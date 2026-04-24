@@ -1,0 +1,129 @@
+/* You can add global styles to this file, and also import other style files */
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+body {
+  position: fixed;
+  inset: 0;
+}
+
+div {
+  font-family: 'Arial';
+}
+button{
+    font-family: 'Arial';
+}
+
+daga-tutorial-root {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+daga-tutorial-simple,
+daga-tutorial-pathProbability {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.page-layout {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background: #f7f7f7;
+  overflow: hidden;
+}
+
+.models-sidebar {
+  width: 330px;
+  height: 100%;
+  background: #f0f0f0;
+  border-right: 1px solid #d2d2d2;
+  transition: width 0.25s ease;
+  overflow: hidden;
+  z-index: 1200;
+  flex-shrink: 0;
+}
+
+.models-sidebar.collapsed {
+  width: 0;
+  border-right: none;
+}
+
+.models-header {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  font-weight: 700;
+  color: #0c173d;
+  border-bottom: 1px solid #d2d2d2;
+  white-space: nowrap;
+}
+
+.model-item {
+  width: 100%;
+  text-align: left;
+  padding: 0 28px;
+  height: 80px;
+  border: none;
+  border-bottom: 1px solid #d2d2d2;
+  background: #f0f0f0;
+  color: #0c173d;
+  font-size: 32px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.model-item.active {
+  font-weight: 700;
+  box-shadow: inset -8px 0 0 #ff6b00;
+  background: #f6f6f6;
+}
+
+.sidebar-toggle {
+  position: absolute;
+  top: 50%;
+  left: 330px;
+  transform: translate(0, -50%);
+  width: 56px;
+  height: 120px;
+  border: none;
+  border-radius: 0 14px 14px 0;
+  background: #0c173d;
+  color: #fff;
+  font-size: 44px;
+  font-weight: 700;
+  cursor: pointer;
+  z-index: 1300;
+  transition: left 0.25s ease;
+}
+
+.sidebar-toggle.collapsed {
+  left: 0;
+}
+
+.diagram-panel {
+  flex: 1;
+  height: 100%;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.resultsbarVisible {
+  transform: translateX(0) !important;
+}
+
+.selectedResult {
+  background: #f0f7ff !important;
+}

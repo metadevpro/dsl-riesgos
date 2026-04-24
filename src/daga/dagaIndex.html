@@ -1,0 +1,28 @@
+<div class="page-layout">
+  <aside class="models-sidebar" [ngClass]="{'collapsed': isSidebarCollapsed}">
+    <div class="models-header">Probability models</div>
+    <button class="model-item" [ngClass]="{'active': selectedModel === 'binomial'}" (click)="selectModel('binomial')">
+      Binomial model
+    </button>
+    <button class="model-item" [ngClass]="{'active': selectedModel === 'pathProbability'}" (click)="selectModel('pathProbability')">
+      Path model
+    </button>
+    <button class="model-item" [ngClass]="{'active': selectedModel === 'bayes'}" (click)="selectModel('bayes')">
+      Bayes model
+    </button>
+  </aside>
+
+  <button
+    class="sidebar-toggle"
+    [ngClass]="{'collapsed': isSidebarCollapsed}"
+    (click)="toggleSidebar()"
+    [attr.aria-label]="isSidebarCollapsed ? 'Open models panel' : 'Close models panel'">
+    {{ isSidebarCollapsed ? '❯' : '❮' }}
+  </button>
+
+  <section class="diagram-panel">
+    <daga-tutorial-simple *ngIf="selectedModel === 'binomial'"></daga-tutorial-simple>
+    <daga-tutorial-pathProbability *ngIf="selectedModel === 'pathProbability'"></daga-tutorial-pathProbability>
+    <daga-tutorial-bayes *ngIf="selectedModel === 'bayes'"></daga-tutorial-bayes>
+  </section>
+</div>

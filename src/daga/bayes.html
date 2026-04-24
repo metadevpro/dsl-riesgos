@@ -1,0 +1,486 @@
+<div style="position: relative; width: 100%; height: 100%;">
+
+  <!-- ═══ Network Size Warning ═══ -->
+  <div *ngIf="isNetworkTooLarge" 
+       style="position: absolute; top: 20px; left: 50%; transform: translateX(-50%); z-index: 1000; background: #FFF3E0; border: 1px solid #FFCC80; padding: 12px 24px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 12px;">
+    <span style="font-size: 20px;">⚠️</span>
+    <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;">
+      <div style="font-weight: 600; color: #E65100; font-size: 14px; margin-bottom: 4px;">Red Bayesiana muy grande</div>
+      <div style="color: #F57C00; font-size: 12px;">La inferencia exacta evaluará todas las combinaciones reales.<br>Puede haber retrasos e incluso bloqueos (O(2^N)).</div>
+    </div>
+  </div>
+
+  <!-- ═══ Node Popup (double-click) ═══ -->
+  <div *ngIf="showNodePopup" 
+       class="bayes-popup-backdrop"
+       (click)="onBackdropClick($event)"
+       style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.35); z-index: 2000; display: flex; align-items: center; justify-content: center;">
+    
+    <div style="background: #fff; border-radius: 10px; box-shadow: 0 8px 32px rgba(0,0,0,0.18); width: 380px; max-height: 80vh; overflow-y: auto; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;"
+         (click)="$event.stopPropagation()">
+      
+      <!-- Header -->
+      <div style="padding: 16px 20px 12px; border-bottom: 1px solid #eee;">
+        <div style="font-size: 16px; font-weight: 600; color: #1a1a1a;">{{ selectedNodeName }}</div>
+        <div style="font-size: 12px; color: #888; margin-top: 3px;">
+          Padres: {{ selectedNodeParentNames.length > 0 ? selectedNodeParentNames.join(', ') : 'ninguno' }}
+        </div>
+      </div>
+
+      <!-- Evidence Section -->
+      <div style="padding: 14px 20px; border-bottom: 1px solid #eee;">
+        <div style="font-size: 10px; font-weight: 600; color: #888; letter-spacing: 0.06em; margin-bottom: 10px;">EVIDENCIA</div>
+        <div style="display: flex; gap: 8px;">
+          <button 
+            (click)="setEvidence('si')"
+            [style.background]="selectedNodeEvidence === 'si' ? '#EAF3DE' : '#f5f5f5'"
+            [style.color]="selectedNodeEvidence === 'si' ? '#27500A' : '#666'"
+            [style.borderColor]="selectedNodeEvidence === 'si' ? '#3B6D11' : '#ddd'"
+            style="flex: 1; padding: 7px 0; font-size: 13px; border: 1px solid #ddd; border-radius: 6px; cursor: pointer; font-weight: 500; transition: all 0.15s;">
+            Sí
+          </button>
+          <button 
+            (click)="setEvidence(null)"
+            [style.background]="selectedNodeEvidence === null ? '#E8F0FE' : '#f5f5f5'"
+            [style.color]="selectedNodeEvidence === null ? '#1967D2' : '#666'"
+            [style.borderColor]="selectedNodeEvidence === null ? '#4285F4' : '#ddd'"
+            style="flex: 1; padding: 7px 0; font-size: 13px; border: 1px solid #ddd; border-radius: 6px; cursor: pointer; font-weight: 500; transition: all 0.15s;">
+            ?
+          </button>
+          <button 
+            (click)="setEvidence('no')"
+            [style.background]="selectedNodeEvidence === 'no' ? '#FCEBEB' : '#f5f5f5'"
+            [style.color]="selectedNodeEvidence === 'no' ? '#791F1F' : '#666'"
+            [style.borderColor]="selectedNodeEvidence === 'no' ? '#A32D2D' : '#ddd'"
+            style="flex: 1; padding: 7px 0; font-size: 13px; border: 1px solid #ddd; border-radius: 6px; cursor: pointer; font-weight: 500; transition: all 0.15s;">
+            No
+          </button>
+        </div>
+      </div>
+
+      <!-- Probabilities Section -->
+      <div style="padding: 14px 20px; border-bottom: 1px solid #eee;">
+        <div style="font-size: 10px; font-weight: 600; color: #888; letter-spacing: 0.06em; margin-bottom: 10px;">PROBABILIDADES</div>
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 5px 0;">
+          <span style="font-size: 13px; color: #555;">P({{ selectedNodeName }}=Sí)</span>
+          <span style="font-size: 13px; font-weight: 600; color: #A32D2D;">{{ (selectedNodeMarginals.si * 100).toFixed(3) }}%</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 5px 0;">
+          <span style="font-size: 13px; color: #555;">P({{ selectedNodeName }}=No)</span>
+          <span style="font-size: 13px; font-weight: 600; color: #A32D2D;">{{ (selectedNodeMarginals.no * 100).toFixed(3) }}%</span>
+        </div>
+      </div>
+
+      <!-- CPT Table Section -->
+      <div style="padding: 14px 20px 18px;">
+        <div style="font-size: 10px; color: #888; letter-spacing: 0.06em; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;">
+          <span style="font-weight: 600;">TABLA CPT</span>
+          <label style="font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 4px; text-transform: none; letter-spacing: normal;">
+            <input type="checkbox" [(ngModel)]="autoNormalizeCPT" style="margin: 0; cursor: pointer;">
+            Auto-Normalize
+          </label>
+        </div>
+        
+        <!-- Warning for large tables -->
+        <div *ngIf="selectedNodeHasTooManyRows" 
+             style="padding: 8px 12px; background: #FFF3E0; border-radius: 6px; margin-bottom: 10px; font-size: 11px; color: #E65100;">
+          ⚠ Esta tabla tiene {{ selectedNodeCPTRows.length }} combinaciones. Considera importar datos desde CSV.
+        </div>
+
+        <!-- Root node (no parents) -->
+        <div *ngIf="selectedNodeParentNames.length === 0 && selectedNodeCPTRows.length > 0" style="overflow-x: auto;">
+          <table style="width: 100%; border-collapse: collapse; font-size: 12px;">
+            <tr>
+              <th style="color: #888; font-weight: 500; padding: 5px 6px; text-align: left; border-bottom: 1px solid #eee;">Estado</th>
+              <th style="color: #888; font-weight: 500; padding: 5px 6px; text-align: left; border-bottom: 1px solid #eee;">P</th>
+            </tr>
+            <tr>
+              <td style="padding: 5px 6px; color: #555;">Sí</td>
+              <td style="padding: 5px 6px;">
+                <input type="number" step="0.0001" min="0" max="1"
+                       [value]="selectedNodeCPTRows[0].pSi"
+                       (change)="updateCPTCell(selectedNodeCPTRows[0].key, 'si', $any($event.target).value)"
+                       [style.borderColor]="selectedNodeCPTRows[0].isValid ? '#eee' : '#A32D2D'"
+                       style="width: 70px; border: 1px solid #eee; border-radius: 4px; padding: 3px 5px; font-size: 12px; text-align: right; background: #fff; color: #1a1a1a;">
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 5px 6px; color: #555;">No</td>
+              <td style="padding: 5px 6px;">
+                <input type="number" step="0.0001" min="0" max="1"
+                       [value]="selectedNodeCPTRows[0].pNo"
+                       (change)="updateCPTCell(selectedNodeCPTRows[0].key, 'no', $any($event.target).value)"
+                       [style.borderColor]="selectedNodeCPTRows[0].isValid ? '#eee' : '#A32D2D'"
+                       style="width: 70px; border: 1px solid #eee; border-radius: 4px; padding: 3px 5px; font-size: 12px; text-align: right; background: #fff; color: #1a1a1a;">
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- Node with parents -->
+        <div *ngIf="selectedNodeParentNames.length > 0" style="overflow-x: auto;">
+          <table style="width: 100%; border-collapse: collapse; font-size: 12px;">
+            <tr>
+              <th *ngFor="let pname of selectedNodeParentNames" 
+                  style="color: #888; font-weight: 500; padding: 5px 6px; text-align: left; border-bottom: 1px solid #eee;">
+                {{ pname }}
+              </th>
+              <th style="color: #888; font-weight: 500; padding: 5px 6px; text-align: left; border-bottom: 1px solid #eee;">P(Sí)</th>
+              <th style="color: #888; font-weight: 500; padding: 5px 6px; text-align: left; border-bottom: 1px solid #eee;">P(No)</th>
+            </tr>
+            <tr *ngFor="let row of selectedNodeCPTRows; let even = even"
+                [style.background]="even ? '#fafafa' : '#fff'"
+                [style.borderLeft]="row.isValid ? 'none' : '3px solid #A32D2D'">
+              <td *ngFor="let ps of row.parentStates" style="padding: 5px 6px; color: #555;">
+                {{ ps.stateLabel }}
+              </td>
+              <td style="padding: 5px 6px;">
+                <input type="number" step="0.0001" min="0" max="1"
+                       [value]="row.pSi"
+                       (change)="updateCPTCell(row.key, 'si', $any($event.target).value)"
+                       [style.borderColor]="row.isValid ? '#eee' : '#A32D2D'"
+                       style="width: 70px; border: 1px solid #eee; border-radius: 4px; padding: 3px 5px; font-size: 12px; text-align: right; background: #fff; color: #1a1a1a;">
+              </td>
+              <td style="padding: 5px 6px;">
+                <input type="number" step="0.0001" min="0" max="1"
+                       [value]="row.pNo"
+                       (change)="updateCPTCell(row.key, 'no', $any($event.target).value)"
+                       [style.borderColor]="row.isValid ? '#eee' : '#A32D2D'"
+                       style="width: 70px; border: 1px solid #eee; border-radius: 4px; padding: 3px 5px; font-size: 12px; text-align: right; background: #fff; color: #1a1a1a;">
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- Validation errors -->
+        <div *ngIf="cptValidationErrors.length > 0"
+             style="margin-top: 10px; padding: 8px 12px; background: #FCEBEB; border-radius: 6px; font-size: 11px; color: #791F1F;">
+          ✗ Algunas filas no suman 1.0. Revisa los valores marcados en rojo.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ Toolbar (centered top, matches binomial style) ═══ -->
+  <div style="position: absolute; top: 20px; left: 50%; transform: translateX(-50%); z-index: 1000; background: white; padding: 15px 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 16px;">
+    <button (click)="toggleMCPanel()"
+            [style.background-color]="showMCPanel ? '#5a9e2f' : '#007bff'"
+            style="padding: 10px 20px; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">
+      Monte Carlo
+    </button>
+    <button (click)="toggleLearningPanel()"
+            [style.background-color]="showLearningPanel ? '#1452a8' : '#007bff'"
+            style="padding: 10px 20px; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">
+      Importar CSV
+    </button>
+    <button (click)="abrirDialogoCSV()"
+            style="padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">
+      Generar CSV
+    </button>
+  </div>
+
+  <!-- ═══ Monte Carlo Panel ═══ -->
+  <div *ngIf="showMCPanel"
+       style="position: absolute; top: 90px; right: 12px; z-index: 900; background: #fff; border: 1px solid #ddd; border-radius: 10px; box-shadow: 0 4px 16px rgba(0,0,0,0.12); width: 340px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; overflow: hidden;">
+
+    <div style="padding: 14px 16px; border-bottom: 1px solid #eee; display: flex; align-items: center; justify-content: space-between;">
+      <span style="font-size: 13px; font-weight: 600; color: #1a1a1a;">Monte Carlo</span>
+      <button (click)="toggleMCPanel()" style="border: none; background: none; cursor: pointer; color: #888; font-size: 16px; line-height: 1;">✕</button>
+    </div>
+
+    <div style="padding: 12px 16px; border-bottom: 1px solid #eee; display: flex; gap: 8px; align-items: center;">
+      <label style="font-size: 12px; color: #666;">Iteraciones:</label>
+      <input type="number" [(ngModel)]="mcIteraciones" min="100" max="100000" step="500"
+             style="width: 90px; border: 1px solid #ddd; border-radius: 5px; padding: 4px 8px; font-size: 12px; color: #1a1a1a;">
+      <button (click)="ejecutarMC()" [disabled]="mcRunning || bayesGraph.size === 0"
+              style="padding: 5px 14px; background: #1967D2; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-size: 12px; font-weight: 500;">
+        {{ mcRunning ? 'Ejecutando…' : 'Ejecutar' }}
+      </button>
+    </div>
+
+    <div *ngIf="mcResult" style="max-height: 300px; overflow-y: auto; padding: 10px 16px;">
+      <table style="width: 100%; border-collapse: collapse; font-size: 11px;">
+        <thead>
+          <tr style="border-bottom: 1px solid #eee;">
+            <th style="text-align: left; padding: 4px 6px; color: #888; font-weight: 500;">Nodo</th>
+            <th style="text-align: right; padding: 4px 6px; color: #888; font-weight: 500;">P(Sí) MC</th>
+            <th style="text-align: right; padding: 4px 6px; color: #1967D2; font-weight: 500;">P(Sí) Exacto</th>
+            <th style="text-align: right; padding: 4px 6px; color: #E65100; font-weight: 500;">Error</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let nodeId of getMCNodeIds()" style="border-bottom: 1px solid #f5f5f5;">
+            <td style="padding: 4px 6px; color: #1a1a1a;">{{ getNodeName(nodeId) }}</td>
+            <td style="padding: 4px 6px; text-align: right; color: #1a1a1a;">
+              {{ (mcResult!.probabilidades[nodeId]['si'] * 100).toFixed(2) }}%
+            </td>
+            <td style="padding: 4px 6px; text-align: right; color: #1967D2;">
+              {{ ((bayesGraph.get(nodeId)?.marginals?.si ?? 0) * 100).toFixed(2) }}%
+            </td>
+            <td style="padding: 4px 6px; text-align: right;"
+                [style.color]="(mcError?.[nodeId]?.['si'] ?? 0) > 0.05 ? '#A32D2D' : '#27500A'">
+              ±{{ ((mcError?.[nodeId]?.['si'] ?? 0) * 100).toFixed(2) }}%
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="margin-top: 8px; font-size: 11px; color: #888;">{{ mcResult.exitosas }} muestras válidas</div>
+    </div>
+  </div>
+
+  <!-- ═══ MC History Panel (right side, slide-in like binomial) ═══ -->
+  <div [ngClass]="{'resultsbarVisible': showMCHistory}"
+       style="position: fixed; right: 0; top: 0; width: 350px; height: 100vh; background: white; box-shadow: -2px 0 8px rgba(0,0,0,0.15); z-index: 1500; overflow-y: auto; transform: translateX(100%); transition: transform 0.3s ease;">
+    <div style="padding: 20px; border-bottom: 2px solid #007bff;">
+      <h2 style="margin: 0; color: #007bff;">Historial MC</h2>
+      <button
+        (click)="closeMCHistory()"
+        style="position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 24px; cursor: pointer; color: #999;">
+        ×
+      </button>
+    </div>
+
+    <div *ngIf="mcHistory.length === 0" style="padding: 20px; color: #999;">
+      Sin resultados aún
+    </div>
+
+    <div *ngFor="let entry of mcHistory; let i = index"
+         [style.background]="i === selectedMCHistory ? '#f0f7ff' : 'white'"
+         style="padding: 15px; border-bottom: 1px solid #eee; cursor: pointer;"
+         (click)="selectedMCHistory = i"
+         [ngClass]="{'selectedResult': i === selectedMCHistory}">
+      <div style="margin-bottom: 8px;">
+        <strong>Simulación {{ i + 1 }}</strong>
+        <span style="float: right; color: #999; font-size: 12px;">{{ entry.date | date:'short' }}</span>
+      </div>
+      <div style="font-size: 14px; color: #666;">
+        <div>Iteraciones: {{ entry.iteraciones }}</div>
+        <div>Muestras válidas: {{ entry.result.exitosas }}</div>
+      </div>
+
+      <!-- Inline results table for selected entry -->
+      <div *ngIf="i === selectedMCHistory" style="margin-top: 12px; overflow-x: auto;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 11px;">
+          <thead>
+            <tr style="border-bottom: 1px solid #ddd;">
+              <th style="text-align: left; padding: 4px 6px; color: #888; font-weight: 500;">Nodo</th>
+              <th style="text-align: right; padding: 4px 6px; color: #888; font-weight: 500;">MC P(Sí)</th>
+              <th style="text-align: right; padding: 4px 6px; color: #E65100; font-weight: 500;">Error</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let nodeId of (entry.result.probabilidades | keyvalue)" style="border-bottom: 1px solid #f5f5f5;">
+              <td style="padding: 4px 6px; color: #1a1a1a;">{{ getNodeName(nodeId.key) }}</td>
+              <td style="padding: 4px 6px; text-align: right; color: #007bff; font-weight: bold;">
+                {{ (entry.result.probabilidades[nodeId.key]['si'] * 100).toFixed(2) }}%
+              </td>
+              <td style="padding: 4px 6px; text-align: right;"
+                  [style.color]="(entry.error[nodeId.key]['si']) > 0.05 ? '#A32D2D' : '#27500A'">
+                ±{{ (entry.error[nodeId.key]['si'] * 100).toFixed(2) }}%
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating button to reopen history -->
+  <button
+    *ngIf="mcHistory.length > 0 && !showMCHistory"
+    (click)="openMCHistory()"
+    style="position: fixed; bottom: 30px; right: 30px; z-index: 1000; padding: 15px 20px; background-color: #007bff; color: white; border: none; border-radius: 50%; width: 60px; height: 60px; cursor: pointer; font-size: 24px; box-shadow: 0 4px 12px rgba(0,123,255,0.4); display: flex; align-items: center; justify-content: center;">
+    📊
+  </button>
+
+  <!-- ═══ Learning Panel (modal) ═══ -->
+  <div *ngIf="showLearningPanel"
+       style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.35); z-index: 2000; display: flex; align-items: center; justify-content: center; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;">
+
+    <div style="background: #fff; border-radius: 10px; box-shadow: 0 8px 32px rgba(0,0,0,0.18); width: 460px; max-height: 85vh; overflow-y: auto;"
+         (click)="$event.stopPropagation()">
+
+      <!-- Header -->
+      <div style="padding: 16px 20px 12px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;">
+        <span style="font-size: 15px; font-weight: 600; color: #1a1a1a;">Aprender desde CSV</span>
+        <button (click)="toggleLearningPanel()" style="border: none; background: none; cursor: pointer; color: #888; font-size: 18px; line-height: 1;">✕</button>
+      </div>
+
+      <!-- Creating Nodes Loader -->
+      <div *ngIf="creatingNodes" style="padding: 40px 20px; text-align: center;">
+        <div style="font-size: 14px; color: #1a1a1a; margin-bottom: 16px; font-weight: 500;">Cargando nodos…</div>
+        <div style="height: 4px; background: #eee; border-radius: 2px; overflow: hidden;">
+          <div style="height: 100%; background: #1967D2; animation: pulse 1.2s ease-in-out infinite; width: 60%;"></div>
+        </div>
+      </div>
+
+      <!-- Creation Summary -->
+      <div *ngIf="creationSummary && !creatingNodes && !csvAnalysis && !learningResult" style="padding: 16px 20px;">
+        <div style="font-size: 13px; color: #27500A; font-weight: 600; margin-bottom: 12px;">✓ Nodos creados</div>
+        <div style="display: grid; gap: 6px; font-size: 12px;">
+          <div style="display: flex; justify-content: space-between; padding: 6px 10px; background: #EAF3DE; border-radius: 5px;">
+            <span style="color: #27500A;">Nodos creados</span>
+            <span style="font-weight: 600; color: #1a1a1a;">{{ creationSummary.createdNodes.length }}</span>
+          </div>
+          <div *ngIf="creationSummary.createdNodes.length > 0" style="padding: 6px 10px; background: #f8f8f8; border-radius: 5px; color: #555;">
+            {{ creationSummary.createdNodes.join(', ') }}
+          </div>
+          <div style="display: flex; justify-content: space-between; padding: 6px 10px; background: #EAF3FE; border-radius: 5px;">
+            <span style="color: #1967D2;">Conexiones creadas</span>
+            <span style="font-weight: 600; color: #1a1a1a;">{{ creationSummary.createdEdges }}</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; padding: 6px 10px; background: #f8f8f8; border-radius: 5px;">
+            <span style="color: #666;">Total nodos en red</span>
+            <span style="font-weight: 600; color: #1a1a1a;">{{ creationSummary.totalNodes }}</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; padding: 6px 10px; background: #f8f8f8; border-radius: 5px;">
+            <span style="color: #666;">Total conexiones en red</span>
+            <span style="font-weight: 600; color: #1a1a1a;">{{ creationSummary.totalConnections }}</span>
+          </div>
+        </div>
+        <div *ngIf="creationSummary.missingEdgesWarning" style="margin-top: 12px; padding: 10px 12px; background: #FFF3E0; border-left: 3px solid #E65100; border-radius: 5px; font-size: 11px; color: #6b3000; line-height: 1.5;">
+          ⚠ {{ csvImportMessage }}
+        </div>
+        <div style="margin-top: 16px; display: flex; gap: 8px;">
+          <button (click)="cancelCreationSummary()" style="flex: 1; padding: 8px; border: 1px solid #ddd; border-radius: 6px; cursor: pointer; font-size: 13px; background: #f5f5f5; color: #666;">Cancelar</button>
+          <button (click)="proceedToAnalysis()" style="flex: 2; padding: 8px; border: none; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 500; background: #1967D2; color: #fff;">Proceder</button>
+        </div>
+      </div>
+
+      <!-- File Upload -->
+      <div *ngIf="!csvAnalysis && !learningResult && !creatingNodes && !creationSummary" style="padding: 20px;">
+        <div style="border: 2px dashed #ddd; border-radius: 8px; padding: 28px; text-align: center; color: #888;">
+          <div style="font-size: 13px; margin-bottom: 12px;">Selecciona un archivo CSV con datos de entrenamiento</div>
+          <input type="file" accept=".csv" (change)="onCSVFile($event)" style="font-size: 12px;">
+        </div>
+        <div style="margin-top: 12px; font-size: 11px; color: #aaa;">
+          Las columnas deben coincidir con los nombres de los nodos. Valores: si/no, yes/no, 1/0, true/false.
+        </div>
+        <div style="margin-top: 10px; padding: 10px 12px; background: #EAF3FE; border-left: 3px solid #1967D2; border-radius: 5px; font-size: 11px; color: #1a3d66; line-height: 1.5;">
+          <strong>💡 Consejo:</strong> Para que las flechas se creen automáticamente al importar nodos nuevos, añade una línea al inicio del CSV con el formato:
+          <div style="margin-top: 6px; font-family: monospace; background: #fff; padding: 4px 6px; border-radius: 3px; color: #1967D2;">
+            # edges: Burglary-&gt;Alarm; Earthquake-&gt;Alarm; Alarm-&gt;John; Alarm-&gt;Mary
+          </div>
+          Sin esta línea, solo se crearán los nodos (sin relaciones).
+        </div>
+        <div *ngIf="csvImportMessage" style="margin-top: 10px; padding: 10px 12px; background: #FFF3E0; border-left: 3px solid #E65100; border-radius: 5px; font-size: 11px; color: #6b3000; line-height: 1.5;">
+          ⚠ {{ csvImportMessage }}
+        </div>
+      </div>
+
+      <!-- CSV Analysis Summary -->
+      <div *ngIf="csvAnalysis && !learningResult && !learningRunning" style="padding: 16px 20px;">
+        <div style="font-size: 12px; color: #666; margin-bottom: 12px; font-weight: 600;">Resumen del CSV:</div>
+        <div style="display: grid; gap: 6px; font-size: 12px;">
+          <div style="display: flex; justify-content: space-between; padding: 6px 10px; background: #f8f8f8; border-radius: 5px;">
+            <span style="color: #666;">Filas detectadas</span>
+            <span style="font-weight: 600; color: #1a1a1a;">{{ csvAnalysis.filas }}</span>
+          </div>
+          <div style="padding: 6px 10px; background: #EAF3DE; border-radius: 5px;">
+            <div style="color: #27500A; font-weight: 500; margin-bottom: 3px;">Nodos observados ({{ csvAnalysis.observados.length }})</div>
+            <div style="color: #3B6D11; font-size: 11px;">{{ csvAnalysis.observados.map(id => bayesGraph.get(id)?.name ?? id).join(', ') || '—' }}</div>
+          </div>
+          <div *ngIf="csvAnalysis.ocultos.length > 0" style="padding: 6px 10px; background: #FFF3E0; border-radius: 5px;">
+            <div style="color: #E65100; font-weight: 500; margin-bottom: 3px;">Nodos ocultos — se usará EM ({{ csvAnalysis.ocultos.length }})</div>
+            <div style="color: #F57C00; font-size: 11px;">{{ csvAnalysis.ocultos.map(id => bayesGraph.get(id)?.name ?? id).join(', ') }}</div>
+          </div>
+          <div *ngIf="csvAnalysis.sinMapeo.length > 0" style="padding: 6px 10px; background: #f5f5f5; border-radius: 5px;">
+            <div style="color: #888; font-weight: 500; margin-bottom: 3px;">Columnas ignoradas (sin nodo)</div>
+            <div style="color: #aaa; font-size: 11px;">{{ csvAnalysis.sinMapeo.join(', ') }}</div>
+          </div>
+        </div>
+        <div style="margin-top: 16px; display: flex; gap: 8px;">
+          <button (click)="descartarCPTs()" style="flex: 1; padding: 8px; border: 1px solid #ddd; border-radius: 6px; cursor: pointer; font-size: 13px; background: #f5f5f5; color: #666;">Cancelar</button>
+          <button (click)="confirmarAprendizaje()" style="flex: 2; padding: 8px; border: none; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 500; background: #1967D2; color: #fff;">
+            {{ csvAnalysis.ocultos.length === 0 ? 'Aplicar MLE' : 'Aplicar EM' }}
+          </button>
+        </div>
+      </div>
+
+      <!-- EM Progress -->
+      <div *ngIf="learningRunning" style="padding: 24px 20px; text-align: center;">
+        <div style="font-size: 13px; color: #666; margin-bottom: 12px;">Ejecutando algoritmo EM…</div>
+        <div *ngIf="emProgress" style="font-size: 12px; color: #1967D2;">
+          Iteración {{ emProgress.iter }} — delta: {{ emProgress.delta.toFixed(6) }}
+        </div>
+        <div style="margin-top: 16px; height: 4px; background: #eee; border-radius: 2px; overflow: hidden;">
+          <div style="height: 100%; background: #1967D2; animation: pulse 1.5s ease-in-out infinite; width: 60%;"></div>
+        </div>
+      </div>
+
+      <!-- Learning Result — before/after comparison -->
+      <div *ngIf="learningResult && !learningRunning" style="padding: 16px 20px;">
+        <div style="font-size: 12px; color: #27500A; font-weight: 600; margin-bottom: 4px;">
+          ✓ {{ learningResult.metodo }} completado
+        </div>
+        <div style="font-size: 11px; color: #888; margin-bottom: 14px;">
+          Comparación de P(Sí) antes → después del aprendizaje
+        </div>
+        <div style="max-height: 260px; overflow-y: auto;">
+          <table style="width: 100%; border-collapse: collapse; font-size: 11px;">
+            <thead>
+              <tr style="border-bottom: 1px solid #eee;">
+                <th style="text-align: left; padding: 4px 6px; color: #888; font-weight: 500;">Nodo</th>
+                <th style="text-align: right; padding: 4px 6px; color: #888; font-weight: 500;">Antes</th>
+                <th style="text-align: right; padding: 4px 6px; color: #1967D2; font-weight: 500;">Después</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let nodeId of getLearningNodeIds()" style="border-bottom: 1px solid #f5f5f5;">
+                <td style="padding: 4px 6px; color: #1a1a1a;">{{ bayesGraph.get(nodeId)?.name ?? nodeId }}</td>
+                <td style="padding: 4px 6px; text-align: right; color: #888;">
+                  {{ ((graphBeforeLearning?.get(nodeId)?.marginals?.si ?? 0) * 100).toFixed(2) }}%
+                </td>
+                <td style="padding: 4px 6px; text-align: right; color: #1967D2;">
+                  {{ (getCPTSi(learningResult!.graph, nodeId) * 100).toFixed(2) }}%
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="margin-top: 16px; display: flex; gap: 8px;">
+          <button (click)="descartarCPTs()" style="flex: 1; padding: 8px; border: 1px solid #ddd; border-radius: 6px; cursor: pointer; font-size: 13px; background: #f5f5f5; color: #666;">Descartar</button>
+          <button (click)="aceptarCPTs()" style="flex: 2; padding: 8px; border: none; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 500; background: #27500A; color: #fff;">Aceptar CPTs</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══ CSV Generate Dialog ═══ -->
+  <div *ngIf="showCSVDialog"
+       class="csv-dialog-backdrop"
+       (click)="onCSVBackdropClick($event)"
+       style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.35); z-index: 2500; display: flex; align-items: center; justify-content: center; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;">
+    <div style="background: #fff; border-radius: 10px; box-shadow: 0 8px 32px rgba(0,0,0,0.18); width: 340px; overflow: hidden;"
+         (click)="$event.stopPropagation()">
+      <div style="padding: 14px 18px; border-bottom: 1px solid #eee; display: flex; align-items: center; justify-content: space-between;">
+        <span style="font-size: 14px; font-weight: 600; color: #1a1a1a;">Generar CSV</span>
+        <button (click)="cerrarDialogoCSV()" style="border: none; background: none; cursor: pointer; color: #888; font-size: 16px; line-height: 1;">✕</button>
+      </div>
+      <div style="padding: 18px;">
+        <label style="display: block; font-size: 12px; color: #666; margin-bottom: 6px;">Número de filas:</label>
+        <input type="number" [(ngModel)]="csvFilas" min="1" step="100"
+               style="width: 100%; border: 1px solid #ddd; border-radius: 6px; padding: 8px 10px; font-size: 13px; color: #1a1a1a; box-sizing: border-box;">
+        <div style="margin-top: 16px; display: flex; gap: 8px;">
+          <button (click)="cerrarDialogoCSV()"
+                  style="flex: 1; padding: 8px; border: 1px solid #ddd; border-radius: 6px; cursor: pointer; font-size: 13px; background: #f5f5f5; color: #666;">
+            Cancelar
+          </button>
+          <button (click)="generarCSV()"
+                  style="flex: 2; padding: 8px; border: none; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 500; background: #1967D2; color: #fff;">
+            Generar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ Daga Diagram ═══ -->
+  <daga-diagram
+    [config]="bayes_config"
+    (modelChange)="onModelChange($event)">
+    <example-component [bayesMode]="true" [bayesGraph]="bayesGraph" (nodeDoubleClicked)="onNodeDoubleClick($event)" (canvasReady)="onCanvasReady($event)" />
+  </daga-diagram>
+
+</div>
