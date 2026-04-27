@@ -40,10 +40,7 @@
                 "output": "./assets/daga"
               }
             ],
-            "styles": [
-              "node_modules/@metadev/daga-angular/assets/styles/daga.scss",
-              "src/styles.scss"
-            ],
+            "styles": ["node_modules/@metadev/daga-angular/assets/styles/daga.scss", "src/styles.scss"],
             "server": "src/main.server.ts",
             "outputMode": "server",
             "security": {

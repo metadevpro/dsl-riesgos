@@ -1,13 +1,7 @@
 import { Component, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import {
-  DagaModule,
-  Canvas,
-  AddNodeAction,
-  AddConnectionAction,
-  Side,
-} from '@metadev/daga-angular';
+import { DagaModule, Canvas, AddNodeAction, AddConnectionAction, Side } from '@metadev/daga-angular';
 import { BayesCausalLayout } from '../utils/bayes/causalLayout';
 import { ExampleComponent } from './dagaExample.component';
 import { bayes_CONFIG } from '../config/bayes.config';
@@ -24,37 +18,20 @@ import {
   getParentNames,
   validateCPT,
   generateDefaultCPT,
-  recalcCPTOnParentChange,
+  recalcCPTOnParentChange
 } from '../utils/bayes/bayesInference.utils';
-import {
-  ejecutarMonteCarlo,
-  calcularError,
-  marginalesExactos,
-} from '../utils/bayes/montecarlo.utils';
-import {
-  parsearCSV,
-  analizarCSV,
-  CSVAnalysis,
-  extraerComentarios,
-  parsearEdgesDesdeComentarios,
-} from '../utils/bayes/csv.utils';
+import { ejecutarMonteCarlo, calcularError, marginalesExactos } from '../utils/bayes/montecarlo.utils';
+import { parsearCSV, analizarCSV, CSVAnalysis, extraerComentarios, parsearEdgesDesdeComentarios } from '../utils/bayes/csv.utils';
 import { aprenderMLE } from '../utils/bayes/mle.utils';
 import { aprenderEM } from '../utils/bayes/em.utils';
 import { generarDatosSinteticos } from '../utils/bayes/syntheticData.utils';
-import {
-  BayesGraph,
-  BayesEvidence,
-  BayesCPTEntry,
-  CPTTableRow,
-  MCResult,
-  LearningResult,
-} from '../types';
+import { BayesGraph, BayesEvidence, BayesCPTEntry, CPTTableRow, MCResult, LearningResult } from '../types';
 
 @Component({
   standalone: true,
   selector: 'daga-tutorial-bayes',
   templateUrl: '../bayes.html',
-  imports: [DagaModule, ExampleComponent, CommonModule, FormsModule],
+  imports: [DagaModule, ExampleComponent, CommonModule, FormsModule]
 })
 export class BayesComponent extends GenericComponent implements OnDestroy {
   bayes_config = bayes_CONFIG;
@@ -143,8 +120,8 @@ export class BayesComponent extends GenericComponent implements OnDestroy {
       nodes: (model.nodes || []).map((n: any) => n.id),
       connections: (model.connections || []).map((c: any) => ({
         start: c.start,
-        end: c.end,
-      })),
+        end: c.end
+      }))
     });
 
     // Rebuild graph on structural changes
@@ -349,10 +326,7 @@ export class BayesComponent extends GenericComponent implements OnDestroy {
     if (!this.myModel || !this.myModel.nodes) return;
 
     for (const modelNode of this.myModel.nodes) {
-      const nId =
-        typeof modelNode.id === 'string'
-          ? modelNode.id.replace(/_port_\d+$/i, '')
-          : String(modelNode.id);
+      const nId = typeof modelNode.id === 'string' ? modelNode.id.replace(/_port_\d+$/i, '') : String(modelNode.id);
 
       const bayesNode = this.bayesGraph.get(nId);
       if (!bayesNode || !modelNode.data) continue;
@@ -403,7 +377,7 @@ export class BayesComponent extends GenericComponent implements OnDestroy {
         date: new Date(),
         iteraciones: this.mcIteraciones,
         result: this.mcResult,
-        error: this.mcError,
+        error: this.mcError
       });
       this.selectedMCHistory = this.mcHistory.length - 1;
       this.openMCHistory();
@@ -478,8 +452,7 @@ export class BayesComponent extends GenericComponent implements OnDestroy {
       if (datos.length === 0) return;
 
       const headers = Object.keys(datos[0]);
-      const firstDataLine =
-        texto.split(/\r?\n/).find((l) => l.trim() && !l.trim().startsWith('#')) || '';
+      const firstDataLine = texto.split(/\r?\n/).find((l) => l.trim() && !l.trim().startsWith('#')) || '';
       const originalHeaders: string[] = firstDataLine
         .split(',')
         .map((h: string) => h.trim())
@@ -490,9 +463,7 @@ export class BayesComponent extends GenericComponent implements OnDestroy {
 
       const existingNames = new Set<string>();
       for (const [, n] of this.bayesGraph) existingNames.add(n.name.toLowerCase());
-      const missingOriginals = originalHeaders.filter(
-        (h: string) => !existingNames.has(h.toLowerCase()),
-      );
+      const missingOriginals = originalHeaders.filter((h: string) => !existingNames.has(h.toLowerCase()));
 
       this.csvImportMessage = null;
 
@@ -500,12 +471,8 @@ export class BayesComponent extends GenericComponent implements OnDestroy {
         this.creatingNodes = true;
         this.cdr.detectChanges();
         setTimeout(() => {
-          const edgesCreated = this.autoCreateNodesAndRelations(
-            missingOriginals,
-            edgesFromComments,
-          );
-          const missingEdgesWarning =
-            edgesFromComments.length === 0 && missingOriginals.length >= 2;
+          const edgesCreated = this.autoCreateNodesAndRelations(missingOriginals, edgesFromComments);
+          const missingEdgesWarning = edgesFromComments.length === 0 && missingOriginals.length >= 2;
           this.creatingNodes = false;
           this.creationSummary = {
             createdNodes: missingOriginals,
@@ -513,7 +480,7 @@ export class BayesComponent extends GenericComponent implements OnDestroy {
             totalNodes: this.canvas?.model.nodes.all().length ?? 0,
             totalConnections: this.canvas?.model.connections.all().length ?? 0,
             missingEdgesWarning,
-            pending: { datos, headers },
+            pending: { datos, headers }
           };
           if (missingEdgesWarning) {
             this.csvImportMessage =
@@ -548,10 +515,7 @@ export class BayesComponent extends GenericComponent implements OnDestroy {
     this.csvImportMessage = null;
   }
 
-  private autoCreateNodesAndRelations(
-    missingOriginalNames: string[],
-    edges: [string, string][],
-  ): number {
+  private autoCreateNodesAndRelations(missingOriginalNames: string[], edges: [string, string][]): number {
     const canvas = this.canvas;
     if (!canvas) return 0;
 
@@ -577,17 +541,7 @@ export class BayesComponent extends GenericComponent implements OnDestroy {
       const col = slot % COLS;
       const row = Math.floor(slot / COLS);
       const coords: [number, number] = [baseX + col * DX, baseY + row * DY];
-      const action = new AddNodeAction(
-        canvas,
-        nodeType,
-        coords,
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        name,
-        { 'node name': name },
-      );
+      const action = new AddNodeAction(canvas, nodeType, coords, undefined, undefined, undefined, undefined, name, { 'node name': name });
       action.do();
       canvas.actionStack.add(action);
       nameToNodeId.set(name.toLowerCase(), action.id);
@@ -640,13 +594,13 @@ export class BayesComponent extends GenericComponent implements OnDestroy {
         onProgreso: (iter, delta) => {
           this.emProgress = { iter, delta };
           this.cdr.detectChanges();
-        },
+        }
       });
       recalcAllMarginals(nuevaRed);
       this.learningResult = {
         metodo: 'EM',
         graph: nuevaRed,
-        ocultos: this.csvAnalysis.ocultos,
+        ocultos: this.csvAnalysis.ocultos
       };
       this.learningRunning = false;
       this.cdr.detectChanges();

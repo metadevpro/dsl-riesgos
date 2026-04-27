@@ -1,22 +1,21 @@
 <div class="page-layout">
-  <aside class="models-sidebar" [ngClass]="{'collapsed': isSidebarCollapsed}">
+  <aside class="models-sidebar" [ngClass]="{ collapsed: isSidebarCollapsed }">
     <div class="models-header">Probability models</div>
-    <button class="model-item" [ngClass]="{'active': selectedModel === 'binomial'}" (click)="selectModel('binomial')">
+    <button class="model-item" [ngClass]="{ active: selectedModel === 'binomial' }" (click)="selectModel('binomial')">
       Binomial model
     </button>
-    <button class="model-item" [ngClass]="{'active': selectedModel === 'pathProbability'}" (click)="selectModel('pathProbability')">
+    <button class="model-item" [ngClass]="{ active: selectedModel === 'pathProbability' }" (click)="selectModel('pathProbability')">
       Path model
     </button>
-    <button class="model-item" [ngClass]="{'active': selectedModel === 'bayes'}" (click)="selectModel('bayes')">
-      Bayes model
-    </button>
+    <button class="model-item" [ngClass]="{ active: selectedModel === 'bayes' }" (click)="selectModel('bayes')">Bayes model</button>
   </aside>
 
   <button
     class="sidebar-toggle"
-    [ngClass]="{'collapsed': isSidebarCollapsed}"
+    [ngClass]="{ collapsed: isSidebarCollapsed }"
     (click)="toggleSidebar()"
-    [attr.aria-label]="isSidebarCollapsed ? 'Open models panel' : 'Close models panel'">
+    [attr.aria-label]="isSidebarCollapsed ? 'Open models panel' : 'Close models panel'"
+  >
     {{ isSidebarCollapsed ? '❯' : '❮' }}
   </button>
 

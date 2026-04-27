@@ -1,9 +1,4 @@
-import {
-  Canvas,
-  DiagramConnection,
-  AddConnectionAction,
-  RemoveAction
-} from '@metadev/daga-angular';
+import { Canvas, DiagramConnection, AddConnectionAction, RemoveAction } from '@metadev/daga-angular';
 import { normalizeNodeId } from './generalCalculationNodes.utils';
 
 const PROBABILITY_SCALE = 10_000;
@@ -30,28 +25,14 @@ export function handleConnectionUpdateValues(
   }
 
   if (forceRebalance) {
-    rebalanceOutgoingConnections(
-      canvas,
-      sourceNodeId,
-      probabilityKey,
-      maxProbability,
-      connection.id,
-      normalizedProbability
-    );
+    rebalanceOutgoingConnections(canvas, sourceNodeId, probabilityKey, maxProbability, connection.id, normalizedProbability);
     return;
   }
 
-  const currentValue = Number(connection.valueSet.getValue(probabilityKey));    
+  const currentValue = Number(connection.valueSet.getValue(probabilityKey));
   // If the manual modification introduces a numeric delta, trigger rebalancing.
   if (!Number.isFinite(currentValue) || Math.abs(currentValue - normalizedProbability) > 1e-6) {
-    rebalanceOutgoingConnections(
-      canvas,
-      sourceNodeId,
-      probabilityKey,
-      maxProbability,
-      connection.id,
-      normalizedProbability
-    );
+    rebalanceOutgoingConnections(canvas, sourceNodeId, probabilityKey, maxProbability, connection.id, normalizedProbability);
   }
 }
 
@@ -93,7 +74,7 @@ export function handleConnectionStructuralChange(
   }
 
   // Trigger equal rebalancing for the affected branches
-  modifiedNodes.forEach(nodeId => {
+  modifiedNodes.forEach((nodeId) => {
     rebalanceOutgoingConnections(canvas, nodeId, probabilityKey, maxProbability);
   });
 }
@@ -101,7 +82,7 @@ export function handleConnectionStructuralChange(
 /**
  * Rebalances probabilty values so that the sum of all outgoing connections from a node is exactly `maxProbability`.
  * Ensures numeric limits strictly up to 4 decimal places.
- * 
+ *
  * @param manualConnectionId - Optional specific ID of the connection the user manually edited
  * @param manualValue - Optional the assigned locked value to respect during the split
  */
@@ -155,18 +136,13 @@ function rebalanceOutgoingConnections(
     const remainingUnits = Math.max(0, totalProbabilityUnits - safeManualUnits);
     const distributedOtherUnits = distributeProbabilityUnits(others.length, remainingUnits);
     applyDistributedProbabilities(others, distributedOtherUnits, probabilityKey);
-
   } else {
     const distributedUnits = distributeProbabilityUnits(outgoingConnections.length, totalProbabilityUnits);
     applyDistributedProbabilities(outgoingConnections, distributedUnits, probabilityKey);
   }
 }
 
-function applyDistributedProbabilities(
-  connections: DiagramConnection[],
-  unitsByConnection: number[],
-  probabilityKey: string
-): void {
+function applyDistributedProbabilities(connections: DiagramConnection[], unitsByConnection: number[], probabilityKey: string): void {
   connections.forEach((connection: DiagramConnection, index: number) => {
     const units = unitsByConnection[index] ?? 0;
     connection.valueSet.overwriteValues({
@@ -175,11 +151,7 @@ function applyDistributedProbabilities(
   });
 }
 
-function overwriteConnectionProbability(
-  connection: DiagramConnection,
-  probabilityKey: string,
-  value: number
-): void {
+function overwriteConnectionProbability(connection: DiagramConnection, probabilityKey: string, value: number): void {
   const safeValue = Number.isFinite(value) ? Number(value.toFixed(4)) : 0;
   connection.valueSet.overwriteValues({
     [probabilityKey]: safeValue
@@ -192,7 +164,7 @@ function distributeProbabilityUnits(connectionCount: number, totalUnits: number)
   }
 
   const baseUnits = Math.floor(totalUnits / connectionCount);
-  const remainderUnits = totalUnits - (baseUnits * connectionCount);
+  const remainderUnits = totalUnits - baseUnits * connectionCount;
   const distribution = new Array<number>(connectionCount).fill(baseUnits);
 
   if (remainderUnits > 0) {
@@ -256,7 +228,7 @@ export function isConnectionAutoNormalizeEnabled(
  * Safely extracts the source Node's string ID from a connection endpoint
  */
 function getSourceNodeId(connection: DiagramConnection): string | undefined {
-  if (connection.start && typeof connection.start.getNode === 'function') {     
+  if (connection.start && typeof connection.start.getNode === 'function') {
     return connection.start.getNode()?.id;
   }
   return undefined;

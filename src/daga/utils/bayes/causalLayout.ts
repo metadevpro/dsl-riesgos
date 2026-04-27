@@ -87,9 +87,7 @@ export class BayesCausalLayout implements DiagramLayout {
       arr.forEach((n, idx) => order.set(n.id, idx));
     }
 
-    const colWidths = layerIndices.map((l) =>
-      Math.max(...byLayer.get(l)!.map((n) => n.width || 200)),
-    );
+    const colWidths = layerIndices.map((l) => Math.max(...byLayer.get(l)!.map((n) => n.width || 200)));
     const colXs: number[] = [];
     let x = this.originX;
     for (let i = 0; i < layerIndices.length; i++) {
