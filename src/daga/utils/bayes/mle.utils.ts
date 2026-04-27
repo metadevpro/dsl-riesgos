@@ -62,10 +62,9 @@ function _normalizar(
     const cpt: BayesCPT = {};
     for (const [clave, c] of Object.entries(conteos)) {
         const total = c.si + c.no;
-        cpt[clave] = {
-            si: total > 0 ? c.si / total : 0.5,
-            no: total > 0 ? c.no / total : 0.5
-        };
+        const si = total > 0 ? Math.round((c.si / total) * 1e5) / 1e5 : 0.5;
+        const no = total > 0 ? Math.round((1 - si) * 1e5) / 1e5 : 0.5;
+        cpt[clave] = { si, no };
     }
     return cpt;
 }

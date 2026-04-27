@@ -278,6 +278,10 @@ export class BayesComponent extends GenericComponent implements OnDestroy {
         return '';
     }
 
+    cptPct(p: number): number {
+        return Math.round(p * 100000) / 1000;
+    }
+
     // ── Private helpers ──
 
     private refreshPopupData(): void {
