@@ -141,7 +141,7 @@ export const bayes_CONFIG: DiagramConfig = {
       look: {
         lookType: 'connection-look',
         color: '#888780',
-        thickness: 1.5,
+        thickness: 2.0,
         style: LineStyle.Solid,
         shape: LineShape.Bezier,
         selected: {
