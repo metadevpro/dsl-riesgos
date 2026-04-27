@@ -8,7 +8,9 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:daga-tutorial": "node dist/daga-tutorial/server/server.mjs",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "format:check": "prettier --check .",
+    "format": "prettier --write ."
   },
   "private": true,
   "packageManager": "npm@11.11.0",
