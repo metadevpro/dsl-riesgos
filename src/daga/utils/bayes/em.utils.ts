@@ -59,7 +59,7 @@ export async function aprenderEM(
 export function mStep(
     graph: BayesGraph,
     datosAnotados: { fila: Record<string, string>; evidencias: Record<string, string>; inferido: Record<string, Record<string, number>> }[],
-    suavizado: number = 1
+    suavizado = 1
 ): BayesGraph {
     const nodosActualizados: BayesGraph = new Map();
 

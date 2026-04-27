@@ -98,12 +98,12 @@ export class BayesComponent extends GenericComponent implements OnDestroy {
   mcResult: MCResult | null = null;
   mcError: Record<string, Record<string, number>> | null = null;
   mcRunning = false;
-  mcHistory: Array<{
+  mcHistory: {
     date: Date;
     iteraciones: number;
     result: MCResult;
     error: Record<string, Record<string, number>>;
-  }> = [];
+  }[] = [];
   showMCHistory = false;
   selectedMCHistory = -1;
 
@@ -550,7 +550,7 @@ export class BayesComponent extends GenericComponent implements OnDestroy {
 
   private autoCreateNodesAndRelations(
     missingOriginalNames: string[],
-    edges: Array<[string, string]>,
+    edges: [string, string][],
   ): number {
     const canvas = this.canvas;
     if (!canvas) return 0;

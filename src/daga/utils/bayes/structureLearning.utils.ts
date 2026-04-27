@@ -54,10 +54,10 @@ function mutualInformationBinary(
 export function chowLiuTree(
     data: Record<string, string>[],
     variables: string[]
-): Array<[string, string]> {
+): [string, string][] {
     if (variables.length < 2) return [];
 
-    const edges: Array<{ a: string; b: string; mi: number }> = [];
+    const edges: { a: string; b: string; mi: number }[] = [];
     for (let i = 0; i < variables.length; i++) {
         for (let j = i + 1; j < variables.length; j++) {
             const mi = mutualInformationBinary(data, variables[i], variables[j]);
@@ -82,7 +82,7 @@ export function chowLiuTree(
         return true;
     };
 
-    const tree: Array<[string, string]> = [];
+    const tree: [string, string][] = [];
     for (const e of edges) {
         if (union(e.a, e.b)) tree.push([e.a, e.b]);
         if (tree.length === variables.length - 1) break;
@@ -95,9 +95,9 @@ export function chowLiuTree(
  * All edges point away from the root.
  */
 export function orientTreeFromRoot(
-    edges: Array<[string, string]>,
+    edges: [string, string][],
     root: string
-): Array<[string, string]> {
+): [string, string][] {
     const adj = new Map<string, string[]>();
     for (const [a, b] of edges) {
         if (!adj.has(a)) adj.set(a, []);
@@ -106,7 +106,7 @@ export function orientTreeFromRoot(
         adj.get(b)!.push(a);
     }
 
-    const directed: Array<[string, string]> = [];
+    const directed: [string, string][] = [];
     const visited = new Set<string>([root]);
     const queue = [root];
     while (queue.length > 0) {

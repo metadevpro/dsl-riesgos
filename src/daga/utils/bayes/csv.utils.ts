@@ -28,8 +28,8 @@ export function extraerComentarios(texto: string): string[] {
  *   # edges: Parent->Child; Parent->Child
  * Returns pairs of original names (case-preserved).
  */
-export function parsearEdgesDesdeComentarios(comentarios: string[]): Array<[string, string]> {
-    const edges: Array<[string, string]> = [];
+export function parsearEdgesDesdeComentarios(comentarios: string[]): [string, string][] {
+    const edges: [string, string][] = [];
     for (const line of comentarios) {
         const match = line.match(/^#\s*edges\s*:\s*(.+)$/i);
         if (!match) continue;

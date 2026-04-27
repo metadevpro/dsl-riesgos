@@ -15,10 +15,10 @@ export abstract class GenericComponent {
     showResultsBar = false;
 
     availableStartNodes: any[] = [];
-    selectedStartNodeId: string = '';
+    selectedStartNodeId = '';
 
     results: SimulationResult[] = [];
-    selectedResult: number = -1;
+    selectedResult = -1;
 
     nodeStats = {
         total: 0,

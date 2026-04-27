@@ -52,7 +52,7 @@ function muestrearRed(
 export function ejecutarMonteCarlo(
     graph: BayesGraph,
     evidencias: Record<string, BayesEvidence>,
-    nIteraciones: number = 1000
+    nIteraciones = 1000
 ): MCResult {
     const conteos: Record<string, Record<string, number>> = {};
 

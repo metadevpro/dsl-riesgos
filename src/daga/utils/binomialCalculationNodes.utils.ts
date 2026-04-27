@@ -264,7 +264,7 @@ function simulateIteration(
     probabilityKey: string,
     maxProbability: number
 ): { isSuccess: boolean } {
-    let firstSelection: NextNodeSelection | null = getFirstProbabilityNode(
+    const firstSelection: NextNodeSelection | null = getFirstProbabilityNode(
         startNode,
         outgoingConnections,
         nodeMap,

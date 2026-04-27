@@ -20,8 +20,8 @@ export function handleConnectionUpdateValues(
   normalizedProbability: number,
   probabilityKey: string,
   maxProbability: number,
-  forceRebalance: boolean = false,
-  autoNormalizeAdjacent: boolean = true
+  forceRebalance = false,
+  autoNormalizeAdjacent = true
 ): void {
   const sourceNodeId = getSourceNodeId(connection);
   if (!sourceNodeId || !autoNormalizeAdjacent) {

@@ -5,7 +5,7 @@ import { normalizarValor } from './csv.utils';
 export function aprenderMLE(
     graph: BayesGraph,
     datos: Record<string, string>[],
-    suavizado: number = 1
+    suavizado = 1
 ): BayesGraph {
     const nodosActualizados: BayesGraph = new Map();
 

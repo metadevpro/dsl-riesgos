@@ -3,7 +3,7 @@ import { topologicalSort } from './bayesInference.utils';
 
 export function generarDatosSinteticos(
     graph: BayesGraph,
-    nMuestras: number = 1000,
+    nMuestras = 1000,
     nodosOcultar: string[] = []
 ): string {
     const orden = topologicalSort(graph);
