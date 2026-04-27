@@ -220,7 +220,7 @@ export class BayesComponent extends GenericComponent implements OnDestroy {
     /**
      * Updates a CPT cell value.
      */
-    updateCPTCell(rowKey: string, field: 'si' | 'no', value: string): void {
+    updateCPTCell(rowKey: string, field: 'si' | 'no', value: string | number): void {
         if (!this.selectedNodeId) return;
 
         const node = this.bayesGraph.get(this.selectedNodeId);
