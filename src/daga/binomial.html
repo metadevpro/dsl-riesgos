@@ -1,108 +1,199 @@
-<div style="position: relative; width: 100%; height: 100%;">
-  
-  <div style="position: absolute; top: 20px; left: 50%; transform: translateX(-50%); z-index: 1000; background: white; padding: 15px 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 16px;">
-    <button 
-      (click)="openCalculationDialog()" 
-      style="padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">
+<div style="position: relative; width: 100%; height: 100%">
+  <div
+    style="
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1000;
+      background: white;
+      padding: 15px 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    "
+  >
+    <button
+      (click)="openCalculationDialog()"
+      style="
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+      "
+    >
       Calculate Probability
     </button>
   </div>
 
-  <div *ngIf="showCalculationDialog" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 2000; display: flex; align-items: center; justify-content: center;">
-    <div style="background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.2); min-width: 400px;">
-      <h2 style="margin-top: 0; margin-bottom: 20px;">Diagram Information</h2>
-      
-      <div style="margin-bottom: 15px;">
-        <strong>Total Nodes:</strong> {{ nodeStats.total }}
-      </div>
-      
-      <div style="margin-bottom: 20px;">
-        <strong>Connected Nodes:</strong> {{ nodeStats.connected }}
-      </div>
+  <div
+    *ngIf="showCalculationDialog"
+    style="
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    "
+  >
+    <div style="background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); min-width: 400px">
+      <h2 style="margin-top: 0; margin-bottom: 20px">Diagram Information</h2>
 
-      <div *ngIf="availableStartNodes.length > 1" style="margin-bottom: 20px;">
-        <label for="startNode" style="display: block; margin-bottom: 8px; font-weight: bold;">Select Start Node:</label>
-        <select 
+      <div style="margin-bottom: 15px"><strong>Total Nodes:</strong> {{ nodeStats.total }}</div>
+
+      <div style="margin-bottom: 20px"><strong>Connected Nodes:</strong> {{ nodeStats.connected }}</div>
+
+      <div *ngIf="availableStartNodes.length > 1" style="margin-bottom: 20px">
+        <label for="startNode" style="display: block; margin-bottom: 8px; font-weight: bold">Select Start Node:</label>
+        <select
           id="startNode"
           (change)="selectedStartNodeId = $any($event.target).value"
-          style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box;">
-          <option *ngFor="let node of availableStartNodes" 
-                  [value]="node.id || node.nodeId || node.elementId"
-                  [selected]="(node.id || node.nodeId || node.elementId) === selectedStartNodeId">
+          style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box"
+        >
+          <option
+            *ngFor="let node of availableStartNodes"
+            [value]="node.id || node.nodeId || node.elementId"
+            [selected]="(node.id || node.nodeId || node.elementId) === selectedStartNodeId"
+          >
             {{ node.data?.['node name'] || node.data?.name || node.name || 'Node ' + (node.id || node.nodeId || node.elementId) }}
           </option>
         </select>
       </div>
-      
-      <div style="margin-bottom: 20px;">
-        <label for="iterations" style="display: block; margin-bottom: 8px; font-weight: bold;">Iterations (numbers only):</label>
-        <input 
+
+      <div style="margin-bottom: 20px">
+        <label for="iterations" style="display: block; margin-bottom: 8px; font-weight: bold">Iterations (numbers only):</label>
+        <input
           #iterationsInput
           id="iterations"
-          type="number" 
-          min="1" 
+          type="number"
+          min="1"
           placeholder="Enter number of iterations"
-          style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box;">
+          style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box"
+        />
       </div>
-      
-      <div style="display: flex; gap: 10px;">
-        <button 
+
+      <div style="display: flex; gap: 10px">
+        <button
           (click)="executeCalculation(iterationsInput.value)"
-          style="flex: 1; padding: 10px; background-color: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">
+          style="
+            flex: 1;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+          "
+        >
           Calculate
         </button>
-        <button 
+        <button
           (click)="closeCalculationDialog()"
-          style="flex: 1; padding: 10px; background-color: #6c757d; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">
+          style="
+            flex: 1;
+            padding: 10px;
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+          "
+        >
           Cancel
         </button>
       </div>
     </div>
   </div>
 
-  <div [ngClass]="{'resultsbarVisible': showResultsBar}" style="position: fixed; right: 0; top: 0; width: 350px; height: 100vh; background: white; box-shadow: -2px 0 8px rgba(0,0,0,0.15); z-index: 1500; overflow-y: auto; transform: translateX(100%); transition: transform 0.3s ease;">
-    <div style="padding: 20px; border-bottom: 2px solid #007bff;">
-      <h2 style="margin: 0; color: #007bff;">Results</h2>
-      <button 
+  <div
+    [ngClass]="{ resultsbarVisible: showResultsBar }"
+    style="
+      position: fixed;
+      right: 0;
+      top: 0;
+      width: 350px;
+      height: 100vh;
+      background: white;
+      box-shadow: -2px 0 8px rgba(0, 0, 0, 0.15);
+      z-index: 1500;
+      overflow-y: auto;
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+    "
+  >
+    <div style="padding: 20px; border-bottom: 2px solid #007bff">
+      <h2 style="margin: 0; color: #007bff">Results</h2>
+      <button
         (click)="closeResultsBar()"
-        style="position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 24px; cursor: pointer; color: #999;">
+        style="position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 24px; cursor: pointer; color: #999"
+      >
         ×
       </button>
     </div>
-    
-    <div *ngIf="results.length === 0" style="padding: 20px; color: #999;">
-      No results yet
-    </div>
-    
-    <div *ngFor="let result of results; let i = index" [style.background]="i === selectedResult ? '#f0f7ff' : 'white'" style="padding: 15px; border-bottom: 1px solid #eee; cursor: pointer;" (click)="selectResult(i)" [ngClass]="{'selectedResult': i === selectedResult}">
-      <div style="margin-bottom: 8px;">
+
+    <div *ngIf="results.length === 0" style="padding: 20px; color: #999">No results yet</div>
+
+    <div
+      *ngFor="let result of results; let i = index"
+      [style.background]="i === selectedResult ? '#f0f7ff' : 'white'"
+      style="padding: 15px; border-bottom: 1px solid #eee; cursor: pointer"
+      (click)="selectResult(i)"
+      [ngClass]="{ selectedResult: i === selectedResult }"
+    >
+      <div style="margin-bottom: 8px">
         <strong>Simulation {{ i + 1 }}</strong>
-        <span style="float: right; color: #999; font-size: 12px;">{{ result.date | date:'short' }}</span>
+        <span style="float: right; color: #999; font-size: 12px">{{ result.date | date: 'short' }}</span>
       </div>
-      <div style="font-size: 14px; color: #666;">
+      <div style="font-size: 14px; color: #666">
         <div *ngIf="result.startNodeName">Start Node: {{ result.startNodeName }}</div>
         <div>Iterations: {{ result.iterations }}</div>
         <div>Successes: {{ result.successIterations }}</div>
-        <div style="margin-top: 8px; font-size: 16px; font-weight: bold; color: #007bff;">
+        <div style="margin-top: 8px; font-size: 16px; font-weight: bold; color: #007bff">
           Success Rate: {{ formatPercentage(result.successIterations, result.iterations) }}
         </div>
       </div>
     </div>
   </div>
 
-  <button 
+  <button
     *ngIf="results.length > 0 && !showResultsBar"
     (click)="openResultsBar()"
-    style="position: fixed; bottom: 30px; right: 30px; z-index: 1000; padding: 15px 20px; background-color: #007bff; color: white; border: none; border-radius: 50%; width: 60px; height: 60px; cursor: pointer; font-size: 24px; box-shadow: 0 4px 12px rgba(0,123,255,0.4); display: flex; align-items: center; justify-content: center;">
+    style="
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 1000;
+      padding: 15px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      cursor: pointer;
+      font-size: 24px;
+      box-shadow: 0 4px 12px rgba(0, 123, 255, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    "
+  >
     📊
   </button>
 
-  <daga-diagram 
-    [config]="config" 
-    (modelChange)="myModel = $event">
-    <example-component
-      [branchValueKey]="branchValueKey"
-      [showTheoreticalProbabilities]="showTheoreticalProbabilities" />
+  <daga-diagram [config]="config" (modelChange)="myModel = $event">
+    <example-component [branchValueKey]="branchValueKey" [showTheoreticalProbabilities]="showTheoreticalProbabilities" />
   </daga-diagram>
-
 </div>

@@ -27,7 +27,7 @@ describe('SimpleComponent (Pestañas de Modelos)', () => {
     // Verifica que se renderiza el componente binomial (selector: daga-tutorial-simple)
     const binomialComponent = fixture.debugElement.query(By.css('daga-tutorial-simple'));
     expect(binomialComponent).toBeTruthy();
-    
+
     // Verifica que el botón de binomial tiene la clase 'active'
     const binomialButton = fixture.debugElement.queryAll(By.css('.model-item'))[0];
     expect(binomialButton.classes['active']).toBe(true);
@@ -36,8 +36,8 @@ describe('SimpleComponent (Pestañas de Modelos)', () => {
   it('debe cambiar a la pestaña Bayes al hacer clic y mostrar su componente', () => {
     // Encuentra los botones de la barra lateral (el tercero es Bayes)
     const buttons = fixture.debugElement.queryAll(By.css('.model-item'));
-    const bayesButton = buttons[2]; 
-    
+    const bayesButton = buttons[2];
+
     // Simula el clic en el botón de Bayes
     bayesButton.triggerEventHandler('click', null);
     fixture.detectChanges();
@@ -51,7 +51,7 @@ describe('SimpleComponent (Pestañas de Modelos)', () => {
     // Verifica que el componente de Bayes está presente y el de Binomial se ocultó
     const bayesComponent = fixture.debugElement.query(By.css('daga-tutorial-bayes'));
     const binomialComponent = fixture.debugElement.query(By.css('daga-tutorial-simple'));
-    
+
     expect(bayesComponent).toBeTruthy();
     expect(binomialComponent).toBeFalsy();
   });
@@ -64,7 +64,7 @@ describe('SimpleComponent (Pestañas de Modelos)', () => {
     fixture.detectChanges();
 
     expect(component.isSidebarCollapsed).toBe(true);
-    
+
     const sidebar = fixture.debugElement.query(By.css('.models-sidebar'));
     expect(sidebar.classes['collapsed']).toBe(true);
   });

@@ -1,0 +1,11 @@
+{
+  "CORSRules": [
+    {
+      "AllowedOrigins": ["https://risk.metadev.pro"],
+      "AllowedHeaders": ["*"],
+      "AllowedMethods": ["GET"],
+      "MaxAgeSeconds": 3600,
+      "ExposeHeaders": []
+    }
+  ]
+}

@@ -15,7 +15,12 @@ import {
 } from '@metadev/daga-angular';
 import { Subscription } from 'rxjs';
 import { formatProbabilityPercent, normalizeProbability, MAX_PROBABILITY, PROBABILITY_KEY } from '../utils/probability.utils';
-import { AUTO_NORMALIZE_ADJACENT_KEY, handleConnectionStructuralChange, handleConnectionUpdateValues, isConnectionAutoNormalizeEnabled } from '../utils/connectionCalculate.utils';
+import {
+  AUTO_NORMALIZE_ADJACENT_KEY,
+  handleConnectionStructuralChange,
+  handleConnectionUpdateValues,
+  isConnectionAutoNormalizeEnabled
+} from '../utils/connectionCalculate.utils';
 import { normalizeNodeId } from '../utils/generalCalculationNodes.utils';
 import { calculateTheoreticalNodeProbabilities, normalizeWeightValue } from '../utils/binomialWeight.utils';
 import { BAYES_P_SI_KEY, BAYES_P_NO_KEY, BAYES_EVIDENCE_KEY } from '../utils/bayes/bayesInference.utils';
@@ -47,8 +52,7 @@ export class ExampleComponent implements AfterViewInit, OnDestroy, OnChanges {
   private readonly bayesDecoratorSuffix = '-bayes-decorator';
   private readonly maxProbability = MAX_PROBABILITY;
 
-  constructor(private canvasProviderService: CanvasProviderService) { }
-
+  constructor(private canvasProviderService: CanvasProviderService) {}
 
   /* Implementacion de ngAfterViewInit, ocurre cuando el componente ha sido inicializado */
   ngAfterViewInit(): void {
@@ -71,17 +75,12 @@ export class ExampleComponent implements AfterViewInit, OnDestroy, OnChanges {
         this.handleUpdateValuesAction(canvas, change.action, change.method);
       } else if (change.action instanceof AddConnectionAction || change.action instanceof RemoveAction) {
         if (this.autoNormalizeAdjacent && this.branchValueKey === this.probabilityKey) {
-          const removedConnectionSourceNodeIds = change.action instanceof RemoveAction
-            ? this.getRemovedConnectionSourceNodeIds(canvas, change.action, previousConnectionSourceMap)
-            : undefined;
+          const removedConnectionSourceNodeIds =
+            change.action instanceof RemoveAction
+              ? this.getRemovedConnectionSourceNodeIds(canvas, change.action, previousConnectionSourceMap)
+              : undefined;
 
-          handleConnectionStructuralChange(
-            canvas,
-            change.action,
-            this.probabilityKey,
-            this.maxProbability,
-            removedConnectionSourceNodeIds
-          );
+          handleConnectionStructuralChange(canvas, change.action, this.probabilityKey, this.maxProbability, removedConnectionSourceNodeIds);
         }
       }
 
@@ -112,8 +111,7 @@ export class ExampleComponent implements AfterViewInit, OnDestroy, OnChanges {
   }
 
   private setupDoubleClickHandler(canvas: Canvas): void {
-    const canvasEl = (canvas as any).element?.nativeElement
-      || document.querySelector('daga-diagram');
+    const canvasEl = (canvas as any).element?.nativeElement || document.querySelector('daga-diagram');
     if (!canvasEl) return;
 
     const handler = (event: Event) => {
@@ -174,9 +172,7 @@ export class ExampleComponent implements AfterViewInit, OnDestroy, OnChanges {
     });
 
     // Covers implicit removals (e.g. deleting a node removes attached connections).
-    const currentConnectionIds = new Set<string>(
-      canvas.model.connections.all().map((connection: DiagramConnection) => connection.id)
-    );
+    const currentConnectionIds = new Set<string>(canvas.model.connections.all().map((connection: DiagramConnection) => connection.id));
 
     previousConnectionSourceMap.forEach((sourceNodeId: string, connectionId: string) => {
       if (!currentConnectionIds.has(connectionId)) {
@@ -220,9 +216,8 @@ export class ExampleComponent implements AfterViewInit, OnDestroy, OnChanges {
           return;
         }
 
-        const rawWeight = valuesChangedTo[this.branchValueKey]
-          ?? valuesChangedTo[this.probabilityKey]
-          ?? connection.valueSet.getValue(this.branchValueKey);
+        const rawWeight =
+          valuesChangedTo[this.branchValueKey] ?? valuesChangedTo[this.probabilityKey] ?? connection.valueSet.getValue(this.branchValueKey);
         const normalizedWeight = normalizeWeightValue(rawWeight);
         if (normalizedWeight === null) {
           return;
@@ -326,7 +321,12 @@ export class ExampleComponent implements AfterViewInit, OnDestroy, OnChanges {
     let theoreticalProbabilitiesByNodeId = new Map<string, number>();
     if (this.showTheoreticalProbabilities) {
       try {
-        theoreticalProbabilitiesByNodeId = calculateTheoreticalNodeProbabilities(canvas.model, this.probabilityKey, this.branchValueKey, this.maxProbability);
+        theoreticalProbabilitiesByNodeId = calculateTheoreticalNodeProbabilities(
+          canvas.model,
+          this.probabilityKey,
+          this.branchValueKey,
+          this.maxProbability
+        );
       } catch (err) {
         console.error('Failed to calculate theoretical node probabilities', err);
       }
@@ -352,9 +352,7 @@ export class ExampleComponent implements AfterViewInit, OnDestroy, OnChanges {
     const shouldShowWeightLabels = this.branchValueKey !== this.probabilityKey;
 
     canvas.model.connections.all().forEach((connection: DiagramConnection) => {
-      const nextLabel = shouldShowWeightLabels
-        ? this.getConnectionWeightLabel(connection)
-        : '';
+      const nextLabel = shouldShowWeightLabels ? this.getConnectionWeightLabel(connection) : '';
 
       if (connection.endLabel === nextLabel) {
         return;
@@ -387,9 +385,12 @@ export class ExampleComponent implements AfterViewInit, OnDestroy, OnChanges {
     canvas.model.decorators
       .all(true)
       .filter((decorator: { id: string }) => {
-        return decorator.id && (decorator.id.endsWith(this.nodeProbabilityDecoratorSuffix)
-          || decorator.id.endsWith(this.theoreticalProbabilityDecoratorSuffix)
-          || decorator.id.endsWith(this.bayesDecoratorSuffix));
+        return (
+          decorator.id &&
+          (decorator.id.endsWith(this.nodeProbabilityDecoratorSuffix) ||
+            decorator.id.endsWith(this.theoreticalProbabilityDecoratorSuffix) ||
+            decorator.id.endsWith(this.bayesDecoratorSuffix))
+        );
       })
       .forEach((decorator: { id: string }) => canvas.model.decorators.remove(decorator.id));
   }
@@ -416,22 +417,10 @@ export class ExampleComponent implements AfterViewInit, OnDestroy, OnChanges {
 
     const priority = typeof node.getPriority === 'function' ? node.getPriority() : 0;
 
-    canvas.model.decorators.new(
-      node,
-      [node.coords[0], node.coords[1] + node.height],
-      safeWidth,
-      40,
-      priority,
-      labelHtml,
-      decoratorId
-    );
+    canvas.model.decorators.new(node, [node.coords[0], node.coords[1] + node.height], safeWidth, 40, priority, labelHtml, decoratorId);
   }
 
-  private drawTheoreticalProbabilityDecorator(
-    canvas: Canvas,
-    node: DiagramNode,
-    theoreticalProbability: number | undefined
-  ): void {
+  private drawTheoreticalProbabilityDecorator(canvas: Canvas, node: DiagramNode, theoreticalProbability: number | undefined): void {
     if (theoreticalProbability == null || !Number.isFinite(theoreticalProbability)) {
       return;
     }
