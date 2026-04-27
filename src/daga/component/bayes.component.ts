@@ -7,8 +7,8 @@ import {
   AddNodeAction,
   AddConnectionAction,
   Side,
-  layouts,
 } from '@metadev/daga-angular';
+import { BayesCausalLayout } from '../utils/bayes/causalLayout';
 import { ExampleComponent } from './dagaExample.component';
 import { bayes_CONFIG } from '../config/bayes.config';
 import { GenericComponent } from './generic.component';
@@ -615,7 +615,7 @@ export class BayesComponent extends GenericComponent implements OnDestroy {
       }
     }
 
-    layouts['tree'].apply(canvas.model);
+    new BayesCausalLayout().apply(canvas.model);
 
     canvas.updateModelInView();
     return edgesCreated;

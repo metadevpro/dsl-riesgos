@@ -7,7 +7,11 @@ import {
   Side,
   Type,
   VerticalAlign,
+  layouts,
 } from '@metadev/daga-angular';
+import { BayesCausalLayout } from '../utils/bayes/causalLayout';
+
+layouts['bayes-causal'] = new BayesCausalLayout();
 
 export const bayes_CONFIG: DiagramConfig = {
   type: 'simple-diagram',
@@ -17,7 +21,7 @@ export const bayes_CONFIG: DiagramConfig = {
       snap: true,
     },
   },
-  layoutFormat: 'tree',
+  layoutFormat: 'bayes-causal',
   connectionSettings: {
     inferConnectionType: true,
     defaultConnection: 'diagram-connection',
