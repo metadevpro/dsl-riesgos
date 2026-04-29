@@ -258,9 +258,9 @@
                   <th style="color: #888; font-weight: 500; padding: 5px 6px; text-align: left; border-bottom: 1px solid #eee">P(Sí)</th>
                   <th style="color: #888; font-weight: 500; padding: 5px 6px; text-align: left; border-bottom: 1px solid #eee">P(No)</th>
                 </tr>
-                @for (row of selectedNodeCPTRows; track row; let even = $even) {
+                @for (row of selectedNodeCPTRows; track row.key; let even = $even) {
                   <tr [style.background]="even ? '#fafafa' : '#fff'" [style.borderLeft]="row.isValid ? 'none' : '3px solid #A32D2D'">
-                    @for (ps of row.parentStates; track ps) {
+                    @for (ps of row.parentStates; track ps.parentName) {
                       <td style="padding: 5px 6px; color: #555">
                         {{ ps.stateLabel }}
                       </td>
@@ -497,7 +497,7 @@
       <div style="padding: 20px; color: #999">Sin resultados aún</div>
     }
 
-    @for (entry of mcHistory; track entry; let i = $index) {
+    @for (entry of mcHistory; track $index; let i = $index) {
       <div
         [style.background]="i === selectedMCHistory ? '#f0f7ff' : 'white'"
         style="padding: 15px; border-bottom: 1px solid #eee; cursor: pointer"
