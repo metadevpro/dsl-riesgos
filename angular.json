@@ -7,7 +7,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "daga-tutorial": {
+    "risk": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -78,10 +78,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "daga-tutorial:build:production"
+              "buildTarget": "risk:build:production"
             },
             "development": {
-              "buildTarget": "daga-tutorial:build:development"
+              "buildTarget": "risk:build:development"
             }
           },
           "defaultConfiguration": "development"

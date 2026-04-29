@@ -20,8 +20,8 @@
   </button>
 
   <section class="diagram-panel">
-    <daga-tutorial-simple *ngIf="selectedModel === 'binomial'"></daga-tutorial-simple>
-    <daga-tutorial-pathProbability *ngIf="selectedModel === 'pathProbability'"></daga-tutorial-pathProbability>
-    <daga-tutorial-bayes *ngIf="selectedModel === 'bayes'"></daga-tutorial-bayes>
+    <risk-simple *ngIf="selectedModel === 'binomial'"></risk-simple>
+    <risk-pathProbability *ngIf="selectedModel === 'pathProbability'"></risk-pathProbability>
+    <risk-bayes *ngIf="selectedModel === 'bayes'"></risk-bayes>
   </section>
 </div>

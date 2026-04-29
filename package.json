@@ -1,5 +1,5 @@
 {
-  "name": "daga-tutorial",
+  "name": "risk",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:daga-tutorial": "node dist/daga-tutorial/server/server.mjs",
+    "serve:ssr:risk": "node dist/risk/server/server.mjs",
     "lint": "ng lint",
     "format:check": "prettier --check .",
     "format": "prettier --write ."

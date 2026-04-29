@@ -6,7 +6,7 @@ import { BayesComponent } from './bayes.component';
 
 @Component({
   standalone: true,
-  selector: 'daga-tutorial-root',
+  selector: 'risk-root',
   templateUrl: '../dagaIndex.html',
   imports: [CommonModule, BinomialComponent, pathProbabilityComponent, BayesComponent]
 })

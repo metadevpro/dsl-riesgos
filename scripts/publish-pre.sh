@@ -1,5 +1,5 @@
 #!/bin/sh
-SOURCE="../dist/daga-tutorial/browser"
+SOURCE="../dist/risk/browser"
 TARGET=pre-risk.metadev.pro
 REGION=eu-south-2
 

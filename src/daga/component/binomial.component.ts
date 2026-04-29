@@ -7,7 +7,7 @@ import { GenericComponent } from './generic.component';
 
 @Component({
   standalone: true,
-  selector: 'daga-tutorial-simple',
+  selector: 'risk-simple',
   templateUrl: '../binomial.html',
   imports: [DagaModule, ExampleComponent, CommonModule]
 })

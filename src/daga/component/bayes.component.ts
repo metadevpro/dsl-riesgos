@@ -29,7 +29,7 @@ import { BayesGraph, BayesEvidence, BayesCPTEntry, CPTTableRow, MCResult, Learni
 
 @Component({
   standalone: true,
-  selector: 'daga-tutorial-bayes',
+  selector: 'risk-bayes',
   templateUrl: '../bayes.html',
   imports: [DagaModule, ExampleComponent, CommonModule, FormsModule]
 })

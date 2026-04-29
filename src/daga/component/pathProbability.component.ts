@@ -13,7 +13,7 @@ interface pathProbabilityResult extends SimulationResult {
 
 @Component({
   standalone: true,
-  selector: 'daga-tutorial-pathProbability',
+  selector: 'risk-pathProbability',
   templateUrl: '../pathProbability.html',
   imports: [DagaModule, ExampleComponent, CommonModule]
 })
