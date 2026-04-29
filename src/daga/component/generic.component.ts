@@ -1,4 +1,4 @@
-import { DagaModel, DiagramConfig } from '@metadev/daga-angular';
+import { DiagramConfig } from '@metadev/daga-angular';
 import { PROB_CONFIG } from '../config/prob.config';
 import { MAX_PROBABILITY, PROBABILITY_KEY, normalizeProbability } from '../utils/probability.utils';
 import { extractConnectionEndpoints, findStartNodes, getNodeId } from '../utils/generalCalculationNodes.utils';

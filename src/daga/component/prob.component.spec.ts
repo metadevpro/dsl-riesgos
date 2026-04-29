@@ -24,8 +24,8 @@ describe('SimpleComponent (Pestañas de Modelos)', () => {
     // Verifica que el estado inicial sea 'binomial'
     expect(component.selectedModel).toBe('binomial');
 
-    // Verifica que se renderiza el componente binomial (selector: risk-simple)
-    const binomialComponent = fixture.debugElement.query(By.css('risk-simple'));
+    // Verifica que se renderiza el componente binomial (selector: app-risk-simple)
+    const binomialComponent = fixture.debugElement.query(By.css('app-risk-simple'));
     expect(binomialComponent).toBeTruthy();
 
     // Verifica que el botón de binomial tiene la clase 'active'
@@ -50,7 +50,7 @@ describe('SimpleComponent (Pestañas de Modelos)', () => {
 
     // Verifica que el componente de Bayes está presente y el de Binomial se ocultó
     const bayesComponent = fixture.debugElement.query(By.css('app-risk-bayes'));
-    const binomialComponent = fixture.debugElement.query(By.css('risk-simple'));
+    const binomialComponent = fixture.debugElement.query(By.css('app-risk-simple'));
 
     expect(bayesComponent).toBeTruthy();
     expect(binomialComponent).toBeFalsy();
