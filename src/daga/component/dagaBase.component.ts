@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnDestroy, Output, SimpleChanges } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnDestroy, Output, SimpleChanges, inject } from '@angular/core';
 import {
   Canvas,
   CanvasProviderService,
@@ -28,10 +28,12 @@ import { BayesGraph } from '../types';
 @Component({
   standalone: true,
   template: `<ng-content />`,
-  selector: 'daga-base',
+  selector: 'app-daga-base',
   imports: [DagaModule]
 })
 export class DagaBaseComponent implements AfterViewInit, OnDestroy, OnChanges {
+  private canvasProviderService = inject(CanvasProviderService);
+
   @Input() autoNormalizeAdjacent = true;
   @Input() showTheoreticalProbabilities = false;
   @Input() branchValueKey = 'probability';
@@ -50,8 +52,6 @@ export class DagaBaseComponent implements AfterViewInit, OnDestroy, OnChanges {
   private readonly theoreticalProbabilityDecoratorSuffix = '-theoretical-probability-decorator';
   private readonly bayesDecoratorSuffix = '-bayes-decorator';
   private readonly maxProbability = MAX_PROBABILITY;
-
-  constructor(private canvasProviderService: CanvasProviderService) {}
 
   /* Implementacion de ngAfterViewInit, ocurre cuando el componente ha sido inicializado */
   ngAfterViewInit(): void {
@@ -110,7 +110,7 @@ export class DagaBaseComponent implements AfterViewInit, OnDestroy, OnChanges {
   }
 
   private setupDoubleClickHandler(canvas: Canvas): void {
-    const canvasEl = (canvas as any).element?.nativeElement || document.querySelector('daga-diagram');
+    const canvasEl = document.querySelector('daga-diagram');
     if (!canvasEl) return;
 
     const handler = (event: Event) => {
@@ -407,14 +407,11 @@ export class DagaBaseComponent implements AfterViewInit, OnDestroy, OnChanges {
       return;
     }
 
-    let rawProbability: any;
-    try {
+    let rawProbability: number;
+    if (node.type && node.type.id === 'state-diagram-node') {
+      rawProbability = this.maxProbability;
+    } else {
       rawProbability = node.valueSet.getValue(this.probabilityKey);
-    } catch (e) {
-      // Fallback to 100% if the node type doesn't have a 'probability' property defined in its schema
-      if (node.type && node.type.id === 'state-diagram-node') {
-        rawProbability = this.maxProbability;
-      }
     }
 
     const percentageText = formatProbabilityPercent(rawProbability, this.maxProbability);

@@ -1,7 +1,8 @@
-import { Component, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnDestroy, ChangeDetectorRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { DagaModule, Canvas, AddNodeAction, AddConnectionAction, Side } from '@metadev/daga-angular';
+import { DagaModule, Canvas, AddNodeAction, AddConnectionAction, Side, DiagramPort } from '@metadev/daga-angular';
+import { DagaModel, DagaNode, DagaConnection } from '@metadev/daga';
 import { BayesCausalLayout } from '../utils/bayes/causalLayout';
 import { DagaBaseComponent } from './dagaBase.component';
 import { bayes_CONFIG } from '../config/bayes.config';
@@ -17,7 +18,6 @@ import {
   getCPTTableRows,
   getParentNames,
   validateCPT,
-  generateDefaultCPT,
   recalcCPTOnParentChange
 } from '../utils/bayes/bayesInference.utils';
 import { ejecutarMonteCarlo, calcularError, marginalesExactos } from '../utils/bayes/montecarlo.utils';
@@ -29,16 +29,14 @@ import { BayesGraph, BayesEvidence, BayesCPTEntry, CPTTableRow, MCResult, Learni
 
 @Component({
   standalone: true,
-  selector: 'risk-bayes',
+  selector: 'app-risk-bayes',
   templateUrl: '../bayes.html',
   imports: [DagaModule, CommonModule, FormsModule, DagaBaseComponent]
 })
 export class BayesComponent extends GenericComponent implements OnDestroy {
-  bayes_config = bayes_CONFIG;
+  private cdr = inject(ChangeDetectorRef);
 
-  constructor(private cdr: ChangeDetectorRef) {
-    super();
-  }
+  bayes_config = bayes_CONFIG;
 
   // ── Bayesian state ──
   bayesGraph: BayesGraph = new Map();
@@ -100,7 +98,7 @@ export class BayesComponent extends GenericComponent implements OnDestroy {
     // The interaction is via double-click on nodes.
   }
 
-  override executeCalculation(_iterationsStr: string): void {
+  override executeCalculation(): void {
     // No-op: Bayes uses live inference, not batch calculation
   }
 
@@ -108,7 +106,7 @@ export class BayesComponent extends GenericComponent implements OnDestroy {
    * Called by the template when the model changes.
    * Rebuilds the graph, detects structural changes, and recalculates.
    */
-  onModelChange(model: any): void {
+  onModelChange(model: DagaModel): void {
     this.myModel = model;
 
     if (!model || !model.nodes) {
@@ -117,8 +115,8 @@ export class BayesComponent extends GenericComponent implements OnDestroy {
     }
 
     const modelJson = JSON.stringify({
-      nodes: (model.nodes || []).map((n: any) => n.id),
-      connections: (model.connections || []).map((c: any) => ({
+      nodes: (model.nodes || []).map((n: DagaNode) => n.id),
+      connections: (model.connections || []).map((c: DagaConnection) => ({
         start: c.start,
         end: c.end
       }))
@@ -147,7 +145,7 @@ export class BayesComponent extends GenericComponent implements OnDestroy {
           for (const [nid, nnode] of this.bayesGraph) {
             nameMap.set(nid, nnode.name);
           }
-          node.cpt = recalcCPTOnParentChange(oldNode.cpt, oldNode.parents, node.parents, nameMap);
+          node.cpt = recalcCPTOnParentChange(oldNode.cpt, oldNode.parents);
         }
       }
     }
@@ -194,7 +192,7 @@ export class BayesComponent extends GenericComponent implements OnDestroy {
   /**
    * Handles click on the popup backdrop.
    */
-  onBackdropClick(event: MouseEvent): void {
+  onBackdropClick(event: Event): void {
     if ((event.target as HTMLElement).classList.contains('bayes-popup-backdrop')) {
       this.closeNodePopup();
     }
@@ -311,7 +309,7 @@ export class BayesComponent extends GenericComponent implements OnDestroy {
     if (!node) return;
 
     // Find and update the model node's data
-    const modelNode = this.myModel.nodes?.find((n: any) => {
+    const modelNode = this.myModel.nodes?.find((n: DagaNode) => {
       const nId = typeof n.id === 'string' ? n.id.replace(/_port_\d+$/i, '') : String(n.id);
       return nId === this.selectedNodeId;
     });
@@ -405,7 +403,7 @@ export class BayesComponent extends GenericComponent implements OnDestroy {
     this.showCSVDialog = false;
   }
 
-  onCSVBackdropClick(event: MouseEvent): void {
+  onCSVBackdropClick(event: Event): void {
     if ((event.target as HTMLElement).classList.contains('csv-dialog-backdrop')) {
       this.cerrarDialogoCSV();
     }
@@ -552,7 +550,7 @@ export class BayesComponent extends GenericComponent implements OnDestroy {
       const pickPort = (nodeId: string, side: Side): string | undefined => {
         const node = canvas.model.nodes.get(nodeId);
         if (!node) return undefined;
-        const port = node.ports.find((p: any) => p.direction === side) || node.ports[0];
+        const port = node.ports.find((p: DiagramPort) => p.direction === side) || node.ports[0];
         return port?.id;
       };
       for (const [parent, child] of edges) {

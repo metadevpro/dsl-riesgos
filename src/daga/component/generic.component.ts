@@ -1,9 +1,9 @@
-import { DiagramConfig } from '@metadev/daga-angular';
+import { DagaModel, DiagramConfig } from '@metadev/daga-angular';
 import { PROB_CONFIG } from '../config/prob.config';
 import { MAX_PROBABILITY, PROBABILITY_KEY, normalizeProbability } from '../utils/probability.utils';
 import { extractConnectionEndpoints, findStartNodes, getNodeId } from '../utils/generalCalculationNodes.utils';
 
-import { SimulationResult } from '../types';
+import { NodeInfo, SimulationResult } from '../types';
 
 export abstract class GenericComponent {
   config: DiagramConfig = PROB_CONFIG;
@@ -14,7 +14,7 @@ export abstract class GenericComponent {
   showCalculationDialog = false;
   showResultsBar = false;
 
-  availableStartNodes: any[] = [];
+  availableStartNodes: NodeInfo[] = [];
   selectedStartNodeId = '';
 
   results: SimulationResult[] = [];
@@ -135,7 +135,7 @@ export abstract class GenericComponent {
     const nodesWithError: string[] = [];
     const finalModel = JSON.parse(JSON.stringify(this.myModel));
 
-    finalModel.nodes.forEach((node: any) => {
+    finalModel.nodes.forEach((node: NodeInfo) => {
       if (node.data && node.data[this.probabilityKey] !== undefined) {
         const normalizedValue = normalizeProbability(node.data[this.probabilityKey], this.maxProbability);
         if (normalizedValue === null) {

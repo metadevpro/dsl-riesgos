@@ -304,7 +304,7 @@ export const PROB_CONFIG: DiagramConfig = {
       look: {
         lookType: 'connection-look',
         color: '#000000',
-        thickness: 3,
+        thickness: 1.5,
         style: LineStyle.Solid,
         shape: LineShape.Bezier,
         selected: {
@@ -354,7 +354,7 @@ export const PROB_CONFIG: DiagramConfig = {
       look: {
         lookType: 'connection-look',
         color: '#000000',
-        thickness: 4,
+        thickness: 3,
         style: LineStyle.Solid,
         shape: LineShape.Bezier,
         selected: {
@@ -404,7 +404,7 @@ export const PROB_CONFIG: DiagramConfig = {
       look: {
         lookType: 'connection-look',
         color: '#000000',
-        thickness: 5,
+        thickness: 3,
         style: LineStyle.Solid,
         shape: LineShape.Bezier,
         selected: {

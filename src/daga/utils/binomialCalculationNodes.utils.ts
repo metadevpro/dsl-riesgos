@@ -157,6 +157,18 @@ function isTerminalSuccessNode(node: NodeInfo): boolean {
   return node?.data?.['important'] !== false;
 }
 
+function isStateDiagramNode(node: NodeInfo): boolean {
+  const nodeType = (node as Record<string, unknown>)?.['type'];
+  if (typeof nodeType === 'string') {
+    return nodeType === 'state-diagram-node';
+  }
+  if (nodeType && typeof nodeType === 'object') {
+    const nodeTypeId = (nodeType as Record<string, unknown>)['id'];
+    return typeof nodeTypeId === 'string' && nodeTypeId === 'state-diagram-node';
+  }
+  return false;
+}
+
 function isEndNodeLike(node: NodeInfo): boolean {
   if (node?.data?.['end'] === true) return true;
 
@@ -280,7 +292,7 @@ function simulateIteration(
     }
 
     let probability = normalizeProbability(currentNode.data?.[probabilityKey], maxProbability) ?? 0;
-    if (isNodeTypeLike(currentNode, 'transition')) {
+    if (isNodeTypeLike(currentNode, 'transition') || isStateDiagramNode(currentNode)) {
       probability = 1;
     }
 

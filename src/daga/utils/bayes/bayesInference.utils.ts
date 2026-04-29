@@ -2,7 +2,7 @@ import { extractConnectionEndpoints } from '../generalCalculationNodes.utils';
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
-import { BayesEvidence, BayesCPTEntry, BayesCPT, BayesNodeInfo, BayesGraph, CPTTableRow } from '../../types';
+import { BayesEvidence, BayesCPT, BayesGraph, CPTTableRow } from '../../types';
 
 // ─── Constants ───────────────────────────────────────────────────────────────
 
@@ -19,7 +19,7 @@ const STATES: readonly string[] = ['si', 'no'] as const;
  * Generates a uniform default CPT for a node given its parent IDs.
  * Root nodes get a `prior` key; others get one row per parent-state combination.
  */
-export function generateDefaultCPT(parentIds: string[], parentNames: Map<string, string>): BayesCPT {
+export function generateDefaultCPT(parentIds: string[]): BayesCPT {
   if (parentIds.length === 0) {
     return { prior: { si: 0.5, no: 0.5 } };
   }
@@ -39,12 +39,7 @@ export function generateDefaultCPT(parentIds: string[], parentNames: Map<string,
  * Recalculates a CPT when parents change.
  * Tries to preserve values for combinations that still exist.
  */
-export function recalcCPTOnParentChange(
-  oldCPT: BayesCPT,
-  oldParents: string[],
-  newParents: string[],
-  parentNames: Map<string, string>
-): BayesCPT {
+export function recalcCPTOnParentChange(oldCPT: BayesCPT, newParents: string[]): BayesCPT {
   if (newParents.length === 0) {
     // Node became a root — try to keep from old prior if it exists
     if (oldCPT['prior']) {
@@ -170,7 +165,7 @@ export function buildBayesGraph(model: any): BayesGraph {
       }
     }
 
-    const cpt = storedCPT || generateDefaultCPT(parents, nameMap);
+    const cpt = storedCPT || generateDefaultCPT(parents);
 
     graph.set(id, {
       id,

@@ -49,7 +49,7 @@ describe('SimpleComponent (Pestañas de Modelos)', () => {
     expect(bayesButton.classes['active']).toBe(true);
 
     // Verifica que el componente de Bayes está presente y el de Binomial se ocultó
-    const bayesComponent = fixture.debugElement.query(By.css('risk-bayes'));
+    const bayesComponent = fixture.debugElement.query(By.css('app-risk-bayes'));
     const binomialComponent = fixture.debugElement.query(By.css('risk-simple'));
 
     expect(bayesComponent).toBeTruthy();

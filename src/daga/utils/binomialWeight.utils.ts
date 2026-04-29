@@ -167,6 +167,9 @@ function resolveConnectionWeight(connection: ConnectionInfo, branchValueKey: str
 
 function resolveNodeProbability(node: NodeInfo, probabilityKey: string, maxProbability: number): number {
   const nodeType = (node as Record<string, unknown>)?.['type'];
+  if (typeof nodeType === 'string' && nodeType === 'state-diagram-node') {
+    return 1;
+  }
   if (nodeType && typeof nodeType === 'object') {
     const nodeTypeId =
       typeof (nodeType as Record<string, unknown>)['id'] === 'string' ? String((nodeType as Record<string, unknown>)['id']) : '';

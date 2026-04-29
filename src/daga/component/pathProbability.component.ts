@@ -13,7 +13,7 @@ interface pathProbabilityResult extends SimulationResult {
 
 @Component({
   standalone: true,
-  selector: 'risk-pathProbability',
+  selector: 'app-risk-pathprobability',
   templateUrl: '../pathProbability.html',
   imports: [DagaModule, CommonModule, DagaBaseComponent]
 })
@@ -26,7 +26,7 @@ export class pathProbabilityComponent extends GenericComponent {
     super.openCalculationDialog();
   }
 
-  override executeCalculation(iterationsStr: string): void {
+  override executeCalculation(): void {
     // pathProbability doesn't require iterations, execute directly
     this.executepathProbabilityCalculation();
   }
