@@ -944,7 +944,7 @@
 
   <!-- ═══ Daga Diagram ═══ -->
   <daga-diagram [config]="bayes_config" (modelChange)="onModelChange($event)">
-    <example-component
+    <daga-base
       [bayesMode]="true"
       [bayesGraph]="bayesGraph"
       (nodeDoubleClicked)="onNodeDoubleClick($event)"

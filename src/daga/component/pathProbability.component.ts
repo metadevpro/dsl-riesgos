@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DagaModule } from '@metadev/daga-angular';
-import { ExampleComponent } from './dagaExample.component';
+import { DagaBaseComponent } from './dagaBase.component';
 import { calculatepathProbabilityProbability } from '../utils/pathProbabilityCalculationNodes.utils';
 import { pathProbability_CONFIG } from '../config/pathProbability.config';
 import { GenericComponent } from './generic.component';
@@ -15,7 +15,7 @@ interface pathProbabilityResult extends SimulationResult {
   standalone: true,
   selector: 'risk-pathProbability',
   templateUrl: '../pathProbability.html',
-  imports: [DagaModule, ExampleComponent, CommonModule]
+  imports: [DagaModule, CommonModule, DagaBaseComponent]
 })
 export class pathProbabilityComponent extends GenericComponent {
   pathProbability_config = pathProbability_CONFIG;

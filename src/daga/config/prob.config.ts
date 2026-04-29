@@ -26,13 +26,13 @@ export const PROB_CONFIG: DiagramConfig = {
             },
             {
               templateType: 'node',
-              type: 'transition-diagram-node',
-              label: 'Transition'
+              type: 'state-diagram-node',
+              label: 'Estado'
             },
             {
               templateType: 'node',
-              type: 'diagram-node',
-              label: 'Node'
+              type: 'event-diagram-node',
+              label: 'Suceso'
             },
             {
               templateType: 'node',
@@ -47,7 +47,7 @@ export const PROB_CONFIG: DiagramConfig = {
   },
   nodeTypes: [
     {
-      id: 'diagram-node',
+      id: 'event-diagram-node',
       name: 'Node',
       defaultWidth: 150,
       defaultHeight: 50,
@@ -113,7 +113,7 @@ export const PROB_CONFIG: DiagramConfig = {
       ]
     },
     {
-      id: 'transition-diagram-node',
+      id: 'state-diagram-node',
       name: 'Transition',
       defaultWidth: 150,
       defaultHeight: 50,
@@ -329,8 +329,8 @@ export const PROB_CONFIG: DiagramConfig = {
         padding: 6,
         margin: 20
       },
-      startTypes: ['diagram-node', 'transition-diagram-node'],
-      endTypes: ['diagram-node', 'transition-diagram-node'],
+      startTypes: ['event-diagram-node', 'state-diagram-node'],
+      endTypes: ['event-diagram-node', 'state-diagram-node'],
       properties: [
         {
           name: 'connection name',
@@ -380,7 +380,7 @@ export const PROB_CONFIG: DiagramConfig = {
         margin: 20
       },
       startTypes: ['start-diagram-node'],
-      endTypes: ['diagram-node', 'transition-diagram-node'],
+      endTypes: ['event-diagram-node', 'state-diagram-node'],
       properties: [
         {
           name: 'connection name',
@@ -429,7 +429,7 @@ export const PROB_CONFIG: DiagramConfig = {
         padding: 6,
         margin: 20
       },
-      startTypes: ['diagram-node', 'transition-diagram-node'],
+      startTypes: ['event-diagram-node', 'state-diagram-node'],
       endTypes: ['end-diagram-node'],
       properties: [
         {

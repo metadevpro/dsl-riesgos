@@ -171,7 +171,7 @@ function resolveNodeProbability(node: NodeInfo, probabilityKey: string, maxProba
     const nodeTypeId =
       typeof (nodeType as Record<string, unknown>)['id'] === 'string' ? String((nodeType as Record<string, unknown>)['id']) : '';
 
-    if (nodeTypeId === 'transition-diagram-node') {
+    if (nodeTypeId === 'state-diagram-node') {
       return 1;
     }
   }

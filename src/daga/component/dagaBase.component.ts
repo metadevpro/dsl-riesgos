@@ -23,16 +23,15 @@ import {
 } from '../utils/connectionCalculate.utils';
 import { normalizeNodeId } from '../utils/generalCalculationNodes.utils';
 import { calculateTheoreticalNodeProbabilities, normalizeWeightValue } from '../utils/binomialWeight.utils';
-import { BAYES_P_SI_KEY, BAYES_P_NO_KEY, BAYES_EVIDENCE_KEY } from '../utils/bayes/bayesInference.utils';
 import { BayesGraph } from '../types';
 
 @Component({
   standalone: true,
   template: `<ng-content />`,
-  selector: 'example-component',
+  selector: 'daga-base',
   imports: [DagaModule]
 })
-export class ExampleComponent implements AfterViewInit, OnDestroy, OnChanges {
+export class DagaBaseComponent implements AfterViewInit, OnDestroy, OnChanges {
   @Input() autoNormalizeAdjacent = true;
   @Input() showTheoreticalProbabilities = false;
   @Input() branchValueKey = 'probability';
@@ -58,7 +57,7 @@ export class ExampleComponent implements AfterViewInit, OnDestroy, OnChanges {
   ngAfterViewInit(): void {
     const canvas = this.canvasProviderService.getCanvas();
 
-    canvas.validators.push(new ExampleDiagramValidator());
+    canvas.validators.push(new DagaBaseDiagramValidator());
     this.refreshProbabilityDecorators(canvas);
     this.refreshConnectionSourceMap(canvas);
     this.canvasReady.emit(canvas);
@@ -74,7 +73,7 @@ export class ExampleComponent implements AfterViewInit, OnDestroy, OnChanges {
       if (change.action instanceof UpdateValuesAction) {
         this.handleUpdateValuesAction(canvas, change.action, change.method);
       } else if (change.action instanceof AddConnectionAction || change.action instanceof RemoveAction) {
-        if (this.autoNormalizeAdjacent && this.branchValueKey === this.probabilityKey) {
+        if (this.autoNormalizeAdjacent && this.branchValueKey === this.probabilityKey && !this.bayesMode) {
           const removedConnectionSourceNodeIds =
             change.action instanceof RemoveAction
               ? this.getRemovedConnectionSourceNodeIds(canvas, change.action, previousConnectionSourceMap)
@@ -194,6 +193,10 @@ export class ExampleComponent implements AfterViewInit, OnDestroy, OnChanges {
 
   /* Manejador de la acción de actualización de valores */
   private handleUpdateValuesAction(canvas: Canvas, action: UpdateValuesAction, method: DiagramActionMethod): void {
+    if (this.bayesMode) {
+      return;
+    }
+
     if (!action.id) {
       return;
     }
@@ -283,7 +286,7 @@ export class ExampleComponent implements AfterViewInit, OnDestroy, OnChanges {
     // 3. Si el ID corresponde a un nodo, escribimos su valor directo
     const node = canvas.model.nodes.get(action.id);
     if (node) {
-      if (node.type && node.type.id === 'transition-diagram-node') {
+      if (node.type && node.type.id === 'state-diagram-node') {
         const currentProb = node.valueSet.getValue(this.probabilityKey);
         if (currentProb !== this.maxProbability || valuesChangedTo[this.probabilityKey] !== this.maxProbability) {
           node.valueSet.overwriteValues({
@@ -400,13 +403,18 @@ export class ExampleComponent implements AfterViewInit, OnDestroy, OnChanges {
       return;
     }
 
-    if (node.type && node.type.id === 'start-diagram-node') {
+    if (node.type && node.type.id !== 'event-diagram-node') {
       return;
     }
 
-    let rawProbability = node.valueSet.getValue(this.probabilityKey);
-    if (node.type && node.type.id === 'transition-diagram-node') {
-      rawProbability = this.maxProbability;
+    let rawProbability: any;
+    try {
+      rawProbability = node.valueSet.getValue(this.probabilityKey);
+    } catch (e) {
+      // Fallback to 100% if the node type doesn't have a 'probability' property defined in its schema
+      if (node.type && node.type.id === 'state-diagram-node') {
+        rawProbability = this.maxProbability;
+      }
     }
 
     const percentageText = formatProbabilityPercent(rawProbability, this.maxProbability);
@@ -515,7 +523,7 @@ export class ExampleComponent implements AfterViewInit, OnDestroy, OnChanges {
   }
 }
 
-class ExampleDiagramValidator implements DiagramValidator {
+class DagaBaseDiagramValidator implements DiagramValidator {
   validate(model: DiagramModel): DiagramError[] {
     const errors: DiagramError[] = [];
     if (model.nodes.length === 0) {

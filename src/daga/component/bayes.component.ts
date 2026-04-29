@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DagaModule, Canvas, AddNodeAction, AddConnectionAction, Side } from '@metadev/daga-angular';
 import { BayesCausalLayout } from '../utils/bayes/causalLayout';
-import { ExampleComponent } from './dagaExample.component';
+import { DagaBaseComponent } from './dagaBase.component';
 import { bayes_CONFIG } from '../config/bayes.config';
 import { GenericComponent } from './generic.component';
 import { normalizeProbability } from '../utils/probability.utils';
@@ -31,7 +31,7 @@ import { BayesGraph, BayesEvidence, BayesCPTEntry, CPTTableRow, MCResult, Learni
   standalone: true,
   selector: 'risk-bayes',
   templateUrl: '../bayes.html',
-  imports: [DagaModule, ExampleComponent, CommonModule, FormsModule]
+  imports: [DagaModule, CommonModule, FormsModule, DagaBaseComponent]
 })
 export class BayesComponent extends GenericComponent implements OnDestroy {
   bayes_config = bayes_CONFIG;
@@ -159,7 +159,7 @@ export class BayesComponent extends GenericComponent implements OnDestroy {
     // Recalculate marginals
     recalcAllMarginals(this.bayesGraph);
 
-    // Create new Map reference to trigger Angular change detection in ExampleComponent
+    // Create new Map reference to trigger Angular change detection in DagaBaseComponent
     this.bayesGraph = new Map(this.bayesGraph);
 
     // Persist marginals back to model data for the decorator

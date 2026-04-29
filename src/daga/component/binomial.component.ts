@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DagaModule } from '@metadev/daga-angular';
-import { ExampleComponent } from './dagaExample.component';
+import { DagaBaseComponent } from './dagaBase.component';
 import { calculateBinomialProbability } from '../utils/binomialCalculationNodes.utils';
 import { GenericComponent } from './generic.component';
 
@@ -9,7 +9,7 @@ import { GenericComponent } from './generic.component';
   standalone: true,
   selector: 'risk-simple',
   templateUrl: '../binomial.html',
-  imports: [DagaModule, ExampleComponent, CommonModule]
+  imports: [DagaModule, CommonModule, DagaBaseComponent]
 })
 export class BinomialComponent extends GenericComponent {
   branchValueKey = 'weight';
