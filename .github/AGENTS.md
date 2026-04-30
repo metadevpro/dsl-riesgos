@@ -31,6 +31,7 @@ This file is mandatory living documentation for architecture flow, coding standa
 ### 2.5 Testing
 
 - Write unit tests (`.spec.ts`) for utility functions and core components to ensure mathematical and logic accuracy.
+- Run `npm run lint` repeatedly until there are 0 errors, especially when creating new code. All existing lint errors must be fixed, even if they were not introduced in the current session.
 
 ## 3. Project Context (DAGA Tutorial)
 
