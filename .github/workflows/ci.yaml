@@ -26,5 +26,43 @@ jobs:
     - run: npm ci
     - run: npm run format
     # - run: npm run lint  ## fix before uncomment
-    - run: npm run build 
+    - run: npm run build
     - run: npm test
+
+  e2e:
+    needs: build
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [24.x]
+    steps:
+    - uses: actions/checkout@v4
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - name: Cypress run
+      uses: cypress-io/github-action@v6
+      with:
+        install-command: npm ci
+        working-directory: .
+        project: e2e
+        start: npm start
+        wait-on: 'http://localhost:4200'
+        wait-on-timeout: 180
+        browser: electron
+    - name: Upload Cypress screenshots
+      if: failure()
+      uses: actions/upload-artifact@v4
+      with:
+        name: cypress-screenshots
+        path: e2e/screenshots
+        if-no-files-found: ignore
+    - name: Upload Cypress videos
+      if: failure()
+      uses: actions/upload-artifact@v4
+      with:
+        name: cypress-videos
+        path: e2e/videos
+        if-no-files-found: ignore
