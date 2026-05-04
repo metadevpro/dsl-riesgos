@@ -1,7 +1,6 @@
 import { normalizeProbability } from './probability.utils';
 import {
   buildOutgoingConnections,
-  findStartNode,
   findStartNodes,
   getNodeId,
   getNodeMap,
@@ -250,7 +249,7 @@ function walkTheoreticalProbabilities(
 }
 
 export function calculateTheoreticalNodeProbabilities(
-  model: any,
+  model: unknown,
   probabilityKey: string,
   branchValueKey: string,
   maxProbability: number
@@ -261,8 +260,8 @@ export function calculateTheoreticalNodeProbabilities(
     return results;
   }
 
-  const nodes: NodeInfo[] = toArray<NodeInfo>(model.nodes);
-  const connections: ConnectionInfo[] = toArray<ConnectionInfo>(model.connections);
+  const nodes: NodeInfo[] = toArray<NodeInfo>((model as Record<string, unknown>)['nodes']);
+  const connections: ConnectionInfo[] = toArray<ConnectionInfo>((model as Record<string, unknown>)['connections']);
 
   if (nodes.length === 0) {
     return results;

@@ -85,14 +85,14 @@ export function buildOutgoingConnections(connections: ConnectionInfo[]): Map<Nod
 
 export function isNodeName(node: NodeInfo, expectedName: string): boolean {
   const normalizedExpected = expectedName.trim().toLowerCase();
-  const candidateName = node?.data?.['node name'] ?? node?.data?.name ?? (node as NodeInfo)?.['name'];
+  const candidateName = node?.data?.['node name'] ?? node?.data?.['name'] ?? (node as NodeInfo)?.['name'];
 
   return typeof candidateName === 'string' && candidateName.trim().toLowerCase() === normalizedExpected;
 }
 
 export function isNodeTypeLike(node: NodeInfo, fragment: string): boolean {
   const normalizedFragment = fragment.toLowerCase();
-  const candidateType = (node as NodeInfo)?.['type'] ?? (node as NodeInfo)?.['nodeType'] ?? node?.data?.type;
+  const candidateType = (node as NodeInfo)?.['type'] ?? (node as NodeInfo)?.['nodeType'] ?? node?.data?.['type'];
 
   return typeof candidateType === 'string' && candidateType.toLowerCase().includes(normalizedFragment);
 }

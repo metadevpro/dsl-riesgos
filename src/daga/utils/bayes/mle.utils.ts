@@ -37,7 +37,11 @@ export function aprenderMLE(graph: BayesGraph, datos: Record<string, string>[], 
 
       const clave = clavePartes.length === 0 ? 'prior' : clavePartes.join('|');
       if (conteos[clave]) {
-        (conteos[clave] as any)[estadoNodo]++;
+        if (estadoNodo === 'si') {
+          conteos[clave].si++;
+        } else if (estadoNodo === 'no') {
+          conteos[clave].no++;
+        }
       }
     }
 

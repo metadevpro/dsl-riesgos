@@ -107,13 +107,13 @@ export function getParentCombinations(parentIds: string[]): ParentStateCombi[][]
  * Builds the complete Bayesian graph from a daga DiagramModel.
  * Nodes read their stored CPT/evidence from `node.data`, or get defaults.
  */
-export function buildBayesGraph(model: any): BayesGraph {
+export function buildBayesGraph(model: unknown): BayesGraph {
   const graph: BayesGraph = new Map();
 
-  if (!model || !model.nodes) return graph;
+  if (!model || typeof model !== 'object' || !('nodes' in model)) return graph;
 
-  const nodes: any[] = model.nodes;
-  const connections: any[] = model.connections || [];
+  const nodes = (model as Record<string, unknown>)['nodes'] as unknown[];
+  const connections = ((model as Record<string, unknown>)['connections'] as unknown[]) || [];
 
   // Build parent/child maps from connections
   const parentsMap = new Map<string, string[]>();
@@ -150,16 +150,16 @@ export function buildBayesGraph(model: any): BayesGraph {
     const children = childrenMap.get(id) || [];
     const name = nameMap.get(id) || id;
 
-    // Read stored data or create defaults
-    // Config stores default as the string 'null', convert to actual null
-    const rawEvidence = node.data?.[BAYES_EVIDENCE_KEY];
+    const n = node as Record<string, unknown>;
+    const nData = n['data'] as Record<string, unknown> | undefined;
+    const rawEvidence = nData?.[BAYES_EVIDENCE_KEY];
     const evidence: BayesEvidence = rawEvidence === 'si' || rawEvidence === 'no' ? rawEvidence : null;
     let storedCPT: BayesCPT | null = null;
 
-    if (node.data?.[BAYES_CPT_KEY]) {
+    if (nData?.[BAYES_CPT_KEY]) {
       try {
-        const raw = node.data[BAYES_CPT_KEY];
-        storedCPT = typeof raw === 'string' ? JSON.parse(raw) : raw;
+        const raw = nData[BAYES_CPT_KEY];
+        storedCPT = typeof raw === 'string' ? JSON.parse(raw) : (raw as BayesCPT);
       } catch {
         storedCPT = null;
       }
@@ -206,13 +206,10 @@ function enumerateWorlds(
   for (const state of ['si', 'no'] as ('si' | 'no')[]) {
     if (evidence[nodeId] && evidence[nodeId] !== state) continue;
 
-    let prob = 0;
-    if (node.parents.length === 0) {
-      prob = node.cpt['prior']?.[state] ?? 0;
-    } else {
-      const cptKey = node.parents.map((p) => `${p}_${currentWorld[p]}`).join('|');
-      prob = node.cpt[cptKey]?.[state] ?? 0;
-    }
+    const prob =
+      node.parents.length === 0
+        ? node.cpt['prior']?.[state] ?? 0
+        : node.cpt[node.parents.map((p) => `${p}_${currentWorld[p]}`).join('|')]?.[state] ?? 0;
 
     if (prob === 0) continue;
 
@@ -317,16 +314,19 @@ export function topologicalSort(graph: BayesGraph): string[] {
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
-function getNodeIdSafe(node: any): string | undefined {
-  if (!node) return undefined;
-  const raw = node.id;
+function getNodeIdSafe(node: unknown): string | undefined {
+  if (!node || typeof node !== 'object') return undefined;
+  const raw = (node as Record<string, unknown>)['id'];
   if (typeof raw === 'string') return raw.replace(/_port_\d+$/i, '');
   if (typeof raw === 'number') return String(raw);
   return undefined;
 }
 
-function getNodeName(node: any): string {
-  return node?.data?.['node name'] || node?.name || node?.id || 'unnamed';
+function getNodeName(node: unknown): string {
+  if (!node || typeof node !== 'object') return 'unnamed';
+  const n = node as Record<string, unknown>;
+  const data = n['data'] as Record<string, unknown> | undefined;
+  return (data?.['node name'] as string) || (n['name'] as string) || (n['id'] as string) || 'unnamed';
 }
 
 /**

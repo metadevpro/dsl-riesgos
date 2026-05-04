@@ -13,6 +13,15 @@ module.exports = defineConfig([
     extends: [eslint.configs.recommended, tseslint.configs.recommended, tseslint.configs.stylistic, angular.configs.tsRecommended],
     processor: angular.processInlineTemplates,
     rules: {
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          args: 'all',
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          caughtErrorsIgnorePattern: '^_'
+        }
+      ],
       '@angular-eslint/directive-selector': [
         'error',
         {
@@ -25,7 +34,7 @@ module.exports = defineConfig([
         'error',
         {
           type: 'element',
-          prefix: 'app',
+          prefix: ['app', 'risk'],
           style: 'kebab-case'
         }
       ]

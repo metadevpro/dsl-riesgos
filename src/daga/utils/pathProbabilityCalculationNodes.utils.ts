@@ -86,17 +86,19 @@ function findAllSimplePaths(
 }
 
 export function calculatepathProbabilityProbability(
-  model: any,
+  model: unknown,
   probabilityKey: string,
   maxProbability: number,
   selectedStartNodeId?: string
 ): pathProbabilityCalculationResult {
-  if (!model || !Array.isArray(model.nodes) || model.nodes.length === 0) {
+  const m = model as Record<string, unknown>;
+  const nodesArr = m ? (m['nodes'] as NodeInfo[]) : [];
+  if (!model || typeof model !== 'object' || !Array.isArray(nodesArr) || nodesArr.length === 0) {
     throw new Error('Diagram must have at least 1 node.');
   }
 
-  const nodes: NodeInfo[] = model.nodes;
-  const connections: ConnectionInfo[] = model.connections || [];
+  const nodes = nodesArr;
+  const connections: ConnectionInfo[] = (m['connections'] as ConnectionInfo[]) || [];
 
   const nodeMap = getNodeMap(nodes);
   let startNodeToUse: NodeInfo;
@@ -114,7 +116,10 @@ export function calculatepathProbabilityProbability(
   }
 
   const startNodeId = getNodeId(startNodeToUse);
-  const startNodeName = startNodeToUse.data?.['node name'] || startNodeToUse.data?.name || `Node ${startNodeId}`;
+  const startNodeName =
+    ((startNodeToUse.data?.['node name'] as string | undefined) ||
+    (startNodeToUse.data?.['name'] as string | undefined) ||
+    `Node ${startNodeId}`) as string;
   const endNodeId = getNodeId(endNode);
 
   if (!startNodeId || !endNodeId) {

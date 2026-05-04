@@ -1,13 +1,13 @@
-import { DiagramConfig } from '@metadev/daga-angular';
+import { DiagramConfig, DagaModel } from '@metadev/daga-angular';
 import { PROB_CONFIG } from '../config/prob.config';
 import { MAX_PROBABILITY, PROBABILITY_KEY, normalizeProbability } from '../utils/probability.utils';
 import { extractConnectionEndpoints, findStartNodes, getNodeId } from '../utils/generalCalculationNodes.utils';
 
-import { NodeInfo, SimulationResult } from '../types';
+import { NodeInfo, ConnectionInfo, SimulationResult } from '../types';
 
 export abstract class GenericComponent {
   config: DiagramConfig = PROB_CONFIG;
-  myModel: any;
+  myModel: DagaModel | null = null;
   isSidebarCollapsed = false;
   selectedModel = 'none';
 
@@ -42,8 +42,8 @@ export abstract class GenericComponent {
       return;
     }
 
-    const nodes = this.myModel.nodes || [];
-    const connections = this.myModel.connections || [];
+    const nodes = (this.myModel.nodes as unknown as NodeInfo[]) || [];
+    const connections = (this.myModel.connections as unknown as ConnectionInfo[]) || [];
     this.availableStartNodes = findStartNodes(nodes, connections);
 
     if (this.availableStartNodes.length > 0) {
@@ -112,7 +112,7 @@ export abstract class GenericComponent {
     if (this.myModel.connections) {
       const connectedNodes = new Set<string>();
 
-      this.myModel.connections.forEach((conn: any) => {
+      this.myModel.connections.forEach((conn: unknown) => {
         const { endId } = extractConnectionEndpoints(conn);
         if (endId) connectedNodes.add(endId);
       });
@@ -139,11 +139,11 @@ export abstract class GenericComponent {
       if (node.data && node.data[this.probabilityKey] !== undefined) {
         const normalizedValue = normalizeProbability(node.data[this.probabilityKey], this.maxProbability);
         if (normalizedValue === null) {
-          const nodeName = node.data['node name'] || `ID ${node.id}`;
+          const nodeName = (node.data['node name'] as string) || `ID ${node.id}`;
           nodesWithError.push(nodeName);
         } else {
           node.data[this.probabilityKey] = normalizedValue;
-          node.data.probabilidadImplicita = normalizedValue;
+          node.data['probabilidadImplicita'] = normalizedValue;
         }
       }
     });
@@ -159,11 +159,11 @@ export abstract class GenericComponent {
     return finalModel;
   }
 
-  getpathProbabilityResultAtIndex(index: number): any {
+  getpathProbabilityResultAtIndex(_index: number): unknown {
     return undefined;
   }
 
-  formatPosteriorProbability(probability: number): string {
+  formatPosteriorProbability(_probability: number): string {
     return '0%';
   }
 

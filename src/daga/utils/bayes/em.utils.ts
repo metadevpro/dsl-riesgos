@@ -1,5 +1,5 @@
 import { BayesGraph, BayesCPT, BayesNodeInfo } from '../../types';
-import { getParentCombinations, recalcAllMarginals, topologicalSort } from './bayesInference.utils';
+import { getParentCombinations, recalcAllMarginals } from './bayesInference.utils';
 import { normalizarValor } from './csv.utils';
 
 // ─── Public Entry ─────────────────────────────────────────────────────────────
@@ -104,13 +104,12 @@ export function calcularClavePadres(
   nodo: BayesNodeInfo,
   evidencias: Record<string, string>,
   inferido: Record<string, Record<string, number>>,
-  graph: BayesGraph
+  _graph: BayesGraph
 ): [string, number][] {
   if (nodo.parents.length === 0) return [['prior', 1]];
 
   const distsPadres = nodo.parents.map((padreId) => {
     if (evidencias[padreId]) {
-      const padre = graph.get(padreId)!;
       return Object.fromEntries(['si', 'no'].map((e) => [e, e === evidencias[padreId] ? 1 : 0]));
     }
     return inferido[padreId] ?? { si: 0.5, no: 0.5 };

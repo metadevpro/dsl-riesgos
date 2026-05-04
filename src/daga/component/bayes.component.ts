@@ -145,7 +145,7 @@ export class BayesComponent extends GenericComponent implements OnDestroy {
           for (const [nid, nnode] of this.bayesGraph) {
             nameMap.set(nid, nnode.name);
           }
-          node.cpt = recalcCPTOnParentChange(oldNode.cpt, oldNode.parents);
+          node.cpt = recalcCPTOnParentChange(oldNode.cpt, node.parents);
         }
       }
     }

@@ -11,7 +11,7 @@ import {
 
 import { ConnectionInfo, NodeId, NodeInfo, CalculationResult } from '../types';
 
-function normalizeWeight(rawValue: unknown, maxProbability: number): number | null {
+function normalizeWeight(rawValue: unknown, _maxProbability: number): number | null {
   if (typeof rawValue === 'number') {
     return Number.isFinite(rawValue) && rawValue >= 0 ? Number(rawValue.toFixed(4)) : null;
   }
@@ -172,7 +172,7 @@ function isStateDiagramNode(node: NodeInfo): boolean {
 function isEndNodeLike(node: NodeInfo): boolean {
   if (node?.data?.['end'] === true) return true;
 
-  const nodeName = node?.data?.['node name'] ?? node?.data?.name ?? (node as any)?.name;
+  const nodeName = node?.data?.['node name'] ?? node?.data?.['name'] ?? node?.['name'];
   if (typeof nodeName === 'string' && nodeName.trim().toLowerCase() === 'end') return true;
 
   return isNodeTypeLike(node, 'end');
@@ -203,13 +203,13 @@ function buildEndNodeIdSet(nodes: NodeInfo[]): Set<NodeId> {
  * @returns An object matching SimulationResult pattern
  */
 export function calculateBinomialProbability(
-  model: any,
+  model: unknown,
   iterations: number,
   probabilityKey: string,
   maxProbability: number,
   startNodeId?: string
 ): CalculationResult {
-  if (!model || !model.nodes || model.nodes.length === 0) {
+  if (!model || !(model as Record<string, unknown>)['nodes'] || ((model as Record<string, unknown>)['nodes'] as NodeInfo[]).length === 0) {
     throw new Error('Diagram must have at least 1 node.');
   }
 
@@ -217,8 +217,8 @@ export function calculateBinomialProbability(
     throw new Error('Number of iterations must be equal or greater than 1.');
   }
 
-  const nodes: NodeInfo[] = model.nodes;
-  const connections: ConnectionInfo[] = model.connections || [];
+  const nodes: NodeInfo[] = (model as Record<string, unknown>)['nodes'] as NodeInfo[];
+  const connections: ConnectionInfo[] = ((model as Record<string, unknown>)['connections'] as ConnectionInfo[]) || [];
 
   const nodeMap = getNodeMap(nodes);
   const endNodeIds = buildEndNodeIdSet(nodes);
@@ -234,7 +234,10 @@ export function calculateBinomialProbability(
     startNodeToUse = findStartNode(nodes, connections);
   }
 
-  const startNodeName = startNodeToUse.data?.['node name'] || startNodeToUse.data?.name || `Node ${getNodeId(startNodeToUse)}`;
+  const startNodeName =
+    ((startNodeToUse.data?.['node name'] as string | undefined) ||
+    (startNodeToUse.data?.['name'] as string | undefined) ||
+    `Node ${getNodeId(startNodeToUse)}`) as string;
 
   for (let i = 0; i < iterations; i++) {
     const result = simulateIteration(startNodeToUse, outgoingConnections, nodeMap, endNodeIds, hasEndNode, probabilityKey, maxProbability);

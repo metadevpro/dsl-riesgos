@@ -95,7 +95,7 @@ const MAPEOS_COMUNES: Record<string, string> = {
   '0': 'no'
 };
 
-export function normalizarValor(valor: string, nodo: BayesNodeInfo): string | null {
+export function normalizarValor(valor: string, _nodo: BayesNodeInfo): string | null {
   if (!valor) return null;
   const v = valor.toLowerCase().trim();
 

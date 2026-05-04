@@ -1,13 +1,13 @@
 export interface NodeInfo {
   id: string;
-  data: any;
-  [key: string]: any;
+  data: Record<string, unknown>;
+  [key: string]: unknown;
 }
 
 export interface ConnectionInfo {
   startNode?: string;
   endNode?: string;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 export interface ConnectionEndpoints {

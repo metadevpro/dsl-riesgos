@@ -64,8 +64,8 @@
                   [selected]="(node.id || node['nodeId'] || node['elementId']) === selectedStartNodeId"
                 >
                   {{
-                    node.data?.['node name'] ||
-                      node.data?.name ||
+                    node.data['node name'] ||
+                      node.data['name'] ||
                       node['name'] ||
                       'Node ' + (node.id || node['nodeId'] || node['elementId'])
                   }}
