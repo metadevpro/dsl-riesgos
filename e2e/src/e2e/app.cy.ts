@@ -1,13 +1,13 @@
-import { getGreeting } from '../support/app.po';
+
 
 describe('e2e', () => {
-  beforeEach(() => cy.visit('/'));
+  beforeEach(() => cy.visit('/')); //Se visita la raíz de la aplicación antes de cada prueba
 
-  it('should display welcome message', () => {
-    // Custom command example, see `../support/commands.ts` file
-    cy.login('my-email@something.com', 'myPassword');
+  it('daga panel should exist', () => {
+    cy.get('.daga-panel').should('exist');
+  });
 
-    // Function helper example, see `../support/app.po.ts` file
-    getGreeting().contains(/Welcome/);
+  it('should display 3 tabs', () => {
+    cy.getByTestId('sidebar').find('button').should('have.length', 3);
   });
 });

@@ -13,7 +13,7 @@
     "format": "prettier --write .",
     "cy:open": "cypress open --project e2e",
     "cy:run": "cypress run --project e2e",
-    "e2e": "cypress run --project e2e"
+    "e2e": "cypress run --project e2e" 
   },
   "private": true,
   "packageManager": "npm@11.11.0",
