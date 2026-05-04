@@ -1,7 +1,7 @@
 <div class="page-layout">
-  <aside class="models-sidebar" [ngClass]="{ collapsed: isSidebarCollapsed }">
+  <aside data-test-id="sidebar" class="models-sidebar" [ngClass]="{ collapsed: isSidebarCollapsed }">
     <div class="models-header">Probability models</div>
-    <button class="model-item" [ngClass]="{ active: selectedModel === 'binomial' }" (click)="selectModel('binomial')">
+    <button data-test-id="binomial" class="model-item" [ngClass]="{ active: selectedModel === 'binomial' }" (click)="selectModel('binomial')">
       Binomial model
     </button>
     <button class="model-item" [ngClass]="{ active: selectedModel === 'pathProbability' }" (click)="selectModel('pathProbability')">
