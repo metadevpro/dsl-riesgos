@@ -4,8 +4,6 @@
     "allowJs": true,
     "outDir": "../dist/out-tsc",
     "module": "commonjs",
-    "moduleResolution": "node",
-    "ignoreDeprecations": "6.0",
     "types": ["cypress", "node"],
     "sourceMap": false,
     "forceConsistentCasingInFileNames": true,
