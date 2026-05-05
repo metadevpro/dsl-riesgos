@@ -76,6 +76,7 @@ export interface SimulationResult {
   startNodeName?: string;
   iterations: number;
   successIterations: number;
+  theoreticalProbability?: number;
   date: Date;
 }
 

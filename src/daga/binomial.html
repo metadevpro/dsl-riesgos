@@ -178,6 +178,11 @@
           <div style="margin-top: 8px; font-size: 16px; font-weight: bold; color: #007bff">
             Success Rate: {{ formatPercentage(result.successIterations, result.iterations) }}
           </div>
+          @if (result.theoreticalProbability !== null && result.theoreticalProbability !== undefined) {
+            <div style="margin-top: 4px; font-size: 14px; color: #34a3f1">
+              Theoretical: {{ result.theoreticalProbability.toFixed(2) }}%
+            </div>
+          }
         </div>
       </div>
     }

@@ -178,7 +178,7 @@ function isEndNodeLike(node: NodeInfo): boolean {
   return isNodeTypeLike(node, 'end');
 }
 
-function buildEndNodeIdSet(nodes: NodeInfo[]): Set<NodeId> {
+export function buildEndNodeIdSet(nodes: NodeInfo[]): Set<NodeId> {
   const endNodeIds = new Set<NodeId>();
 
   for (const node of nodes) {

@@ -86,12 +86,13 @@ export abstract class GenericComponent {
     return !!(this.myModel && this.myModel.nodes && this.myModel.nodes.length > 0);
   }
 
-  protected pushResult(iterations: number, successIterations: number, startNodeId?: string, startNodeName?: string): void {
+  protected pushResult(iterations: number, successIterations: number, startNodeId?: string, startNodeName?: string, theoreticalProbability?: number): void {
     this.results.push({
       startNodeId,
       startNodeName,
       iterations,
       successIterations,
+      theoreticalProbability,
       date: new Date()
     });
 

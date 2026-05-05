@@ -2,8 +2,10 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DagaModule } from '@metadev/daga-angular';
 import { DagaBaseComponent } from './dagaBase.component';
-import { calculateBinomialProbability } from '../utils/binomialCalculationNodes.utils';
+import { calculateBinomialProbability, buildEndNodeIdSet } from '../utils/binomialCalculationNodes.utils';
+import { calculateTheoreticalNodeProbabilities } from '../utils/binomialWeight.utils';
 import { GenericComponent } from './generic.component';
+import { NodeInfo } from '../types';
 
 @Component({
   standalone: true,
@@ -37,7 +39,17 @@ export class BinomialComponent extends GenericComponent {
         this.selectedStartNodeId
       );
 
-      this.pushResult(result.iterations, result.successIterations, result.startNodeId, result.startNodeName);
+      const theoreticalMap = calculateTheoreticalNodeProbabilities(
+        this.myModel, this.probabilityKey, this.branchValueKey, this.maxProbability
+      );
+      const nodes = (this.myModel?.nodes as unknown as NodeInfo[]) ?? [];
+      const endNodeIds = buildEndNodeIdSet(nodes);
+      let theoreticalProbability = 0;
+      for (const nodeId of endNodeIds) {
+        theoreticalProbability += theoreticalMap.get(nodeId) ?? 0;
+      }
+
+      this.pushResult(result.iterations, result.successIterations, result.startNodeId, result.startNodeName, theoreticalProbability);
       console.log('Calculation completed:', result);
     } catch (error) {
       alert(`Error during calculation: ${error}`);
