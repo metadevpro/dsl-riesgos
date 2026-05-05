@@ -1,5 +1,5 @@
 export const PROBABILITY_KEY = 'probability';
-export const MAX_PROBABILITY = 1.0;
+export const MAX_PROBABILITY = 100;
 
 function normalizeNumericInput(rawValue: string): string {
   const compact = rawValue.replace(/\s+/g, '');
@@ -53,15 +53,14 @@ export function normalizeProbability(rawValue: unknown, maxProbability: number =
     return null;
   }
 
-  const normalized = numericValue > maxProbability ? numericValue / 100 : numericValue;
-  const clamped = Math.max(0, Math.min(maxProbability, normalized));
+  const clamped = Math.max(0, Math.min(maxProbability, numericValue));
 
   return Number(clamped.toFixed(6));
 }
 
 export function formatProbabilityPercent(rawValue: unknown, maxProbability: number = MAX_PROBABILITY): string {
   const normalized = normalizeProbability(rawValue, maxProbability) ?? 0;
-  const percentage = normalized * 100;
+  const percentage = (normalized / maxProbability) * 100;
 
   return Number.isInteger(percentage) ? `${percentage}%` : `${percentage.toFixed(2)}%`;
 }

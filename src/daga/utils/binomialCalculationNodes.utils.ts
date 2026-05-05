@@ -294,7 +294,7 @@ function simulateIteration(
       return { isSuccess: isTerminalSuccessNode(currentNode) };
     }
 
-    let probability = normalizeProbability(currentNode.data?.[probabilityKey], maxProbability) ?? 0;
+    let probability = (normalizeProbability(currentNode.data?.[probabilityKey], maxProbability) ?? 0) / maxProbability;
     if (isNodeTypeLike(currentNode, 'transition') || isStateDiagramNode(currentNode)) {
       probability = 1;
     }

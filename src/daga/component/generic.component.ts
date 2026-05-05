@@ -149,7 +149,7 @@ export abstract class GenericComponent {
     });
 
     if (nodesWithError.length > 0) {
-      const message = `Cannot save the diagram.\n\nProbability must be numeric and non-negative.\nIf you enter a value greater than ${this.maxProbability}, it gets interpreted as a percentage and divided by 100.\n\nPlease review these nodes:\n\n- ${nodesWithError.join('\n- ')}`;
+      const message = `Cannot save the diagram.\n\nProbability must be numeric, non-negative, and at most ${this.maxProbability}.\n\nPlease review these nodes:\n\n- ${nodesWithError.join('\n- ')}`;
       alert(message);
       return null;
     }

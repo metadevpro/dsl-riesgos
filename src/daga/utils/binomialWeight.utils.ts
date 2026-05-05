@@ -167,19 +167,19 @@ function resolveConnectionWeight(connection: ConnectionInfo, branchValueKey: str
 function resolveNodeProbability(node: NodeInfo, probabilityKey: string, maxProbability: number): number {
   const nodeType = (node as Record<string, unknown>)?.['type'];
   if (typeof nodeType === 'string' && nodeType === 'state-diagram-node') {
-    return 1;
+    return maxProbability;
   }
   if (nodeType && typeof nodeType === 'object') {
     const nodeTypeId =
       typeof (nodeType as Record<string, unknown>)['id'] === 'string' ? String((nodeType as Record<string, unknown>)['id']) : '';
 
     if (nodeTypeId === 'state-diagram-node') {
-      return 1;
+      return maxProbability;
     }
   }
 
   const rawValue = readNodeValue(node, [probabilityKey, 'probability', 'chance']);
-  return normalizeProbability(rawValue, maxProbability) ?? 1;
+  return normalizeProbability(rawValue, maxProbability) ?? maxProbability;
 }
 
 function addProbabilityContribution(target: Map<NodeId, number>, nodeId: NodeId, probability: number): void {
@@ -204,7 +204,8 @@ function walkTheoreticalProbabilities(
     return;
   }
 
-  const nodeProbabilityFactor = currentId === startNodeId ? 1 : resolveNodeProbability(currentNode, probabilityKey, maxProbability);
+  const rawFactor = currentId === startNodeId ? maxProbability : resolveNodeProbability(currentNode, probabilityKey, maxProbability);
+  const nodeProbabilityFactor = rawFactor / maxProbability;
   const nodeProbability = Number((accumulatedProbability * nodeProbabilityFactor).toFixed(6));
   addProbabilityContribution(results, currentId, nodeProbability);
 
@@ -282,7 +283,7 @@ export function calculateTheoreticalNodeProbabilities(
 
     walkTheoreticalProbabilities(
       startNode,
-      1,
+      maxProbability,
       outgoingConnections,
       nodeMap,
       results,
