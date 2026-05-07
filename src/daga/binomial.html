@@ -127,7 +127,8 @@
   }
 
   <div
-    [ngClass]="{ resultsbarVisible: showResultsBar }"
+  data-test-id="results-panel"  
+  [ngClass]="{ resultsbarVisible: showResultsBar }"
     style="
       position: fixed;
       right: 0;

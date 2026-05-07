@@ -4,10 +4,10 @@
     <button data-test-id="binomial" class="model-item" [ngClass]="{ active: selectedModel === 'binomial' }" (click)="selectModel('binomial')">
       Binomial model
     </button>
-    <button class="model-item" [ngClass]="{ active: selectedModel === 'pathProbability' }" (click)="selectModel('pathProbability')">
+    <button data-test-id="pathProbability" class="model-item" [ngClass]="{ active: selectedModel === 'pathProbability' }" (click)="selectModel('pathProbability')">
       Path model
     </button>
-    <button class="model-item" [ngClass]="{ active: selectedModel === 'bayes' }" (click)="selectModel('bayes')">Bayes model</button>
+    <button data-test-id="bayes" class="model-item" [ngClass]="{ active: selectedModel === 'bayes' }" (click)="selectModel('bayes')">Bayes model</button>
   </aside>
 
   <button
