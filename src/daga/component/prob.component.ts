@@ -52,9 +52,20 @@ export class SimpleComponent {
       return;
     }
 
-    this.selectModel(parsed.modelType);
+    if (parsed.modelType !== this.selectedModel) {
+      const labels: Record<'binomial' | 'pathProbability' | 'bayes', string> = {
+        binomial: 'Binomial',
+        pathProbability: 'Path',
+        bayes: 'Bayes'
+      };
+      alert(
+        `El archivo corresponde al modelo "${labels[parsed.modelType]}" pero estás en la pestaña "${labels[this.selectedModel]}". ` +
+          `Cambia a la pestaña correcta antes de importar.`
+      );
+      input.value = '';
+      return;
+    }
 
-    // Wait for the @if block to render the target component before applying.
     setTimeout(() => {
       if (parsed.modelType === 'binomial') {
         this.binomial?.applyImport(parsed);
