@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DagaModule } from '@metadev/daga-angular';
+import { Canvas, DagaModule } from '@metadev/daga-angular';
 import { DagaBaseComponent } from './dagaBase.component';
 import { calculateBinomialProbability, buildEndNodeIdSet } from '../utils/binomialCalculationNodes.utils';
 import { calculateTheoreticalNodeProbabilities } from '../utils/binomialWeight.utils';
 import { GenericComponent } from './generic.component';
 import { NodeInfo } from '../types';
+import { applyRiskFileToCanvas, exportCanvasToFile, RiskFile } from '../utils/importExport.utils';
 
 @Component({
   standalone: true,
@@ -16,6 +17,42 @@ import { NodeInfo } from '../types';
 export class BinomialComponent extends GenericComponent {
   branchValueKey = 'weight';
   showTheoreticalProbabilities = true;
+
+  @ViewChild(DagaBaseComponent) private dagaBase?: DagaBaseComponent;
+
+  private canvas: Canvas | null = null;
+  private pendingImport: RiskFile | null = null;
+
+  onCanvasReady(canvas: Canvas): void {
+    this.canvas = canvas;
+    if (this.pendingImport) {
+      const pending = this.pendingImport;
+      this.pendingImport = null;
+      this.runImport(pending);
+    }
+  }
+
+  applyImport(file: RiskFile): void {
+    if (!this.canvas) {
+      this.pendingImport = file;
+      return;
+    }
+    this.runImport(file);
+  }
+
+  exportCurrent(): RiskFile | null {
+    if (!this.canvas) {
+      alert('El diagrama todavía no está listo. Inténtalo de nuevo en unos segundos.');
+      return null;
+    }
+    return exportCanvasToFile(this.canvas, 'binomial');
+  }
+
+  private runImport(file: RiskFile): void {
+    if (!this.canvas) return;
+    applyRiskFileToCanvas(this.canvas, file);
+    this.dagaBase?.refreshAfterProgrammaticChange();
+  }
 
   override executeCalculation(iterationsStr: string): void {
     const iterations = parseInt(iterationsStr, 10);

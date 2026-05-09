@@ -8,6 +8,19 @@
       Path model
     </button>
     <button data-test-id="bayes" class="model-item" [ngClass]="{ active: selectedModel === 'bayes' }" (click)="selectModel('bayes')">Bayes model</button>
+
+    <div class="io-separator"></div>
+
+    <button
+      data-test-id="export"
+      class="model-item io-item"
+      [disabled]="selectedModel === 'pathProbability'"
+      (click)="exportCurrent()"
+    >
+      Exportar
+    </button>
+    <button data-test-id="import" class="model-item io-item" (click)="fileInput.click()">Importar</button>
+    <input #fileInput type="file" accept="application/json,.json" hidden (change)="onImportFile($event)" />
   </aside>
 
   <button

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, ChangeDetectorRef, inject } from '@angular/core';
+import { Component, OnDestroy, ChangeDetectorRef, ViewChild, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DagaModule, Canvas, AddNodeAction, AddConnectionAction, Side, DiagramPort } from '@metadev/daga-angular';
@@ -26,6 +26,7 @@ import { aprenderMLE } from '../utils/bayes/mle.utils';
 import { aprenderEM } from '../utils/bayes/em.utils';
 import { generarDatosSinteticos } from '../utils/bayes/syntheticData.utils';
 import { BayesGraph, BayesEvidence, BayesCPTEntry, CPTTableRow, MCResult, LearningResult } from '../types';
+import { applyRiskFileToCanvas, exportCanvasToFile, RiskFile } from '../utils/importExport.utils';
 
 @Component({
   standalone: true,
@@ -62,9 +63,39 @@ export class BayesComponent extends GenericComponent implements OnDestroy {
     pending: { datos: Record<string, string>[]; headers: string[] };
   } | null = null;
   private canvas: Canvas | null = null;
+  private pendingImport: RiskFile | null = null;
+
+  @ViewChild(DagaBaseComponent) private dagaBase?: DagaBaseComponent;
 
   onCanvasReady(canvas: Canvas): void {
     this.canvas = canvas;
+    if (this.pendingImport) {
+      const pending = this.pendingImport;
+      this.pendingImport = null;
+      this.runImport(pending);
+    }
+  }
+
+  applyImport(file: RiskFile): void {
+    if (!this.canvas) {
+      this.pendingImport = file;
+      return;
+    }
+    this.runImport(file);
+  }
+
+  exportCurrent(): RiskFile | null {
+    if (!this.canvas) {
+      alert('El diagrama todavía no está listo. Inténtalo de nuevo en unos segundos.');
+      return null;
+    }
+    return exportCanvasToFile(this.canvas, 'bayes');
+  }
+
+  private runImport(file: RiskFile): void {
+    if (!this.canvas) return;
+    applyRiskFileToCanvas(this.canvas, file);
+    this.dagaBase?.refreshAfterProgrammaticChange();
   }
 
   // ── Monte Carlo state ──
