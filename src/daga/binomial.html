@@ -217,6 +217,10 @@
   }
 
   <daga-diagram [config]="config" (modelChange)="myModel = $event">
-    <app-daga-base [branchValueKey]="branchValueKey" [showTheoreticalProbabilities]="showTheoreticalProbabilities" />
+    <app-daga-base
+      [branchValueKey]="branchValueKey"
+      [showTheoreticalProbabilities]="showTheoreticalProbabilities"
+      (canvasReady)="onCanvasReady($event)"
+    />
   </daga-diagram>
 </div>

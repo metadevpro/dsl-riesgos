@@ -8,12 +8,16 @@ export const PROB_CONFIG: DiagramConfig = {
       snap: true
     }
   },
+  layoutFormat: 'tree',
   connectionSettings: {
     inferConnectionType: true,
     defaultConnection: 'diagram-connection'
   },
   components: {
-    buttons: {},
+    buttons: {
+      enableLayout: true,
+      enableSelection: false
+    },
     palette: {
       sections: [
         {
@@ -27,12 +31,12 @@ export const PROB_CONFIG: DiagramConfig = {
             {
               templateType: 'node',
               type: 'state-diagram-node',
-              label: 'Estado'
+              label: 'State'
             },
             {
               templateType: 'node',
               type: 'event-diagram-node',
-              label: 'Suceso'
+              label: 'Event'
             },
             {
               templateType: 'node',
@@ -482,14 +486,15 @@ export const PROB_CONFIG: DiagramConfig = {
     {
       name: 'layout',
       type: Type.Option,
-      defaultValue: 'adjacency',
+      defaultValue: 'tree',
       basic: true,
       editable: true,
       rootAttribute: 'layoutFormat',
       options: [
         { key: 'adjacency', label: 'Adjacency' },
         { key: 'breadth', label: 'Breadth First' },
-        { key: 'priority', label: 'Priority' }
+        { key: 'priority', label: 'Priority' },
+        { key: 'tree', label: 'Tree' }
       ]
     }
   ]

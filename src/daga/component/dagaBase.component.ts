@@ -100,6 +100,22 @@ export class DagaBaseComponent implements AfterViewInit, OnDestroy, OnChanges {
     }
   }
 
+  /**
+   * Forces decorator/label/source-map refresh after programmatic model mutations
+   * (e.g. import). Daga's diagramChange$ does not fire for programmatic changes.
+   */
+  refreshAfterProgrammaticChange(): void {
+    let canvas: Canvas;
+    try {
+      canvas = this.canvasProviderService.getCanvas();
+    } catch {
+      return;
+    }
+    this.refreshConnectionWeightLabels(canvas);
+    this.refreshProbabilityDecorators(canvas);
+    this.refreshConnectionSourceMap(canvas);
+  }
+
   /* Implementacion de ngOnDestroy */
   ngOnDestroy(): void {
     this.diagramSub?.unsubscribe();

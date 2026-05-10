@@ -91,6 +91,24 @@ risk-pathProbability {
   background: #f6f6f6;
 }
 
+.io-separator {
+  height: 1px;
+  background: #b0b0b0;
+  margin: 16px 0;
+}
+
+.io-item {
+  font-size: 24px;
+  height: 60px;
+  background: #ffffff;
+}
+
+.io-item:disabled {
+  color: #9a9a9a;
+  cursor: not-allowed;
+  background: #ececec;
+}
+
 .sidebar-toggle {
   position: absolute;
   top: 50%;

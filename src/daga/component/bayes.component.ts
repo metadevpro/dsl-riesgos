@@ -1,4 +1,4 @@
-import { Component, OnDestroy, ChangeDetectorRef, inject } from '@angular/core';
+import { Component, OnDestroy, ChangeDetectorRef, ViewChild, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DagaModule, Canvas, AddNodeAction, AddConnectionAction, Side, DiagramPort } from '@metadev/daga-angular';
@@ -8,6 +8,7 @@ import { DagaBaseComponent } from './dagaBase.component';
 import { bayes_CONFIG } from '../config/bayes.config';
 import { GenericComponent } from './generic.component';
 import { normalizeProbability } from '../utils/probability.utils';
+import { normalizeNodeId } from '../utils/generalCalculationNodes.utils';
 import {
   BAYES_EVIDENCE_KEY,
   BAYES_CPT_KEY,
@@ -26,6 +27,8 @@ import { aprenderMLE } from '../utils/bayes/mle.utils';
 import { aprenderEM } from '../utils/bayes/em.utils';
 import { generarDatosSinteticos } from '../utils/bayes/syntheticData.utils';
 import { BayesGraph, BayesEvidence, BayesCPTEntry, CPTTableRow, MCResult, LearningResult } from '../types';
+import { applyRiskFileToCanvas, exportCanvasToFile, RiskFile } from '../utils/importExport.utils';
+import { DagaExporter } from '@metadev/daga';
 
 @Component({
   standalone: true,
@@ -62,9 +65,47 @@ export class BayesComponent extends GenericComponent implements OnDestroy {
     pending: { datos: Record<string, string>[]; headers: string[] };
   } | null = null;
   private canvas: Canvas | null = null;
+  private pendingImport: RiskFile | null = null;
+
+  @ViewChild(DagaBaseComponent) private dagaBase?: DagaBaseComponent;
 
   onCanvasReady(canvas: Canvas): void {
     this.canvas = canvas;
+    if (this.pendingImport) {
+      const pending = this.pendingImport;
+      this.pendingImport = null;
+      this.runImport(pending);
+    }
+  }
+
+  applyImport(file: RiskFile): void {
+    if (!this.canvas) {
+      this.pendingImport = file;
+      return;
+    }
+    this.runImport(file);
+  }
+
+  exportCurrent(): RiskFile | null {
+    if (!this.canvas) {
+      alert('El diagrama todavía no está listo. Inténtalo de nuevo en unos segundos.');
+      return null;
+    }
+    return exportCanvasToFile(this.canvas, 'bayes');
+  }
+
+  private runImport(file: RiskFile): void {
+    if (!this.canvas) return;
+    applyRiskFileToCanvas(this.canvas, file);
+    this.dagaBase?.refreshAfterProgrammaticChange();
+
+    const exported = new DagaExporter().export(this.canvas.model);
+    this.myModel = exported;
+    this.bayesGraph = buildBayesGraph(exported);
+    recalcAllMarginals(this.bayesGraph);
+    this.bayesGraph = new Map(this.bayesGraph);
+    this.syncMarginalsToModel();
+    this.cdr.markForCheck();
   }
 
   // ── Monte Carlo state ──
@@ -303,36 +344,34 @@ export class BayesComponent extends GenericComponent implements OnDestroy {
   }
 
   private saveNodeData(): void {
-    if (!this.selectedNodeId || !this.myModel) return;
+    if (!this.selectedNodeId || !this.canvas) return;
 
     const node = this.bayesGraph.get(this.selectedNodeId);
     if (!node) return;
 
-    // Find and update the model node's data
-    const modelNode = this.myModel.nodes?.find((n: DagaNode) => {
-      const nId = typeof n.id === 'string' ? n.id.replace(/_port_\d+$/i, '') : String(n.id);
-      return nId === this.selectedNodeId;
-    });
+    const liveNode = this.canvas.model.nodes.find((n) => normalizeNodeId(String(n.id)) === this.selectedNodeId);
+    if (!liveNode) return;
 
-    if (modelNode && modelNode.data) {
-      modelNode.data[BAYES_EVIDENCE_KEY] = node.evidence;
-      modelNode.data[BAYES_CPT_KEY] = JSON.stringify(node.cpt);
-    }
+    liveNode.valueSet.overwriteValues({
+      [BAYES_EVIDENCE_KEY]: node.evidence ?? 'null',
+      [BAYES_CPT_KEY]: JSON.stringify(node.cpt)
+    });
   }
 
   private syncMarginalsToModel(): void {
-    if (!this.myModel || !this.myModel.nodes) return;
+    if (!this.canvas) return;
 
-    for (const modelNode of this.myModel.nodes) {
-      const nId = typeof modelNode.id === 'string' ? modelNode.id.replace(/_port_\d+$/i, '') : String(modelNode.id);
-
+    for (const liveNode of this.canvas.model.nodes) {
+      const nId = normalizeNodeId(String(liveNode.id));
       const bayesNode = this.bayesGraph.get(nId);
-      if (!bayesNode || !modelNode.data) continue;
+      if (!bayesNode) continue;
 
-      modelNode.data[BAYES_P_SI_KEY] = bayesNode.marginals.si;
-      modelNode.data[BAYES_P_NO_KEY] = bayesNode.marginals.no;
-      modelNode.data[BAYES_EVIDENCE_KEY] = bayesNode.evidence;
-      modelNode.data[BAYES_CPT_KEY] = JSON.stringify(bayesNode.cpt);
+      liveNode.valueSet.overwriteValues({
+        [BAYES_P_SI_KEY]: bayesNode.marginals.si,
+        [BAYES_P_NO_KEY]: bayesNode.marginals.no,
+        [BAYES_EVIDENCE_KEY]: bayesNode.evidence ?? 'null',
+        [BAYES_CPT_KEY]: JSON.stringify(bayesNode.cpt)
+      });
     }
   }
 
