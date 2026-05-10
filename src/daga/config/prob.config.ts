@@ -486,14 +486,15 @@ export const PROB_CONFIG: DiagramConfig = {
     {
       name: 'layout',
       type: Type.Option,
-      defaultValue: 'adjacency',
+      defaultValue: 'tree',
       basic: true,
       editable: true,
       rootAttribute: 'layoutFormat',
       options: [
         { key: 'adjacency', label: 'Adjacency' },
         { key: 'breadth', label: 'Breadth First' },
-        { key: 'priority', label: 'Priority' }
+        { key: 'priority', label: 'Priority' },
+        { key: 'tree', label: 'Tree' }
       ]
     }
   ]

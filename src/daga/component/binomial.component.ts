@@ -7,6 +7,7 @@ import { calculateTheoreticalNodeProbabilities } from '../utils/binomialWeight.u
 import { GenericComponent } from './generic.component';
 import { NodeInfo } from '../types';
 import { applyRiskFileToCanvas, exportCanvasToFile, RiskFile } from '../utils/importExport.utils';
+import { DagaExporter } from '@metadev/daga';
 
 @Component({
   standalone: true,
@@ -52,6 +53,7 @@ export class BinomialComponent extends GenericComponent {
     if (!this.canvas) return;
     applyRiskFileToCanvas(this.canvas, file);
     this.dagaBase?.refreshAfterProgrammaticChange();
+    this.myModel = new DagaExporter().export(this.canvas.model) as unknown as typeof this.myModel;
   }
 
   override executeCalculation(iterationsStr: string): void {
