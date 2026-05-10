@@ -7,7 +7,7 @@ describe('e2e', () => {
     cy.get('.daga-panel').should('be.visible');
   });
 
-  it('should display 3 tabs', () => {
-    cy.getByTestId('sidebar').find('button').should('have.length', 3);
+  it('should display 5 tabs', () => {
+    cy.getByTestId('sidebar').find('button').should('have.length', 5);
   });
 });
