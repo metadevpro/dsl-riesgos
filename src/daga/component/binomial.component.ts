@@ -4,6 +4,8 @@ import { Canvas, DagaModule } from '@metadev/daga-angular';
 import { DagaBaseComponent } from './dagaBase.component';
 import { calculateBinomialProbability, buildEndNodeIdSet } from '../utils/binomialCalculationNodes.utils';
 import { calculateTheoreticalNodeProbabilities } from '../utils/binomialWeight.utils';
+import { detectCycle, getNodeDisplayName, getNodeMap } from '../utils/generalCalculationNodes.utils';
+import { ConnectionInfo } from '../types';
 import { GenericComponent } from './generic.component';
 import { NodeInfo } from '../types';
 import { applyRiskFileToCanvas, exportCanvasToFile, RiskFile } from '../utils/importExport.utils';
@@ -69,6 +71,18 @@ export class BinomialComponent extends GenericComponent {
       return;
     }
 
+    const nodes = (this.myModel?.nodes as unknown as NodeInfo[]) ?? [];
+    const connections = ((this.myModel as unknown as Record<string, unknown>)?.['connections'] as ConnectionInfo[]) ?? [];
+    const cycle = detectCycle(nodes, connections);
+    if (cycle) {
+      const nodeMap = getNodeMap(nodes);
+      const labels = cycle.map((id) => getNodeDisplayName(nodeMap.get(id)) ?? id);
+      alert(
+        `El diagrama contiene un ciclo y este DSL no admite ciclos. Revisa la ruta: ${labels.join(' → ')}.`
+      );
+      return;
+    }
+
     try {
       const result = calculateBinomialProbability(
         this.myModel,
@@ -81,7 +95,6 @@ export class BinomialComponent extends GenericComponent {
       const theoreticalMap = calculateTheoreticalNodeProbabilities(
         this.myModel, this.probabilityKey, this.branchValueKey, this.maxProbability
       );
-      const nodes = (this.myModel?.nodes as unknown as NodeInfo[]) ?? [];
       const endNodeIds = buildEndNodeIdSet(nodes);
       let theoreticalProbability = 0;
       for (const nodeId of endNodeIds) {

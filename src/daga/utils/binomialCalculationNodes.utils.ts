@@ -153,10 +153,6 @@ function getFirstProbabilityNode(
   };
 }
 
-function isTerminalSuccessNode(node: NodeInfo): boolean {
-  return node?.data?.['important'] !== false;
-}
-
 function isStateDiagramNode(node: NodeInfo): boolean {
   const nodeType = (node as Record<string, unknown>)?.['type'];
   if (typeof nodeType === 'string') {
@@ -291,7 +287,7 @@ function simulateIteration(
     }
 
     if (outgoingCount === 0 && arrivedByWeightedChoice) {
-      return { isSuccess: isTerminalSuccessNode(currentNode) };
+      return { isSuccess: true };
     }
 
     let probability = (normalizeProbability(currentNode.data?.[probabilityKey], maxProbability) ?? 0) / maxProbability;

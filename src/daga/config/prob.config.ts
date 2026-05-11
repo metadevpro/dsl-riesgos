@@ -231,13 +231,6 @@ export const PROB_CONFIG: DiagramConfig = {
           defaultValue: 1,
           basic: true,
           editable: true
-        },
-        {
-          name: 'important',
-          type: Type.Boolean,
-          defaultValue: true,
-          basic: true,
-          editable: true
         }
       ]
     },

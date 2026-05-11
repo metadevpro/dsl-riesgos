@@ -160,3 +160,94 @@ export function getNextNodeFromConnection(connection: ConnectionInfo, nodeMap: M
   const { endId } = extractConnectionEndpoints(connection);
   return endId ? (nodeMap.get(endId) ?? null) : null;
 }
+
+/**
+ * Detects a cycle in the directed graph defined by nodes + connections.
+ * Returns the list of node ids that form the cycle (first repeated node included at both ends),
+ * or null if the graph is acyclic.
+ */
+export function detectCycle(nodes: NodeInfo[], connections: ConnectionInfo[]): NodeId[] | null {
+  const adjacency = new Map<NodeId, NodeId[]>();
+
+  connections.forEach((conn) => {
+    const { startId, endId } = extractConnectionEndpoints(conn);
+    if (!startId || !endId) return;
+    const list = adjacency.get(startId) ?? [];
+    list.push(endId);
+    adjacency.set(startId, list);
+  });
+
+  const WHITE = 0;
+  const GRAY = 1;
+  const BLACK = 2;
+  const color = new Map<NodeId, number>();
+  const parent = new Map<NodeId, NodeId | null>();
+
+  const nodeIds: NodeId[] = [];
+  nodes.forEach((node) => {
+    const id = getNodeId(node);
+    if (id) {
+      nodeIds.push(id);
+      color.set(id, WHITE);
+    }
+  });
+
+  for (const id of adjacency.keys()) {
+    if (!color.has(id)) {
+      nodeIds.push(id);
+      color.set(id, WHITE);
+    }
+  }
+
+  const buildCyclePath = (from: NodeId, to: NodeId): NodeId[] => {
+    const path: NodeId[] = [to];
+    let cursor: NodeId | null = from;
+    while (cursor && cursor !== to) {
+      path.push(cursor);
+      cursor = parent.get(cursor) ?? null;
+    }
+    path.push(to);
+    return path.reverse();
+  };
+
+  const stack: { id: NodeId; iter: Iterator<NodeId> }[] = [];
+
+  for (const root of nodeIds) {
+    if (color.get(root) !== WHITE) continue;
+
+    color.set(root, GRAY);
+    parent.set(root, null);
+    stack.push({ id: root, iter: (adjacency.get(root) ?? [])[Symbol.iterator]() });
+
+    while (stack.length > 0) {
+      const frame = stack[stack.length - 1];
+      const next = frame.iter.next();
+
+      if (next.done) {
+        color.set(frame.id, BLACK);
+        stack.pop();
+        continue;
+      }
+
+      const neighbor = next.value;
+      const neighborColor = color.get(neighbor) ?? WHITE;
+
+      if (neighborColor === GRAY) {
+        return buildCyclePath(frame.id, neighbor);
+      }
+      if (neighborColor === WHITE) {
+        color.set(neighbor, GRAY);
+        parent.set(neighbor, frame.id);
+        stack.push({ id: neighbor, iter: (adjacency.get(neighbor) ?? [])[Symbol.iterator]() });
+      }
+    }
+  }
+
+  return null;
+}
+
+export function getNodeDisplayName(node: NodeInfo | undefined): string | undefined {
+  if (!node) return undefined;
+  const name = node?.data?.['node name'] ?? node?.data?.['name'] ?? (node as NodeInfo)?.['name'];
+  return typeof name === 'string' && name.trim().length > 0 ? name : undefined;
+}
