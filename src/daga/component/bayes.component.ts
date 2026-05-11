@@ -56,6 +56,8 @@ export class BayesComponent extends GenericComponent implements OnDestroy {
   autoNormalizeCPT = false;
   isNetworkTooLarge = false;
   private tooLargeAlerted = false;
+  private recalcTimer: ReturnType<typeof setTimeout> | null = null;
+  private static readonly RECALC_DEBOUNCE_MS = 200;
   csvImportMessage: string | null = null;
   creatingNodes = false;
   creationSummary: {
@@ -261,10 +263,7 @@ export class BayesComponent extends GenericComponent implements OnDestroy {
     node.evidence = value;
     this.selectedNodeEvidence = value;
 
-    // Recalculate and refresh
-    recalcAllMarginals(this.bayesGraph);
-    this.bayesGraph = new Map(this.bayesGraph);
-    this.refreshPopupData();
+    this.scheduleRecalc();
   }
 
   /**
@@ -288,10 +287,31 @@ export class BayesComponent extends GenericComponent implements OnDestroy {
       }
     }
 
-    // Recalculate
-    recalcAllMarginals(this.bayesGraph);
-    this.bayesGraph = new Map(this.bayesGraph);
-    this.refreshPopupData();
+    this.scheduleRecalc();
+  }
+
+  /**
+   * Debounces recalcAllMarginals so that bursts of UI edits (typing in a CPT
+   * cell, rapid evidence toggles) collapse into a single recompute.
+   * Bypasses the recompute when the network exceeds MAX_EXACT_INFERENCE_NODES.
+   */
+  private scheduleRecalc(): void {
+    if (this.recalcTimer !== null) {
+      clearTimeout(this.recalcTimer);
+      this.recalcTimer = null;
+    }
+
+    if (this.isNetworkTooLarge) return;
+
+    this.recalcTimer = setTimeout(() => {
+      this.recalcTimer = null;
+      recalcAllMarginals(this.bayesGraph);
+      this.bayesGraph = new Map(this.bayesGraph);
+      if (this.showNodePopup && this.selectedNodeId) {
+        this.refreshPopupData();
+      }
+      this.cdr.markForCheck();
+    }, BayesComponent.RECALC_DEBOUNCE_MS);
   }
 
   /**
@@ -648,6 +668,10 @@ export class BayesComponent extends GenericComponent implements OnDestroy {
   }
 
   ngOnDestroy(): void {
+    if (this.recalcTimer !== null) {
+      clearTimeout(this.recalcTimer);
+      this.recalcTimer = null;
+    }
     this.bayesGraph.clear();
   }
 }
