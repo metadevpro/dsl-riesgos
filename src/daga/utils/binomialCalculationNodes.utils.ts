@@ -1,81 +1,45 @@
-import { normalizeProbability } from './probability.utils';
 import {
   buildOutgoingConnections,
   findEndNode,
   findStartNode,
+  getEffectiveNodeProbability,
   getNodeId,
   getNodeMap,
   getNextNodeFromConnection,
-  isNodeTypeLike
+  isNodeTypeLike,
+  isStateDiagramNodeLike
 } from './generalCalculationNodes.utils';
+import { normalizeWeightValue } from './binomialWeight.utils';
 
 import { ConnectionInfo, NodeId, NodeInfo, CalculationResult } from '../types';
 
-function normalizeWeight(rawValue: unknown, _maxProbability: number): number | null {
-  if (typeof rawValue === 'number') {
-    return Number.isFinite(rawValue) && rawValue >= 0 ? Number(rawValue.toFixed(4)) : null;
-  }
-
-  if (typeof rawValue === 'string') {
-    const compact = rawValue.replace(/\s+/g, '');
-    if (!compact) {
-      return null;
-    }
-
-    const hasComma = compact.includes(',');
-    const hasDot = compact.includes('.');
-    let normalizedInput = compact;
-
-    if (hasComma && hasDot) {
-      const lastComma = compact.lastIndexOf(',');
-      const lastDot = compact.lastIndexOf('.');
-      normalizedInput = lastComma > lastDot ? compact.replace(/\./g, '').replace(',', '.') : compact.replace(/,/g, '');
-    } else if (hasComma) {
-      normalizedInput = compact.replace(',', '.');
-    }
-
-    const numericValue = Number(normalizedInput);
-    return Number.isFinite(numericValue) && numericValue >= 0 ? Number(numericValue.toFixed(4)) : null;
-  }
-
-  const numericValue = Number(rawValue);
-  return Number.isFinite(numericValue) && numericValue >= 0 ? Number(numericValue.toFixed(4)) : null;
-}
-
-export function getConnectionDataProbability(connection: ConnectionInfo): unknown {
+function readConnectionFieldByKey(connection: ConnectionInfo, key: string): unknown {
   if (!connection || typeof connection !== 'object') return undefined;
 
   const conn = connection as Record<string, unknown>;
   const data = conn['data'];
-  const valueSet = conn['valueSet'];
-
   if (data && typeof data === 'object') {
-    const dataObject = data as Record<string, unknown>;
-    return dataObject['probability'] ?? dataObject['weight'] ?? dataObject['chance'];
+    const value = (data as Record<string, unknown>)[key];
+    if (value !== undefined) return value;
   }
 
+  const valueSet = conn['valueSet'];
   if (valueSet && typeof valueSet === 'object') {
     const valueSetObject = valueSet as Record<string, unknown>;
     const values = valueSetObject['values'];
-
     if (values && typeof values === 'object') {
-      const valuesObject = values as Record<string, unknown>;
-      return valuesObject['probability'] ?? valuesObject['weight'] ?? valuesObject['chance'];
+      const value = (values as Record<string, unknown>)[key];
+      if (value !== undefined) return value;
     }
-
-    return valueSetObject['probability'] ?? valueSetObject['weight'] ?? valueSetObject['chance'];
+    if (valueSetObject[key] !== undefined) return valueSetObject[key];
   }
 
-  return conn['probability'] ?? conn['weight'] ?? conn['chance'];
+  return conn[key];
 }
 
 function resolveTransitionWeight(connection: ConnectionInfo, branchValueKey: string): number {
-  const conn = connection as Record<string, unknown>;
-  const rawValue =
-    conn?.['data'] && typeof conn['data'] === 'object' ? (conn['data'] as Record<string, unknown>)?.[branchValueKey] : undefined;
-
-  const fallbackValue = rawValue ?? getConnectionDataProbability(connection) ?? conn?.[branchValueKey];
-  const normalized = normalizeWeight(fallbackValue, 1);
+  const rawValue = readConnectionFieldByKey(connection, branchValueKey);
+  const normalized = normalizeWeightValue(rawValue);
   return normalized ?? 1;
 }
 
@@ -151,22 +115,6 @@ function getFirstProbabilityNode(
     node: startNode,
     usedWeightedChoice: false
   };
-}
-
-function isTerminalSuccessNode(node: NodeInfo): boolean {
-  return node?.data?.['important'] !== false;
-}
-
-function isStateDiagramNode(node: NodeInfo): boolean {
-  const nodeType = (node as Record<string, unknown>)?.['type'];
-  if (typeof nodeType === 'string') {
-    return nodeType === 'state-diagram-node';
-  }
-  if (nodeType && typeof nodeType === 'object') {
-    const nodeTypeId = (nodeType as Record<string, unknown>)['id'];
-    return typeof nodeTypeId === 'string' && nodeTypeId === 'state-diagram-node';
-  }
-  return false;
 }
 
 function isEndNodeLike(node: NodeInfo): boolean {
@@ -291,11 +239,11 @@ function simulateIteration(
     }
 
     if (outgoingCount === 0 && arrivedByWeightedChoice) {
-      return { isSuccess: isTerminalSuccessNode(currentNode) };
+      return { isSuccess: true };
     }
 
-    let probability = (normalizeProbability(currentNode.data?.[probabilityKey], maxProbability) ?? 0) / maxProbability;
-    if (isNodeTypeLike(currentNode, 'transition') || isStateDiagramNode(currentNode)) {
+    let probability = getEffectiveNodeProbability(currentNode, probabilityKey, maxProbability) / maxProbability;
+    if (isNodeTypeLike(currentNode, 'transition') || isStateDiagramNodeLike(currentNode)) {
       probability = 1;
     }
 

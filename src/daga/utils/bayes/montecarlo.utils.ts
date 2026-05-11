@@ -13,26 +13,45 @@ function samplear(distribucion: Record<string, number>): string {
   return Object.keys(distribucion).at(-1)!;
 }
 
-function muestrearRed(graph: BayesGraph, evidencias: Record<string, BayesEvidence>): Record<string, string> {
-  const orden = topologicalSort(graph);
+interface WeightedSample {
+  muestra: Record<string, string>;
+  peso: number;
+}
+
+/**
+ * One likelihood-weighting pass: traverses the graph in topological order,
+ * sampling non-evidence nodes from their CPT and accumulating the likelihood
+ * weight from evidence nodes as the product of P(evidence | parents_sampled).
+ * Returns the sample together with its weight.
+ */
+function muestrearLikelihoodWeighting(
+  graph: BayesGraph,
+  orden: string[],
+  evidencias: Record<string, BayesEvidence>
+): WeightedSample {
   const muestra: Record<string, string> = {};
+  let peso = 1;
 
   for (const nodoId of orden) {
-    if (evidencias[nodoId] != null) {
-      muestra[nodoId] = evidencias[nodoId] as string;
+    const nodo = graph.get(nodoId)!;
+    const clave = nodo.parents.length === 0 ? 'prior' : nodo.parents.map((p) => `${p}_${muestra[p]}`).join('|');
+    const distribucion = nodo.cpt[clave];
+
+    const evidencia = evidencias[nodoId];
+    if (evidencia != null) {
+      muestra[nodoId] = evidencia;
+      const probEvidencia = distribucion?.[evidencia] ?? 0;
+      peso *= probEvidencia;
+      if (peso === 0) {
+        // Sample inconsistent with the network — short-circuit.
+        for (const restante of orden) {
+          if (muestra[restante] === undefined) muestra[restante] = evidencias[restante] ?? 'si';
+        }
+        return { muestra, peso: 0 };
+      }
       continue;
     }
 
-    const nodo = graph.get(nodoId)!;
-    let clave: string;
-
-    if (nodo.parents.length === 0) {
-      clave = 'prior';
-    } else {
-      clave = nodo.parents.map((p) => `${p}_${muestra[p]}`).join('|');
-    }
-
-    const distribucion = nodo.cpt[clave];
     if (!distribucion) {
       muestra[nodoId] = 'si';
       continue;
@@ -41,37 +60,48 @@ function muestrearRed(graph: BayesGraph, evidencias: Record<string, BayesEvidenc
     muestra[nodoId] = samplear({ si: distribucion.si, no: distribucion.no });
   }
 
-  return muestra;
+  return { muestra, peso };
 }
 
-// ─── Monte Carlo Simulation ───────────────────────────────────────────────────
+// ─── Monte Carlo Simulation (Likelihood Weighting) ────────────────────────────
 
 export function ejecutarMonteCarlo(graph: BayesGraph, evidencias: Record<string, BayesEvidence>, nIteraciones = 1000): MCResult {
-  const conteos: Record<string, Record<string, number>> = {};
-
+  const acumulados: Record<string, Record<string, number>> = {};
   for (const [nodoId] of graph) {
-    conteos[nodoId] = { si: 0, no: 0 };
+    acumulados[nodoId] = { si: 0, no: 0 };
   }
 
+  const orden = topologicalSort(graph);
+  let pesoTotal = 0;
+  let muestrasNoNulas = 0;
+
   for (let i = 0; i < nIteraciones; i++) {
-    const muestra = muestrearRed(graph, evidencias);
+    const { muestra, peso } = muestrearLikelihoodWeighting(graph, orden, evidencias);
+    if (peso <= 0) continue;
+
+    muestrasNoNulas++;
+    pesoTotal += peso;
     for (const [nodoId, estado] of Object.entries(muestra)) {
-      if (conteos[nodoId]?.[estado] !== undefined) {
-        conteos[nodoId][estado]++;
+      if (acumulados[nodoId]?.[estado] !== undefined) {
+        acumulados[nodoId][estado] += peso;
       }
     }
   }
 
   const probabilidades: Record<string, Record<string, number>> = {};
-  for (const [nodoId, estados] of Object.entries(conteos)) {
-    const total = Object.values(estados).reduce((s, c) => s + c, 0);
+  for (const [nodoId, estados] of Object.entries(acumulados)) {
     probabilidades[nodoId] = {};
-    for (const [estado, count] of Object.entries(estados)) {
-      probabilidades[nodoId][estado] = total > 0 ? count / total : 0;
+    if (pesoTotal <= 0) {
+      probabilidades[nodoId]['si'] = 0;
+      probabilidades[nodoId]['no'] = 0;
+      continue;
+    }
+    for (const [estado, sumaPeso] of Object.entries(estados)) {
+      probabilidades[nodoId][estado] = sumaPeso / pesoTotal;
     }
   }
 
-  return { probabilidades, iteraciones: nIteraciones, exitosas: nIteraciones };
+  return { probabilidades, iteraciones: nIteraciones, exitosas: muestrasNoNulas };
 }
 
 // ─── Error vs Exact Inference ─────────────────────────────────────────────────

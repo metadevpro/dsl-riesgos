@@ -57,3 +57,37 @@ Each has component + config + utils:
 - After any structural change to connections, refresh decorators AND `connectionSourceByConnectionId` map (used to recover source nodes for `RemoveAction`).
 - Cypress specs use `data-cy` test IDs (see commit `6023960`). New interactive UI must expose stable `data-cy`.
 - Prettier + eslint-config-prettier active — run `npm run format` before commits.
+
+## Data contracts
+
+### RiskFile (import/export)
+
+`utils/importExport.utils.ts::RiskFile` is the canonical serialization format. Shape:
+
+```jsonc
+{
+  "riskFileVersion": 1,
+  "modelType": "binomial" | "bayes",
+  "exportedAt": "<ISO date>",
+  "daga": <DagaModel>,
+  "bayes": { "nodes": { "<nodeId>": { "evidence": "si"|"no"|null, "cpt": <BayesCPT> } } } // bayes mode only
+}
+```
+
+- Bayesian CPTs and evidence live in `RiskFile.bayes` — **not** inside `daga.nodes[].valueSet`. Runtime keeps the authoritative state in `BayesComponent.bayesGraph`; `buildBayesGraph` only builds topology + default uniform CPTs.
+- `readRiskFile` runs `migrateLegacyValueKeys` to rewrite legacy aliases: connections `chance`/`probability` → `weight`; nodes `chance` → `probability`. Canonical keys per entity: connections use `weight`, nodes use `probability`.
+
+### Bayes CSV learning (`csv.utils.ts` + `BayesComponent.autoCreateNodesAndRelations`)
+
+CSV format consumed by the "Aprender desde CSV" flow:
+
+1. Optional comment lines starting with `#` at the top of the file. Recognized directive: `# edges: Padre->Hijo; Padre->Hijo; ...`. Used to auto-create connections when the CSV introduces nodes that don't yet exist in the diagram.
+2. Header row: column names must match `bayes_node.name` (case-insensitive) for learning to associate samples with nodes.
+3. Data rows: cell values accepted by `normalizarValor`: `si`/`no`, `yes`/`no`, `1`/`0`, `true`/`false`. Empty cells mark the variable as hidden in that row → EM is used instead of MLE.
+
+Without the `# edges:` directive, importing a CSV that introduces new variables creates **only the nodes**, leaving the user to wire the DAG manually. UI banner warns when this happens (`creationSummary.missingEdgesWarning`).
+
+### Bayes inference
+
+- Exact inference (`recalcAllMarginals`) is hard-capped at `MAX_EXACT_INFERENCE_NODES = 20`. Beyond that the function skips enumeration and `BayesComponent` alerts the user once. Use Monte Carlo (likelihood weighting in `montecarlo.utils.ts`) for approximate inference on larger nets.
+- UI edits (`setEvidence`, `updateCPTCell`) route through `BayesComponent.scheduleRecalc` which debounces `recalcAllMarginals` at 200 ms to collapse keystroke bursts.

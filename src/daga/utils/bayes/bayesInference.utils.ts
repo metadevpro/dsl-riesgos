@@ -2,16 +2,13 @@ import { extractConnectionEndpoints } from '../generalCalculationNodes.utils';
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
-import { BayesEvidence, BayesCPT, BayesGraph, CPTTableRow } from '../../types';
+import { BayesCPT, BayesGraph, CPTTableRow } from '../../types';
 
 // ─── Constants ───────────────────────────────────────────────────────────────
 
-export const BAYES_EVIDENCE_KEY = 'bayes_evidence';
-export const BAYES_CPT_KEY = 'bayes_cpt';
-export const BAYES_P_SI_KEY = 'bayes_pSi';
-export const BAYES_P_NO_KEY = 'bayes_pNo';
-
 const STATES: readonly string[] = ['si', 'no'] as const;
+
+export const MAX_EXACT_INFERENCE_NODES = 20;
 
 // ─── CPT Utilities ───────────────────────────────────────────────────────────
 
@@ -141,7 +138,6 @@ export function buildBayesGraph(model: unknown): BayesGraph {
     nameMap.set(id, getNodeName(node));
   }
 
-  // Create BayesNodeInfo for each node
   for (const node of nodes) {
     const id = getNodeIdSafe(node);
     if (!id) continue;
@@ -150,30 +146,13 @@ export function buildBayesGraph(model: unknown): BayesGraph {
     const children = childrenMap.get(id) || [];
     const name = nameMap.get(id) || id;
 
-    const n = node as Record<string, unknown>;
-    const nData = n['data'] as Record<string, unknown> | undefined;
-    const rawEvidence = nData?.[BAYES_EVIDENCE_KEY];
-    const evidence: BayesEvidence = rawEvidence === 'si' || rawEvidence === 'no' ? rawEvidence : null;
-    let storedCPT: BayesCPT | null = null;
-
-    if (nData?.[BAYES_CPT_KEY]) {
-      try {
-        const raw = nData[BAYES_CPT_KEY];
-        storedCPT = typeof raw === 'string' ? JSON.parse(raw) : (raw as BayesCPT);
-      } catch {
-        storedCPT = null;
-      }
-    }
-
-    const cpt = storedCPT || generateDefaultCPT(parents);
-
     graph.set(id, {
       id,
       name,
       parents,
       children,
-      evidence,
-      cpt,
+      evidence: null,
+      cpt: generateDefaultCPT(parents),
       marginals: { si: 0.5, no: 0.5 }
     });
   }
@@ -244,10 +223,12 @@ export function recalcAllMarginals(graph: BayesGraph): BayesGraph {
     return graph;
   }
 
-  // We do not skip inference here based on graph.size anymore.
-  // We only log a warning. The UI component will handle showing a banner.
-  if (graph.size > 20) {
-    console.warn('[Bayes] Graph exceeds 20 nodes \u2014 exact inference may freeze the browser.');
+  if (graph.size > MAX_EXACT_INFERENCE_NODES) {
+    console.warn(`[Bayes] Graph exceeds ${MAX_EXACT_INFERENCE_NODES} nodes \u2014 exact inference skipped.`);
+    for (const [, node] of graph) {
+      node.marginals = node.evidence === 'si' ? { si: 1, no: 0 } : node.evidence === 'no' ? { si: 0, no: 1 } : { si: 0.5, no: 0.5 };
+    }
+    return graph;
   }
 
   const order = topologicalSort(graph);

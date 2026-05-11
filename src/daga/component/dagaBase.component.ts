@@ -21,7 +21,7 @@ import {
   handleConnectionUpdateValues,
   isConnectionAutoNormalizeEnabled
 } from '../utils/connectionCalculate.utils';
-import { normalizeNodeId } from '../utils/generalCalculationNodes.utils';
+import { isStateDiagramNodeLike, normalizeNodeId } from '../utils/generalCalculationNodes.utils';
 import { calculateTheoreticalNodeProbabilities, normalizeWeightValue } from '../utils/binomialWeight.utils';
 import { BayesGraph } from '../types';
 
@@ -302,7 +302,7 @@ export class DagaBaseComponent implements AfterViewInit, OnDestroy, OnChanges {
     // 3. Si el ID corresponde a un nodo, escribimos su valor directo
     const node = canvas.model.nodes.get(action.id);
     if (node) {
-      if (node.type && node.type.id === 'state-diagram-node') {
+      if (isStateDiagramNodeLike(node)) {
         const currentProb = node.valueSet.getValue(this.probabilityKey);
         if (currentProb !== this.maxProbability || valuesChangedTo[this.probabilityKey] !== this.maxProbability) {
           node.valueSet.overwriteValues({
@@ -423,12 +423,7 @@ export class DagaBaseComponent implements AfterViewInit, OnDestroy, OnChanges {
       return;
     }
 
-    let rawProbability: number;
-    if (node.type && node.type.id === 'state-diagram-node') {
-      rawProbability = this.maxProbability;
-    } else {
-      rawProbability = node.valueSet.getValue(this.probabilityKey);
-    }
+    const rawProbability: number = node.valueSet.getValue(this.probabilityKey);
 
     const percentageText = formatProbabilityPercent(rawProbability, this.maxProbability);
 

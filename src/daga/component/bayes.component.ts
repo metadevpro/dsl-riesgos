@@ -8,12 +8,7 @@ import { DagaBaseComponent } from './dagaBase.component';
 import { bayes_CONFIG } from '../config/bayes.config';
 import { GenericComponent } from './generic.component';
 import { normalizeProbability } from '../utils/probability.utils';
-import { normalizeNodeId } from '../utils/generalCalculationNodes.utils';
 import {
-  BAYES_EVIDENCE_KEY,
-  BAYES_CPT_KEY,
-  BAYES_P_SI_KEY,
-  BAYES_P_NO_KEY,
   buildBayesGraph,
   recalcAllMarginals,
   getCPTTableRows,
@@ -27,7 +22,13 @@ import { aprenderMLE } from '../utils/bayes/mle.utils';
 import { aprenderEM } from '../utils/bayes/em.utils';
 import { generarDatosSinteticos } from '../utils/bayes/syntheticData.utils';
 import { BayesGraph, BayesEvidence, BayesCPTEntry, CPTTableRow, MCResult, LearningResult } from '../types';
-import { applyRiskFileToCanvas, exportCanvasToFile, RiskFile } from '../utils/importExport.utils';
+import {
+  applyRiskFileToCanvas,
+  exportCanvasToFile,
+  overlayBayesSchemaOnGraph,
+  RiskFile,
+  serializeBayesGraph
+} from '../utils/importExport.utils';
 import { DagaExporter } from '@metadev/daga';
 
 @Component({
@@ -54,6 +55,9 @@ export class BayesComponent extends GenericComponent implements OnDestroy {
   cptValidationErrors: string[] = [];
   autoNormalizeCPT = false;
   isNetworkTooLarge = false;
+  private tooLargeAlerted = false;
+  private recalcTimer: ReturnType<typeof setTimeout> | null = null;
+  private static readonly RECALC_DEBOUNCE_MS = 200;
   csvImportMessage: string | null = null;
   creatingNodes = false;
   creationSummary: {
@@ -91,7 +95,9 @@ export class BayesComponent extends GenericComponent implements OnDestroy {
       alert('El diagrama todavía no está listo. Inténtalo de nuevo en unos segundos.');
       return null;
     }
-    return exportCanvasToFile(this.canvas, 'bayes');
+    const file = exportCanvasToFile(this.canvas, 'bayes');
+    file.bayes = serializeBayesGraph(this.bayesGraph);
+    return file;
   }
 
   private runImport(file: RiskFile): void {
@@ -102,9 +108,9 @@ export class BayesComponent extends GenericComponent implements OnDestroy {
     const exported = new DagaExporter().export(this.canvas.model);
     this.myModel = exported;
     this.bayesGraph = buildBayesGraph(exported);
+    overlayBayesSchemaOnGraph(this.bayesGraph, file.bayes);
     recalcAllMarginals(this.bayesGraph);
     this.bayesGraph = new Map(this.bayesGraph);
-    this.syncMarginalsToModel();
     this.cdr.markForCheck();
   }
 
@@ -195,14 +201,23 @@ export class BayesComponent extends GenericComponent implements OnDestroy {
 
     this.isNetworkTooLarge = this.bayesGraph.size > 20;
 
-    // Recalculate marginals
-    recalcAllMarginals(this.bayesGraph);
+    if (this.isNetworkTooLarge) {
+      if (!this.tooLargeAlerted) {
+        this.tooLargeAlerted = true;
+        alert(
+          `La red tiene ${this.bayesGraph.size} nodos. La inferencia exacta es O(2^N) y se bloquea por encima de 20 nodos. ` +
+            'El cálculo de marginales queda desactivado hasta que reduzcas la red. Usa Monte Carlo para inferencia aproximada.'
+        );
+      }
+    } else {
+      this.tooLargeAlerted = false;
+      recalcAllMarginals(this.bayesGraph);
+    }
 
     // Create new Map reference to trigger Angular change detection in DagaBaseComponent
     this.bayesGraph = new Map(this.bayesGraph);
 
     // Persist marginals back to model data for the decorator
-    this.syncMarginalsToModel();
 
     // If popup is open, refresh it
     if (this.showNodePopup && this.selectedNodeId) {
@@ -223,9 +238,6 @@ export class BayesComponent extends GenericComponent implements OnDestroy {
    * Closes the popup, saving valid data.
    */
   closeNodePopup(): void {
-    if (this.selectedNodeId) {
-      this.saveNodeData();
-    }
     this.showNodePopup = false;
     this.selectedNodeId = null;
   }
@@ -251,11 +263,7 @@ export class BayesComponent extends GenericComponent implements OnDestroy {
     node.evidence = value;
     this.selectedNodeEvidence = value;
 
-    // Recalculate and refresh
-    recalcAllMarginals(this.bayesGraph);
-    this.bayesGraph = new Map(this.bayesGraph);
-    this.syncMarginalsToModel();
-    this.refreshPopupData();
+    this.scheduleRecalc();
   }
 
   /**
@@ -279,11 +287,31 @@ export class BayesComponent extends GenericComponent implements OnDestroy {
       }
     }
 
-    // Recalculate
-    recalcAllMarginals(this.bayesGraph);
-    this.bayesGraph = new Map(this.bayesGraph);
-    this.syncMarginalsToModel();
-    this.refreshPopupData();
+    this.scheduleRecalc();
+  }
+
+  /**
+   * Debounces recalcAllMarginals so that bursts of UI edits (typing in a CPT
+   * cell, rapid evidence toggles) collapse into a single recompute.
+   * Bypasses the recompute when the network exceeds MAX_EXACT_INFERENCE_NODES.
+   */
+  private scheduleRecalc(): void {
+    if (this.recalcTimer !== null) {
+      clearTimeout(this.recalcTimer);
+      this.recalcTimer = null;
+    }
+
+    if (this.isNetworkTooLarge) return;
+
+    this.recalcTimer = setTimeout(() => {
+      this.recalcTimer = null;
+      recalcAllMarginals(this.bayesGraph);
+      this.bayesGraph = new Map(this.bayesGraph);
+      if (this.showNodePopup && this.selectedNodeId) {
+        this.refreshPopupData();
+      }
+      this.cdr.markForCheck();
+    }, BayesComponent.RECALC_DEBOUNCE_MS);
   }
 
   /**
@@ -341,38 +369,6 @@ export class BayesComponent extends GenericComponent implements OnDestroy {
     this.selectedNodeCPTRows = getCPTTableRows(this.selectedNodeId, this.bayesGraph);
     this.selectedNodeHasTooManyRows = this.selectedNodeCPTRows.length > 16;
     this.cptValidationErrors = validateCPT(node.cpt);
-  }
-
-  private saveNodeData(): void {
-    if (!this.selectedNodeId || !this.canvas) return;
-
-    const node = this.bayesGraph.get(this.selectedNodeId);
-    if (!node) return;
-
-    const liveNode = this.canvas.model.nodes.find((n) => normalizeNodeId(String(n.id)) === this.selectedNodeId);
-    if (!liveNode) return;
-
-    liveNode.valueSet.overwriteValues({
-      [BAYES_EVIDENCE_KEY]: node.evidence ?? 'null',
-      [BAYES_CPT_KEY]: JSON.stringify(node.cpt)
-    });
-  }
-
-  private syncMarginalsToModel(): void {
-    if (!this.canvas) return;
-
-    for (const liveNode of this.canvas.model.nodes) {
-      const nId = normalizeNodeId(String(liveNode.id));
-      const bayesNode = this.bayesGraph.get(nId);
-      if (!bayesNode) continue;
-
-      liveNode.valueSet.overwriteValues({
-        [BAYES_P_SI_KEY]: bayesNode.marginals.si,
-        [BAYES_P_NO_KEY]: bayesNode.marginals.no,
-        [BAYES_EVIDENCE_KEY]: bayesNode.evidence ?? 'null',
-        [BAYES_CPT_KEY]: JSON.stringify(bayesNode.cpt)
-      });
-    }
   }
 
   // ── Monte Carlo ──────────────────────────────────────────────────────────
@@ -649,7 +645,6 @@ export class BayesComponent extends GenericComponent implements OnDestroy {
     this.bayesGraph = this.learningResult.graph;
     recalcAllMarginals(this.bayesGraph);
     this.bayesGraph = new Map(this.bayesGraph);
-    this.syncMarginalsToModel();
     this.showLearningPanel = false;
     this.learningResult = null;
     this.csvAnalysis = null;
@@ -673,6 +668,10 @@ export class BayesComponent extends GenericComponent implements OnDestroy {
   }
 
   ngOnDestroy(): void {
+    if (this.recalcTimer !== null) {
+      clearTimeout(this.recalcTimer);
+      this.recalcTimer = null;
+    }
     this.bayesGraph.clear();
   }
 }

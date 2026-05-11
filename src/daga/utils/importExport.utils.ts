@@ -1,13 +1,49 @@
 import { Canvas } from '@metadev/daga-angular';
 import { DagaExporter, DagaImporter, DagaModel, DagaNode } from '@metadev/daga';
+import { BayesCPT, BayesEvidence, BayesGraph } from '../types';
 
 export type RiskModelType = 'binomial' | 'bayes';
+
+export interface BayesNodeSchema {
+  evidence: BayesEvidence;
+  cpt: BayesCPT;
+}
+
+export interface BayesExportSchema {
+  nodes: Record<string, BayesNodeSchema>;
+}
 
 export interface RiskFile {
   riskFileVersion: 1;
   modelType: RiskModelType;
   exportedAt: string;
   daga: DagaModel;
+  bayes?: BayesExportSchema;
+}
+
+export function serializeBayesGraph(graph: BayesGraph): BayesExportSchema {
+  const nodes: Record<string, BayesNodeSchema> = {};
+  for (const [id, node] of graph) {
+    nodes[id] = {
+      evidence: node.evidence,
+      cpt: Object.fromEntries(Object.entries(node.cpt).map(([k, v]) => [k, { si: v.si, no: v.no }]))
+    };
+  }
+  return { nodes };
+}
+
+export function overlayBayesSchemaOnGraph(graph: BayesGraph, schema: BayesExportSchema | undefined): void {
+  if (!schema || !schema.nodes) return;
+  for (const [id, entry] of Object.entries(schema.nodes)) {
+    const node = graph.get(id);
+    if (!node) continue;
+    if (entry.evidence === 'si' || entry.evidence === 'no' || entry.evidence === null) {
+      node.evidence = entry.evidence;
+    }
+    if (entry.cpt && typeof entry.cpt === 'object') {
+      node.cpt = entry.cpt;
+    }
+  }
 }
 
 const BINOMIAL_NODE_TYPES = new Set(['event-diagram-node', 'state-diagram-node']);
@@ -50,11 +86,13 @@ export function readRiskFile(file: File): Promise<RiskFile> {
         }
         const modelType: RiskModelType =
           parsed.modelType === 'binomial' || parsed.modelType === 'bayes' ? parsed.modelType : detectModelType(parsed.daga);
+        migrateLegacyValueKeys(parsed.daga);
         resolve({
           riskFileVersion: 1,
           modelType,
           exportedAt: typeof parsed.exportedAt === 'string' ? parsed.exportedAt : new Date().toISOString(),
-          daga: parsed.daga
+          daga: parsed.daga,
+          bayes: parsed.bayes
         });
       } catch (err) {
         reject(err instanceof Error ? err : new Error(String(err)));
@@ -72,6 +110,46 @@ export function detectModelType(daga: DagaModel): RiskModelType {
     }
   }
   return 'bayes';
+}
+
+/**
+ * Rewrites legacy alias keys to the canonical pair so the calculation utils
+ * only need to read one key. Connections: `chance` / `probability` -> `weight`.
+ * Nodes: `chance` -> `probability`.
+ */
+function migrateLegacyValueKeys(daga: DagaModel): void {
+  const rewriteValues = (values: Record<string, unknown> | undefined, canonical: string, aliases: string[]): void => {
+    if (!values || typeof values !== 'object') return;
+    if (values[canonical] !== undefined) {
+      for (const alias of aliases) delete values[alias];
+      return;
+    }
+    for (const alias of aliases) {
+      if (values[alias] !== undefined) {
+        values[canonical] = values[alias];
+        delete values[alias];
+        break;
+      }
+    }
+  };
+
+  const walkValueSet = (item: unknown, canonical: string, aliases: string[]): void => {
+    if (!item || typeof item !== 'object') return;
+    const valueSet = (item as Record<string, unknown>)['valueSet'];
+    if (valueSet && typeof valueSet === 'object') {
+      const values = (valueSet as Record<string, unknown>)['values'] as Record<string, unknown> | undefined;
+      rewriteValues(values, canonical, aliases);
+    }
+    const data = (item as Record<string, unknown>)['data'] as Record<string, unknown> | undefined;
+    rewriteValues(data, canonical, aliases);
+  };
+
+  for (const conn of daga.connections ?? []) {
+    walkValueSet(conn, 'weight', ['chance', 'probability']);
+  }
+  for (const node of daga.nodes ?? []) {
+    walkValueSet(node, 'probability', ['chance']);
+  }
 }
 
 export function applyRiskFileToCanvas(canvas: Canvas, file: RiskFile): void {
