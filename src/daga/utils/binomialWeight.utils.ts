@@ -160,7 +160,7 @@ function readNodeValue(node: NodeInfo, keys: string[]): unknown {
 }
 
 function resolveConnectionWeight(connection: ConnectionInfo, branchValueKey: string): number {
-  const rawValue = readConnectionValue(connection, [branchValueKey, 'weight', 'probability', 'chance']);
+  const rawValue = readConnectionValue(connection, [branchValueKey]);
   return normalizeWeightValue(rawValue) ?? 1;
 }
 
@@ -178,7 +178,7 @@ function resolveNodeProbability(node: NodeInfo, probabilityKey: string, maxProba
     }
   }
 
-  const rawValue = readNodeValue(node, [probabilityKey, 'probability', 'chance']);
+  const rawValue = readNodeValue(node, [probabilityKey]);
   return normalizeProbability(rawValue, maxProbability) ?? maxProbability;
 }
 

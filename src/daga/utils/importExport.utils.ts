@@ -50,6 +50,7 @@ export function readRiskFile(file: File): Promise<RiskFile> {
         }
         const modelType: RiskModelType =
           parsed.modelType === 'binomial' || parsed.modelType === 'bayes' ? parsed.modelType : detectModelType(parsed.daga);
+        migrateLegacyValueKeys(parsed.daga);
         resolve({
           riskFileVersion: 1,
           modelType,
@@ -72,6 +73,46 @@ export function detectModelType(daga: DagaModel): RiskModelType {
     }
   }
   return 'bayes';
+}
+
+/**
+ * Rewrites legacy alias keys to the canonical pair so the calculation utils
+ * only need to read one key. Connections: `chance` / `probability` -> `weight`.
+ * Nodes: `chance` -> `probability`.
+ */
+function migrateLegacyValueKeys(daga: DagaModel): void {
+  const rewriteValues = (values: Record<string, unknown> | undefined, canonical: string, aliases: string[]): void => {
+    if (!values || typeof values !== 'object') return;
+    if (values[canonical] !== undefined) {
+      for (const alias of aliases) delete values[alias];
+      return;
+    }
+    for (const alias of aliases) {
+      if (values[alias] !== undefined) {
+        values[canonical] = values[alias];
+        delete values[alias];
+        break;
+      }
+    }
+  };
+
+  const walkValueSet = (item: unknown, canonical: string, aliases: string[]): void => {
+    if (!item || typeof item !== 'object') return;
+    const valueSet = (item as Record<string, unknown>)['valueSet'];
+    if (valueSet && typeof valueSet === 'object') {
+      const values = (valueSet as Record<string, unknown>)['values'] as Record<string, unknown> | undefined;
+      rewriteValues(values, canonical, aliases);
+    }
+    const data = (item as Record<string, unknown>)['data'] as Record<string, unknown> | undefined;
+    rewriteValues(data, canonical, aliases);
+  };
+
+  for (const conn of daga.connections ?? []) {
+    walkValueSet(conn, 'weight', ['chance', 'probability']);
+  }
+  for (const node of daga.nodes ?? []) {
+    walkValueSet(node, 'probability', ['chance']);
+  }
 }
 
 export function applyRiskFileToCanvas(canvas: Canvas, file: RiskFile): void {
