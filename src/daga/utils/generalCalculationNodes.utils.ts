@@ -1,4 +1,7 @@
 import { NodeInfo, ConnectionInfo, ConnectionEndpoints, NodeId } from '../types';
+import { normalizeProbability } from './probability.utils';
+
+const STATE_DIAGRAM_NODE_TYPE_ID = 'state-diagram-node';
 
 export function normalizeNodeId(rawId: string): string {
   return rawId.replace(/_port_\d+$/i, '');
@@ -101,6 +104,12 @@ export function findNamedNode(nodes: NodeInfo[], expectedName: string): NodeInfo
   return nodes.find((node) => isNodeName(node, expectedName));
 }
 
+export function isEndNodeLike(node: NodeInfo): boolean {
+  if (node?.data?.['end'] === true) return true;
+  if (isNodeName(node, 'end')) return true;
+  return isNodeTypeLike(node, 'end');
+}
+
 export function findStartNodes(nodes: NodeInfo[], connections: ConnectionInfo[]): NodeInfo[] {
   if (!nodes || nodes.length === 0) {
     return [];
@@ -114,7 +123,9 @@ export function findStartNodes(nodes: NodeInfo[], connections: ConnectionInfo[])
 
   const startNodes = nodes.filter((node) => {
     const nodeId = getNodeId(node);
-    return !!nodeId && !nodesWithInput.has(nodeId);
+    if (!nodeId || nodesWithInput.has(nodeId)) return false;
+    if (isEndNodeLike(node)) return false;
+    return true;
   });
 
   return startNodes;
@@ -244,6 +255,58 @@ export function detectCycle(nodes: NodeInfo[], connections: ConnectionInfo[]): N
   }
 
   return null;
+}
+
+/**
+ * Returns true for any node whose `type` resolves to `state-diagram-node`,
+ * supporting both the string form and the daga object form `{ id: 'state-diagram-node' }`.
+ */
+export function isStateDiagramNodeLike(node: NodeInfo | { type?: unknown } | null | undefined): boolean {
+  if (!node || typeof node !== 'object') return false;
+  const nodeType = (node as Record<string, unknown>)['type'];
+  if (typeof nodeType === 'string') {
+    return nodeType === STATE_DIAGRAM_NODE_TYPE_ID;
+  }
+  if (nodeType && typeof nodeType === 'object') {
+    const nodeTypeId = (nodeType as Record<string, unknown>)['id'];
+    return typeof nodeTypeId === 'string' && nodeTypeId === STATE_DIAGRAM_NODE_TYPE_ID;
+  }
+  return false;
+}
+
+/**
+ * Effective probability of a node in the probability scale (0..maxProbability).
+ * `state-diagram-node` always evaluates to `maxProbability` (the node is a
+ * deterministic transition). For other nodes, reads `data[probabilityKey]` /
+ * `valueSet.getValue(probabilityKey)` and normalizes. Falls back to `maxProbability`
+ * when the value is missing or unparseable.
+ */
+export function getEffectiveNodeProbability(node: NodeInfo, probabilityKey: string, maxProbability: number): number {
+  if (isStateDiagramNodeLike(node)) return maxProbability;
+
+  const nodeRecord = node as Record<string, unknown>;
+  const data = nodeRecord['data'];
+  let raw: unknown;
+  if (data && typeof data === 'object') {
+    raw = (data as Record<string, unknown>)[probabilityKey];
+  }
+  if (raw === undefined) {
+    const valueSet = nodeRecord['valueSet'];
+    if (valueSet && typeof (valueSet as { getValue?: (k: string) => unknown }).getValue === 'function') {
+      try {
+        raw = (valueSet as { getValue: (k: string) => unknown }).getValue(probabilityKey);
+      } catch {
+        raw = undefined;
+      }
+    } else if (valueSet && typeof valueSet === 'object') {
+      const values = (valueSet as Record<string, unknown>)['values'];
+      if (values && typeof values === 'object') {
+        raw = (values as Record<string, unknown>)[probabilityKey];
+      }
+    }
+  }
+
+  return normalizeProbability(raw, maxProbability) ?? maxProbability;
 }
 
 export function getNodeDisplayName(node: NodeInfo | undefined): string | undefined {

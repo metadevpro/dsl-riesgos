@@ -1,7 +1,7 @@
-import { normalizeProbability } from './probability.utils';
 import {
   buildOutgoingConnections,
   findStartNodes,
+  getEffectiveNodeProbability,
   getNodeId,
   getNodeMap,
   getNextNodeFromConnection
@@ -112,74 +112,9 @@ function readConnectionValue(connection: ConnectionInfo, keys: string[]): unknow
   return undefined;
 }
 
-function readNodeValue(node: NodeInfo, keys: string[]): unknown {
-  if (!node || typeof node !== 'object') {
-    return undefined;
-  }
-
-  const nodeRecord = node as Record<string, unknown>;
-  const data = nodeRecord['data'];
-  const valueSet = nodeRecord['valueSet'];
-
-  if (data && typeof data === 'object') {
-    const dataObject = data as Record<string, unknown>;
-    for (const key of keys) {
-      if (dataObject[key] !== undefined) {
-        return dataObject[key];
-      }
-    }
-  }
-
-  if (valueSet && typeof valueSet === 'object') {
-    const valueSetObject = valueSet as Record<string, unknown>;
-    const values = valueSetObject['values'];
-
-    if (values && typeof values === 'object') {
-      const valuesObject = values as Record<string, unknown>;
-      for (const key of keys) {
-        if (valuesObject[key] !== undefined) {
-          return valuesObject[key];
-        }
-      }
-    }
-
-    for (const key of keys) {
-      if (valueSetObject[key] !== undefined) {
-        return valueSetObject[key];
-      }
-    }
-  }
-
-  for (const key of keys) {
-    if (nodeRecord[key] !== undefined) {
-      return nodeRecord[key];
-    }
-  }
-
-  return undefined;
-}
-
 function resolveConnectionWeight(connection: ConnectionInfo, branchValueKey: string): number {
   const rawValue = readConnectionValue(connection, [branchValueKey]);
   return normalizeWeightValue(rawValue) ?? 1;
-}
-
-function resolveNodeProbability(node: NodeInfo, probabilityKey: string, maxProbability: number): number {
-  const nodeType = (node as Record<string, unknown>)?.['type'];
-  if (typeof nodeType === 'string' && nodeType === 'state-diagram-node') {
-    return maxProbability;
-  }
-  if (nodeType && typeof nodeType === 'object') {
-    const nodeTypeId =
-      typeof (nodeType as Record<string, unknown>)['id'] === 'string' ? String((nodeType as Record<string, unknown>)['id']) : '';
-
-    if (nodeTypeId === 'state-diagram-node') {
-      return maxProbability;
-    }
-  }
-
-  const rawValue = readNodeValue(node, [probabilityKey]);
-  return normalizeProbability(rawValue, maxProbability) ?? maxProbability;
 }
 
 function addProbabilityContribution(target: Map<NodeId, number>, nodeId: NodeId, probability: number): void {
@@ -204,7 +139,7 @@ function walkTheoreticalProbabilities(
     return;
   }
 
-  const rawFactor = currentId === startNodeId ? maxProbability : resolveNodeProbability(currentNode, probabilityKey, maxProbability);
+  const rawFactor = currentId === startNodeId ? maxProbability : getEffectiveNodeProbability(currentNode, probabilityKey, maxProbability);
   const nodeProbabilityFactor = rawFactor / maxProbability;
   const nodeProbability = Number((accumulatedProbability * nodeProbabilityFactor).toFixed(6));
   addProbabilityContribution(results, currentId, nodeProbability);

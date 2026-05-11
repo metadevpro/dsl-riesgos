@@ -1,12 +1,13 @@
-import { normalizeProbability } from './probability.utils';
 import {
   buildOutgoingConnections,
   findEndNode,
   findStartNode,
+  getEffectiveNodeProbability,
   getNodeId,
   getNodeMap,
   getNextNodeFromConnection,
-  isNodeTypeLike
+  isNodeTypeLike,
+  isStateDiagramNodeLike
 } from './generalCalculationNodes.utils';
 import { normalizeWeightValue } from './binomialWeight.utils';
 
@@ -114,18 +115,6 @@ function getFirstProbabilityNode(
     node: startNode,
     usedWeightedChoice: false
   };
-}
-
-function isStateDiagramNode(node: NodeInfo): boolean {
-  const nodeType = (node as Record<string, unknown>)?.['type'];
-  if (typeof nodeType === 'string') {
-    return nodeType === 'state-diagram-node';
-  }
-  if (nodeType && typeof nodeType === 'object') {
-    const nodeTypeId = (nodeType as Record<string, unknown>)['id'];
-    return typeof nodeTypeId === 'string' && nodeTypeId === 'state-diagram-node';
-  }
-  return false;
 }
 
 function isEndNodeLike(node: NodeInfo): boolean {
@@ -253,8 +242,8 @@ function simulateIteration(
       return { isSuccess: true };
     }
 
-    let probability = (normalizeProbability(currentNode.data?.[probabilityKey], maxProbability) ?? 0) / maxProbability;
-    if (isNodeTypeLike(currentNode, 'transition') || isStateDiagramNode(currentNode)) {
+    let probability = getEffectiveNodeProbability(currentNode, probabilityKey, maxProbability) / maxProbability;
+    if (isNodeTypeLike(currentNode, 'transition') || isStateDiagramNodeLike(currentNode)) {
       probability = 1;
     }
 

@@ -96,9 +96,24 @@ export class BinomialComponent extends GenericComponent {
         this.myModel, this.probabilityKey, this.branchValueKey, this.maxProbability
       );
       const endNodeIds = buildEndNodeIdSet(nodes);
-      let theoreticalProbability = 0;
+      let theoreticalProbability: number | undefined = 0;
+      let reachableEndCount = 0;
       for (const nodeId of endNodeIds) {
-        theoreticalProbability += theoreticalMap.get(nodeId) ?? 0;
+        if (theoreticalMap.has(nodeId)) {
+          reachableEndCount++;
+          theoreticalProbability += theoreticalMap.get(nodeId) ?? 0;
+        }
+      }
+
+      if (endNodeIds.size === 0) {
+        alert('El diagrama no contiene ningún nodo End. La probabilidad teórica no se puede calcular hasta que añadas un nodo End como terminal del flujo.');
+        theoreticalProbability = undefined;
+      } else if (reachableEndCount === 0) {
+        alert(
+          `El diagrama tiene ${endNodeIds.size} nodo(s) End, pero ninguno está conectado al flujo desde el Start. ` +
+            'Conéctalos para que la probabilidad teórica refleje el resultado.'
+        );
+        theoreticalProbability = undefined;
       }
 
       this.pushResult(result.iterations, result.successIterations, result.startNodeId, result.startNodeName, theoreticalProbability);
