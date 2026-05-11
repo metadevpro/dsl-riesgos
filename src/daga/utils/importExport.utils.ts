@@ -1,13 +1,49 @@
 import { Canvas } from '@metadev/daga-angular';
 import { DagaExporter, DagaImporter, DagaModel, DagaNode } from '@metadev/daga';
+import { BayesCPT, BayesEvidence, BayesGraph } from '../types';
 
 export type RiskModelType = 'binomial' | 'bayes';
+
+export interface BayesNodeSchema {
+  evidence: BayesEvidence;
+  cpt: BayesCPT;
+}
+
+export interface BayesExportSchema {
+  nodes: Record<string, BayesNodeSchema>;
+}
 
 export interface RiskFile {
   riskFileVersion: 1;
   modelType: RiskModelType;
   exportedAt: string;
   daga: DagaModel;
+  bayes?: BayesExportSchema;
+}
+
+export function serializeBayesGraph(graph: BayesGraph): BayesExportSchema {
+  const nodes: Record<string, BayesNodeSchema> = {};
+  for (const [id, node] of graph) {
+    nodes[id] = {
+      evidence: node.evidence,
+      cpt: Object.fromEntries(Object.entries(node.cpt).map(([k, v]) => [k, { si: v.si, no: v.no }]))
+    };
+  }
+  return { nodes };
+}
+
+export function overlayBayesSchemaOnGraph(graph: BayesGraph, schema: BayesExportSchema | undefined): void {
+  if (!schema || !schema.nodes) return;
+  for (const [id, entry] of Object.entries(schema.nodes)) {
+    const node = graph.get(id);
+    if (!node) continue;
+    if (entry.evidence === 'si' || entry.evidence === 'no' || entry.evidence === null) {
+      node.evidence = entry.evidence;
+    }
+    if (entry.cpt && typeof entry.cpt === 'object') {
+      node.cpt = entry.cpt;
+    }
+  }
 }
 
 const BINOMIAL_NODE_TYPES = new Set(['event-diagram-node', 'state-diagram-node']);
@@ -55,7 +91,8 @@ export function readRiskFile(file: File): Promise<RiskFile> {
           riskFileVersion: 1,
           modelType,
           exportedAt: typeof parsed.exportedAt === 'string' ? parsed.exportedAt : new Date().toISOString(),
-          daga: parsed.daga
+          daga: parsed.daga,
+          bayes: parsed.bayes
         });
       } catch (err) {
         reject(err instanceof Error ? err : new Error(String(err)));

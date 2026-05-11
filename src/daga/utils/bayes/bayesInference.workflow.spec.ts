@@ -9,10 +9,9 @@ import {
   recalcAllMarginals,
   recalcCPTOnParentChange,
   topologicalSort,
-  validateCPT,
-  BAYES_CPT_KEY,
-  BAYES_EVIDENCE_KEY
+  validateCPT
 } from './bayesInference.utils';
+import { overlayBayesSchemaOnGraph } from '../importExport.utils';
 import { BayesGraph } from '../../types';
 
 describe('Bayes Workflow — CPT building blocks', () => {
@@ -120,11 +119,11 @@ describe('Bayes Workflow — Inference behaviour', () => {
 });
 
 describe('Bayes Workflow — Build from diagram model', () => {
-  it('buildBayesGraph wires parents, children, evidence, and CPT from node.data', () => {
+  it('buildBayesGraph wires parents, children, and default CPT from diagram model', () => {
     const model = {
       nodes: [
-        { id: 'A', data: { 'node name': 'Rain', [BAYES_CPT_KEY]: { prior: { si: 0.3, no: 0.7 } } } },
-        { id: 'B', data: { 'node name': 'WetGrass', [BAYES_EVIDENCE_KEY]: 'si' } }
+        { id: 'A', data: { 'node name': 'Rain' } },
+        { id: 'B', data: { 'node name': 'WetGrass' } }
       ],
       connections: [{ startNode: 'A', endNode: 'B' }]
     };
@@ -136,20 +135,31 @@ describe('Bayes Workflow — Build from diagram model', () => {
     const b = graph.get('B')!;
     expect(a.children).toEqual(['B']);
     expect(b.parents).toEqual(['A']);
-    expect(b.evidence).toBe('si');
-    expect(a.cpt['prior']).toEqual({ si: 0.3, no: 0.7 });
-    // B got default CPT for 1 parent (2 rows)
+    expect(b.evidence).toBeNull();
+    expect(a.cpt['prior']).toEqual({ si: 0.5, no: 0.5 });
     expect(Object.keys(b.cpt)).toHaveLength(2);
   });
 
-  it('buildBayesGraph parses stringified CPT in node.data', () => {
+  it('overlayBayesSchemaOnGraph applies evidence and CPTs from the RiskFile schema', () => {
     const model = {
-      nodes: [{ id: 'X', data: { [BAYES_CPT_KEY]: JSON.stringify({ prior: { si: 0.7, no: 0.3 } }) } }],
-      connections: []
+      nodes: [
+        { id: 'A', data: { 'node name': 'Rain' } },
+        { id: 'B', data: { 'node name': 'WetGrass' } }
+      ],
+      connections: [{ startNode: 'A', endNode: 'B' }]
     };
+    const graph = buildBayesGraph(model);
 
-    const g = buildBayesGraph(model);
-    expect(g.get('X')!.cpt['prior']).toEqual({ si: 0.7, no: 0.3 });
+    overlayBayesSchemaOnGraph(graph, {
+      nodes: {
+        A: { evidence: null, cpt: { prior: { si: 0.3, no: 0.7 } } },
+        B: { evidence: 'si', cpt: { A_si: { si: 0.9, no: 0.1 }, A_no: { si: 0.2, no: 0.8 } } }
+      }
+    });
+
+    expect(graph.get('A')!.cpt['prior']).toEqual({ si: 0.3, no: 0.7 });
+    expect(graph.get('B')!.evidence).toBe('si');
+    expect(graph.get('B')!.cpt['A_si']).toEqual({ si: 0.9, no: 0.1 });
   });
 
   it('returns an empty graph for a missing model', () => {
