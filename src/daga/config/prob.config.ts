@@ -47,7 +47,9 @@ export const PROB_CONFIG: DiagramConfig = {
         }
       ]
     },
-    propertyEditor: {}
+    propertyEditor: {
+      width: '16rem'
+    }
   },
   nodeTypes: [
     {
@@ -450,7 +452,7 @@ export const PROB_CONFIG: DiagramConfig = {
     {
       name: 'name',
       type: Type.Text,
-      defaultValue: 'unnamed',
+      defaultValue: 'binomial diagram',
       basic: true,
       editable: true,
       rootAttribute: 'name'

@@ -1,0 +1,526 @@
+{
+  "riskFileVersion": 1,
+  "modelType": "bayes",
+  "exportedAt": "2026-05-13T14:42:39.246Z",
+  "daga": {
+    "name": "unnamed",
+    "type": "simple-diagram",
+    "typeVersion": 1,
+    "createdAt": "2026-05-13T14:34:19.553Z",
+    "updatedAt": "2026-05-13T14:34:19.553Z",
+    "nodes": [
+      {
+        "id": "id28c84bc1-97e0-44dd-9ae6-a788e9287144",
+        "type": "diagram-node",
+        "children": [],
+        "sections": [],
+        "ports": [
+          {
+            "id": "id28c84bc1-97e0-44dd-9ae6-a788e9287144_port_0",
+            "coords": [
+              150,
+              370
+            ],
+            "connectionPoint": [
+              150,
+              370
+            ],
+            "direction": "top",
+            "label": ""
+          },
+          {
+            "id": "id28c84bc1-97e0-44dd-9ae6-a788e9287144_port_1",
+            "coords": [
+              50,
+              420
+            ],
+            "connectionPoint": [
+              50,
+              420
+            ],
+            "direction": "left",
+            "label": ""
+          },
+          {
+            "id": "id28c84bc1-97e0-44dd-9ae6-a788e9287144_port_2",
+            "coords": [
+              150,
+              470
+            ],
+            "connectionPoint": [
+              150,
+              470
+            ],
+            "direction": "bottom",
+            "label": ""
+          },
+          {
+            "id": "id28c84bc1-97e0-44dd-9ae6-a788e9287144_port_3",
+            "coords": [
+              250,
+              420
+            ],
+            "connectionPoint": [
+              250,
+              420
+            ],
+            "direction": "right",
+            "label": ""
+          }
+        ],
+        "label": "Requisitos Cambiantes",
+        "coords": [
+          50,
+          370
+        ],
+        "width": 200,
+        "height": 100,
+        "data": {
+          "node name": "Requisitos Cambiantes",
+          "bayes_evidence": "null",
+          "bayes_cpt": "",
+          "bayes_pSi": 50,
+          "bayes_pNo": 50
+        }
+      },
+      {
+        "id": "id362b1f2c-af14-4186-b21f-43e0ccf360b4",
+        "type": "diagram-node",
+        "children": [],
+        "sections": [],
+        "ports": [
+          {
+            "id": "id362b1f2c-af14-4186-b21f-43e0ccf360b4_port_0",
+            "coords": [
+              150,
+              50
+            ],
+            "connectionPoint": [
+              150,
+              50
+            ],
+            "direction": "top",
+            "label": ""
+          },
+          {
+            "id": "id362b1f2c-af14-4186-b21f-43e0ccf360b4_port_1",
+            "coords": [
+              50,
+              100
+            ],
+            "connectionPoint": [
+              50,
+              100
+            ],
+            "direction": "left",
+            "label": ""
+          },
+          {
+            "id": "id362b1f2c-af14-4186-b21f-43e0ccf360b4_port_2",
+            "coords": [
+              150,
+              150
+            ],
+            "connectionPoint": [
+              150,
+              150
+            ],
+            "direction": "bottom",
+            "label": ""
+          },
+          {
+            "id": "id362b1f2c-af14-4186-b21f-43e0ccf360b4_port_3",
+            "coords": [
+              250,
+              100
+            ],
+            "connectionPoint": [
+              250,
+              100
+            ],
+            "direction": "right",
+            "label": ""
+          }
+        ],
+        "label": "Baja Disponibilidad",
+        "coords": [
+          50,
+          50
+        ],
+        "width": 200,
+        "height": 100,
+        "data": {
+          "node name": "Baja Disponibilidad",
+          "bayes_evidence": "null",
+          "bayes_cpt": "",
+          "bayes_pSi": 50,
+          "bayes_pNo": 50
+        }
+      },
+      {
+        "id": "idff9d5432-684b-482a-bc6b-6fb194aeeb56",
+        "type": "diagram-node",
+        "children": [],
+        "sections": [],
+        "ports": [
+          {
+            "id": "idff9d5432-684b-482a-bc6b-6fb194aeeb56_port_0",
+            "coords": [
+              150,
+              210
+            ],
+            "connectionPoint": [
+              150,
+              210
+            ],
+            "direction": "top",
+            "label": ""
+          },
+          {
+            "id": "idff9d5432-684b-482a-bc6b-6fb194aeeb56_port_1",
+            "coords": [
+              50,
+              260
+            ],
+            "connectionPoint": [
+              50,
+              260
+            ],
+            "direction": "left",
+            "label": ""
+          },
+          {
+            "id": "idff9d5432-684b-482a-bc6b-6fb194aeeb56_port_2",
+            "coords": [
+              150,
+              310
+            ],
+            "connectionPoint": [
+              150,
+              310
+            ],
+            "direction": "bottom",
+            "label": ""
+          },
+          {
+            "id": "idff9d5432-684b-482a-bc6b-6fb194aeeb56_port_3",
+            "coords": [
+              250,
+              260
+            ],
+            "connectionPoint": [
+              250,
+              260
+            ],
+            "direction": "right",
+            "label": ""
+          }
+        ],
+        "label": "Deuda Tecnica",
+        "coords": [
+          50,
+          210
+        ],
+        "width": 200,
+        "height": 100,
+        "data": {
+          "node name": "Deuda Tecnica",
+          "bayes_evidence": "null",
+          "bayes_cpt": "",
+          "bayes_pSi": 50,
+          "bayes_pNo": 50
+        }
+      },
+      {
+        "id": "idb96a7196-d87e-426a-a279-4fca22f8508a",
+        "type": "diagram-node",
+        "children": [],
+        "sections": [],
+        "ports": [
+          {
+            "id": "idb96a7196-d87e-426a-a279-4fca22f8508a_port_0",
+            "coords": [
+              430,
+              210
+            ],
+            "connectionPoint": [
+              430,
+              210
+            ],
+            "direction": "top",
+            "label": ""
+          },
+          {
+            "id": "idb96a7196-d87e-426a-a279-4fca22f8508a_port_1",
+            "coords": [
+              330,
+              260
+            ],
+            "connectionPoint": [
+              330,
+              260
+            ],
+            "direction": "left",
+            "label": ""
+          },
+          {
+            "id": "idb96a7196-d87e-426a-a279-4fca22f8508a_port_2",
+            "coords": [
+              430,
+              310
+            ],
+            "connectionPoint": [
+              430,
+              310
+            ],
+            "direction": "bottom",
+            "label": ""
+          },
+          {
+            "id": "idb96a7196-d87e-426a-a279-4fca22f8508a_port_3",
+            "coords": [
+              530,
+              260
+            ],
+            "connectionPoint": [
+              530,
+              260
+            ],
+            "direction": "right",
+            "label": ""
+          }
+        ],
+        "label": "Retraso",
+        "coords": [
+          330,
+          210
+        ],
+        "width": 200,
+        "height": 100,
+        "data": {
+          "node name": "Retraso",
+          "bayes_evidence": "null",
+          "bayes_cpt": "",
+          "bayes_pSi": 50,
+          "bayes_pNo": 50
+        }
+      },
+      {
+        "id": "id9059d110-43fb-4b71-b897-b823074d985d",
+        "type": "diagram-node",
+        "children": [],
+        "sections": [],
+        "ports": [
+          {
+            "id": "id9059d110-43fb-4b71-b897-b823074d985d_port_0",
+            "coords": [
+              710,
+              210
+            ],
+            "connectionPoint": [
+              710,
+              210
+            ],
+            "direction": "top",
+            "label": ""
+          },
+          {
+            "id": "id9059d110-43fb-4b71-b897-b823074d985d_port_1",
+            "coords": [
+              610,
+              260
+            ],
+            "connectionPoint": [
+              610,
+              260
+            ],
+            "direction": "left",
+            "label": ""
+          },
+          {
+            "id": "id9059d110-43fb-4b71-b897-b823074d985d_port_2",
+            "coords": [
+              710,
+              310
+            ],
+            "connectionPoint": [
+              710,
+              310
+            ],
+            "direction": "bottom",
+            "label": ""
+          },
+          {
+            "id": "id9059d110-43fb-4b71-b897-b823074d985d_port_3",
+            "coords": [
+              810,
+              260
+            ],
+            "connectionPoint": [
+              810,
+              260
+            ],
+            "direction": "right",
+            "label": ""
+          }
+        ],
+        "label": "Penalizacion Contractual",
+        "coords": [
+          610,
+          210
+        ],
+        "width": 200,
+        "height": 100,
+        "data": {
+          "node name": "Penalizacion Contractual",
+          "bayes_evidence": "null",
+          "bayes_cpt": "",
+          "bayes_pSi": 50,
+          "bayes_pNo": 50
+        }
+      }
+    ],
+    "connections": [
+      {
+        "id": "ide6c65e72-949a-4dff-84cb-94385b061738",
+        "type": "diagram-connection",
+        "start": "id28c84bc1-97e0-44dd-9ae6-a788e9287144_port_3",
+        "end": "idb96a7196-d87e-426a-a279-4fca22f8508a_port_1",
+        "startLabel": "",
+        "middleLabel": "",
+        "endLabel": "",
+        "points": [],
+        "data": {
+          "connection name": ""
+        }
+      },
+      {
+        "id": "id3aa3f9d7-6217-42b8-b1ba-0eddb23e3aa8",
+        "type": "diagram-connection",
+        "start": "idff9d5432-684b-482a-bc6b-6fb194aeeb56_port_3",
+        "end": "idb96a7196-d87e-426a-a279-4fca22f8508a_port_1",
+        "startLabel": "",
+        "middleLabel": "",
+        "endLabel": "",
+        "points": [],
+        "data": {
+          "connection name": ""
+        }
+      },
+      {
+        "id": "id85a09778-53ce-43d8-ad29-14337aee1843",
+        "type": "diagram-connection",
+        "start": "id362b1f2c-af14-4186-b21f-43e0ccf360b4_port_3",
+        "end": "idb96a7196-d87e-426a-a279-4fca22f8508a_port_1",
+        "startLabel": "",
+        "middleLabel": "",
+        "endLabel": "",
+        "points": [],
+        "data": {
+          "connection name": ""
+        }
+      },
+      {
+        "id": "id2c123623-25bc-485b-85b2-3812cd12e391",
+        "type": "diagram-connection",
+        "start": "idb96a7196-d87e-426a-a279-4fca22f8508a_port_3",
+        "end": "id9059d110-43fb-4b71-b897-b823074d985d_port_1",
+        "startLabel": "",
+        "middleLabel": "",
+        "endLabel": "",
+        "points": [],
+        "data": {
+          "connection name": ""
+        }
+      }
+    ],
+    "data": {
+      "name": "unnamed",
+      "description": "",
+      "created": "2026-05-13T14:34:19.553Z",
+      "last opened": "2026-05-13T14:34:19.553Z",
+      "layout": "adjacency"
+    }
+  },
+  "bayes": {
+    "nodes": {
+      "id28c84bc1-97e0-44dd-9ae6-a788e9287144": {
+        "evidence": null,
+        "cpt": {
+          "prior": {
+            "si": 0.35,
+            "no": 0.65
+          }
+        }
+      },
+      "id362b1f2c-af14-4186-b21f-43e0ccf360b4": {
+        "evidence": null,
+        "cpt": {
+          "prior": {
+            "si": 0.2,
+            "no": 0.8
+          }
+        }
+      },
+      "idff9d5432-684b-482a-bc6b-6fb194aeeb56": {
+        "evidence": null,
+        "cpt": {
+          "prior": {
+            "si": 0.4,
+            "no": 0.6
+          }
+        }
+      },
+      "idb96a7196-d87e-426a-a279-4fca22f8508a": {
+        "evidence": null,
+        "cpt": {
+          "id28c84bc1-97e0-44dd-9ae6-a788e9287144_si|idff9d5432-684b-482a-bc6b-6fb194aeeb56_si|id362b1f2c-af14-4186-b21f-43e0ccf360b4_si": {
+            "si": 0.98,
+            "no": 0.02
+          },
+          "id28c84bc1-97e0-44dd-9ae6-a788e9287144_si|idff9d5432-684b-482a-bc6b-6fb194aeeb56_si|id362b1f2c-af14-4186-b21f-43e0ccf360b4_no": {
+            "si": 0.85,
+            "no": 0.15
+          },
+          "id28c84bc1-97e0-44dd-9ae6-a788e9287144_si|idff9d5432-684b-482a-bc6b-6fb194aeeb56_no|id362b1f2c-af14-4186-b21f-43e0ccf360b4_si": {
+            "si": 0.75,
+            "no": 0.25
+          },
+          "id28c84bc1-97e0-44dd-9ae6-a788e9287144_si|idff9d5432-684b-482a-bc6b-6fb194aeeb56_no|id362b1f2c-af14-4186-b21f-43e0ccf360b4_no": {
+            "si": 0.5,
+            "no": 0.5
+          },
+          "id28c84bc1-97e0-44dd-9ae6-a788e9287144_no|idff9d5432-684b-482a-bc6b-6fb194aeeb56_si|id362b1f2c-af14-4186-b21f-43e0ccf360b4_si": {
+            "si": 0.7,
+            "no": 0.3
+          },
+          "id28c84bc1-97e0-44dd-9ae6-a788e9287144_no|idff9d5432-684b-482a-bc6b-6fb194aeeb56_si|id362b1f2c-af14-4186-b21f-43e0ccf360b4_no": {
+            "si": 0.4,
+            "no": 0.6
+          },
+          "id28c84bc1-97e0-44dd-9ae6-a788e9287144_no|idff9d5432-684b-482a-bc6b-6fb194aeeb56_no|id362b1f2c-af14-4186-b21f-43e0ccf360b4_si": {
+            "si": 0.45,
+            "no": 0.55
+          },
+          "id28c84bc1-97e0-44dd-9ae6-a788e9287144_no|idff9d5432-684b-482a-bc6b-6fb194aeeb56_no|id362b1f2c-af14-4186-b21f-43e0ccf360b4_no": {
+            "si": 0.1,
+            "no": 0.9
+          }
+        }
+      },
+      "id9059d110-43fb-4b71-b897-b823074d985d": {
+        "evidence": null,
+        "cpt": {
+          "idb96a7196-d87e-426a-a279-4fca22f8508a_si": {
+            "si": 0.6,
+            "no": 0.4
+          },
+          "idb96a7196-d87e-426a-a279-4fca22f8508a_no": {
+            "si": 0.05,
+            "no": 0.95
+          }
+        }
+      }
+    }
+  }
+}

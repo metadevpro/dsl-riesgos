@@ -1,0 +1,523 @@
+{
+  "riskFileVersion": 1,
+  "modelType": "binomial",
+  "exportedAt": "2026-05-13T11:23:56.715Z",
+  "daga": {
+    "name": "unnamed",
+    "type": "simple-diagram",
+    "typeVersion": 1,
+    "createdAt": "2026-05-13T11:22:20.659Z",
+    "updatedAt": "2026-05-13T11:22:20.659Z",
+    "nodes": [
+      {
+        "id": "id0c4c8625-c3a7-44cf-933f-1ce3ef00b552",
+        "type": "start-diagram-node",
+        "children": [],
+        "sections": [],
+        "ports": [
+          {
+            "id": "id0c4c8625-c3a7-44cf-933f-1ce3ef00b552_port_0",
+            "coords": [
+              100,
+              0
+            ],
+            "connectionPoint": [
+              100,
+              0
+            ],
+            "direction": "top",
+            "label": ""
+          },
+          {
+            "id": "id0c4c8625-c3a7-44cf-933f-1ce3ef00b552_port_1",
+            "coords": [
+              0,
+              25
+            ],
+            "connectionPoint": [
+              0,
+              25
+            ],
+            "direction": "left",
+            "label": ""
+          },
+          {
+            "id": "id0c4c8625-c3a7-44cf-933f-1ce3ef00b552_port_2",
+            "coords": [
+              100,
+              50
+            ],
+            "connectionPoint": [
+              100,
+              50
+            ],
+            "direction": "bottom",
+            "label": ""
+          },
+          {
+            "id": "id0c4c8625-c3a7-44cf-933f-1ce3ef00b552_port_3",
+            "coords": [
+              200,
+              25
+            ],
+            "connectionPoint": [
+              200,
+              25
+            ],
+            "direction": "right",
+            "label": ""
+          }
+        ],
+        "label": "Ensayo de Fármaco",
+        "coords": [
+          0,
+          0
+        ],
+        "width": 200,
+        "height": 50,
+        "data": {
+          "node name": "Ensayo de Fármaco",
+          "node number": 1
+        }
+      },
+      {
+        "id": "ideb7ea712-f4ef-4898-9778-2f0f04cee8ec",
+        "type": "event-diagram-node",
+        "children": [],
+        "sections": [],
+        "ports": [
+          {
+            "id": "ideb7ea712-f4ef-4898-9778-2f0f04cee8ec_port_0",
+            "coords": [
+              375,
+              0
+            ],
+            "connectionPoint": [
+              375,
+              0
+            ],
+            "direction": "top",
+            "label": ""
+          },
+          {
+            "id": "ideb7ea712-f4ef-4898-9778-2f0f04cee8ec_port_1",
+            "coords": [
+              300,
+              25
+            ],
+            "connectionPoint": [
+              300,
+              25
+            ],
+            "direction": "left",
+            "label": ""
+          },
+          {
+            "id": "ideb7ea712-f4ef-4898-9778-2f0f04cee8ec_port_2",
+            "coords": [
+              375,
+              50
+            ],
+            "connectionPoint": [
+              375,
+              50
+            ],
+            "direction": "bottom",
+            "label": ""
+          },
+          {
+            "id": "ideb7ea712-f4ef-4898-9778-2f0f04cee8ec_port_3",
+            "coords": [
+              450,
+              25
+            ],
+            "connectionPoint": [
+              450,
+              25
+            ],
+            "direction": "right",
+            "label": ""
+          }
+        ],
+        "label": "Supera Fase I",
+        "coords": [
+          300,
+          0
+        ],
+        "width": 150,
+        "height": 50,
+        "data": {
+          "node name": "Supera Fase I",
+          "node number": 1,
+          "probability": 70
+        }
+      },
+      {
+        "id": "id4664ab93-64ea-42cc-8e3d-24e9acc20c25",
+        "type": "event-diagram-node",
+        "children": [],
+        "sections": [],
+        "ports": [
+          {
+            "id": "id4664ab93-64ea-42cc-8e3d-24e9acc20c25_port_0",
+            "coords": [
+              650,
+              0
+            ],
+            "connectionPoint": [
+              650,
+              0
+            ],
+            "direction": "top",
+            "label": ""
+          },
+          {
+            "id": "id4664ab93-64ea-42cc-8e3d-24e9acc20c25_port_1",
+            "coords": [
+              550,
+              25
+            ],
+            "connectionPoint": [
+              550,
+              25
+            ],
+            "direction": "left",
+            "label": ""
+          },
+          {
+            "id": "id4664ab93-64ea-42cc-8e3d-24e9acc20c25_port_2",
+            "coords": [
+              650,
+              50
+            ],
+            "connectionPoint": [
+              650,
+              50
+            ],
+            "direction": "bottom",
+            "label": ""
+          },
+          {
+            "id": "id4664ab93-64ea-42cc-8e3d-24e9acc20c25_port_3",
+            "coords": [
+              750,
+              25
+            ],
+            "connectionPoint": [
+              750,
+              25
+            ],
+            "direction": "right",
+            "label": ""
+          }
+        ],
+        "label": "Supera Fase II",
+        "coords": [
+          550,
+          0
+        ],
+        "width": 200,
+        "height": 50,
+        "data": {
+          "node name": "Supera Fase II",
+          "node number": 1,
+          "probability": 45
+        }
+      },
+      {
+        "id": "id700a88bc-15d9-481a-94c3-637adcad036e",
+        "type": "event-diagram-node",
+        "children": [],
+        "sections": [],
+        "ports": [
+          {
+            "id": "id700a88bc-15d9-481a-94c3-637adcad036e_port_0",
+            "coords": [
+              950,
+              0
+            ],
+            "connectionPoint": [
+              950,
+              0
+            ],
+            "direction": "top",
+            "label": ""
+          },
+          {
+            "id": "id700a88bc-15d9-481a-94c3-637adcad036e_port_1",
+            "coords": [
+              850,
+              25
+            ],
+            "connectionPoint": [
+              850,
+              25
+            ],
+            "direction": "left",
+            "label": ""
+          },
+          {
+            "id": "id700a88bc-15d9-481a-94c3-637adcad036e_port_2",
+            "coords": [
+              950,
+              50
+            ],
+            "connectionPoint": [
+              950,
+              50
+            ],
+            "direction": "bottom",
+            "label": ""
+          },
+          {
+            "id": "id700a88bc-15d9-481a-94c3-637adcad036e_port_3",
+            "coords": [
+              1050,
+              25
+            ],
+            "connectionPoint": [
+              1050,
+              25
+            ],
+            "direction": "right",
+            "label": ""
+          }
+        ],
+        "label": "Supera Fase III",
+        "coords": [
+          850,
+          0
+        ],
+        "width": 200,
+        "height": 50,
+        "data": {
+          "node name": "Supera Fase III",
+          "node number": 1,
+          "probability": 55
+        }
+      },
+      {
+        "id": "id224abdb2-98c7-4732-8db8-b2d1306b7b0e",
+        "type": "event-diagram-node",
+        "children": [],
+        "sections": [],
+        "ports": [
+          {
+            "id": "id224abdb2-98c7-4732-8db8-b2d1306b7b0e_port_0",
+            "coords": [
+              1275,
+              0
+            ],
+            "connectionPoint": [
+              1275,
+              0
+            ],
+            "direction": "top",
+            "label": ""
+          },
+          {
+            "id": "id224abdb2-98c7-4732-8db8-b2d1306b7b0e_port_1",
+            "coords": [
+              1150,
+              25
+            ],
+            "connectionPoint": [
+              1150,
+              25
+            ],
+            "direction": "left",
+            "label": ""
+          },
+          {
+            "id": "id224abdb2-98c7-4732-8db8-b2d1306b7b0e_port_2",
+            "coords": [
+              1275,
+              50
+            ],
+            "connectionPoint": [
+              1275,
+              50
+            ],
+            "direction": "bottom",
+            "label": ""
+          },
+          {
+            "id": "id224abdb2-98c7-4732-8db8-b2d1306b7b0e_port_3",
+            "coords": [
+              1400,
+              25
+            ],
+            "connectionPoint": [
+              1400,
+              25
+            ],
+            "direction": "right",
+            "label": ""
+          }
+        ],
+        "label": "Aprobación regulatoria",
+        "coords": [
+          1150,
+          0
+        ],
+        "width": 250,
+        "height": 50,
+        "data": {
+          "node name": "Aprobación regulatoria",
+          "node number": 1,
+          "probability": 85
+        }
+      },
+      {
+        "id": "id883b5988-289c-4d14-a208-28fc249970b9",
+        "type": "end-diagram-node",
+        "children": [],
+        "sections": [],
+        "ports": [
+          {
+            "id": "id883b5988-289c-4d14-a208-28fc249970b9_port_0",
+            "coords": [
+              1625,
+              0
+            ],
+            "connectionPoint": [
+              1625,
+              0
+            ],
+            "direction": "top",
+            "label": ""
+          },
+          {
+            "id": "id883b5988-289c-4d14-a208-28fc249970b9_port_1",
+            "coords": [
+              1500,
+              25
+            ],
+            "connectionPoint": [
+              1500,
+              25
+            ],
+            "direction": "left",
+            "label": ""
+          },
+          {
+            "id": "id883b5988-289c-4d14-a208-28fc249970b9_port_2",
+            "coords": [
+              1625,
+              50
+            ],
+            "connectionPoint": [
+              1625,
+              50
+            ],
+            "direction": "bottom",
+            "label": ""
+          },
+          {
+            "id": "id883b5988-289c-4d14-a208-28fc249970b9_port_3",
+            "coords": [
+              1750,
+              25
+            ],
+            "connectionPoint": [
+              1750,
+              25
+            ],
+            "direction": "right",
+            "label": ""
+          }
+        ],
+        "label": "Fármaco sale a mercado",
+        "coords": [
+          1500,
+          0
+        ],
+        "width": 250,
+        "height": 50,
+        "data": {
+          "node name": "Fármaco sale a mercado",
+          "node number": 1
+        }
+      }
+    ],
+    "connections": [
+      {
+        "id": "idf87c7001-1bab-49e2-88c4-778edb24ad15",
+        "type": "start-connection",
+        "start": "id0c4c8625-c3a7-44cf-933f-1ce3ef00b552_port_3",
+        "end": "ideb7ea712-f4ef-4898-9778-2f0f04cee8ec_port_1",
+        "startLabel": "",
+        "middleLabel": "",
+        "endLabel": "1",
+        "points": [],
+        "data": {
+          "connection name": "miss connection",
+          "weight": 1
+        }
+      },
+      {
+        "id": "id025b1567-dc8e-4b93-ad1a-d60be2949146",
+        "type": "diagram-connection",
+        "start": "ideb7ea712-f4ef-4898-9778-2f0f04cee8ec_port_3",
+        "end": "id4664ab93-64ea-42cc-8e3d-24e9acc20c25_port_1",
+        "startLabel": "",
+        "middleLabel": "",
+        "endLabel": "1",
+        "points": [],
+        "data": {
+          "connection name": "miss connection",
+          "weight": 1
+        }
+      },
+      {
+        "id": "idb8298d19-49bf-48b7-b14c-b431df357a32",
+        "type": "diagram-connection",
+        "start": "id4664ab93-64ea-42cc-8e3d-24e9acc20c25_port_3",
+        "end": "id700a88bc-15d9-481a-94c3-637adcad036e_port_1",
+        "startLabel": "",
+        "middleLabel": "",
+        "endLabel": "1",
+        "points": [],
+        "data": {
+          "connection name": "miss connection",
+          "weight": 1
+        }
+      },
+      {
+        "id": "idb6837e16-e7f6-4598-b9bb-11f6a736b231",
+        "type": "diagram-connection",
+        "start": "id700a88bc-15d9-481a-94c3-637adcad036e_port_3",
+        "end": "id224abdb2-98c7-4732-8db8-b2d1306b7b0e_port_1",
+        "startLabel": "",
+        "middleLabel": "",
+        "endLabel": "1",
+        "points": [],
+        "data": {
+          "connection name": "miss connection",
+          "weight": 1
+        }
+      },
+      {
+        "id": "id5bc73ddc-f947-4deb-983b-573616c3f64c",
+        "type": "end-connection",
+        "start": "id224abdb2-98c7-4732-8db8-b2d1306b7b0e_port_3",
+        "end": "id883b5988-289c-4d14-a208-28fc249970b9_port_1",
+        "startLabel": "",
+        "middleLabel": "",
+        "endLabel": "1",
+        "points": [],
+        "data": {
+          "connection name": "end connection",
+          "weight": 1
+        }
+      }
+    ],
+    "data": {
+      "name": "unnamed",
+      "description": "",
+      "created": "2026-05-13T11:22:20.659Z",
+      "last opened": "2026-05-13T11:22:20.659Z",
+      "layout": "tree"
+    }
+  }
+}

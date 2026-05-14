@@ -1,0 +1,437 @@
+{
+  "riskFileVersion": 1,
+  "modelType": "binomial",
+  "exportedAt": "2026-05-13T11:14:00.808Z",
+  "daga": {
+    "name": "unnamed",
+    "type": "simple-diagram",
+    "typeVersion": 1,
+    "createdAt": "2026-05-13T11:03:22.888Z",
+    "updatedAt": "2026-05-13T11:03:22.888Z",
+    "nodes": [
+      {
+        "id": "id3bc83dfc-e546-4c56-ae7a-024047579967",
+        "type": "start-diagram-node",
+        "children": [],
+        "sections": [],
+        "ports": [
+          {
+            "id": "id3bc83dfc-e546-4c56-ae7a-024047579967_port_0",
+            "coords": [
+              -725,
+              450
+            ],
+            "connectionPoint": [
+              -725,
+              450
+            ],
+            "direction": "top",
+            "label": ""
+          },
+          {
+            "id": "id3bc83dfc-e546-4c56-ae7a-024047579967_port_1",
+            "coords": [
+              -850,
+              475
+            ],
+            "connectionPoint": [
+              -850,
+              475
+            ],
+            "direction": "left",
+            "label": ""
+          },
+          {
+            "id": "id3bc83dfc-e546-4c56-ae7a-024047579967_port_2",
+            "coords": [
+              -725,
+              500
+            ],
+            "connectionPoint": [
+              -725,
+              500
+            ],
+            "direction": "bottom",
+            "label": ""
+          },
+          {
+            "id": "id3bc83dfc-e546-4c56-ae7a-024047579967_port_3",
+            "coords": [
+              -600,
+              475
+            ],
+            "connectionPoint": [
+              -600,
+              475
+            ],
+            "direction": "right",
+            "label": ""
+          }
+        ],
+        "label": "Cadena de suministro",
+        "coords": [
+          -850,
+          450
+        ],
+        "width": 250,
+        "height": 50,
+        "data": {
+          "node name": "Cadena de suministro",
+          "node number": 1
+        }
+      },
+      {
+        "id": "id66d1ebd0-8202-4302-ab31-6b3224a80bd2",
+        "type": "event-diagram-node",
+        "children": [],
+        "sections": [],
+        "ports": [
+          {
+            "id": "id66d1ebd0-8202-4302-ab31-6b3224a80bd2_port_0",
+            "coords": [
+              -476,
+              451
+            ],
+            "connectionPoint": [
+              -476,
+              451
+            ],
+            "direction": "top",
+            "label": ""
+          },
+          {
+            "id": "id66d1ebd0-8202-4302-ab31-6b3224a80bd2_port_1",
+            "coords": [
+              -551,
+              476
+            ],
+            "connectionPoint": [
+              -551,
+              476
+            ],
+            "direction": "left",
+            "label": ""
+          },
+          {
+            "id": "id66d1ebd0-8202-4302-ab31-6b3224a80bd2_port_2",
+            "coords": [
+              -476,
+              501
+            ],
+            "connectionPoint": [
+              -476,
+              501
+            ],
+            "direction": "bottom",
+            "label": ""
+          },
+          {
+            "id": "id66d1ebd0-8202-4302-ab31-6b3224a80bd2_port_3",
+            "coords": [
+              -401,
+              476
+            ],
+            "connectionPoint": [
+              -401,
+              476
+            ],
+            "direction": "right",
+            "label": ""
+          }
+        ],
+        "label": "Proveedor",
+        "coords": [
+          -551,
+          451
+        ],
+        "width": 150,
+        "height": 50,
+        "data": {
+          "node name": "Proveedor",
+          "node number": 1,
+          "probability": 97
+        }
+      },
+      {
+        "id": "idc4ceb794-cf61-4f04-ac34-ddfb4b239050",
+        "type": "event-diagram-node",
+        "children": [],
+        "sections": [],
+        "ports": [
+          {
+            "id": "idc4ceb794-cf61-4f04-ac34-ddfb4b239050_port_0",
+            "coords": [
+              -300,
+              450
+            ],
+            "connectionPoint": [
+              -300,
+              450
+            ],
+            "direction": "top",
+            "label": ""
+          },
+          {
+            "id": "idc4ceb794-cf61-4f04-ac34-ddfb4b239050_port_1",
+            "coords": [
+              -350,
+              475
+            ],
+            "connectionPoint": [
+              -350,
+              475
+            ],
+            "direction": "left",
+            "label": ""
+          },
+          {
+            "id": "idc4ceb794-cf61-4f04-ac34-ddfb4b239050_port_2",
+            "coords": [
+              -300,
+              500
+            ],
+            "connectionPoint": [
+              -300,
+              500
+            ],
+            "direction": "bottom",
+            "label": ""
+          },
+          {
+            "id": "idc4ceb794-cf61-4f04-ac34-ddfb4b239050_port_3",
+            "coords": [
+              -250,
+              475
+            ],
+            "connectionPoint": [
+              -250,
+              475
+            ],
+            "direction": "right",
+            "label": ""
+          }
+        ],
+        "label": "Almacén",
+        "coords": [
+          -350,
+          450
+        ],
+        "width": 100,
+        "height": 50,
+        "data": {
+          "node name": "Almacén",
+          "node number": 1,
+          "probability": 95
+        }
+      },
+      {
+        "id": "id9e2e2385-ac72-4aaa-b556-65139d142d42",
+        "type": "event-diagram-node",
+        "children": [],
+        "sections": [],
+        "ports": [
+          {
+            "id": "id9e2e2385-ac72-4aaa-b556-65139d142d42_port_0",
+            "coords": [
+              -125,
+              450
+            ],
+            "connectionPoint": [
+              -125,
+              450
+            ],
+            "direction": "top",
+            "label": ""
+          },
+          {
+            "id": "id9e2e2385-ac72-4aaa-b556-65139d142d42_port_1",
+            "coords": [
+              -200,
+              475
+            ],
+            "connectionPoint": [
+              -200,
+              475
+            ],
+            "direction": "left",
+            "label": ""
+          },
+          {
+            "id": "id9e2e2385-ac72-4aaa-b556-65139d142d42_port_2",
+            "coords": [
+              -125,
+              500
+            ],
+            "connectionPoint": [
+              -125,
+              500
+            ],
+            "direction": "bottom",
+            "label": ""
+          },
+          {
+            "id": "id9e2e2385-ac72-4aaa-b556-65139d142d42_port_3",
+            "coords": [
+              -50,
+              475
+            ],
+            "connectionPoint": [
+              -50,
+              475
+            ],
+            "direction": "right",
+            "label": ""
+          }
+        ],
+        "label": "Distribución",
+        "coords": [
+          -200,
+          450
+        ],
+        "width": 150,
+        "height": 50,
+        "data": {
+          "node name": "Distribución",
+          "node number": 1,
+          "probability": 98
+        }
+      },
+      {
+        "id": "id55eeb1c9-66f2-4430-ba49-239ca9c38019",
+        "type": "end-diagram-node",
+        "children": [],
+        "sections": [],
+        "ports": [
+          {
+            "id": "id55eeb1c9-66f2-4430-ba49-239ca9c38019_port_0",
+            "coords": [
+              100,
+              450
+            ],
+            "connectionPoint": [
+              100,
+              450
+            ],
+            "direction": "top",
+            "label": ""
+          },
+          {
+            "id": "id55eeb1c9-66f2-4430-ba49-239ca9c38019_port_1",
+            "coords": [
+              0,
+              475
+            ],
+            "connectionPoint": [
+              0,
+              475
+            ],
+            "direction": "left",
+            "label": ""
+          },
+          {
+            "id": "id55eeb1c9-66f2-4430-ba49-239ca9c38019_port_2",
+            "coords": [
+              100,
+              500
+            ],
+            "connectionPoint": [
+              100,
+              500
+            ],
+            "direction": "bottom",
+            "label": ""
+          },
+          {
+            "id": "id55eeb1c9-66f2-4430-ba49-239ca9c38019_port_3",
+            "coords": [
+              200,
+              475
+            ],
+            "connectionPoint": [
+              200,
+              475
+            ],
+            "direction": "right",
+            "label": ""
+          }
+        ],
+        "label": "Enrtrega exitosa",
+        "coords": [
+          0,
+          450
+        ],
+        "width": 200,
+        "height": 50,
+        "data": {
+          "node name": "Enrtrega exitosa",
+          "node number": 1
+        }
+      }
+    ],
+    "connections": [
+      {
+        "id": "id119b3b05-f632-4dc6-a307-15b8751604b2",
+        "type": "start-connection",
+        "start": "id3bc83dfc-e546-4c56-ae7a-024047579967_port_3",
+        "end": "id66d1ebd0-8202-4302-ab31-6b3224a80bd2_port_1",
+        "startLabel": "",
+        "middleLabel": "",
+        "endLabel": "1",
+        "points": [],
+        "data": {
+          "connection name": "miss connection",
+          "weight": 1
+        }
+      },
+      {
+        "id": "id4adb00bd-74cb-426d-b40e-ab61d6c50529",
+        "type": "diagram-connection",
+        "start": "id66d1ebd0-8202-4302-ab31-6b3224a80bd2_port_3",
+        "end": "idc4ceb794-cf61-4f04-ac34-ddfb4b239050_port_1",
+        "startLabel": "",
+        "middleLabel": "",
+        "endLabel": "1",
+        "points": [],
+        "data": {
+          "connection name": "miss connection",
+          "weight": 1
+        }
+      },
+      {
+        "id": "id9a54bd74-51bc-449b-81fb-069e1a8e4264",
+        "type": "diagram-connection",
+        "start": "idc4ceb794-cf61-4f04-ac34-ddfb4b239050_port_3",
+        "end": "id9e2e2385-ac72-4aaa-b556-65139d142d42_port_1",
+        "startLabel": "",
+        "middleLabel": "",
+        "endLabel": "1",
+        "points": [],
+        "data": {
+          "connection name": "miss connection",
+          "weight": 1
+        }
+      },
+      {
+        "id": "idb7c58155-201d-42a1-bc53-3359f7720a98",
+        "type": "end-connection",
+        "start": "id9e2e2385-ac72-4aaa-b556-65139d142d42_port_3",
+        "end": "id55eeb1c9-66f2-4430-ba49-239ca9c38019_port_1",
+        "startLabel": "",
+        "middleLabel": "",
+        "endLabel": "1",
+        "points": [],
+        "data": {
+          "connection name": "end connection",
+          "weight": 1
+        }
+      }
+    ],
+    "data": {
+      "name": "unnamed",
+      "description": "",
+      "created": "2026-05-13T11:03:22.888Z",
+      "last opened": "2026-05-13T11:03:22.888Z",
+      "layout": "tree"
+    }
+  }
+}

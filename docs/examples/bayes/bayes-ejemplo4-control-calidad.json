@@ -1,0 +1,310 @@
+{
+  "riskFileVersion": 1,
+  "modelType": "bayes",
+  "exportedAt": "2026-05-13T14:43:58.774Z",
+  "daga": {
+    "name": "unnamed",
+    "type": "simple-diagram",
+    "typeVersion": 1,
+    "createdAt": "2026-05-13T14:42:57.615Z",
+    "updatedAt": "2026-05-13T14:42:57.615Z",
+    "nodes": [
+      {
+        "id": "id23812d7b-57dc-4a41-80fb-4d16d8cc8f72",
+        "type": "diagram-node",
+        "children": [],
+        "sections": [],
+        "ports": [
+          {
+            "id": "id23812d7b-57dc-4a41-80fb-4d16d8cc8f72_port_0",
+            "coords": [
+              250,
+              400
+            ],
+            "connectionPoint": [
+              250,
+              400
+            ],
+            "direction": "top",
+            "label": ""
+          },
+          {
+            "id": "id23812d7b-57dc-4a41-80fb-4d16d8cc8f72_port_1",
+            "coords": [
+              150,
+              450
+            ],
+            "connectionPoint": [
+              150,
+              450
+            ],
+            "direction": "left",
+            "label": ""
+          },
+          {
+            "id": "id23812d7b-57dc-4a41-80fb-4d16d8cc8f72_port_2",
+            "coords": [
+              250,
+              500
+            ],
+            "connectionPoint": [
+              250,
+              500
+            ],
+            "direction": "bottom",
+            "label": ""
+          },
+          {
+            "id": "id23812d7b-57dc-4a41-80fb-4d16d8cc8f72_port_3",
+            "coords": [
+              350,
+              450
+            ],
+            "connectionPoint": [
+              350,
+              450
+            ],
+            "direction": "right",
+            "label": ""
+          }
+        ],
+        "label": "Sensor Óptico",
+        "coords": [
+          150,
+          400
+        ],
+        "width": 200,
+        "height": 100,
+        "data": {
+          "node name": "Sensor Óptico",
+          "bayes_evidence": "null",
+          "bayes_cpt": "",
+          "bayes_pSi": 50,
+          "bayes_pNo": 50
+        }
+      },
+      {
+        "id": "id2bd9b18e-ddbe-47c4-a425-a08c793e0a55",
+        "type": "diagram-node",
+        "children": [],
+        "sections": [],
+        "ports": [
+          {
+            "id": "id2bd9b18e-ddbe-47c4-a425-a08c793e0a55_port_0",
+            "coords": [
+              500,
+              400
+            ],
+            "connectionPoint": [
+              500,
+              400
+            ],
+            "direction": "top",
+            "label": ""
+          },
+          {
+            "id": "id2bd9b18e-ddbe-47c4-a425-a08c793e0a55_port_1",
+            "coords": [
+              400,
+              450
+            ],
+            "connectionPoint": [
+              400,
+              450
+            ],
+            "direction": "left",
+            "label": ""
+          },
+          {
+            "id": "id2bd9b18e-ddbe-47c4-a425-a08c793e0a55_port_2",
+            "coords": [
+              500,
+              500
+            ],
+            "connectionPoint": [
+              500,
+              500
+            ],
+            "direction": "bottom",
+            "label": ""
+          },
+          {
+            "id": "id2bd9b18e-ddbe-47c4-a425-a08c793e0a55_port_3",
+            "coords": [
+              600,
+              450
+            ],
+            "connectionPoint": [
+              600,
+              450
+            ],
+            "direction": "right",
+            "label": ""
+          }
+        ],
+        "label": "Sensor de Vibración",
+        "coords": [
+          400,
+          400
+        ],
+        "width": 200,
+        "height": 100,
+        "data": {
+          "node name": "Sensor de Vibración",
+          "bayes_evidence": "null",
+          "bayes_cpt": "",
+          "bayes_pSi": 50,
+          "bayes_pNo": 50
+        }
+      },
+      {
+        "id": "idc99786b7-3134-4fc8-bf15-e961c821b2e3",
+        "type": "diagram-node",
+        "children": [],
+        "sections": [],
+        "ports": [
+          {
+            "id": "idc99786b7-3134-4fc8-bf15-e961c821b2e3_port_0",
+            "coords": [
+              400,
+              200
+            ],
+            "connectionPoint": [
+              400,
+              200
+            ],
+            "direction": "top",
+            "label": ""
+          },
+          {
+            "id": "idc99786b7-3134-4fc8-bf15-e961c821b2e3_port_1",
+            "coords": [
+              300,
+              250
+            ],
+            "connectionPoint": [
+              300,
+              250
+            ],
+            "direction": "left",
+            "label": ""
+          },
+          {
+            "id": "idc99786b7-3134-4fc8-bf15-e961c821b2e3_port_2",
+            "coords": [
+              400,
+              300
+            ],
+            "connectionPoint": [
+              400,
+              300
+            ],
+            "direction": "bottom",
+            "label": ""
+          },
+          {
+            "id": "idc99786b7-3134-4fc8-bf15-e961c821b2e3_port_3",
+            "coords": [
+              500,
+              250
+            ],
+            "connectionPoint": [
+              500,
+              250
+            ],
+            "direction": "right",
+            "label": ""
+          }
+        ],
+        "label": "Defecto Real",
+        "coords": [
+          300,
+          200
+        ],
+        "width": 200,
+        "height": 100,
+        "data": {
+          "node name": "Defecto Real",
+          "bayes_evidence": "null",
+          "bayes_cpt": "",
+          "bayes_pSi": 50,
+          "bayes_pNo": 50
+        }
+      }
+    ],
+    "connections": [
+      {
+        "id": "idaedd6ebd-7b93-4bca-b1bb-72978666f1e3",
+        "type": "diagram-connection",
+        "start": "idc99786b7-3134-4fc8-bf15-e961c821b2e3_port_2",
+        "end": "id23812d7b-57dc-4a41-80fb-4d16d8cc8f72_port_0",
+        "startLabel": "",
+        "middleLabel": "",
+        "endLabel": "",
+        "points": [],
+        "data": {
+          "connection name": ""
+        }
+      },
+      {
+        "id": "ide7a3c773-d71d-420f-9bac-c09e33408792",
+        "type": "diagram-connection",
+        "start": "idc99786b7-3134-4fc8-bf15-e961c821b2e3_port_2",
+        "end": "id2bd9b18e-ddbe-47c4-a425-a08c793e0a55_port_0",
+        "startLabel": "",
+        "middleLabel": "",
+        "endLabel": "",
+        "points": [],
+        "data": {
+          "connection name": ""
+        }
+      }
+    ],
+    "data": {
+      "name": "unnamed",
+      "description": "",
+      "created": "2026-05-13T14:42:57.615Z",
+      "last opened": "2026-05-13T14:42:57.615Z",
+      "layout": "adjacency"
+    }
+  },
+  "bayes": {
+    "nodes": {
+      "id23812d7b-57dc-4a41-80fb-4d16d8cc8f72": {
+        "evidence": null,
+        "cpt": {
+          "idc99786b7-3134-4fc8-bf15-e961c821b2e3_si": {
+            "si": 0.88,
+            "no": 0.12
+          },
+          "idc99786b7-3134-4fc8-bf15-e961c821b2e3_no": {
+            "si": 0.05,
+            "no": 0.95
+          }
+        }
+      },
+      "id2bd9b18e-ddbe-47c4-a425-a08c793e0a55": {
+        "evidence": null,
+        "cpt": {
+          "idc99786b7-3134-4fc8-bf15-e961c821b2e3_si": {
+            "si": 0.75,
+            "no": 0.25
+          },
+          "idc99786b7-3134-4fc8-bf15-e961c821b2e3_no": {
+            "si": 0.08,
+            "no": 0.92
+          }
+        }
+      },
+      "idc99786b7-3134-4fc8-bf15-e961c821b2e3": {
+        "evidence": null,
+        "cpt": {
+          "prior": {
+            "si": 0.08,
+            "no": 0.92
+          }
+        }
+      }
+    }
+  }
+}
