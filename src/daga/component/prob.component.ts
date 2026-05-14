@@ -44,6 +44,22 @@ export class SimpleComponent {
     this.bayes?.toggleMCPanel();
   }
 
+  get hasBinomialResults(): boolean {
+    return (this.binomial?.results?.length ?? 0) > 0;
+  }
+
+  get hasBayesHistory(): boolean {
+    return (this.bayes?.mcHistory?.length ?? 0) > 0;
+  }
+
+  openBinomialResults(): void {
+    this.binomial?.openResultsBar();
+  }
+
+  openBayesHistory(): void {
+    this.bayes?.openMCHistory();
+  }
+
   async onImportFile(event: Event): Promise<void> {
     const input = event.target as HTMLInputElement;
     const file = input?.files?.[0];

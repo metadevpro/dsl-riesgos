@@ -24,11 +24,17 @@
       <button data-test-id="export" (click)="exportCurrent()">Exportar</button>
       @if (selectedModel === 'binomial') {
         <button class="primary" (click)="triggerCalculate()">Calcular Probabilidad</button>
+        @if (hasBinomialResults) {
+          <button class="primary" (click)="openBinomialResults()">Ver Resultados</button>
+        }
       }
       @if (selectedModel === 'bayes') {
         <button class="primary" (click)="triggerImportCSV()">Importar CSV</button>
         <button class="primary" (click)="triggerGenerateCSV()">Generar CSV</button>
         <button class="primary" (click)="triggerMonteCarlo()">Monte Carlo</button>
+        @if (hasBayesHistory) {
+          <button class="primary" (click)="openBayesHistory()">Ver Resultados</button>
+        }
       }
       <input #fileInput type="file" accept="application/json,.json" hidden (change)="onImportFile($event)" />
     </div>
