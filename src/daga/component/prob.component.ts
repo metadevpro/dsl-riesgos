@@ -11,15 +11,10 @@ import { downloadRiskFile, readRiskFile, RiskFile } from '../utils/importExport.
   imports: [CommonModule, BinomialComponent, BayesComponent]
 })
 export class SimpleComponent {
-  isSidebarCollapsed = false;
   selectedModel: 'binomial' | 'bayes' = 'binomial';
 
   @ViewChild(BinomialComponent) private binomial?: BinomialComponent;
   @ViewChild(BayesComponent) private bayes?: BayesComponent;
-
-  toggleSidebar(): void {
-    this.isSidebarCollapsed = !this.isSidebarCollapsed;
-  }
 
   selectModel(modelKey: 'binomial' | 'bayes'): void {
     this.selectedModel = modelKey;
@@ -31,6 +26,22 @@ export class SimpleComponent {
     if (file) {
       downloadRiskFile(file);
     }
+  }
+
+  triggerCalculate(): void {
+    this.binomial?.openCalculationDialog();
+  }
+
+  triggerImportCSV(): void {
+    this.bayes?.toggleLearningPanel();
+  }
+
+  triggerGenerateCSV(): void {
+    this.bayes?.abrirDialogoCSV();
+  }
+
+  triggerMonteCarlo(): void {
+    this.bayes?.toggleMCPanel();
   }
 
   async onImportFile(event: Event): Promise<void> {

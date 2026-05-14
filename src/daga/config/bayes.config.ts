@@ -46,7 +46,9 @@ export const bayes_CONFIG: DiagramConfig = {
         }
       ]
     },
-    propertyEditor: {}
+    propertyEditor: {
+      width: '16rem'
+    }
   },
   nodeTypes: [
     {
@@ -187,7 +189,7 @@ export const bayes_CONFIG: DiagramConfig = {
     {
       name: 'name',
       type: Type.Text,
-      defaultValue: 'unnamed',
+      defaultValue: 'bayes diagram',
       basic: true,
       editable: true,
       rootAttribute: 'name'

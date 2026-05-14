@@ -326,53 +326,6 @@
     </div>
   }
 
-  <!-- ═══ Toolbar (centered top, matches binomial style) ═══ -->
-  <div
-    style="
-      position: absolute;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 1000;
-      background: white;
-      padding: 15px 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    "
-  >
-    <button
-      (click)="toggleMCPanel()"
-      [style.background-color]="showMCPanel ? '#5a9e2f' : '#007bff'"
-      style="padding: 10px 20px; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold"
-    >
-      Monte Carlo
-    </button>
-    <button
-      (click)="toggleLearningPanel()"
-      [style.background-color]="showLearningPanel ? '#1452a8' : '#007bff'"
-      style="padding: 10px 20px; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold"
-    >
-      Importar CSV
-    </button>
-    <button
-      (click)="abrirDialogoCSV()"
-      style="
-        padding: 10px 20px;
-        background-color: #007bff;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-weight: bold;
-      "
-    >
-      Generar CSV
-    </button>
-  </div>
-
   <!-- ═══ Monte Carlo Panel ═══ -->
   @if (showMCPanel) {
     <div
