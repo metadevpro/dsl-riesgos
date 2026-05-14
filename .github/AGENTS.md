@@ -44,7 +44,7 @@ This file is mandatory living documentation for architecture flow, coding standa
 
 - Bootstrap entry is `src/main.ts`, which mounts `SimpleComponent` from `src/daga/component/prob.component.ts`.
 - The shell template is `src/daga/dagaIndex.html`.
-- Model switch currently supports `binomial`, `pathProbability`, and `bayes`.
+- Model switch currently supports `binomial` and `bayes`.
 - Shared UI state and base flows live in `src/daga/component/generic.component.ts`.
 - Canvas lifecycle and decorators are handled by `src/daga/component/dagaExample.component.ts`.
 - Reusable graph/probability logic must stay in `src/daga/utils` and not be duplicated inside components.
@@ -60,16 +60,14 @@ This file is mandatory living documentation for architecture flow, coding standa
 - `src/daga/component/prob.component.ts` (`SimpleComponent`): host shell and model selection.
 - `src/daga/component/generic.component.ts` (`GenericComponent`): shared dialogs, results bar, node stats, and base helpers.
 - `src/daga/component/binomial.component.ts` (`BinomialComponent`): binomial calculation trigger and result flow.
-- `src/daga/component/pathProbability.component.ts` (`pathProbabilityComponent`): path posterior calculation and specialized rendering.
 - `src/daga/component/bayes.component.ts` (`BayesComponent`): Bayes model orchestration with live inference, evidence/CPT popup editing, marginal sync to node data, Monte Carlo simulation, and CSV-based learning (MLE/EM).
 - `src/daga/component/dagaExample.component.ts` (`ExampleComponent`): DAGA canvas integration, validation, connection update handling, and decorators.
 - `src/daga/dagaIndex.html`: sidebar + dynamic model workspace.
-- `src/daga/binomial.html`, `src/daga/pathProbability.html`, `src/daga/bayes.html`: per-model workspaces.
+- `src/daga/binomial.html`, `src/daga/bayes.html`: per-model workspaces.
 
 ### 3.5 Config Sources
 
 - `src/daga/config/prob.config.ts`: binomial diagram schema (includes start, transition, node, end types and weight-based connection fields).
-- `src/daga/config/pathProbability.config.ts`: pathProbability diagram schema.
 - `src/daga/config/bayes.config.ts`: Bayes diagram schema, Bayes data fields (`bayes_evidence`, `bayes_cpt`, `bayes_pSi`, `bayes_pNo`), and visual tuning.
 
 ### 3.6 Utility Modules and Canonical Responsibilities
@@ -79,7 +77,6 @@ This file is mandatory living documentation for architecture flow, coding standa
 - `src/daga/utils/connectionCalculate.utils.ts`: probability-mode connection update and sibling rebalancing utilities.
 - `src/daga/utils/binomialCalculationNodes.utils.ts`: Monte Carlo binomial simulation engine.
 - `src/daga/utils/binomialWeight.utils.ts`: raw weight normalization and theoretical node probability propagation.
-- `src/daga/utils/pathProbabilityCalculationNodes.utils.ts`: path-based posterior probability computation.
 - `src/daga/utils/bayesInference.utils.ts`: Bayes graph model, CPT generation/recalculation, exact marginal inference, topological sort, and CPT table/validation helpers.
 - `src/daga/utils/montecarlo.utils.ts`: Bayesian network Monte Carlo sampler (`ejecutarMonteCarlo`, `calcularError`, `marginalesExactos`).
 - `src/daga/utils/csv.utils.ts`: CSV parsing, column-to-node mapping, and value normalization for learning (`parsearCSV`, `analizarCSV`, `normalizarValor`).
@@ -90,7 +87,6 @@ This file is mandatory living documentation for architecture flow, coding standa
 ### 3.7 Important Function Contracts
 
 - `calculateBinomialProbability(...)`: single public entry for binomial simulation runs.
-- `calculatepathProbabilityProbability(...)`: single public entry for path probability posterior calculations.
 - `buildBayesGraph(...)`, `recalcAllMarginals(...)`, `calcMarginal(...)`: canonical Bayes inference and graph-projection functions.
 - `getCPTTableRows(...)`, `validateCPT(...)`, `recalcCPTOnParentChange(...)`: canonical Bayes CPT editing/validation/migration helpers.
 - `normalizeProbability(...)` and `formatProbabilityPercent(...)`: canonical conversion and display rules.
@@ -106,18 +102,17 @@ This file is mandatory living documentation for architecture flow, coding standa
 ### 3.8 Current Behavioral Notes
 
 - Binomial uses branch `weight` values for transition selection and shows theoretical decorators.
-- PathProbability executes without iteration input and stores posterior/path data in result entries.
 - Bayes uses live inference in-canvas: node double-click opens popup, evidence/CPT edits recalculate marginals immediately, and Bayes decorators render per node.
 - Bayes toolbar (top-right) exposes three actions: **Monte Carlo** (sample-based inference with error vs exact), **Importar CSV** (MLE or EM learning flow with before/after CPT comparison), and **Generar CSV** (download synthetic training data from current network).
 - Learning flow: `parsearCSV` → `analizarCSV` → if all nodes observed use `aprenderMLE`, else `aprenderEM` with progress callback → user accepts or discards updated CPTs.
 
 ## 4. End-to-End Functional Flow
 
-1. User selects a model from the sidebar (`binomial`, `pathProbability`, or `bayes`).
+1. User selects a model from the sidebar (`binomial` or `bayes`).
 2. Shell mounts exactly one model component at a time.
 3. User edits diagram on DAGA canvas.
 4. `ExampleComponent` reacts to `diagramChange$` events and applies validation/normalization/update flows.
-5. Binomial and pathProbability use model-specific calculation paths (dialog-based), while Bayes uses node double-click popup interaction.
+5. Binomial uses a dialog-based calculation path, while Bayes uses node double-click popup interaction.
 6. In Bayes mode, evidence/CPT edits trigger real-time marginal recomputation and decorator refresh.
 7. Shared result flow updates history and opens results panel for models that use result history.
 8. Switching model remounts a different component instance, isolating view state and config.

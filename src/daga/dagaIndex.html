@@ -4,9 +4,6 @@
     <button data-test-id="binomial" class="model-item" [ngClass]="{ active: selectedModel === 'binomial' }" (click)="selectModel('binomial')">
       Binomial model
     </button>
-    <button data-test-id="pathProbability" class="model-item" [ngClass]="{ active: selectedModel === 'pathProbability' }" (click)="selectModel('pathProbability')">
-      Path model
-    </button>
     <button data-test-id="bayes" class="model-item" [ngClass]="{ active: selectedModel === 'bayes' }" (click)="selectModel('bayes')">Bayes model</button>
 
     <div class="io-separator"></div>
@@ -14,7 +11,6 @@
     <button
       data-test-id="export"
       class="model-item io-item"
-      [disabled]="selectedModel === 'pathProbability'"
       (click)="exportCurrent()"
     >
       Exportar
@@ -35,9 +31,6 @@
   <section class="diagram-panel">
     @if (selectedModel === 'binomial') {
       <app-risk-simple></app-risk-simple>
-    }
-    @if (selectedModel === 'pathProbability') {
-      <app-risk-pathprobability></app-risk-pathprobability>
     }
     @if (selectedModel === 'bayes') {
       <app-risk-bayes></app-risk-bayes>

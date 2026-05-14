@@ -34,9 +34,9 @@ describe('SimpleComponent (Pestañas de Modelos)', () => {
   });
 
   it('debe cambiar a la pestaña Bayes al hacer clic y mostrar su componente', () => {
-    // Encuentra los botones de la barra lateral (el tercero es Bayes)
+    // Encuentra los botones de la barra lateral (el segundo es Bayes)
     const buttons = fixture.debugElement.queryAll(By.css('.model-item'));
-    const bayesButton = buttons[2];
+    const bayesButton = buttons[1];
 
     // Simula el clic en el botón de Bayes
     bayesButton.triggerEventHandler('click', null);

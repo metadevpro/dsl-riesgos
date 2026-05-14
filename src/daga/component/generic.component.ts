@@ -160,10 +160,6 @@ export abstract class GenericComponent {
     return finalModel;
   }
 
-  getpathProbabilityResultAtIndex(_index: number): unknown {
-    return undefined;
-  }
-
   formatPosteriorProbability(_probability: number): string {
     return '0%';
   }
