@@ -465,6 +465,20 @@ export const PROB_CONFIG: DiagramConfig = {
       rootAttribute: 'description'
     },
     {
+      name: 'layout',
+      type: Type.Option,
+      defaultValue: 'tree',
+      basic: true,
+      editable: true,
+      rootAttribute: 'layoutFormat',
+      options: [
+        { key: 'adjacency', label: 'Adjacency' },
+        { key: 'breadth', label: 'Breadth First' },
+        { key: 'priority', label: 'Priority' },
+        { key: 'tree', label: 'Tree' }
+      ]
+    },
+    {
       name: 'created',
       type: Type.Datetime,
       basic: true,
@@ -478,19 +492,5 @@ export const PROB_CONFIG: DiagramConfig = {
       editable: false,
       rootAttribute: 'updatedAt'
     },
-    {
-      name: 'layout',
-      type: Type.Option,
-      defaultValue: 'tree',
-      basic: true,
-      editable: true,
-      rootAttribute: 'layoutFormat',
-      options: [
-        { key: 'adjacency', label: 'Adjacency' },
-        { key: 'breadth', label: 'Breadth First' },
-        { key: 'priority', label: 'Priority' },
-        { key: 'tree', label: 'Tree' }
-      ]
-    }
   ]
 };
