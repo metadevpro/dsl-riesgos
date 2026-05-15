@@ -1,11 +1,32 @@
-import { ClosedShape, DiagramConfig, LineShape, LineStyle, Side, Type } from '@metadev/daga-angular';
+import {DiagramConfig, HorizontalAlign, LineShape, LineStyle, Side, Type, VerticalAlign } from '@metadev/daga-angular';
+
+const RECTANGLE_RADIUS = 5;
+
+const roundedRectangleShape = (
+  x: number,
+  y: number,
+  width: number,
+  height: number
+) => {
+  return `M ${x + RECTANGLE_RADIUS} ${y} L ${x + width - RECTANGLE_RADIUS} ${y} A ${
+    RECTANGLE_RADIUS
+  } ${RECTANGLE_RADIUS} 0 0 1 ${x + width} ${y + RECTANGLE_RADIUS} L ${x + width} ${
+    y + height - RECTANGLE_RADIUS
+  } A ${RECTANGLE_RADIUS} ${RECTANGLE_RADIUS} 0 0 1 ${x + width - RECTANGLE_RADIUS} ${y + height} L ${
+    x + RECTANGLE_RADIUS
+  } ${y + height} A ${RECTANGLE_RADIUS} ${RECTANGLE_RADIUS} 0 0 1 ${x} ${
+    y + height - RECTANGLE_RADIUS
+  } L ${x} ${y + RECTANGLE_RADIUS} A ${RECTANGLE_RADIUS} ${RECTANGLE_RADIUS} 0 0 1 ${x + RECTANGLE_RADIUS} ${y} Z`;
+};
 
 export const PROB_CONFIG: DiagramConfig = {
   type: 'simple-diagram',
   canvas: {
     grid: {
       spacing: 50,
-      snap: true
+      snap: true,
+      style: 'lines',
+      thickness: 0.02,
     }
   },
   layoutFormat: 'tree',
@@ -46,7 +67,7 @@ export const PROB_CONFIG: DiagramConfig = {
               labelLook: null,
               look: {
                 lookType: 'image-look',
-                backgroundImage: '/assets/palette/element-state.svg'
+                backgroundImage: '/assets/palette/element-transition.svg'
               }
             },
             {
@@ -58,7 +79,7 @@ export const PROB_CONFIG: DiagramConfig = {
               labelLook: null,
               look: {
                 lookType: 'image-look',
-                backgroundImage: '/assets/palette/element-transition.svg'
+                backgroundImage: '/assets/palette/element-state.svg'
               }
             },
             {
@@ -79,46 +100,49 @@ export const PROB_CONFIG: DiagramConfig = {
     },
     propertyEditor: {
       width: '16rem'
-    }
+    },
   },
   nodeTypes: [
     {
       id: 'event-diagram-node',
       name: 'Node',
-      defaultWidth: 150,
-      defaultHeight: 50,
+      defaultWidth: 250,
+      defaultHeight: 150,
       label: {
-        fontSize: 20,
-        margin: 10,
-        fit: true
+        fontSize: 18,
+        margin: [0,0,-15,0],
+        fit: false,
+        horizontalAlign: HorizontalAlign.Center,
+        verticalAlign: VerticalAlign.Center
       },
       ports: [
         {
-          coords: [75, 0],
+          coords: [125, 0],
           direction: Side.Top
         },
         {
-          coords: [0, 25],
+          coords: [0, 75],
           direction: Side.Left
         },
         {
-          coords: [75, 50],
+          coords: [125, 150],
           direction: Side.Bottom
         },
         {
-          coords: [150, 25],
+          coords: [250, 75],
           direction: Side.Right
         }
       ],
       look: {
         lookType: 'shaped-look',
-        shape: ClosedShape.Rectangle,
+        shape: roundedRectangleShape,
         fillColor: '#FFFFFF',
-        borderColor: '#000000',
+        borderColor: '#E5E7EB',
         borderThickness: 1,
         selected: {
-          fillColor: '#FFAAFF',
-          borderColor: '#AA00AA'
+          fillColor: '#FFFFFF',
+          borderColor: '#378ADD',
+          borderThickness: 2
         },
         highlighted: {
           borderThickness: 3
@@ -150,41 +174,44 @@ export const PROB_CONFIG: DiagramConfig = {
     },
     {
       id: 'state-diagram-node',
-      name: 'Transition',
-      defaultWidth: 150,
-      defaultHeight: 50,
+      name: 'State',
+      defaultWidth: 250,
+      defaultHeight: 150,
       label: {
-        fontSize: 20,
-        margin: 10,
-        fit: true
+        fontSize: 18,
+        margin: [0,0,-15,0],
+        fit: false,
+        horizontalAlign: HorizontalAlign.Center,
+        verticalAlign: VerticalAlign.Center
       },
       ports: [
         {
-          coords: [75, 0],
+          coords: [125, 0],
           direction: Side.Top
         },
         {
-          coords: [0, 25],
+          coords: [0, 75],
           direction: Side.Left
         },
         {
-          coords: [75, 50],
+          coords: [125, 150],
           direction: Side.Bottom
         },
         {
-          coords: [150, 25],
+          coords: [250, 75],
           direction: Side.Right
         }
       ],
       look: {
         lookType: 'shaped-look',
-        shape: ClosedShape.Rectangle,
-        fillColor: '#F3F3F3',
-        borderColor: '#8C8C8C',
+        shape: roundedRectangleShape,
+        fillColor: '#FFFFFF',
+        borderColor: '#E5E7EB',
         borderThickness: 1,
         selected: {
-          fillColor: '#FFAAFF',
-          borderColor: '#AA00AA'
+          fillColor: '#FFFFFF',
+          borderColor: '#378ADD',
+          borderThickness: 2
         },
         highlighted: {
           borderThickness: 3
@@ -210,40 +237,43 @@ export const PROB_CONFIG: DiagramConfig = {
     {
       id: 'start-diagram-node',
       name: 'Start',
-      defaultWidth: 150,
-      defaultHeight: 50,
+      defaultWidth: 250,
+      defaultHeight: 150,
       label: {
-        fontSize: 20,
-        margin: 10,
-        fit: true
+        fontSize: 18,
+        margin: [0,0,-15,0],
+        fit: false,
+        horizontalAlign: HorizontalAlign.Center,
+        verticalAlign: VerticalAlign.Center
       },
       ports: [
         {
-          coords: [75, 0],
+          coords: [125, 0],
           direction: Side.Top
         },
         {
-          coords: [0, 25],
+          coords: [0, 75],
           direction: Side.Left
         },
         {
-          coords: [75, 50],
+          coords: [125, 150],
           direction: Side.Bottom
         },
         {
-          coords: [150, 25],
+          coords: [250, 75],
           direction: Side.Right
         }
       ],
       look: {
         lookType: 'shaped-look',
-        shape: ClosedShape.Rectangle,
+        shape: roundedRectangleShape,
         fillColor: '#FFFFFF',
-        borderColor: '#21a754',
+        borderColor: '#E5E7EB',
         borderThickness: 1,
         selected: {
-          fillColor: '#FFAAFF',
-          borderColor: '#AA00AA'
+          fillColor: '#FFFFFF',
+          borderColor: '#378ADD',
+          borderThickness: 2
         },
         highlighted: {
           borderThickness: 3
@@ -269,40 +299,43 @@ export const PROB_CONFIG: DiagramConfig = {
     {
       id: 'end-diagram-node',
       name: 'Node',
-      defaultWidth: 150,
-      defaultHeight: 50,
+      defaultWidth: 250,
+      defaultHeight: 150,
       label: {
-        fontSize: 20,
-        margin: 10,
-        fit: true
+        fontSize: 18,
+        margin: [0,0,-15,0],
+        fit: false,
+        horizontalAlign: HorizontalAlign.Center,
+        verticalAlign: VerticalAlign.Center
       },
       ports: [
         {
-          coords: [75, 0],
+          coords: [125, 0],
           direction: Side.Top
         },
         {
-          coords: [0, 25],
+          coords: [0, 75],
           direction: Side.Left
         },
         {
-          coords: [75, 50],
+          coords: [125, 150],
           direction: Side.Bottom
         },
         {
-          coords: [150, 25],
+          coords: [250, 75],
           direction: Side.Right
         }
       ],
       look: {
         lookType: 'shaped-look',
-        shape: ClosedShape.Rectangle,
+        shape: roundedRectangleShape,
         fillColor: '#FFFFFF',
-        borderColor: '#cf1f1f',
+        borderColor: '#E5E7EB',
         borderThickness: 1,
         selected: {
-          fillColor: '#FFAAFF',
-          borderColor: '#AA00AA'
+          fillColor: '#FFFFFF',
+          borderColor: '#378ADD',
+          borderThickness: 2
         },
         highlighted: {
           borderThickness: 3

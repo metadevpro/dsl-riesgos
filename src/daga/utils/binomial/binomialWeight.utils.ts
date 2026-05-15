@@ -5,8 +5,8 @@ import {
   getNodeId,
   getNodeMap,
   getNextNodeFromConnection
-} from './generalCalculationNodes.utils';
-import { ConnectionInfo, NodeId, NodeInfo } from '../types';
+} from '../generalCalculationNodes.utils';
+import { ConnectionInfo, NodeId, NodeInfo } from '../../types';
 
 function toArray<T>(value: unknown): T[] {
   if (Array.isArray(value)) {

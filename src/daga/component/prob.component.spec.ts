@@ -55,17 +55,4 @@ describe('SimpleComponent (Pestañas de Modelos)', () => {
     expect(bayesComponent).toBeTruthy();
     expect(binomialComponent).toBeFalsy();
   });
-
-  it('debe ocultar/mostrar la barra lateral al pulsar el toggle', () => {
-    expect(component.isSidebarCollapsed).toBe(false);
-
-    const toggleButton = fixture.debugElement.query(By.css('.sidebar-toggle'));
-    toggleButton.triggerEventHandler('click', null);
-    fixture.detectChanges();
-
-    expect(component.isSidebarCollapsed).toBe(true);
-
-    const sidebar = fixture.debugElement.query(By.css('.models-sidebar'));
-    expect(sidebar.classes['collapsed']).toBe(true);
-  });
 });

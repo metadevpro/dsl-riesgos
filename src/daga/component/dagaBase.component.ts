@@ -22,7 +22,7 @@ import {
   isConnectionAutoNormalizeEnabled
 } from '../utils/connectionCalculate.utils';
 import { isStateDiagramNodeLike, normalizeNodeId } from '../utils/generalCalculationNodes.utils';
-import { calculateTheoreticalNodeProbabilities, normalizeWeightValue } from '../utils/binomialWeight.utils';
+import { calculateTheoreticalNodeProbabilities, normalizeWeightValue } from '../utils/binomial/binomialWeight.utils';
 import { BayesGraph } from '../types';
 
 @Component({
@@ -52,6 +52,13 @@ export class DagaBaseComponent implements AfterViewInit, OnDestroy, OnChanges {
   private readonly theoreticalProbabilityDecoratorSuffix = '-theoretical-probability-decorator';
   private readonly bayesDecoratorSuffix = '-bayes-decorator';
   private readonly maxProbability = MAX_PROBABILITY;
+
+  private readonly nodeVisualByType: Record<string, { icon: string; solid: string; tint: string }> = {
+    'start-diagram-node': { icon: '/assets/icons/start-icon.svg', solid: '#15A34A', tint: '#DCFCE7' },
+    'event-diagram-node': { icon: '/assets/icons/state-icon.svg', solid: '#BA51C5', tint: '#F4DCF7' },
+    'state-diagram-node': { icon: '/assets/icons/transition-icon.svg', solid: '#047E9C', tint: '#D5EEF6' },
+    'end-diagram-node': { icon: '/assets/icons/end-icon.svg', solid: '#B8475A', tint: '#F7DCE1' }
+  };
 
   /* Implementacion de ngAfterViewInit, ocurre cuando el componente ha sido inicializado */
   ngAfterViewInit(): void {
@@ -338,17 +345,15 @@ export class DagaBaseComponent implements AfterViewInit, OnDestroy, OnChanges {
     }
 
     let theoreticalProbabilitiesByNodeId = new Map<string, number>();
-    if (this.showTheoreticalProbabilities) {
-      try {
-        theoreticalProbabilitiesByNodeId = calculateTheoreticalNodeProbabilities(
-          canvas.model,
-          this.probabilityKey,
-          this.branchValueKey,
-          this.maxProbability
-        );
-      } catch (err) {
-        console.error('Failed to calculate theoretical node probabilities', err);
-      }
+    try {
+      theoreticalProbabilitiesByNodeId = calculateTheoreticalNodeProbabilities(
+        canvas.model,
+        this.probabilityKey,
+        this.branchValueKey,
+        this.maxProbability
+      );
+    } catch (err) {
+      console.error('Failed to calculate theoretical node probabilities', err);
     }
 
     canvas.model.nodes
@@ -356,11 +361,7 @@ export class DagaBaseComponent implements AfterViewInit, OnDestroy, OnChanges {
       .filter((node: DiagramNode | undefined | null) => this.isNodeRenderable(node))
       .forEach((node: DiagramNode) => {
         try {
-          this.drawNodeProbabilityDecorator(canvas, node);
-
-          if (this.showTheoreticalProbabilities) {
-            this.drawTheoreticalProbabilityDecorator(canvas, node, theoreticalProbabilitiesByNodeId.get(node.id));
-          }
+          this.drawNodeShellDecorator(canvas, node, theoreticalProbabilitiesByNodeId.get(node.id));
         } catch (err) {
           console.error('Failed to draw decorators for node', node.id, err);
         }
@@ -414,50 +415,53 @@ export class DagaBaseComponent implements AfterViewInit, OnDestroy, OnChanges {
       .forEach((decorator: { id: string }) => canvas.model.decorators.remove(decorator.id));
   }
 
-  private drawNodeProbabilityDecorator(canvas: Canvas, node: DiagramNode): void {
+  private drawNodeShellDecorator(canvas: Canvas, node: DiagramNode, globalProbability: number | undefined): void {
     if (!this.isNodeRenderable(node)) {
       return;
     }
 
-    if (node.type && node.type.id !== 'event-diagram-node') {
+    const typeId = node.type?.id ?? '';
+    const visual = this.nodeVisualByType[typeId];
+    if (!visual) {
       return;
     }
 
-    const rawProbability: number = node.valueSet.getValue(this.probabilityKey);
+    const width = Math.max(node.width, 1);
+    const height = Math.max(node.height, 1);
 
-    const percentageText = formatProbabilityPercent(rawProbability, this.maxProbability);
+    const globalText =
+      globalProbability != null && Number.isFinite(globalProbability)
+        ? formatProbabilityPercent(globalProbability, this.maxProbability)
+        : '—';
+
+    const isEvent = typeId === 'event-diagram-node';
+    let chipHtml = '';
+    if (isEvent) {
+      const rawLocal = node.valueSet.getValue(this.probabilityKey);
+      const localText = formatProbabilityPercent(rawLocal, this.maxProbability);
+      chipHtml = `
+        <div style="display:flex;justify-content:center;padding:4px 0 8px;">
+          <span style="background:#EEEEEE;color:#333;font-size:12px;border-radius:999px;padding:2px 12px;font-weight:500;">${localText}</span>
+        </div>`;
+    }
 
     const decoratorId = `${node.id}${this.nodeProbabilityDecoratorSuffix}`;
-    const safeWidth = Math.max(node.width, 10);
-    const labelHtml = `<text x="${Math.max(safeWidth / 2, 12)}" y="24" text-anchor="middle" font-size="16" fill="#000">${percentageText}</text>`;
+    const labelHtml = `
+      <foreignObject x="0" y="0" width="${width}" height="${height}">
+        <div xmlns="http://www.w3.org/1999/xhtml" style="height:100%;display:flex;flex-direction:column;border-radius:6px;overflow:hidden;pointer-events:none;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:4px 10px;background:${visual.tint};height:32px;box-sizing:border-box;">
+            <img src="${visual.icon}" width="22" height="22" style="display:block;" />
+            <span style="color:${visual.solid};font-weight:700;font-size:13px;">${globalText}</span>
+          </div>
+          <div style="flex:1;"></div>
+          ${chipHtml}
+        </div>
+      </foreignObject>
+    `;
 
     const priority = typeof node.getPriority === 'function' ? node.getPriority() : 0;
 
-    canvas.model.decorators.new(node, [node.coords[0], node.coords[1] + node.height], safeWidth, 40, priority, labelHtml, decoratorId);
-  }
-
-  private drawTheoreticalProbabilityDecorator(canvas: Canvas, node: DiagramNode, theoreticalProbability: number | undefined): void {
-    if (theoreticalProbability == null || !Number.isFinite(theoreticalProbability)) {
-      return;
-    }
-
-    const totalLabel = formatProbabilityPercent(theoreticalProbability, this.maxProbability);
-    const decoratorId = `${node.id}${this.theoreticalProbabilityDecoratorSuffix}`;
-    const decoratorWidth = Math.max(node.width, 10);
-    const decoratorHeight = 24;
-    const labelHtml = `<text x="${Math.max(decoratorWidth / 2, 12)}" y="16" text-anchor="middle" font-size="15" fill="#b71c1c">${totalLabel}</text>`;
-
-    const priority = typeof node.getPriority === 'function' ? node.getPriority() : 0;
-
-    canvas.model.decorators.new(
-      node,
-      [node.coords[0], node.coords[1] - decoratorHeight + 4],
-      decoratorWidth,
-      decoratorHeight,
-      priority,
-      labelHtml,
-      decoratorId
-    );
+    canvas.model.decorators.new(node, [node.coords[0], node.coords[1]], width, height, priority, labelHtml, decoratorId);
   }
 
   /**
