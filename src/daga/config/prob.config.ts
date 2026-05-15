@@ -19,6 +19,8 @@ export const PROB_CONFIG: DiagramConfig = {
       enableSelection: false
     },
     palette: {
+      width: '15rem',
+      gap: '0.5rem',
       sections: [
         {
           name: '',
@@ -26,22 +28,50 @@ export const PROB_CONFIG: DiagramConfig = {
             {
               templateType: 'node',
               type: 'start-diagram-node',
-              label: 'Start'
+              label: 'Start',
+              width: 212,
+              height: 40,
+              labelLook: null,
+              look: {
+                lookType: 'image-look',
+                backgroundImage: '/assets/palette/element-start.svg'
+              }
             },
             {
               templateType: 'node',
               type: 'state-diagram-node',
-              label: 'State'
+              label: 'State',
+              width: 212,
+              height: 40,
+              labelLook: null,
+              look: {
+                lookType: 'image-look',
+                backgroundImage: '/assets/palette/element-state.svg'
+              }
             },
             {
               templateType: 'node',
               type: 'event-diagram-node',
-              label: 'Event'
+              label: 'Event',
+              width: 212,
+              height: 40,
+              labelLook: null,
+              look: {
+                lookType: 'image-look',
+                backgroundImage: '/assets/palette/element-transition.svg'
+              }
             },
             {
               templateType: 'node',
               type: 'end-diagram-node',
-              label: 'End'
+              label: 'End',
+              width: 212,
+              height: 40,
+              labelLook: null,
+              look: {
+                lookType: 'image-look',
+                backgroundImage: '/assets/palette/element-end.svg'
+              }
             }
           ]
         }
