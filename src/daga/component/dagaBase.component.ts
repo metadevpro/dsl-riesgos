@@ -341,6 +341,7 @@ export class DagaBaseComponent implements AfterViewInit, OnDestroy, OnChanges {
         .forEach((node: DiagramNode) => {
           this.drawBayesDecorator(canvas, node);
         });
+      this.raisePortsAboveDecorators();
       return;
     }
 
@@ -366,6 +367,13 @@ export class DagaBaseComponent implements AfterViewInit, OnDestroy, OnChanges {
           console.error('Failed to draw decorators for node', node.id, err);
         }
       });
+
+    this.raisePortsAboveDecorators();
+  }
+
+  private raisePortsAboveDecorators(): void {
+    if (typeof document === 'undefined') return;
+    document.querySelectorAll('daga-diagram g.diagram-port').forEach(el => el.parentNode?.appendChild(el));
   }
 
   private refreshConnectionWeightLabels(canvas: Canvas): void {
