@@ -49,15 +49,16 @@ export class DagaBaseComponent implements AfterViewInit, OnDestroy, OnChanges {
   private readonly probabilityKey = PROBABILITY_KEY;
   private readonly autoNormalizeKey = AUTO_NORMALIZE_ADJACENT_KEY;
   private readonly nodeProbabilityDecoratorSuffix = '-probability-decorator';
+  private readonly localProbabilityDecoratorSuffix = '-local-probability-decorator';
   private readonly theoreticalProbabilityDecoratorSuffix = '-theoretical-probability-decorator';
   private readonly bayesDecoratorSuffix = '-bayes-decorator';
   private readonly maxProbability = MAX_PROBABILITY;
 
-  private readonly nodeVisualByType: Record<string, { icon: string; solid: string; tint: string }> = {
-    'start-diagram-node': { icon: '/assets/icons/start-icon.svg', solid: '#15A34A', tint: '#DCFCE7' },
-    'event-diagram-node': { icon: '/assets/icons/state-icon.svg', solid: '#BA51C5', tint: '#F4DCF7' },
-    'state-diagram-node': { icon: '/assets/icons/transition-icon.svg', solid: '#047E9C', tint: '#D5EEF6' },
-    'end-diagram-node': { icon: '/assets/icons/end-icon.svg', solid: '#B8475A', tint: '#F7DCE1' }
+  private readonly nodeStyleByType: Record<string, { icon: string; solid: string }> = {
+    'start-diagram-node': { icon: '/assets/icons/start-icon.svg', solid: '#15A34A' },
+    'event-diagram-node': { icon: '/assets/icons/state-icon.svg', solid: '#BA51C5' },
+    'state-diagram-node': { icon: '/assets/icons/transition-icon.svg', solid: '#047E9C' },
+    'end-diagram-node': { icon: '/assets/icons/end-icon.svg', solid: '#B8475A' }
   };
 
   /* Implementacion de ngAfterViewInit, ocurre cuando el componente ha sido inicializado */
@@ -362,7 +363,10 @@ export class DagaBaseComponent implements AfterViewInit, OnDestroy, OnChanges {
       .filter((node: DiagramNode | undefined | null) => this.isNodeRenderable(node))
       .forEach((node: DiagramNode) => {
         try {
-          this.drawNodeShellDecorator(canvas, node, theoreticalProbabilitiesByNodeId.get(node.id));
+          this.drawNodeTopBandDecorator(canvas, node, theoreticalProbabilitiesByNodeId.get(node.id));
+          if (node.type?.id === 'event-diagram-node') {
+            this.drawNodeBottomChipDecorator(canvas, node);
+          }
         } catch (err) {
           console.error('Failed to draw decorators for node', node.id, err);
         }
@@ -416,6 +420,7 @@ export class DagaBaseComponent implements AfterViewInit, OnDestroy, OnChanges {
         return (
           decorator.id &&
           (decorator.id.endsWith(this.nodeProbabilityDecoratorSuffix) ||
+            decorator.id.endsWith(this.localProbabilityDecoratorSuffix) ||
             decorator.id.endsWith(this.theoreticalProbabilityDecoratorSuffix) ||
             decorator.id.endsWith(this.bayesDecoratorSuffix))
         );
@@ -423,53 +428,71 @@ export class DagaBaseComponent implements AfterViewInit, OnDestroy, OnChanges {
       .forEach((decorator: { id: string }) => canvas.model.decorators.remove(decorator.id));
   }
 
-  private drawNodeShellDecorator(canvas: Canvas, node: DiagramNode, globalProbability: number | undefined): void {
+  private drawNodeTopBandDecorator(canvas: Canvas, node: DiagramNode, globalProbability: number | undefined): void {
     if (!this.isNodeRenderable(node)) {
       return;
     }
 
     const typeId = node.type?.id ?? '';
-    const visual = this.nodeVisualByType[typeId];
-    if (!visual) {
+    const style = this.nodeStyleByType[typeId];
+    if (!style) {
       return;
     }
 
     const width = Math.max(node.width, 1);
-    const height = Math.max(node.height, 1);
+    const bandHeight = 32;
 
     const globalText =
       globalProbability != null && Number.isFinite(globalProbability)
         ? formatProbabilityPercent(globalProbability, this.maxProbability)
         : '—';
 
-    const isEvent = typeId === 'event-diagram-node';
-    let chipHtml = '';
-    if (isEvent) {
-      const rawLocal = node.valueSet.getValue(this.probabilityKey);
-      const localText = formatProbabilityPercent(rawLocal, this.maxProbability);
-      chipHtml = `
-        <div style="display:flex;justify-content:center;padding:4px 0 8px;">
-          <span style="background:#EEEEEE;color:#333;font-size:12px;border-radius:999px;padding:2px 12px;font-weight:500;">${localText}</span>
-        </div>`;
-    }
-
     const decoratorId = `${node.id}${this.nodeProbabilityDecoratorSuffix}`;
     const labelHtml = `
-      <foreignObject x="0" y="0" width="${width}" height="${height}">
-        <div xmlns="http://www.w3.org/1999/xhtml" style="height:100%;display:flex;flex-direction:column;border-radius:6px;overflow:hidden;pointer-events:none;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
-          <div style="display:flex;align-items:center;justify-content:space-between;padding:4px 10px;background:${visual.tint};height:32px;box-sizing:border-box;">
-            <img src="${visual.icon}" width="22" height="22" style="display:block;" />
-            <span style="color:${visual.solid};font-weight:700;font-size:13px;">${globalText}</span>
-          </div>
-          <div style="flex:1;"></div>
-          ${chipHtml}
+      <foreignObject x="0" y="0" width="${width}" height="${bandHeight}">
+        <div xmlns="http://www.w3.org/1999/xhtml" style="height:${bandHeight}px;display:flex;align-items:center;justify-content:space-between;padding:0 10px;box-sizing:border-box;background:transparent;pointer-events:none;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
+          <img src="${style.icon}" width="22" height="22" style="display:block;" />
+          <span style="color:${style.solid};font-weight:700;font-size:13px;">${globalText}</span>
         </div>
       </foreignObject>
     `;
 
     const priority = typeof node.getPriority === 'function' ? node.getPriority() : 0;
 
-    canvas.model.decorators.new(node, [node.coords[0], node.coords[1]], width, height, priority, labelHtml, decoratorId);
+    canvas.model.decorators.new(node, [node.coords[0], node.coords[1]], width, bandHeight, priority, labelHtml, decoratorId);
+  }
+
+  private drawNodeBottomChipDecorator(canvas: Canvas, node: DiagramNode): void {
+    if (!this.isNodeRenderable(node)) {
+      return;
+    }
+
+    const width = Math.max(node.width, 1);
+    const chipBandHeight = 28;
+
+    const rawLocal = node.valueSet.getValue(this.probabilityKey);
+    const localText = formatProbabilityPercent(rawLocal, this.maxProbability);
+
+    const decoratorId = `${node.id}${this.localProbabilityDecoratorSuffix}`;
+    const labelHtml = `
+      <foreignObject x="0" y="0" width="${width}" height="${chipBandHeight}">
+        <div xmlns="http://www.w3.org/1999/xhtml" style="height:${chipBandHeight}px;display:flex;align-items:center;justify-content:center;background:transparent;pointer-events:none;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
+          <span style="background:#EEEEEE;color:#333;font-size:12px;border-radius:999px;padding:2px 12px;font-weight:500;">${localText}</span>
+        </div>
+      </foreignObject>
+    `;
+
+    const priority = typeof node.getPriority === 'function' ? node.getPriority() : 0;
+
+    canvas.model.decorators.new(
+      node,
+      [node.coords[0], node.coords[1] + node.height - chipBandHeight],
+      width,
+      chipBandHeight,
+      priority,
+      labelHtml,
+      decoratorId
+    );
   }
 
   /**

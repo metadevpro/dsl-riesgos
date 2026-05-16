@@ -1,23 +1,144 @@
-import {DiagramConfig, HorizontalAlign, LineShape, LineStyle, Side, Type, VerticalAlign } from '@metadev/daga-angular';
+import {
+  ClosedShape,
+  DiagramConfig,
+  HorizontalAlign,
+  LineShape,
+  LineStyle,
+  SectionGridConfig,
+  ShapedLookConfig,
+  Side,
+  Type,
+  VerticalAlign
+} from '@metadev/daga-angular';
+import {
+  bottomRoundedRectangleShape,
+  roundedRectangleShape,
+  topRoundedRectangleShape
+} from './look/shape';
 
-const RECTANGLE_RADIUS = 5;
+interface NodeVisual {
+  solid: string;
+  tint: string;
+}
 
-const roundedRectangleShape = (
-  x: number,
-  y: number,
-  width: number,
-  height: number
-) => {
-  return `M ${x + RECTANGLE_RADIUS} ${y} L ${x + width - RECTANGLE_RADIUS} ${y} A ${
-    RECTANGLE_RADIUS
-  } ${RECTANGLE_RADIUS} 0 0 1 ${x + width} ${y + RECTANGLE_RADIUS} L ${x + width} ${
-    y + height - RECTANGLE_RADIUS
-  } A ${RECTANGLE_RADIUS} ${RECTANGLE_RADIUS} 0 0 1 ${x + width - RECTANGLE_RADIUS} ${y + height} L ${
-    x + RECTANGLE_RADIUS
-  } ${y + height} A ${RECTANGLE_RADIUS} ${RECTANGLE_RADIUS} 0 0 1 ${x} ${
-    y + height - RECTANGLE_RADIUS
-  } L ${x} ${y + RECTANGLE_RADIUS} A ${RECTANGLE_RADIUS} ${RECTANGLE_RADIUS} 0 0 1 ${x + RECTANGLE_RADIUS} ${y} Z`;
+const NODE_VISUALS: Record<string, NodeVisual> = {
+  'start-diagram-node': { solid: '#15A34A', tint: '#DCFCE7' },
+  'event-diagram-node': { solid: '#BA51C5', tint: '#F4DCF7' },
+  'state-diagram-node': { solid: '#047E9C', tint: '#D5EEF6' },
+  'end-diagram-node': { solid: '#B8475A', tint: '#F7DCE1' }
 };
+
+const NODE_BORDER = '#E5E7EB';
+const NODE_BORDER_SELECTED = '#378ADD';
+const NODE_FILL_WHITE = '#FFFFFF';
+
+const NODE_LABEL_CONFIG = {
+  fontSize: 18,
+  margin: [0, 0, -15, 0],
+  fit: false,
+  horizontalAlign: HorizontalAlign.Center,
+  verticalAlign: VerticalAlign.Center
+};
+
+const NODE_PORTS = [
+  { coords: [125, 0] as [number, number], direction: Side.Top },
+  { coords: [0, 75] as [number, number], direction: Side.Left },
+  { coords: [125, 150] as [number, number], direction: Side.Bottom },
+  { coords: [250, 75] as [number, number], direction: Side.Right }
+];
+
+const NODE_PROPERTIES = [
+  { name: 'node name', type: Type.Text, basic: true, editable: true, rootAttribute: 'name' },
+  { name: 'node number', type: Type.Number, defaultValue: 1, basic: true, editable: true }
+];
+
+const NODE_PROPERTIES_WITH_PROB = [
+  ...NODE_PROPERTIES,
+  { name: 'probability', type: Type.Number, defaultValue: 0, basic: true, editable: true }
+];
+
+const topBandLook = (tint: string): ShapedLookConfig => ({
+  lookType: 'shaped-look',
+  shape: topRoundedRectangleShape,
+  fillColor: tint,
+  borderColor: NODE_BORDER,
+  borderThickness: 1,
+  selected: {
+    fillColor: tint,
+    borderColor: NODE_BORDER_SELECTED,
+    borderThickness: 2
+  },
+  highlighted: {
+    borderThickness: 3
+  }
+});
+
+const middleBandLook = (): ShapedLookConfig => ({
+  lookType: 'shaped-look',
+  shape: ClosedShape.Rectangle,
+  fillColor: NODE_FILL_WHITE,
+  borderColor: NODE_BORDER,
+  borderThickness: 1,
+  selected: {
+    fillColor: NODE_FILL_WHITE,
+    borderColor: NODE_BORDER_SELECTED,
+    borderThickness: 2
+  },
+  highlighted: {
+    borderThickness: 3
+  }
+});
+
+const bottomBandLook = (): ShapedLookConfig => ({
+  lookType: 'shaped-look',
+  shape: bottomRoundedRectangleShape,
+  fillColor: NODE_FILL_WHITE,
+  borderColor: NODE_BORDER,
+  borderThickness: 1,
+  selected: {
+    fillColor: NODE_FILL_WHITE,
+    borderColor: NODE_BORDER_SELECTED,
+    borderThickness: 2
+  },
+  highlighted: {
+    borderThickness: 3
+  }
+});
+
+const twoBandSectionGrid = (tint: string): SectionGridConfig => ({
+  defaultWidths: [250],
+  defaultHeights: [32, 118],
+  minWidths: [250],
+  minHeights: [32, 118],
+  margin: 0,
+  sections: [
+    [{ look: topBandLook(tint) }],
+    [{ look: bottomBandLook() }]
+  ]
+});
+
+const threeBandSectionGrid = (tint: string): SectionGridConfig => ({
+  defaultWidths: [250],
+  defaultHeights: [32, 90, 28],
+  minWidths: [250],
+  minHeights: [32, 90, 28],
+  margin: 0,
+  sections: [
+    [{ look: topBandLook(tint) }],
+    [{ look: middleBandLook() }],
+    [{ look: bottomBandLook() }]
+  ]
+});
+
+const nodeShellLook = (): ShapedLookConfig => ({
+  lookType: 'shaped-look',
+  shape: roundedRectangleShape,
+  fillColor: 'transparent',
+  borderColor: 'transparent',
+  borderThickness: 0,
+  selected: { borderColor: 'transparent', fillColor: 'transparent' },
+  highlighted: { borderColor: 'transparent' }
+});
 
 export const PROB_CONFIG: DiagramConfig = {
   type: 'simple-diagram',
@@ -108,255 +229,44 @@ export const PROB_CONFIG: DiagramConfig = {
       name: 'Node',
       defaultWidth: 250,
       defaultHeight: 150,
-      label: {
-        fontSize: 18,
-        margin: [0,0,-15,0],
-        fit: false,
-        horizontalAlign: HorizontalAlign.Center,
-        verticalAlign: VerticalAlign.Center
-      },
-      ports: [
-        {
-          coords: [125, 0],
-          direction: Side.Top
-        },
-        {
-          coords: [0, 75],
-          direction: Side.Left
-        },
-        {
-          coords: [125, 150],
-          direction: Side.Bottom
-        },
-        {
-          coords: [250, 75],
-          direction: Side.Right
-        }
-      ],
-      look: {
-        lookType: 'shaped-look',
-        shape: roundedRectangleShape,
-        fillColor: '#FFFFFF',
-        borderColor: '#E5E7EB',
-        borderThickness: 1,
-        selected: {
-          fillColor: '#FFFFFF',
-          borderColor: '#378ADD',
-          borderThickness: 2
-        },
-        highlighted: {
-          borderThickness: 3
-        }
-      },
-      properties: [
-        {
-          name: 'node name',
-          type: Type.Text,
-          basic: true,
-          editable: true,
-          rootAttribute: 'name'
-        },
-        {
-          name: 'node number',
-          type: Type.Number,
-          defaultValue: 1,
-          basic: true,
-          editable: true
-        },
-        {
-          name: 'probability',
-          type: Type.Number,
-          defaultValue: 0,
-          basic: true,
-          editable: true
-        }
-      ]
+      label: NODE_LABEL_CONFIG,
+      ports: NODE_PORTS,
+      look: nodeShellLook(),
+      sectionGrid: threeBandSectionGrid(NODE_VISUALS['event-diagram-node'].tint),
+      properties: NODE_PROPERTIES_WITH_PROB
     },
     {
       id: 'state-diagram-node',
       name: 'State',
       defaultWidth: 250,
       defaultHeight: 150,
-      label: {
-        fontSize: 18,
-        margin: [0,0,-15,0],
-        fit: false,
-        horizontalAlign: HorizontalAlign.Center,
-        verticalAlign: VerticalAlign.Center
-      },
-      ports: [
-        {
-          coords: [125, 0],
-          direction: Side.Top
-        },
-        {
-          coords: [0, 75],
-          direction: Side.Left
-        },
-        {
-          coords: [125, 150],
-          direction: Side.Bottom
-        },
-        {
-          coords: [250, 75],
-          direction: Side.Right
-        }
-      ],
-      look: {
-        lookType: 'shaped-look',
-        shape: roundedRectangleShape,
-        fillColor: '#FFFFFF',
-        borderColor: '#E5E7EB',
-        borderThickness: 1,
-        selected: {
-          fillColor: '#FFFFFF',
-          borderColor: '#378ADD',
-          borderThickness: 2
-        },
-        highlighted: {
-          borderThickness: 3
-        }
-      },
-      properties: [
-        {
-          name: 'node name',
-          type: Type.Text,
-          basic: true,
-          editable: true,
-          rootAttribute: 'name'
-        },
-        {
-          name: 'node number',
-          type: Type.Number,
-          defaultValue: 1,
-          basic: true,
-          editable: true
-        }
-      ]
+      label: NODE_LABEL_CONFIG,
+      ports: NODE_PORTS,
+      look: nodeShellLook(),
+      sectionGrid: twoBandSectionGrid(NODE_VISUALS['state-diagram-node'].tint),
+      properties: NODE_PROPERTIES
     },
     {
       id: 'start-diagram-node',
       name: 'Start',
       defaultWidth: 250,
       defaultHeight: 150,
-      label: {
-        fontSize: 18,
-        margin: [0,0,-15,0],
-        fit: false,
-        horizontalAlign: HorizontalAlign.Center,
-        verticalAlign: VerticalAlign.Center
-      },
-      ports: [
-        {
-          coords: [125, 0],
-          direction: Side.Top
-        },
-        {
-          coords: [0, 75],
-          direction: Side.Left
-        },
-        {
-          coords: [125, 150],
-          direction: Side.Bottom
-        },
-        {
-          coords: [250, 75],
-          direction: Side.Right
-        }
-      ],
-      look: {
-        lookType: 'shaped-look',
-        shape: roundedRectangleShape,
-        fillColor: '#FFFFFF',
-        borderColor: '#E5E7EB',
-        borderThickness: 1,
-        selected: {
-          fillColor: '#FFFFFF',
-          borderColor: '#378ADD',
-          borderThickness: 2
-        },
-        highlighted: {
-          borderThickness: 3
-        }
-      },
-      properties: [
-        {
-          name: 'node name',
-          type: Type.Text,
-          basic: true,
-          editable: true,
-          rootAttribute: 'name'
-        },
-        {
-          name: 'node number',
-          type: Type.Number,
-          defaultValue: 1,
-          basic: true,
-          editable: true
-        }
-      ]
+      label: NODE_LABEL_CONFIG,
+      ports: NODE_PORTS,
+      look: nodeShellLook(),
+      sectionGrid: twoBandSectionGrid(NODE_VISUALS['start-diagram-node'].tint),
+      properties: NODE_PROPERTIES
     },
     {
       id: 'end-diagram-node',
       name: 'Node',
       defaultWidth: 250,
       defaultHeight: 150,
-      label: {
-        fontSize: 18,
-        margin: [0,0,-15,0],
-        fit: false,
-        horizontalAlign: HorizontalAlign.Center,
-        verticalAlign: VerticalAlign.Center
-      },
-      ports: [
-        {
-          coords: [125, 0],
-          direction: Side.Top
-        },
-        {
-          coords: [0, 75],
-          direction: Side.Left
-        },
-        {
-          coords: [125, 150],
-          direction: Side.Bottom
-        },
-        {
-          coords: [250, 75],
-          direction: Side.Right
-        }
-      ],
-      look: {
-        lookType: 'shaped-look',
-        shape: roundedRectangleShape,
-        fillColor: '#FFFFFF',
-        borderColor: '#E5E7EB',
-        borderThickness: 1,
-        selected: {
-          fillColor: '#FFFFFF',
-          borderColor: '#378ADD',
-          borderThickness: 2
-        },
-        highlighted: {
-          borderThickness: 3
-        }
-      },
-      properties: [
-        {
-          name: 'node name',
-          type: Type.Text,
-          basic: true,
-          editable: true,
-          rootAttribute: 'name'
-        },
-        {
-          name: 'node number',
-          type: Type.Number,
-          defaultValue: 1,
-          basic: true,
-          editable: true
-        }
-      ]
+      label: NODE_LABEL_CONFIG,
+      ports: NODE_PORTS,
+      look: nodeShellLook(),
+      sectionGrid: twoBandSectionGrid(NODE_VISUALS['end-diagram-node'].tint),
+      properties: NODE_PROPERTIES
     }
   ],
   connectionTypes: [
