@@ -8,10 +8,10 @@ import {
   getNextNodeFromConnection,
   isNodeTypeLike,
   isStateDiagramNodeLike
-} from './generalCalculationNodes.utils';
+} from '../generalCalculationNodes.utils';
 import { normalizeWeightValue } from './binomialWeight.utils';
 
-import { ConnectionInfo, NodeId, NodeInfo, CalculationResult } from '../types';
+import { ConnectionInfo, NodeId, NodeInfo, CalculationResult } from '../../types';
 
 function readConnectionFieldByKey(connection: ConnectionInfo, key: string): unknown {
   if (!connection || typeof connection !== 'object') return undefined;

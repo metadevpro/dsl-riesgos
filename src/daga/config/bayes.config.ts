@@ -46,7 +46,9 @@ export const bayes_CONFIG: DiagramConfig = {
         }
       ]
     },
-    propertyEditor: {}
+    propertyEditor: {
+      width: '16rem'
+    }
   },
   nodeTypes: [
     {
@@ -187,7 +189,7 @@ export const bayes_CONFIG: DiagramConfig = {
     {
       name: 'name',
       type: Type.Text,
-      defaultValue: 'unnamed',
+      defaultValue: 'bayes diagram',
       basic: true,
       editable: true,
       rootAttribute: 'name'
@@ -198,6 +200,19 @@ export const bayes_CONFIG: DiagramConfig = {
       basic: true,
       editable: true,
       rootAttribute: 'description'
+    },
+    {
+      name: 'layout',
+      type: Type.Option,
+      defaultValue: 'adjacency',
+      basic: true,
+      editable: true,
+      rootAttribute: 'layoutFormat',
+      options: [
+        { key: 'adjacency', label: 'Adjacency' },
+        { key: 'breadth', label: 'Breadth First' },
+        { key: 'priority', label: 'Priority' }
+      ]
     },
     {
       name: 'created',
@@ -213,18 +228,5 @@ export const bayes_CONFIG: DiagramConfig = {
       editable: false,
       rootAttribute: 'updatedAt'
     },
-    {
-      name: 'layout',
-      type: Type.Option,
-      defaultValue: 'adjacency',
-      basic: true,
-      editable: true,
-      rootAttribute: 'layoutFormat',
-      options: [
-        { key: 'adjacency', label: 'Adjacency' },
-        { key: 'breadth', label: 'Breadth First' },
-        { key: 'priority', label: 'Priority' }
-      ]
-    }
   ]
 };

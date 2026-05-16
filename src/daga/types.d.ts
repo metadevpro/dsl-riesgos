@@ -17,20 +17,6 @@ export interface ConnectionEndpoints {
 
 export type NodeId = string;
 
-export interface pathProbabilityPathResult {
-  nodeIds: NodeId[];
-  probability: number;
-}
-
-export interface pathProbabilityCalculationResult {
-  startNodeId: NodeId;
-  startNodeName?: string;
-  endNodeId: NodeId;
-  posteriorProbability: number;
-  pathCount: number;
-  paths: pathProbabilityPathResult[];
-}
-
 export interface CalculationResult {
   startNodeId?: string;
   startNodeName?: string;

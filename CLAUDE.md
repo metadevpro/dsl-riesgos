@@ -16,17 +16,17 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Architecture
 
-Angular 21 standalone-component SPA (SSR-enabled) wrapping the `@metadev/daga` / `@metadev/daga-angular` diagram engine to model probability graphs. Three diagram modes share one canvas abstraction.
+Angular 21 standalone-component SPA (SSR-enabled) wrapping the `@metadev/daga` / `@metadev/daga-angular` diagram engine to model probability graphs. Two diagram modes share one canvas abstraction.
 
 ### Bootstrap & shell
 
 - `src/main.ts` bootstraps `SimpleComponent` (`src/daga/component/prob.component.ts`) with `simpleAppConfig` (`prob.app.config.ts`, only `provideBrowserGlobalErrorListeners`).
-- `SimpleComponent` is shell: sidebar + `selectedModel: 'binomial' | 'pathProbability' | 'bayes'` switches between three feature components. Template `dagaIndex.html`.
+- `SimpleComponent` is shell: sidebar + `selectedModel: 'binomial' | 'bayes'` switches between two feature components. Template `dagaIndex.html`.
 - SSR entrypoints: `main.server.ts`, `server.ts` (Express).
 
 ### DagaBaseComponent (the core)
 
-`src/daga/component/dagaBase.component.ts` is shared engine logic for all three modes. Key contract:
+`src/daga/component/dagaBase.component.ts` is shared engine logic for both modes. Key contract:
 
 - Inputs: `autoNormalizeAdjacent`, `showTheoreticalProbabilities`, `branchValueKey` (default `'probability'`, switched to weight key in binomial), `bayesMode`, `bayesGraph`.
 - Subscribes to `canvas.diagramChange$` and dispatches on `UpdateValuesAction` / `AddConnectionAction` / `RemoveAction`.
@@ -38,17 +38,16 @@ Angular 21 standalone-component SPA (SSR-enabled) wrapping the `@metadev/daga` /
 
 Node id normalization (`utils/generalCalculationNodes.utils.ts` → `normalizeNodeId`) is required because `@metadev/daga` may suffix ids; always normalize before keying maps/emitting.
 
-### Three modes
+### Two modes
 
 Each has component + config + utils:
 
 - **Binomial** — `binomial.component.ts`, weight-based branching. Theoretical probabilities computed via `binomialWeight.utils.ts::calculateTheoreticalNodeProbabilities`. Per-connection nodes in `binomialCalculationNodes.utils.ts`. `branchValueKey` switches off `'probability'` so connection labels show raw weights.
-- **Path probability** — `pathProbability.component.ts`, config `config/pathProbability.config.ts`, calc in `pathProbabilityCalculationNodes.utils.ts`. Returns `pathProbabilityPathResult[]` per `(start,end)` pair (see `types.d.ts`).
 - **Bayes** — `bayes.component.ts`, config `bayes.config.ts`. Inference engine in `utils/bayes/bayesInference.utils.ts`; supporting modules: `causalLayout.ts`, `csv.utils.ts`, `em.utils.ts`, `mle.utils.ts`, `montecarlo.utils.ts`, `structureLearning.utils.ts`, `syntheticData.utils.ts`. Bayes graph passed to `DagaBaseComponent` via `[bayesGraph]` Input; node marginals (`si`/`no`) + `evidence` rendered as inline foreignObject bars.
 
 ### Generic component
 
-`generic.component.ts` is the abstract pattern host for the three feature components — they extend it and pass mode-specific config to the daga canvas.
+`generic.component.ts` is the abstract pattern host for the two feature components — they extend it and pass mode-specific config to the daga canvas.
 
 ## Conventions
 

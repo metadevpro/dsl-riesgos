@@ -1,36 +1,4 @@
 <div style="position: relative; width: 100%; height: 100%">
-  <div
-    style="
-      position: absolute;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 1000;
-      background: white;
-      padding: 15px 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    "
-  >
-    <button
-      (click)="openCalculationDialog()"
-      style="
-        padding: 10px 20px;
-        background-color: #007bff;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-weight: bold;
-      "
-    >
-      Calculate Probability
-    </button>
-  </div>
-
   @if (showCalculationDialog) {
     <div
       style="
@@ -127,24 +95,24 @@
   }
 
   <div
-  data-test-id="results-panel"  
+  data-test-id="results-panel"
   [ngClass]="{ resultsbarVisible: showResultsBar }"
     style="
       position: fixed;
       right: 0;
-      top: 0;
+      top: 64px;
       width: 350px;
-      height: 100vh;
+      height: calc(100vh - 64px);
       background: white;
       box-shadow: -2px 0 8px rgba(0, 0, 0, 0.15);
-      z-index: 1500;
+      z-index: 1100;
       overflow-y: auto;
       transform: translateX(100%);
       transition: transform 0.3s ease;
     "
   >
-    <div style="padding: 20px; border-bottom: 2px solid #007bff">
-      <h2 style="margin: 0; color: #007bff">Results</h2>
+    <div style="padding: 20px; border-bottom: 2px solid #1F3A22">
+      <h2 style="margin: 0; color: #1F3A22">Results</h2>
       <button
         (click)="closeResultsBar()"
         style="position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 24px; cursor: pointer; color: #999"
@@ -159,7 +127,7 @@
 
     @for (result of results; track i; let i = $index) {
       <div
-        [style.background]="i === selectedResult ? '#f0f7ff' : 'white'"
+        [style.background]="i === selectedResult ? '#EAF3DE' : 'white'"
         style="padding: 15px; border-bottom: 1px solid #eee; cursor: pointer"
         (click)="selectResult(i)"
         (keydown.enter)="selectResult(i)"
@@ -176,11 +144,11 @@
           }
           <div>Iterations: {{ result.iterations }}</div>
           <div>Successes: {{ result.successIterations }}</div>
-          <div style="margin-top: 8px; font-size: 16px; font-weight: bold; color: #007bff">
+          <div style="margin-top: 8px; font-size: 16px; font-weight: bold; color: #2ECC4A">
             Success Rate: {{ formatPercentage(result.successIterations, result.iterations) }}
           </div>
           @if (result.theoreticalProbability !== null && result.theoreticalProbability !== undefined) {
-            <div style="margin-top: 4px; font-size: 14px; color: #34a3f1">
+            <div style="margin-top: 4px; font-size: 14px; color: #28a745">
               Theoretical: {{ result.theoreticalProbability.toFixed(2) }}%
             </div>
           }
@@ -188,33 +156,6 @@
       </div>
     }
   </div>
-
-  @if (results.length > 0 && !showResultsBar) {
-    <button
-      (click)="openResultsBar()"
-      style="
-        position: fixed;
-        bottom: 30px;
-        right: 30px;
-        z-index: 1000;
-        padding: 15px 20px;
-        background-color: #007bff;
-        color: white;
-        border: none;
-        border-radius: 50%;
-        width: 60px;
-        height: 60px;
-        cursor: pointer;
-        font-size: 24px;
-        box-shadow: 0 4px 12px rgba(0, 123, 255, 0.4);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      "
-    >
-      📊
-    </button>
-  }
 
   <daga-diagram [config]="config" (modelChange)="myModel = $event">
     <app-daga-base

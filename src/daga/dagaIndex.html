@@ -1,43 +1,48 @@
 <div class="page-layout">
-  <aside data-test-id="sidebar" class="models-sidebar" [ngClass]="{ collapsed: isSidebarCollapsed }">
-    <div class="models-header">Probability models</div>
-    <button data-test-id="binomial" class="model-item" [ngClass]="{ active: selectedModel === 'binomial' }" (click)="selectModel('binomial')">
-      Binomial model
-    </button>
-    <button data-test-id="pathProbability" class="model-item" [ngClass]="{ active: selectedModel === 'pathProbability' }" (click)="selectModel('pathProbability')">
-      Path model
-    </button>
-    <button data-test-id="bayes" class="model-item" [ngClass]="{ active: selectedModel === 'bayes' }" (click)="selectModel('bayes')">Bayes model</button>
-
-    <div class="io-separator"></div>
-
-    <button
-      data-test-id="export"
-      class="model-item io-item"
-      [disabled]="selectedModel === 'pathProbability'"
-      (click)="exportCurrent()"
-    >
-      Exportar
-    </button>
-    <button data-test-id="import" class="model-item io-item" (click)="fileInput.click()">Importar</button>
-    <input #fileInput type="file" accept="application/json,.json" hidden (change)="onImportFile($event)" />
-  </aside>
-
-  <button
-    class="sidebar-toggle"
-    [ngClass]="{ collapsed: isSidebarCollapsed }"
-    (click)="toggleSidebar()"
-    [attr.aria-label]="isSidebarCollapsed ? 'Open models panel' : 'Close models panel'"
-  >
-    {{ isSidebarCollapsed ? '❯' : '❮' }}
-  </button>
+  <header class="app-topbar">
+    <div class="topbar-brand">RISK PROBABILITY MODELS</div>
+    <nav class="topbar-tabs">
+      <button
+        data-test-id="binomial"
+        class="tab"
+        [ngClass]="{ active: selectedModel === 'binomial' }"
+        (click)="selectModel('binomial')"
+      >
+        Binomial
+      </button>
+      <button
+        data-test-id="bayes"
+        class="tab"
+        [ngClass]="{ active: selectedModel === 'bayes' }"
+        (click)="selectModel('bayes')"
+      >
+        Bayes
+      </button>
+    </nav>
+    <div class="topbar-actions">
+      <button data-test-id="import" (click)="fileInput.click()">Importar</button>
+      <button data-test-id="export" (click)="exportCurrent()">Exportar</button>
+      @if (selectedModel === 'binomial') {
+        <button class="primary" (click)="triggerCalculate()">Calcular Probabilidad</button>
+        @if (hasBinomialResults) {
+          <button class="primary" (click)="openBinomialResults()">Ver Resultados</button>
+        }
+      }
+      @if (selectedModel === 'bayes') {
+        <button class="primary" (click)="triggerImportCSV()">Importar CSV</button>
+        <button class="primary" (click)="triggerGenerateCSV()">Generar CSV</button>
+        <button class="primary" (click)="triggerMonteCarlo()">Monte Carlo</button>
+        @if (hasBayesHistory) {
+          <button class="primary" (click)="openBayesHistory()">Ver Resultados</button>
+        }
+      }
+      <input #fileInput type="file" accept="application/json,.json" hidden (change)="onImportFile($event)" />
+    </div>
+  </header>
 
   <section class="diagram-panel">
     @if (selectedModel === 'binomial') {
       <app-risk-simple></app-risk-simple>
-    }
-    @if (selectedModel === 'pathProbability') {
-      <app-risk-pathprobability></app-risk-pathprobability>
     }
     @if (selectedModel === 'bayes') {
       <app-risk-bayes></app-risk-bayes>

@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
-import { pathProbabilityComponent } from './pathProbability.component';
 import { BinomialComponent } from './binomial.component';
 import { BayesComponent } from './bayes.component';
 import { downloadRiskFile, readRiskFile, RiskFile } from '../utils/importExport.utils';
@@ -9,33 +8,56 @@ import { downloadRiskFile, readRiskFile, RiskFile } from '../utils/importExport.
   standalone: true,
   selector: 'risk-root',
   templateUrl: '../dagaIndex.html',
-  imports: [CommonModule, BinomialComponent, pathProbabilityComponent, BayesComponent]
+  imports: [CommonModule, BinomialComponent, BayesComponent]
 })
 export class SimpleComponent {
-  isSidebarCollapsed = false;
-  selectedModel: 'binomial' | 'pathProbability' | 'bayes' = 'binomial';
+  selectedModel: 'binomial' | 'bayes' = 'binomial';
 
   @ViewChild(BinomialComponent) private binomial?: BinomialComponent;
   @ViewChild(BayesComponent) private bayes?: BayesComponent;
 
-  toggleSidebar(): void {
-    this.isSidebarCollapsed = !this.isSidebarCollapsed;
-  }
-
-  selectModel(modelKey: 'binomial' | 'pathProbability' | 'bayes'): void {
+  selectModel(modelKey: 'binomial' | 'bayes'): void {
     this.selectedModel = modelKey;
   }
 
   exportCurrent(): void {
-    if (this.selectedModel === 'pathProbability') {
-      alert('Exportar/Importar no soportado en el modelo Path.');
-      return;
-    }
     const file =
       this.selectedModel === 'binomial' ? this.binomial?.exportCurrent() ?? null : this.bayes?.exportCurrent() ?? null;
     if (file) {
       downloadRiskFile(file);
     }
+  }
+
+  triggerCalculate(): void {
+    this.binomial?.openCalculationDialog();
+  }
+
+  triggerImportCSV(): void {
+    this.bayes?.toggleLearningPanel();
+  }
+
+  triggerGenerateCSV(): void {
+    this.bayes?.abrirDialogoCSV();
+  }
+
+  triggerMonteCarlo(): void {
+    this.bayes?.toggleMCPanel();
+  }
+
+  get hasBinomialResults(): boolean {
+    return (this.binomial?.results?.length ?? 0) > 0;
+  }
+
+  get hasBayesHistory(): boolean {
+    return (this.bayes?.mcHistory?.length ?? 0) > 0;
+  }
+
+  openBinomialResults(): void {
+    this.binomial?.openResultsBar();
+  }
+
+  openBayesHistory(): void {
+    this.bayes?.openMCHistory();
   }
 
   async onImportFile(event: Event): Promise<void> {
@@ -53,9 +75,8 @@ export class SimpleComponent {
     }
 
     if (parsed.modelType !== this.selectedModel) {
-      const labels: Record<'binomial' | 'pathProbability' | 'bayes', string> = {
+      const labels: Record<'binomial' | 'bayes', string> = {
         binomial: 'Binomial',
-        pathProbability: 'Path',
         bayes: 'Bayes'
       };
       alert(

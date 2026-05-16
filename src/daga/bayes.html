@@ -326,53 +326,6 @@
     </div>
   }
 
-  <!-- ═══ Toolbar (centered top, matches binomial style) ═══ -->
-  <div
-    style="
-      position: absolute;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 1000;
-      background: white;
-      padding: 15px 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    "
-  >
-    <button
-      (click)="toggleMCPanel()"
-      [style.background-color]="showMCPanel ? '#5a9e2f' : '#007bff'"
-      style="padding: 10px 20px; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold"
-    >
-      Monte Carlo
-    </button>
-    <button
-      (click)="toggleLearningPanel()"
-      [style.background-color]="showLearningPanel ? '#1452a8' : '#007bff'"
-      style="padding: 10px 20px; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold"
-    >
-      Importar CSV
-    </button>
-    <button
-      (click)="abrirDialogoCSV()"
-      style="
-        padding: 10px 20px;
-        background-color: #007bff;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-weight: bold;
-      "
-    >
-      Generar CSV
-    </button>
-  </div>
-
   <!-- ═══ Monte Carlo Panel ═══ -->
   @if (showMCPanel) {
     <div
@@ -472,19 +425,19 @@
     style="
       position: fixed;
       right: 0;
-      top: 0;
+      top: 64px;
       width: 350px;
-      height: 100vh;
+      height: calc(100vh - 64px);
       background: white;
       box-shadow: -2px 0 8px rgba(0, 0, 0, 0.15);
-      z-index: 1500;
+      z-index: 1100;
       overflow-y: auto;
       transform: translateX(100%);
       transition: transform 0.3s ease;
     "
   >
-    <div style="padding: 20px; border-bottom: 2px solid #007bff">
-      <h2 style="margin: 0; color: #007bff">Historial MC</h2>
+    <div style="padding: 20px; border-bottom: 2px solid #1F3A22">
+      <h2 style="margin: 0; color: #1F3A22">Historial MC</h2>
       <button
         (click)="closeMCHistory()"
         style="position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 24px; cursor: pointer; color: #999"
@@ -499,7 +452,7 @@
 
     @for (entry of mcHistory; track $index; let i = $index) {
       <div
-        [style.background]="i === selectedMCHistory ? '#f0f7ff' : 'white'"
+        [style.background]="i === selectedMCHistory ? '#EAF3DE' : 'white'"
         style="padding: 15px; border-bottom: 1px solid #eee; cursor: pointer"
         (click)="selectedMCHistory = i"
         (keydown.enter)="selectedMCHistory = i"
@@ -530,7 +483,7 @@
                 @for (nodeId of entry.result.probabilidades | keyvalue; track nodeId) {
                   <tr style="border-bottom: 1px solid #f5f5f5">
                     <td style="padding: 4px 6px; color: #1a1a1a">{{ getNodeName(nodeId.key) }}</td>
-                    <td style="padding: 4px 6px; text-align: right; color: #007bff; font-weight: bold">
+                    <td style="padding: 4px 6px; text-align: right; color: #2ECC4A; font-weight: bold">
                       {{ (entry.result.probabilidades[nodeId.key]['si'] * 100).toFixed(2) }}%
                     </td>
                     <td
@@ -548,34 +501,6 @@
       </div>
     }
   </div>
-
-  <!-- Floating button to reopen history -->
-  @if (mcHistory.length > 0 && !showMCHistory) {
-    <button
-      (click)="openMCHistory()"
-      style="
-        position: fixed;
-        bottom: 30px;
-        right: 30px;
-        z-index: 1000;
-        padding: 15px 20px;
-        background-color: #007bff;
-        color: white;
-        border: none;
-        border-radius: 50%;
-        width: 60px;
-        height: 60px;
-        cursor: pointer;
-        font-size: 24px;
-        box-shadow: 0 4px 12px rgba(0, 123, 255, 0.4);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      "
-    >
-      📊
-    </button>
-  }
 
   <!-- ═══ Learning Panel (modal) ═══ -->
   @if (showLearningPanel) {
