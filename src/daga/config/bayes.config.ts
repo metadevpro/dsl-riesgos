@@ -18,7 +18,9 @@ export const bayes_CONFIG: DiagramConfig = {
   canvas: {
     grid: {
       spacing: 50,
-      snap: true
+      snap: true,
+      style: 'lines',
+      thickness: 0.02,
     }
   },
   layoutFormat: 'bayes-causal',

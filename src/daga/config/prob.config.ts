@@ -188,7 +188,7 @@ export const PROB_CONFIG: DiagramConfig = {
               labelLook: null,
               look: {
                 lookType: 'image-look',
-                backgroundImage: '/assets/palette/element-transition.svg'
+                backgroundImage: '/assets/palette/element-state.svg'
               }
             },
             {
@@ -200,7 +200,7 @@ export const PROB_CONFIG: DiagramConfig = {
               labelLook: null,
               look: {
                 lookType: 'image-look',
-                backgroundImage: '/assets/palette/element-state.svg'
+                backgroundImage: '/assets/palette/element-event.svg'
               }
             },
             {
