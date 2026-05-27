@@ -20,9 +20,9 @@
     >
       <span style="font-size: 20px">⚠️</span>
       <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
-        <div style="font-weight: 600; color: #e65100; font-size: 14px; margin-bottom: 4px">Red Bayesiana muy grande</div>
+        <div style="font-weight: 600; color: #e65100; font-size: 14px; margin-bottom: 4px">Bayesian network is very large</div>
         <div style="color: #f57c00; font-size: 12px">
-          La inferencia exacta evaluará todas las combinaciones reales.<br />Puede haber retrasos e incluso bloqueos (O(2^N)).
+          Exact inference will evaluate every real combination.<br />Expect delays or even hangs (O(2^N)).
         </div>
       </div>
     </div>
@@ -66,14 +66,14 @@
         <div style="padding: 16px 20px 12px; border-bottom: 1px solid #eee">
           <div style="font-size: 16px; font-weight: 600; color: #1a1a1a">{{ selectedNodeName }}</div>
           <div style="font-size: 12px; color: #888; margin-top: 3px">
-            Padres:
-            {{ selectedNodeParentNames.length > 0 ? selectedNodeParentNames.join(', ') : 'ninguno' }}
+            Parents:
+            {{ selectedNodeParentNames.length > 0 ? selectedNodeParentNames.join(', ') : 'none' }}
           </div>
         </div>
 
         <!-- Evidence Section -->
         <div style="padding: 14px 20px; border-bottom: 1px solid #eee">
-          <div style="font-size: 10px; font-weight: 600; color: #888; letter-spacing: 0.06em; margin-bottom: 10px">EVIDENCIA</div>
+          <div style="font-size: 10px; font-weight: 600; color: #888; letter-spacing: 0.06em; margin-bottom: 10px">EVIDENCE</div>
           <div style="display: flex; gap: 8px">
             <button
               (click)="setEvidence('si')"
@@ -91,7 +91,7 @@
                 transition: all 0.15s;
               "
             >
-              Sí
+              Yes
             </button>
             <button
               (click)="setEvidence(null)"
@@ -134,9 +134,9 @@
 
         <!-- Probabilities Section -->
         <div style="padding: 14px 20px; border-bottom: 1px solid #eee">
-          <div style="font-size: 10px; font-weight: 600; color: #888; letter-spacing: 0.06em; margin-bottom: 10px">PROBABILIDADES</div>
+          <div style="font-size: 10px; font-weight: 600; color: #888; letter-spacing: 0.06em; margin-bottom: 10px">PROBABILITIES</div>
           <div style="display: flex; justify-content: space-between; align-items: center; padding: 5px 0">
-            <span style="font-size: 13px; color: #555">P({{ selectedNodeName }}=Sí)</span>
+            <span style="font-size: 13px; color: #555">P({{ selectedNodeName }}=Yes)</span>
             <span style="font-size: 13px; font-weight: 600; color: #a32d2d">{{ (selectedNodeMarginals.si * 100).toFixed(3) }}%</span>
           </div>
           <div style="display: flex; justify-content: space-between; align-items: center; padding: 5px 0">
@@ -158,7 +158,7 @@
               align-items: center;
             "
           >
-            <span style="font-weight: 600">TABLA CPT</span>
+            <span style="font-weight: 600">CPT TABLE</span>
             <label
               for="autoNormalizeCPTCheckbox"
               style="
@@ -179,7 +179,7 @@
           <!-- Warning for large tables -->
           @if (selectedNodeHasTooManyRows) {
             <div style="padding: 8px 12px; background: #fff3e0; border-radius: 6px; margin-bottom: 10px; font-size: 11px; color: #e65100">
-              ⚠ Esta tabla tiene {{ selectedNodeCPTRows.length }} combinaciones. Considera importar datos desde CSV.
+              ⚠ This table has {{ selectedNodeCPTRows.length }} combinations. Consider importing data from CSV.
             </div>
           }
 
@@ -188,11 +188,11 @@
             <div style="overflow-x: auto">
               <table style="width: 100%; border-collapse: collapse; font-size: 12px">
                 <tr>
-                  <th style="color: #888; font-weight: 500; padding: 5px 6px; text-align: left; border-bottom: 1px solid #eee">Estado</th>
+                  <th style="color: #888; font-weight: 500; padding: 5px 6px; text-align: left; border-bottom: 1px solid #eee">State</th>
                   <th style="color: #888; font-weight: 500; padding: 5px 6px; text-align: left; border-bottom: 1px solid #eee">P</th>
                 </tr>
                 <tr>
-                  <td style="padding: 5px 6px; color: #555">Sí</td>
+                  <td style="padding: 5px 6px; color: #555">Yes</td>
                   <td style="padding: 5px 6px">
                     <input
                       type="number"
@@ -255,7 +255,7 @@
                       {{ pname }}
                     </th>
                   }
-                  <th style="color: #888; font-weight: 500; padding: 5px 6px; text-align: left; border-bottom: 1px solid #eee">P(Sí)</th>
+                  <th style="color: #888; font-weight: 500; padding: 5px 6px; text-align: left; border-bottom: 1px solid #eee">P(Yes)</th>
                   <th style="color: #888; font-weight: 500; padding: 5px 6px; text-align: left; border-bottom: 1px solid #eee">P(No)</th>
                 </tr>
                 @for (row of selectedNodeCPTRows; track row.key; let even = $even) {
@@ -318,7 +318,7 @@
           <!-- Validation errors -->
           @if (cptValidationErrors.length > 0) {
             <div style="margin-top: 10px; padding: 8px 12px; background: #fcebeb; border-radius: 6px; font-size: 11px; color: #791f1f">
-              ✗ Algunas filas no suman 1.0. Revisa los valores marcados en rojo.
+              ✗ Some rows do not sum to 1.0. Review the values marked in red.
             </div>
           }
         </div>
@@ -354,7 +354,7 @@
       </div>
 
       <div style="padding: 12px 16px; border-bottom: 1px solid #eee; display: flex; gap: 8px; align-items: center">
-        <label for="mcIteracionesInput" style="font-size: 12px; color: #666">Iteraciones:</label>
+        <label for="mcIteracionesInput" style="font-size: 12px; color: #666">Iterations:</label>
         <input
           id="mcIteracionesInput"
           type="number"
@@ -378,7 +378,7 @@
             font-weight: 500;
           "
         >
-          {{ mcRunning ? 'Ejecutando…' : 'Ejecutar' }}
+          {{ mcRunning ? 'Running…' : 'Run' }}
         </button>
       </div>
 
@@ -387,9 +387,9 @@
           <table style="width: 100%; border-collapse: collapse; font-size: 11px">
             <thead>
               <tr style="border-bottom: 1px solid #eee">
-                <th style="text-align: left; padding: 4px 6px; color: #888; font-weight: 500">Nodo</th>
-                <th style="text-align: right; padding: 4px 6px; color: #888; font-weight: 500">P(Sí) MC</th>
-                <th style="text-align: right; padding: 4px 6px; color: #1967d2; font-weight: 500">P(Sí) Exacto</th>
+                <th style="text-align: left; padding: 4px 6px; color: #888; font-weight: 500">Node</th>
+                <th style="text-align: right; padding: 4px 6px; color: #888; font-weight: 500">P(Yes) MC</th>
+                <th style="text-align: right; padding: 4px 6px; color: #1967d2; font-weight: 500">P(Yes) Exact</th>
                 <th style="text-align: right; padding: 4px 6px; color: #e65100; font-weight: 500">Error</th>
               </tr>
             </thead>
@@ -413,7 +413,7 @@
               }
             </tbody>
           </table>
-          <div style="margin-top: 8px; font-size: 11px; color: #888">{{ mcResult.exitosas }} muestras válidas</div>
+          <div style="margin-top: 8px; font-size: 11px; color: #888">{{ mcResult.exitosas }} valid samples</div>
         </div>
       }
     </div>
@@ -437,7 +437,7 @@
     "
   >
     <div style="padding: 20px; border-bottom: 2px solid #1F3A22">
-      <h2 style="margin: 0; color: #1F3A22">Historial MC</h2>
+      <h2 style="margin: 0; color: #1F3A22">MC History</h2>
       <button
         (click)="closeMCHistory()"
         style="position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 24px; cursor: pointer; color: #999"
@@ -447,7 +447,7 @@
     </div>
 
     @if (mcHistory.length === 0) {
-      <div style="padding: 20px; color: #999">Sin resultados aún</div>
+      <div style="padding: 20px; color: #999">No results yet</div>
     }
 
     @for (entry of mcHistory; track $index; let i = $index) {
@@ -460,12 +460,12 @@
         [ngClass]="{ selectedResult: i === selectedMCHistory }"
       >
         <div style="margin-bottom: 8px">
-          <strong>Simulación {{ i + 1 }}</strong>
+          <strong>Simulation {{ i + 1 }}</strong>
           <span style="float: right; color: #999; font-size: 12px">{{ entry.date | date: 'short' }}</span>
         </div>
         <div style="font-size: 14px; color: #666">
-          <div>Iteraciones: {{ entry.iteraciones }}</div>
-          <div>Muestras válidas: {{ entry.result.exitosas }}</div>
+          <div>Iterations: {{ entry.iteraciones }}</div>
+          <div>Valid samples: {{ entry.result.exitosas }}</div>
         </div>
 
         <!-- Inline results table for selected entry -->
@@ -474,8 +474,8 @@
             <table style="width: 100%; border-collapse: collapse; font-size: 11px">
               <thead>
                 <tr style="border-bottom: 1px solid #ddd">
-                  <th style="text-align: left; padding: 4px 6px; color: #888; font-weight: 500">Nodo</th>
-                  <th style="text-align: right; padding: 4px 6px; color: #888; font-weight: 500">MC P(Sí)</th>
+                  <th style="text-align: left; padding: 4px 6px; color: #888; font-weight: 500">Node</th>
+                  <th style="text-align: right; padding: 4px 6px; color: #888; font-weight: 500">MC P(Yes)</th>
                   <th style="text-align: right; padding: 4px 6px; color: #e65100; font-weight: 500">Error</th>
                 </tr>
               </thead>
@@ -536,7 +536,7 @@
         <div
           style="padding: 16px 20px 12px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center"
         >
-          <span style="font-size: 15px; font-weight: 600; color: #1a1a1a">Aprender desde CSV</span>
+          <span style="font-size: 15px; font-weight: 600; color: #1a1a1a">Learn from CSV</span>
           <button
             (click)="toggleLearningPanel()"
             style="border: none; background: none; cursor: pointer; color: #888; font-size: 18px; line-height: 1"
@@ -548,7 +548,7 @@
         <!-- Creating Nodes Loader -->
         @if (creatingNodes) {
           <div style="padding: 40px 20px; text-align: center">
-            <div style="font-size: 14px; color: #1a1a1a; margin-bottom: 16px; font-weight: 500">Cargando nodos…</div>
+            <div style="font-size: 14px; color: #1a1a1a; margin-bottom: 16px; font-weight: 500">Loading nodes…</div>
             <div style="height: 4px; background: #eee; border-radius: 2px; overflow: hidden">
               <div style="height: 100%; background: #1967d2; animation: pulse 1.2s ease-in-out infinite; width: 60%"></div>
             </div>
@@ -558,10 +558,10 @@
         <!-- Creation Summary -->
         @if (creationSummary && !creatingNodes && !csvAnalysis && !learningResult) {
           <div style="padding: 16px 20px">
-            <div style="font-size: 13px; color: #27500a; font-weight: 600; margin-bottom: 12px">✓ Nodos creados</div>
+            <div style="font-size: 13px; color: #27500a; font-weight: 600; margin-bottom: 12px">✓ Nodes created</div>
             <div style="display: grid; gap: 6px; font-size: 12px">
               <div style="display: flex; justify-content: space-between; padding: 6px 10px; background: #eaf3de; border-radius: 5px">
-                <span style="color: #27500a">Nodos creados</span>
+                <span style="color: #27500a">Nodes created</span>
                 <span style="font-weight: 600; color: #1a1a1a">{{ creationSummary.createdNodes.length }}</span>
               </div>
               @if (creationSummary.createdNodes.length > 0) {
@@ -570,15 +570,15 @@
                 </div>
               }
               <div style="display: flex; justify-content: space-between; padding: 6px 10px; background: #eaf3fe; border-radius: 5px">
-                <span style="color: #1967d2">Conexiones creadas</span>
+                <span style="color: #1967d2">Connections created</span>
                 <span style="font-weight: 600; color: #1a1a1a">{{ creationSummary.createdEdges }}</span>
               </div>
               <div style="display: flex; justify-content: space-between; padding: 6px 10px; background: #f8f8f8; border-radius: 5px">
-                <span style="color: #666">Total nodos en red</span>
+                <span style="color: #666">Total nodes in network</span>
                 <span style="font-weight: 600; color: #1a1a1a">{{ creationSummary.totalNodes }}</span>
               </div>
               <div style="display: flex; justify-content: space-between; padding: 6px 10px; background: #f8f8f8; border-radius: 5px">
-                <span style="color: #666">Total conexiones en red</span>
+                <span style="color: #666">Total connections in network</span>
                 <span style="font-weight: 600; color: #1a1a1a">{{ creationSummary.totalConnections }}</span>
               </div>
             </div>
@@ -612,7 +612,7 @@
                   color: #666;
                 "
               >
-                Cancelar
+                Cancel
               </button>
               <button
                 (click)="proceedToAnalysis()"
@@ -628,7 +628,7 @@
                   color: #fff;
                 "
               >
-                Proceder
+                Proceed
               </button>
             </div>
           </div>
@@ -638,11 +638,11 @@
         @if (!csvAnalysis && !learningResult && !creatingNodes && !creationSummary) {
           <div style="padding: 20px">
             <div style="border: 2px dashed #ddd; border-radius: 8px; padding: 28px; text-align: center; color: #888">
-              <div style="font-size: 13px; margin-bottom: 12px">Selecciona un archivo CSV con datos de entrenamiento</div>
+              <div style="font-size: 13px; margin-bottom: 12px">Select a CSV file with training data</div>
               <input type="file" accept=".csv" (change)="onCSVFile($event)" style="font-size: 12px" />
             </div>
             <div style="margin-top: 12px; font-size: 11px; color: #aaa">
-              Las columnas deben coincidir con los nombres de los nodos. Valores: si/no, yes/no, 1/0, true/false.
+              Columns must match node names. Values: yes/no, si/no, 1/0, true/false.
             </div>
             <div
               style="
@@ -656,12 +656,12 @@
                 line-height: 1.5;
               "
             >
-              <strong>💡 Consejo:</strong> Para que las flechas se creen automáticamente al importar nodos nuevos, añade una línea al inicio
-              del CSV con el formato:
+              <strong>💡 Tip:</strong> To have edges created automatically when importing new nodes, add a line at the top of the CSV with
+              the format:
               <div style="margin-top: 6px; font-family: monospace; background: #fff; padding: 4px 6px; border-radius: 3px; color: #1967d2">
                 # edges: Burglary-&gt;Alarm; Earthquake-&gt;Alarm; Alarm-&gt;John; Alarm-&gt;Mary
               </div>
-              Sin esta línea, solo se crearán los nodos (sin relaciones).
+              Without this line, only the nodes will be created (no relationships).
             </div>
             @if (csvImportMessage) {
               <div
@@ -685,15 +685,15 @@
         <!-- CSV Analysis Summary -->
         @if (csvAnalysis && !learningResult && !learningRunning) {
           <div style="padding: 16px 20px">
-            <div style="font-size: 12px; color: #666; margin-bottom: 12px; font-weight: 600">Resumen del CSV:</div>
+            <div style="font-size: 12px; color: #666; margin-bottom: 12px; font-weight: 600">CSV Summary:</div>
             <div style="display: grid; gap: 6px; font-size: 12px">
               <div style="display: flex; justify-content: space-between; padding: 6px 10px; background: #f8f8f8; border-radius: 5px">
-                <span style="color: #666">Filas detectadas</span>
+                <span style="color: #666">Detected rows</span>
                 <span style="font-weight: 600; color: #1a1a1a">{{ csvAnalysis.filas }}</span>
               </div>
               <div style="padding: 6px 10px; background: #eaf3de; border-radius: 5px">
                 <div style="color: #27500a; font-weight: 500; margin-bottom: 3px">
-                  Nodos observados ({{ csvAnalysis.observados.length }})
+                  Observed nodes ({{ csvAnalysis.observados.length }})
                 </div>
                 <div style="color: #3b6d11; font-size: 11px">
                   {{ csvAnalysis.observados.map((id) => bayesGraph.get(id)?.name ?? id).join(', ') || '—' }}
@@ -702,7 +702,7 @@
               @if (csvAnalysis.ocultos.length > 0) {
                 <div style="padding: 6px 10px; background: #fff3e0; border-radius: 5px">
                   <div style="color: #e65100; font-weight: 500; margin-bottom: 3px">
-                    Nodos ocultos — se usará EM ({{ csvAnalysis.ocultos.length }})
+                    Hidden nodes — EM will be used ({{ csvAnalysis.ocultos.length }})
                   </div>
                   <div style="color: #f57c00; font-size: 11px">
                     {{ csvAnalysis.ocultos.map((id) => bayesGraph.get(id)?.name ?? id).join(', ') }}
@@ -711,7 +711,7 @@
               }
               @if (csvAnalysis.sinMapeo.length > 0) {
                 <div style="padding: 6px 10px; background: #f5f5f5; border-radius: 5px">
-                  <div style="color: #888; font-weight: 500; margin-bottom: 3px">Columnas ignoradas (sin nodo)</div>
+                  <div style="color: #888; font-weight: 500; margin-bottom: 3px">Ignored columns (no matching node)</div>
                   <div style="color: #aaa; font-size: 11px">{{ csvAnalysis.sinMapeo.join(', ') }}</div>
                 </div>
               }
@@ -730,7 +730,7 @@
                   color: #666;
                 "
               >
-                Cancelar
+                Cancel
               </button>
               <button
                 (click)="confirmarAprendizaje()"
@@ -746,7 +746,7 @@
                   color: #fff;
                 "
               >
-                {{ csvAnalysis.ocultos.length === 0 ? 'Aplicar MLE' : 'Aplicar EM' }}
+                {{ csvAnalysis.ocultos.length === 0 ? 'Apply MLE' : 'Apply EM' }}
               </button>
             </div>
           </div>
@@ -755,9 +755,9 @@
         <!-- EM Progress -->
         @if (learningRunning) {
           <div style="padding: 24px 20px; text-align: center">
-            <div style="font-size: 13px; color: #666; margin-bottom: 12px">Ejecutando algoritmo EM…</div>
+            <div style="font-size: 13px; color: #666; margin-bottom: 12px">Running EM algorithm…</div>
             @if (emProgress) {
-              <div style="font-size: 12px; color: #1967d2">Iteración {{ emProgress.iter }} — delta: {{ emProgress.delta.toFixed(6) }}</div>
+              <div style="font-size: 12px; color: #1967d2">Iteration {{ emProgress.iter }} — delta: {{ emProgress.delta.toFixed(6) }}</div>
             }
             <div style="margin-top: 16px; height: 4px; background: #eee; border-radius: 2px; overflow: hidden">
               <div style="height: 100%; background: #1967d2; animation: pulse 1.5s ease-in-out infinite; width: 60%"></div>
@@ -769,16 +769,16 @@
         @if (learningResult && !learningRunning) {
           <div style="padding: 16px 20px">
             <div style="font-size: 12px; color: #27500a; font-weight: 600; margin-bottom: 4px">
-              ✓ {{ learningResult.metodo }} completado
+              ✓ {{ learningResult.metodo }} completed
             </div>
-            <div style="font-size: 11px; color: #888; margin-bottom: 14px">Comparación de P(Sí) antes → después del aprendizaje</div>
+            <div style="font-size: 11px; color: #888; margin-bottom: 14px">P(Yes) comparison before → after learning</div>
             <div style="max-height: 260px; overflow-y: auto">
               <table style="width: 100%; border-collapse: collapse; font-size: 11px">
                 <thead>
                   <tr style="border-bottom: 1px solid #eee">
-                    <th style="text-align: left; padding: 4px 6px; color: #888; font-weight: 500">Nodo</th>
-                    <th style="text-align: right; padding: 4px 6px; color: #888; font-weight: 500">Antes</th>
-                    <th style="text-align: right; padding: 4px 6px; color: #1967d2; font-weight: 500">Después</th>
+                    <th style="text-align: left; padding: 4px 6px; color: #888; font-weight: 500">Node</th>
+                    <th style="text-align: right; padding: 4px 6px; color: #888; font-weight: 500">Before</th>
+                    <th style="text-align: right; padding: 4px 6px; color: #1967d2; font-weight: 500">After</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -812,7 +812,7 @@
                   color: #666;
                 "
               >
-                Descartar
+                Discard
               </button>
               <button
                 (click)="aceptarCPTs()"
@@ -828,7 +828,7 @@
                   color: #fff;
                 "
               >
-                Aceptar CPTs
+                Accept CPTs
               </button>
             </div>
           </div>
@@ -865,7 +865,7 @@
         tabindex="0"
       >
         <div style="padding: 14px 18px; border-bottom: 1px solid #eee; display: flex; align-items: center; justify-content: space-between">
-          <span style="font-size: 14px; font-weight: 600; color: #1a1a1a">Generar CSV</span>
+          <span style="font-size: 14px; font-weight: 600; color: #1a1a1a">Generate CSV</span>
           <button
             (click)="cerrarDialogoCSV()"
             style="border: none; background: none; cursor: pointer; color: #888; font-size: 16px; line-height: 1"
@@ -874,7 +874,7 @@
           </button>
         </div>
         <div style="padding: 18px">
-          <label for="csvFilasInput" style="display: block; font-size: 12px; color: #666; margin-bottom: 6px">Número de filas:</label>
+          <label for="csvFilasInput" style="display: block; font-size: 12px; color: #666; margin-bottom: 6px">Number of rows:</label>
           <input
             id="csvFilasInput"
             type="number"
@@ -905,7 +905,7 @@
                 color: #666;
               "
             >
-              Cancelar
+              Cancel
             </button>
             <button
               (click)="generarCSV()"
@@ -921,7 +921,7 @@
                 color: #fff;
               "
             >
-              Generar
+              Generate
             </button>
           </div>
         </div>

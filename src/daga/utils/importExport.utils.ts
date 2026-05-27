@@ -152,9 +152,23 @@ function migrateLegacyValueKeys(daga: DagaModel): void {
   }
 }
 
+const BAYES_LEGACY_NODE_TYPE = 'diagram-node';
+const BAYES_DEFAULT_NODE_TYPE = 'event-diagram-node';
+
 export function applyRiskFileToCanvas(canvas: Canvas, file: RiskFile): void {
+  if (file.modelType === 'bayes') {
+    remapLegacyBayesNodeTypes(file.daga);
+  }
   canvas.model.clear();
   new DagaImporter().import(canvas.model, file.daga);
   canvas.updateModelInView();
   canvas.center(undefined, 1, 300);
+}
+
+function remapLegacyBayesNodeTypes(daga: DagaModel): void {
+  for (const node of daga.nodes ?? []) {
+    if (node.type === BAYES_LEGACY_NODE_TYPE) {
+      node.type = BAYES_DEFAULT_NODE_TYPE;
+    }
+  }
 }

@@ -78,7 +78,7 @@ export function analizarCSV(graph: BayesGraph, headers: string[]): CSVAnalysis {
   }
 
   if (sinMapeo.length > 0) {
-    console.warn('[CSV] Columnas sin nodo correspondiente:', sinMapeo);
+    console.warn('[CSV] Columns without a matching node:', sinMapeo);
   }
 
   return { observados, ocultos, sinMapeo };

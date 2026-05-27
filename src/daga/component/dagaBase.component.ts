@@ -52,6 +52,7 @@ export class DagaBaseComponent implements AfterViewInit, OnDestroy, OnChanges {
   private readonly localProbabilityDecoratorSuffix = '-local-probability-decorator';
   private readonly theoreticalProbabilityDecoratorSuffix = '-theoretical-probability-decorator';
   private readonly bayesDecoratorSuffix = '-bayes-decorator';
+  private readonly bayesTopDecoratorSuffix = '-bayes-top-decorator';
   private readonly maxProbability = MAX_PROBABILITY;
 
   private readonly nodeStyleByType: Record<string, { icon: string; solid: string }> = {
@@ -60,6 +61,14 @@ export class DagaBaseComponent implements AfterViewInit, OnDestroy, OnChanges {
     'state-diagram-node': { icon: '/assets/icons/transition-icon.svg', solid: '#047E9C' },
     'end-diagram-node': { icon: '/assets/icons/end-icon.svg', solid: '#B8475A' }
   };
+
+  private readonly bayesNodeStyleByType: Record<string, { icon: string; solid: string }> = {
+    'cause-diagram-node': { icon: '/assets/icons/cause-icon.svg', solid: '#C2410C' },
+    'effect-diagram-node': { icon: '/assets/icons/effect-icon.svg', solid: '#047857' },
+    'event-diagram-node': { icon: '/assets/icons/event-icon.svg', solid: '#6D28D9' }
+  };
+
+  private readonly bayesFallbackStyle = { icon: '/assets/icons/event-icon.svg', solid: '#6D28D9' };
 
   /* Implementacion de ngAfterViewInit, ocurre cuando el componente ha sido inicializado */
   ngAfterViewInit(): void {
@@ -422,6 +431,7 @@ export class DagaBaseComponent implements AfterViewInit, OnDestroy, OnChanges {
           (decorator.id.endsWith(this.nodeProbabilityDecoratorSuffix) ||
             decorator.id.endsWith(this.localProbabilityDecoratorSuffix) ||
             decorator.id.endsWith(this.theoreticalProbabilityDecoratorSuffix) ||
+            decorator.id.endsWith(this.bayesTopDecoratorSuffix) ||
             decorator.id.endsWith(this.bayesDecoratorSuffix))
         );
       })
@@ -450,7 +460,7 @@ export class DagaBaseComponent implements AfterViewInit, OnDestroy, OnChanges {
     const decoratorId = `${node.id}${this.nodeProbabilityDecoratorSuffix}`;
     const labelHtml = `
       <foreignObject x="0" y="0" width="${width}" height="${bandHeight}">
-        <div xmlns="http://www.w3.org/1999/xhtml" style="height:${bandHeight}px;display:flex;align-items:center;justify-content:space-between;padding:0 10px;box-sizing:border-box;background:transparent;pointer-events:none;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
+        <div xmlns="http://www.w3.org/1999/xhtml" style="height:${bandHeight}px;display:flex;align-items:center;justify-content:space-between;padding:0 10px;box-sizing:border-box;background:transparent;pointer-events:none;font-family:'WonderUnitSans', sans-serif;">
           <img src="${style.icon}" width="22" height="22" style="display:block;" />
           <span style="color:${style.solid};font-weight:700;font-size:13px;">${globalText}</span>
         </div>
@@ -476,7 +486,7 @@ export class DagaBaseComponent implements AfterViewInit, OnDestroy, OnChanges {
     const decoratorId = `${node.id}${this.localProbabilityDecoratorSuffix}`;
     const labelHtml = `
       <foreignObject x="0" y="0" width="${width}" height="${chipBandHeight}">
-        <div xmlns="http://www.w3.org/1999/xhtml" style="height:${chipBandHeight}px;display:flex;align-items:center;justify-content:center;background:transparent;pointer-events:none;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
+        <div xmlns="http://www.w3.org/1999/xhtml" style="height:${chipBandHeight}px;display:flex;align-items:center;justify-content:center;background:transparent;pointer-events:none;font-family:'WonderUnitSans', sans-serif;">
           <span style="background:#EEEEEE;color:#333;font-size:12px;border-radius:999px;padding:2px 12px;font-weight:500;">${localText}</span>
         </div>
       </foreignObject>
@@ -496,12 +506,15 @@ export class DagaBaseComponent implements AfterViewInit, OnDestroy, OnChanges {
   }
 
   /**
-   * Draws the Bayesian decorator INSIDE the node.
-   * Shows: two probability bars (Sí/No) with percentages and an evidence badge.
-   * Positioned below the node name label to avoid overlap.
+   * Draws the Bayesian decorators INSIDE the node:
+   *   • Top band: type icon (left) + Yes% (right), tinted by node type.
+   *   • Body: centered node name + Yes/No bars + evidence pill.
    */
   private drawBayesDecorator(canvas: Canvas, node: DiagramNode): void {
     if (!this.isNodeRenderable(node)) return;
+
+    const typeId = node.type?.id ?? '';
+    const style = this.bayesNodeStyleByType[typeId] ?? this.bayesFallbackStyle;
 
     const nodeId = normalizeNodeId(node.id);
     const bayesNode = this.bayesGraph.get(nodeId);
@@ -515,55 +528,67 @@ export class DagaBaseComponent implements AfterViewInit, OnDestroy, OnChanges {
     const barWidthSi = Math.max(pSi * 100, 0.5);
     const barWidthNo = Math.max(pNo * 100, 0.5);
 
-    // Evidence badge
-    let badgeColor = '#888';
-    let badgeBg = '#f0f0f0';
-    let badgeText = '? sin evidencia';
+    let badgeColor = '#6B7280';
+    let badgeBg = '#F3F4F6';
+    let badgeIcon = '?';
+    let badgeText = 'no evidence';
     if (evidence === 'si') {
       badgeColor = '#27500A';
       badgeBg = '#EAF3DE';
-      badgeText = 'Evidencia: Sí';
+      badgeIcon = '✓';
+      badgeText = 'evidence: Yes';
     } else if (evidence === 'no') {
       badgeColor = '#791F1F';
       badgeBg = '#FCEBEB';
-      badgeText = 'Evidencia: No';
+      badgeIcon = '✕';
+      badgeText = 'evidence: No';
     }
-
-    const decoratorId = `${node.id}${this.bayesDecoratorSuffix}`;
-    const decoratorWidth = node.width - 8;
-    const decoratorHeight = 70;
-    const offsetY = 28; // Below the node name
-
-    const labelHtml = `
-      <foreignObject x="4" y="0" width="${decoratorWidth}" height="${decoratorHeight}">
-        <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:11px;padding:2px 4px;">
-          <div style="display:flex;align-items:center;gap:4px;margin-bottom:3px;">
-            <span style="color:#888;min-width:18px;font-size:10px;">Sí</span>
-            <div style="flex:1;height:4px;background:#eee;border-radius:2px;overflow:hidden;"><div style="height:100%;width:${barWidthSi}%;background:#E24B4A;border-radius:2px;transition:width .4s;"></div></div>
-            <span style="color:#A32D2D;font-weight:600;min-width:36px;text-align:right;font-size:10px;">${pSiPct}%</span>
-          </div>
-          <div style="display:flex;align-items:center;gap:4px;margin-bottom:5px;">
-            <span style="color:#888;min-width:18px;font-size:10px;">No</span>
-            <div style="flex:1;height:4px;background:#eee;border-radius:2px;overflow:hidden;"><div style="height:100%;width:${barWidthNo}%;background:#E24B4A;border-radius:2px;transition:width .4s;"></div></div>
-            <span style="color:#A32D2D;font-weight:600;min-width:36px;text-align:right;font-size:10px;">${pNoPct}%</span>
-          </div>
-          <div style="display:inline-block;font-size:9px;padding:1px 6px;border-radius:10px;font-weight:500;background:${badgeBg};color:${badgeColor};">${badgeText}</div>
-        </div>
-      </foreignObject>
-    `;
 
     const priority = typeof node.getPriority === 'function' ? node.getPriority() : 0;
 
-    canvas.model.decorators.new(
-      node,
-      [node.coords[0], node.coords[1] + offsetY],
-      node.width,
-      decoratorHeight,
-      priority,
-      labelHtml,
-      decoratorId
-    );
+    // ── Top band: icon + Yes% ──
+    const topBandHeight = 32;
+    const topDecoratorId = `${node.id}${this.bayesTopDecoratorSuffix}`;
+    const topHtml = `
+      <foreignObject x="0" y="0" width="${node.width}" height="${topBandHeight}">
+        <div xmlns="http://www.w3.org/1999/xhtml" style="height:${topBandHeight}px;display:flex;align-items:center;justify-content:space-between;padding:0 10px;box-sizing:border-box;background:transparent;pointer-events:none;font-family:'WonderUnitSans', sans-serif;">
+          <img src="${style.icon}" width="22" height="22" style="display:block;" alt="" />
+          <span style="color:${style.solid};font-weight:700;font-size:13px;">${pSiPct}%</span>
+        </div>
+      </foreignObject>
+    `;
+    canvas.model.decorators.new(node, [node.coords[0], node.coords[1]], node.width, topBandHeight, priority, topHtml, topDecoratorId);
+
+    // ── Body: name + bars + evidence pill ──
+    const bodyOffsetY = topBandHeight;
+    const bodyHeight = Math.max(node.height - topBandHeight, 1);
+    const bodyDecoratorId = `${node.id}${this.bayesDecoratorSuffix}`;
+    const bodyHtml = `
+      <foreignObject x="0" y="0" width="${node.width}" height="${bodyHeight}">
+        <div xmlns="http://www.w3.org/1999/xhtml" style="height:${bodyHeight}px;display:flex;flex-direction:column;justify-content:space-between;padding:30px 14px 10px;box-sizing:border-box;background:transparent;pointer-events:none;font-family:'WonderUnitSans', sans-serif;">
+          <div style="display:flex;flex-direction:column;gap:4px;">
+            <div style="display:flex;align-items:center;gap:6px;">
+              <span style="color:#6B7280;min-width:22px;font-size:11px;">Yes</span>
+              <div style="flex:1;height:4px;background:#EEEEEE;border-radius:2px;overflow:hidden;"><div style="height:100%;width:${barWidthSi}%;background:#E24B4A;border-radius:2px;transition:width .4s;"></div></div>
+              <span style="color:#1F2937;font-weight:500;min-width:54px;text-align:right;font-size:11px;">${pSiPct}%</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:6px;">
+              <span style="color:#6B7280;min-width:22px;font-size:11px;">No</span>
+              <div style="flex:1;height:4px;background:#EEEEEE;border-radius:2px;overflow:hidden;"><div style="height:100%;width:${barWidthNo}%;background:#E24B4A;border-radius:2px;transition:width .4s;"></div></div>
+              <span style="color:#1F2937;font-weight:500;min-width:54px;text-align:right;font-size:11px;">${pNoPct}%</span>
+            </div>
+          </div>
+          <div style="display:flex;justify-content:center;">
+            <div style="display:inline-flex;align-items:center;gap:4px;font-size:11px;padding:2px 10px;border-radius:999px;font-weight:500;background:${badgeBg};color:${badgeColor};">
+              <span style="font-weight:700;">${badgeIcon}</span>${badgeText}
+            </div>
+          </div>
+        </div>
+      </foreignObject>
+    `;
+    canvas.model.decorators.new(node, [node.coords[0], node.coords[1] + bodyOffsetY], node.width, bodyHeight, priority, bodyHtml, bodyDecoratorId);
   }
+
 }
 
 class DagaBaseDiagramValidator implements DiagramValidator {

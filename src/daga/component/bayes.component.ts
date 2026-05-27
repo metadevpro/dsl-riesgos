@@ -92,7 +92,7 @@ export class BayesComponent extends GenericComponent implements OnDestroy {
 
   exportCurrent(): RiskFile | null {
     if (!this.canvas) {
-      alert('El diagrama todavía no está listo. Inténtalo de nuevo en unos segundos.');
+      alert('The diagram is not ready yet. Try again in a few seconds.');
       return null;
     }
     const file = exportCanvasToFile(this.canvas, 'bayes');
@@ -205,8 +205,8 @@ export class BayesComponent extends GenericComponent implements OnDestroy {
       if (!this.tooLargeAlerted) {
         this.tooLargeAlerted = true;
         alert(
-          `La red tiene ${this.bayesGraph.size} nodos. La inferencia exacta es O(2^N) y se bloquea por encima de 20 nodos. ` +
-            'El cálculo de marginales queda desactivado hasta que reduzcas la red. Usa Monte Carlo para inferencia aproximada.'
+          `The network has ${this.bayesGraph.size} nodes. Exact inference is O(2^N) and is blocked above 20 nodes. ` +
+            'Marginal calculation is disabled until you reduce the network. Use Monte Carlo for approximate inference.'
         );
       }
     } else {
@@ -330,10 +330,10 @@ export class BayesComponent extends GenericComponent implements OnDestroy {
    */
   getEvidenceText(nodeId: string): string {
     const node = this.bayesGraph.get(nodeId);
-    if (!node) return '? sin evidencia';
-    if (node.evidence === 'si') return 'Evidencia: Sí';
-    if (node.evidence === 'no') return 'Evidencia: No';
-    return '? sin evidencia';
+    if (!node) return '? no evidence';
+    if (node.evidence === 'si') return 'evidence: Yes';
+    if (node.evidence === 'no') return 'evidence: No';
+    return '? no evidence';
   }
 
   /**
@@ -517,7 +517,7 @@ export class BayesComponent extends GenericComponent implements OnDestroy {
           };
           if (missingEdgesWarning) {
             this.csvImportMessage =
-              'CSV no contiene info de direcciones (aristas). Solo se crearon los nodos. Añade una línea "# edges: Padre->Hijo; Padre->Hijo" al inicio del CSV para definir relaciones.';
+              'CSV does not contain direction info (edges). Only nodes were created. Add a line "# edges: Parent->Child; Parent->Child" at the start of the CSV to define relationships.';
           }
           this.cdr.detectChanges();
         }, 100);
@@ -552,7 +552,12 @@ export class BayesComponent extends GenericComponent implements OnDestroy {
     const canvas = this.canvas;
     if (!canvas) return 0;
 
-    const nodeType = canvas.model.nodes.types.get('diagram-node');
+    const nodeType =
+      canvas.model.nodes.types.get('event-diagram-node') ??
+      canvas.model.nodes.types.get('cause-diagram-node') ??
+      canvas.model.nodes.types.get('effect-diagram-node') ??
+      canvas.model.nodes.types.get('diagram-node') ??
+      canvas.model.nodes.types.all()[0];
     const connType = canvas.model.connections.types.get('diagram-connection');
     if (!nodeType || !connType) return 0;
 
