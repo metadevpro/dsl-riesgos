@@ -4,9 +4,9 @@ describe('e2e', () => {
     cy.getByTestId('bayes').click(); // Se hace click en el botón del modelo binomial para asegurarse de que se muestre el panel correspondiente
   });
 
-  it('daga panel should be visible and should have 1 item', () => {
+  it('daga panel should be visible and should have 3 items', () => {
     cy.get('.daga-panel').should('be.visible');
-    cy.get('.daga-palette-view').children().should('have.length', 1);
+    cy.get('.daga-palette-view').children().should('have.length', 3);
   });
 
   it('daga model should be visible', () => {
@@ -18,11 +18,11 @@ describe('e2e', () => {
   });
 
   it('should build bayes network and run Monte Carlo', () => {
-    // Drag 2 nodes: second is 200px gap after first (200px wide → placed at x=500)
-    cy.dragNodeToCanvas(0, 100, 200); // Node 1
-    cy.dragNodeToCanvas(0, 400, 200); // Node 2
+    // Drag 2 nodes onto canvas (250×150 nodes, 150px gap between centers).
+    cy.dragNodeToCanvas(0, 300, 200); // Node 1
+    cy.dragNodeToCanvas(1, 500, 200); // Node 2
 
-    // Connect Node 1 right port → Node 2 left port (200×100 nodes)
+    // Connect Node 1 right port → Node 2 left port.
     cy.connectCanvasNodes(0, 1);
 
     // Open CPT popup for Node 1 (root): right-click to select, Esc to dismiss context menu,
@@ -56,7 +56,7 @@ describe('e2e', () => {
     // Open Monte Carlo panel and execute
     cy.contains('button', 'Monte Carlo').click();
     cy.get('#mcIteracionesInput').should('be.visible');
-    cy.contains('button', 'Ejecutar').click();
+    cy.contains('button', 'Run').click();
 
     // Results table should appear in the MC panel
     cy.get('#mcIteracionesInput').parents('div').first().parent().find('table').should('exist');
