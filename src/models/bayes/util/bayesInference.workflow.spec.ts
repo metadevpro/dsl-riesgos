@@ -11,7 +11,7 @@ import {
   topologicalSort,
   validateCPT
 } from './bayesInference.utils';
-import { overlayBayesSchemaOnGraph } from '../importExport.utils';
+import { overlayBayesSchemaOnGraph } from '../../../util/importExport.utils';
 import { BayesGraph } from '../../types';
 
 describe('Bayes Workflow — CPT building blocks', () => {
@@ -24,7 +24,7 @@ describe('Bayes Workflow — CPT building blocks', () => {
     const cpt = generateDefaultCPT(['P1', 'P2', 'P3']);
     expect(Object.keys(cpt)).toHaveLength(8);
     for (const row of Object.values(cpt)) {
-      expect(row.si + row.no).toBeCloseTo(1, 5);
+      expect((row as any).si + (row as any).no).toBeCloseTo(1, 5);
     }
   });
 
@@ -46,8 +46,8 @@ describe('Bayes Workflow — CPT building blocks', () => {
 
   it('recalcCPTOnParentChange preserves matching rows and fills gaps', () => {
     const oldCPT = {
-      'A_si': { si: 0.8, no: 0.2 },
-      'A_no': { si: 0.1, no: 0.9 }
+      A_si: { si: 0.8, no: 0.2 },
+      A_no: { si: 0.1, no: 0.9 }
     };
 
     const newCPT = recalcCPTOnParentChange(oldCPT, ['A', 'B']);
@@ -62,9 +62,33 @@ describe('Bayes Workflow — CPT building blocks', () => {
 describe('Bayes Workflow — Graph topology', () => {
   function makeChainGraph(): BayesGraph {
     const g: BayesGraph = new Map();
-    g.set('R', { id: 'R', name: 'R', parents: [], children: ['S'], evidence: null, cpt: { prior: { si: 0.4, no: 0.6 } }, marginals: { si: 0, no: 0 } });
-    g.set('S', { id: 'S', name: 'S', parents: ['R'], children: ['T'], evidence: null, cpt: { R_si: { si: 0.9, no: 0.1 }, R_no: { si: 0.2, no: 0.8 } }, marginals: { si: 0, no: 0 } });
-    g.set('T', { id: 'T', name: 'T', parents: ['S'], children: [], evidence: null, cpt: { S_si: { si: 0.7, no: 0.3 }, S_no: { si: 0.05, no: 0.95 } }, marginals: { si: 0, no: 0 } });
+    g.set('R', {
+      id: 'R',
+      name: 'R',
+      parents: [],
+      children: ['S'],
+      evidence: null,
+      cpt: { prior: { si: 0.4, no: 0.6 } },
+      marginals: { si: 0, no: 0 }
+    });
+    g.set('S', {
+      id: 'S',
+      name: 'S',
+      parents: ['R'],
+      children: ['T'],
+      evidence: null,
+      cpt: { R_si: { si: 0.9, no: 0.1 }, R_no: { si: 0.2, no: 0.8 } },
+      marginals: { si: 0, no: 0 }
+    });
+    g.set('T', {
+      id: 'T',
+      name: 'T',
+      parents: ['S'],
+      children: [],
+      evidence: null,
+      cpt: { S_si: { si: 0.7, no: 0.3 }, S_no: { si: 0.05, no: 0.95 } },
+      marginals: { si: 0, no: 0 }
+    });
     return g;
   }
 
@@ -76,8 +100,24 @@ describe('Bayes Workflow — Graph topology', () => {
 
   it('hasCycle detects a 2-node loop', () => {
     const g: BayesGraph = new Map();
-    g.set('X', { id: 'X', name: 'X', parents: ['Y'], children: ['Y'], evidence: null, cpt: { Y_si: { si: 0.5, no: 0.5 }, Y_no: { si: 0.5, no: 0.5 } }, marginals: { si: 0, no: 0 } });
-    g.set('Y', { id: 'Y', name: 'Y', parents: ['X'], children: ['X'], evidence: null, cpt: { X_si: { si: 0.5, no: 0.5 }, X_no: { si: 0.5, no: 0.5 } }, marginals: { si: 0, no: 0 } });
+    g.set('X', {
+      id: 'X',
+      name: 'X',
+      parents: ['Y'],
+      children: ['Y'],
+      evidence: null,
+      cpt: { Y_si: { si: 0.5, no: 0.5 }, Y_no: { si: 0.5, no: 0.5 } },
+      marginals: { si: 0, no: 0 }
+    });
+    g.set('Y', {
+      id: 'Y',
+      name: 'Y',
+      parents: ['X'],
+      children: ['X'],
+      evidence: null,
+      cpt: { X_si: { si: 0.5, no: 0.5 }, X_no: { si: 0.5, no: 0.5 } },
+      marginals: { si: 0, no: 0 }
+    });
     expect(hasCycle(g)).toBe(true);
   });
 
@@ -89,8 +129,24 @@ describe('Bayes Workflow — Graph topology', () => {
 describe('Bayes Workflow — Inference behaviour', () => {
   it('cycle in graph yields neutral marginals (0.5 / 0.5)', () => {
     const g: BayesGraph = new Map();
-    g.set('X', { id: 'X', name: 'X', parents: ['Y'], children: ['Y'], evidence: null, cpt: { Y_si: { si: 0.5, no: 0.5 }, Y_no: { si: 0.5, no: 0.5 } }, marginals: { si: 0, no: 0 } });
-    g.set('Y', { id: 'Y', name: 'Y', parents: ['X'], children: ['X'], evidence: null, cpt: { X_si: { si: 0.5, no: 0.5 }, X_no: { si: 0.5, no: 0.5 } }, marginals: { si: 0, no: 0 } });
+    g.set('X', {
+      id: 'X',
+      name: 'X',
+      parents: ['Y'],
+      children: ['Y'],
+      evidence: null,
+      cpt: { Y_si: { si: 0.5, no: 0.5 }, Y_no: { si: 0.5, no: 0.5 } },
+      marginals: { si: 0, no: 0 }
+    });
+    g.set('Y', {
+      id: 'Y',
+      name: 'Y',
+      parents: ['X'],
+      children: ['X'],
+      evidence: null,
+      cpt: { X_si: { si: 0.5, no: 0.5 }, X_no: { si: 0.5, no: 0.5 } },
+      marginals: { si: 0, no: 0 }
+    });
 
     recalcAllMarginals(g);
     expect(g.get('X')!.marginals).toEqual({ si: 0.5, no: 0.5 });
@@ -99,8 +155,24 @@ describe('Bayes Workflow — Inference behaviour', () => {
 
   it('evidence on a node forces its marginal to 1/0', () => {
     const g: BayesGraph = new Map();
-    g.set('R', { id: 'R', name: 'R', parents: [], children: ['S'], evidence: 'si', cpt: { prior: { si: 0.4, no: 0.6 } }, marginals: { si: 0, no: 0 } });
-    g.set('S', { id: 'S', name: 'S', parents: ['R'], children: [], evidence: null, cpt: { R_si: { si: 0.9, no: 0.1 }, R_no: { si: 0.2, no: 0.8 } }, marginals: { si: 0, no: 0 } });
+    g.set('R', {
+      id: 'R',
+      name: 'R',
+      parents: [],
+      children: ['S'],
+      evidence: 'si',
+      cpt: { prior: { si: 0.4, no: 0.6 } },
+      marginals: { si: 0, no: 0 }
+    });
+    g.set('S', {
+      id: 'S',
+      name: 'S',
+      parents: ['R'],
+      children: [],
+      evidence: null,
+      cpt: { R_si: { si: 0.9, no: 0.1 }, R_no: { si: 0.2, no: 0.8 } },
+      marginals: { si: 0, no: 0 }
+    });
 
     recalcAllMarginals(g);
     expect(g.get('R')!.marginals).toEqual({ si: 1, no: 0 });
@@ -109,8 +181,24 @@ describe('Bayes Workflow — Inference behaviour', () => {
 
   it('child evidence updates parent posterior (Bayes update)', () => {
     const g: BayesGraph = new Map();
-    g.set('R', { id: 'R', name: 'R', parents: [], children: ['S'], evidence: null, cpt: { prior: { si: 0.4, no: 0.6 } }, marginals: { si: 0, no: 0 } });
-    g.set('S', { id: 'S', name: 'S', parents: ['R'], children: [], evidence: 'si', cpt: { R_si: { si: 0.9, no: 0.1 }, R_no: { si: 0.2, no: 0.8 } }, marginals: { si: 0, no: 0 } });
+    g.set('R', {
+      id: 'R',
+      name: 'R',
+      parents: [],
+      children: ['S'],
+      evidence: null,
+      cpt: { prior: { si: 0.4, no: 0.6 } },
+      marginals: { si: 0, no: 0 }
+    });
+    g.set('S', {
+      id: 'S',
+      name: 'S',
+      parents: ['R'],
+      children: [],
+      evidence: 'si',
+      cpt: { R_si: { si: 0.9, no: 0.1 }, R_no: { si: 0.2, no: 0.8 } },
+      marginals: { si: 0, no: 0 }
+    });
 
     recalcAllMarginals(g);
     // P(R=si | S=si) = (0.9*0.4) / (0.9*0.4 + 0.2*0.6) = 0.36 / 0.48 = 0.75
@@ -173,7 +261,15 @@ describe('Bayes Workflow — Display helpers', () => {
 
   beforeEach(() => {
     graph = new Map();
-    graph.set('F', { id: 'F', name: 'Fumador', parents: [], children: ['C'], evidence: null, cpt: { prior: { si: 0.3, no: 0.7 } }, marginals: { si: 0, no: 0 } });
+    graph.set('F', {
+      id: 'F',
+      name: 'Fumador',
+      parents: [],
+      children: ['C'],
+      evidence: null,
+      cpt: { prior: { si: 0.3, no: 0.7 } },
+      marginals: { si: 0, no: 0 }
+    });
     graph.set('C', {
       id: 'C',
       name: 'Cancer',

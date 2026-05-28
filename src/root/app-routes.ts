@@ -1,7 +1,7 @@
 import { Route } from '@angular/router';
-import { BinomialComponent } from './component/binomial.component';
-import { BayesComponent } from './component/bayes.component';
-import { LandingComponent } from './component/landing/landing.component';
+import { LandingComponent } from '../landing/landing.component';
+import { BayesComponent } from '../models/bayes/bayes.component';
+import { BinomialComponent } from '../models/binomial/binomial.component';
 
 export const appRoutes: Route[] = [
   { path: '', component: LandingComponent },

@@ -1,6 +1,6 @@
-import { Canvas } from '@metadev/daga-angular';
 import { DagaExporter, DagaImporter, DagaModel, DagaNode } from '@metadev/daga';
-import { BayesCPT, BayesEvidence, BayesGraph } from '../types';
+import { Canvas } from '@metadev/daga-angular';
+import { BayesCPT, BayesEvidence, BayesGraph } from '../models/types';
 
 export type RiskModelType = 'binomial' | 'bayes';
 

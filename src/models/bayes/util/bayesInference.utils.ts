@@ -1,16 +1,9 @@
-import { extractConnectionEndpoints } from '../generalCalculationNodes.utils';
-
-// ─── Types ───────────────────────────────────────────────────────────────────
-
+import { extractConnectionEndpoints } from '../../../util/generalCalculationNodes.utils';
 import { BayesCPT, BayesGraph, CPTTableRow } from '../../types';
-
-// ─── Constants ───────────────────────────────────────────────────────────────
 
 const STATES: readonly string[] = ['si', 'no'] as const;
 
 export const MAX_EXACT_INFERENCE_NODES = 20;
-
-// ─── CPT Utilities ───────────────────────────────────────────────────────────
 
 /**
  * Generates a uniform default CPT for a node given its parent IDs.
@@ -187,8 +180,8 @@ function enumerateWorlds(
 
     const prob =
       node.parents.length === 0
-        ? node.cpt['prior']?.[state] ?? 0
-        : node.cpt[node.parents.map((p) => `${p}_${currentWorld[p]}`).join('|')]?.[state] ?? 0;
+        ? (node.cpt['prior']?.[state] ?? 0)
+        : (node.cpt[node.parents.map((p) => `${p}_${currentWorld[p]}`).join('|')]?.[state] ?? 0);
 
     if (prob === 0) continue;
 

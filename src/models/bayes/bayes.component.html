@@ -1,3 +1,14 @@
+<div class="topbar-actions">
+  <button data-test-id="import" (click)="fileInput.click()">Import</button>
+  <button data-test-id="export" (click)="exportCurrent()">Export</button>
+  <button class="primary" (click)="toggleLearningPanel()">Import CSV</button>
+  <button class="primary" (click)="abrirDialogoCSV()">Generate CSV</button>
+  <button class="primary" (click)="toggleMCPanel()">Monte Carlo</button>
+  @if (hasHistory) {
+    <button class="primary" (click)="openMCHistory()">View Results</button>
+  }
+  <input #fileInput type="file" accept="application/json,.json" hidden (change)="onImportFile($event)" />
+</div>
 <div style="position: relative; width: 100%; height: 100%">
   <!-- ═══ Network Size Warning ═══ -->
   @if (isNetworkTooLarge) {
@@ -436,8 +447,8 @@
       transition: transform 0.3s ease;
     "
   >
-    <div style="padding: 20px; border-bottom: 2px solid #1F3A22">
-      <h2 style="margin: 0; color: #1F3A22">MC History</h2>
+    <div style="padding: 20px; border-bottom: 2px solid #1f3a22">
+      <h2 style="margin: 0; color: #1f3a22">MC History</h2>
       <button
         (click)="closeMCHistory()"
         style="position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 24px; cursor: pointer; color: #999"
@@ -483,7 +494,7 @@
                 @for (nodeId of entry.result.probabilidades | keyvalue; track nodeId) {
                   <tr style="border-bottom: 1px solid #f5f5f5">
                     <td style="padding: 4px 6px; color: #1a1a1a">{{ getNodeName(nodeId.key) }}</td>
-                    <td style="padding: 4px 6px; text-align: right; color: #2ECC4A; font-weight: bold">
+                    <td style="padding: 4px 6px; text-align: right; color: #2ecc4a; font-weight: bold">
                       {{ (entry.result.probabilidades[nodeId.key]['si'] * 100).toFixed(2) }}%
                     </td>
                     <td
@@ -692,9 +703,7 @@
                 <span style="font-weight: 600; color: #1a1a1a">{{ csvAnalysis.filas }}</span>
               </div>
               <div style="padding: 6px 10px; background: #eaf3de; border-radius: 5px">
-                <div style="color: #27500a; font-weight: 500; margin-bottom: 3px">
-                  Observed nodes ({{ csvAnalysis.observados.length }})
-                </div>
+                <div style="color: #27500a; font-weight: 500; margin-bottom: 3px">Observed nodes ({{ csvAnalysis.observados.length }})</div>
                 <div style="color: #3b6d11; font-size: 11px">
                   {{ csvAnalysis.observados.map((id) => bayesGraph.get(id)?.name ?? id).join(', ') || '—' }}
                 </div>
@@ -768,9 +777,7 @@
         <!-- Learning Result — before/after comparison -->
         @if (learningResult && !learningRunning) {
           <div style="padding: 16px 20px">
-            <div style="font-size: 12px; color: #27500a; font-weight: 600; margin-bottom: 4px">
-              ✓ {{ learningResult.metodo }} completed
-            </div>
+            <div style="font-size: 12px; color: #27500a; font-weight: 600; margin-bottom: 4px">✓ {{ learningResult.metodo }} completed</div>
             <div style="font-size: 11px; color: #888; margin-bottom: 14px">P(Yes) comparison before → after learning</div>
             <div style="max-height: 260px; overflow-y: auto">
               <table style="width: 100%; border-collapse: collapse; font-size: 11px">
@@ -931,7 +938,7 @@
 
   <!-- ═══ Daga Diagram ═══ -->
   <daga-diagram [config]="bayes_config" (modelChange)="onModelChange($event)">
-    <app-daga-base
+    <daga-base
       [bayesMode]="true"
       [bayesGraph]="bayesGraph"
       (nodeDoubleClicked)="onNodeDoubleClick($event)"

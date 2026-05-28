@@ -1,40 +1,41 @@
-import { Component, OnDestroy, ChangeDetectorRef, ViewChild, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ChangeDetectorRef, Component, inject, OnDestroy, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { DagaModule, Canvas, AddNodeAction, AddConnectionAction, Side, DiagramPort } from '@metadev/daga-angular';
-import { DagaModel, DagaNode, DagaConnection } from '@metadev/daga';
-import { BayesCausalLayout } from '../utils/bayes/causalLayout';
-import { DagaBaseComponent } from './dagaBase.component';
-import { bayes_CONFIG } from '../config/bayes.config';
-import { GenericComponent } from './generic.component';
-import { normalizeProbability } from '../utils/probability.utils';
-import {
-  buildBayesGraph,
-  recalcAllMarginals,
-  getCPTTableRows,
-  getParentNames,
-  validateCPT,
-  recalcCPTOnParentChange
-} from '../utils/bayes/bayesInference.utils';
-import { ejecutarMonteCarlo, calcularError, marginalesExactos } from '../utils/bayes/montecarlo.utils';
-import { parsearCSV, analizarCSV, CSVAnalysis, extraerComentarios, parsearEdgesDesdeComentarios } from '../utils/bayes/csv.utils';
-import { aprenderMLE } from '../utils/bayes/mle.utils';
-import { aprenderEM } from '../utils/bayes/em.utils';
-import { generarDatosSinteticos } from '../utils/bayes/syntheticData.utils';
-import { BayesGraph, BayesEvidence, BayesCPTEntry, CPTTableRow, MCResult, LearningResult } from '../types';
+import { DagaConnection, DagaExporter, DagaModel, DagaNode } from '@metadev/daga';
+import { AddConnectionAction, AddNodeAction, Canvas, DagaModule, DiagramPort, Side } from '@metadev/daga-angular';
 import {
   applyRiskFileToCanvas,
+  downloadRiskFile,
   exportCanvasToFile,
   overlayBayesSchemaOnGraph,
+  readRiskFile,
   RiskFile,
   serializeBayesGraph
-} from '../utils/importExport.utils';
-import { DagaExporter } from '@metadev/daga';
+} from '../../util/importExport.utils';
+import { normalizeProbability } from '../../util/probability.utils';
+import { DagaBaseComponent } from '../dagaBase.component';
+import { GenericComponent } from '../generic.component';
+import { BayesCPTEntry, BayesEvidence, BayesGraph, CPTTableRow, LearningResult, MCResult } from '../types';
+import { bayes_CONFIG } from './bayes.config';
+import {
+  buildBayesGraph,
+  getCPTTableRows,
+  getParentNames,
+  recalcAllMarginals,
+  recalcCPTOnParentChange,
+  validateCPT
+} from './util/bayesInference.utils';
+import { BayesCausalLayout } from './util/causalLayout';
+import { analizarCSV, CSVAnalysis, extraerComentarios, parsearCSV, parsearEdgesDesdeComentarios } from './util/csv.utils';
+import { aprenderEM } from './util/em.utils';
+import { aprenderMLE } from './util/mle.utils';
+import { calcularError, ejecutarMonteCarlo, marginalesExactos } from './util/montecarlo.utils';
+import { generarDatosSinteticos } from './util/syntheticData.utils';
 
 @Component({
   standalone: true,
-  selector: 'app-risk-bayes',
-  templateUrl: '../bayes.html',
+  selector: 'risk-bayes',
+  templateUrl: 'bayes.component.html',
   imports: [DagaModule, CommonModule, FormsModule, DagaBaseComponent]
 })
 export class BayesComponent extends GenericComponent implements OnDestroy {
@@ -73,6 +74,20 @@ export class BayesComponent extends GenericComponent implements OnDestroy {
 
   @ViewChild(DagaBaseComponent) private dagaBase?: DagaBaseComponent;
 
+  get hasResults(): boolean {
+    return this.results.length > 0;
+  }
+  get hasHistory(): boolean {
+    return this.mcHistory.length > 0;
+  }
+
+  downloadRiskFile(): void {
+    const file = this.exportCurrent();
+    if (file) {
+      downloadRiskFile(file);
+    }
+  }
+
   onCanvasReady(canvas: Canvas): void {
     this.canvas = canvas;
     if (this.pendingImport) {
@@ -98,6 +113,26 @@ export class BayesComponent extends GenericComponent implements OnDestroy {
     const file = exportCanvasToFile(this.canvas, 'bayes');
     file.bayes = serializeBayesGraph(this.bayesGraph);
     return file;
+  }
+
+  async onImportFile(event: Event): Promise<void> {
+    const input = event.target as HTMLInputElement;
+    const file = input?.files?.[0];
+    if (!file) return;
+
+    let parsed: RiskFile;
+    try {
+      parsed = await readRiskFile(file);
+    } catch (err) {
+      alert(`No se pudo importar el archivo: ${err instanceof Error ? err.message : String(err)}`);
+      input.value = '';
+      return;
+    }
+
+    setTimeout(() => {
+      this.applyImport(parsed);
+      input.value = '';
+    }, 0);
   }
 
   private runImport(file: RiskFile): void {
@@ -404,12 +439,12 @@ export class BayesComponent extends GenericComponent implements OnDestroy {
     setTimeout(() => {
       this.mcResult = ejecutarMonteCarlo(this.bayesGraph, evidencias, this.mcIteraciones);
       const exactos = marginalesExactos(this.bayesGraph);
-      this.mcError = calcularError(exactos, this.mcResult.probabilidades);
+      this.mcError = calcularError(exactos, this.mcResult!.probabilidades);
       this.mcRunning = false;
       this.mcHistory.push({
         date: new Date(),
         iteraciones: this.mcIteraciones,
-        result: this.mcResult,
+        result: this.mcResult!,
         error: this.mcError
       });
       this.selectedMCHistory = this.mcHistory.length - 1;

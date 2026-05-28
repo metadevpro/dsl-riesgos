@@ -1,20 +1,19 @@
-import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Canvas, DagaModule } from '@metadev/daga-angular';
-import { DagaBaseComponent } from './dagaBase.component';
-import { calculateBinomialProbability, buildEndNodeIdSet } from '../utils/binomial/binomialCalculationNodes.utils';
-import { calculateTheoreticalNodeProbabilities } from '../utils/binomial/binomialWeight.utils';
-import { detectCycle, getNodeDisplayName, getNodeMap } from '../utils/generalCalculationNodes.utils';
-import { ConnectionInfo } from '../types';
-import { GenericComponent } from './generic.component';
-import { NodeInfo } from '../types';
-import { applyRiskFileToCanvas, exportCanvasToFile, RiskFile } from '../utils/importExport.utils';
+import { Component, ViewChild } from '@angular/core';
 import { DagaExporter } from '@metadev/daga';
+import { Canvas, DagaModule } from '@metadev/daga-angular';
+import { detectCycle, getNodeDisplayName, getNodeMap } from '../../util/generalCalculationNodes.utils';
+import { RiskFile, applyRiskFileToCanvas, downloadRiskFile, exportCanvasToFile, readRiskFile } from '../../util/importExport.utils';
+import { DagaBaseComponent } from '../dagaBase.component';
+import { GenericComponent } from '../generic.component';
+import { ConnectionInfo, NodeInfo } from '../types';
+import { buildEndNodeIdSet, calculateBinomialProbability } from './util/binomialCalculationNodes.utils';
+import { calculateTheoreticalNodeProbabilities } from './util/binomialWeight.utils';
 
 @Component({
   standalone: true,
-  selector: 'app-risk-simple',
-  templateUrl: '../binomial.html',
+  selector: 'risk-simple',
+  templateUrl: 'binomial.component.html',
   imports: [DagaModule, CommonModule, DagaBaseComponent]
 })
 export class BinomialComponent extends GenericComponent {
@@ -25,6 +24,17 @@ export class BinomialComponent extends GenericComponent {
 
   private canvas: Canvas | null = null;
   private pendingImport: RiskFile | null = null;
+
+  get hasResults(): boolean {
+    return this.results.length > 0;
+  }
+
+  downloadRiskFile(): void {
+    const file = this.exportCurrent();
+    if (file) {
+      downloadRiskFile(file);
+    }
+  }
 
   onCanvasReady(canvas: Canvas): void {
     this.canvas = canvas;
@@ -58,6 +68,26 @@ export class BinomialComponent extends GenericComponent {
     this.myModel = new DagaExporter().export(this.canvas.model) as unknown as typeof this.myModel;
   }
 
+  async onImportFile(event: Event): Promise<void> {
+    const input = event.target as HTMLInputElement;
+    const file = input?.files?.[0];
+    if (!file) return;
+
+    let parsed: RiskFile;
+    try {
+      parsed = await readRiskFile(file);
+    } catch (err) {
+      alert(`No se pudo importar el archivo: ${err instanceof Error ? err.message : String(err)}`);
+      input.value = '';
+      return;
+    }
+
+    setTimeout(() => {
+      this.applyImport(parsed);
+      input.value = '';
+    }, 0);
+  }
+
   override executeCalculation(iterationsStr: string): void {
     const iterations = parseInt(iterationsStr, 10);
 
@@ -77,9 +107,7 @@ export class BinomialComponent extends GenericComponent {
     if (cycle) {
       const nodeMap = getNodeMap(nodes);
       const labels = cycle.map((id) => getNodeDisplayName(nodeMap.get(id)) ?? id);
-      alert(
-        `El diagrama contiene un ciclo y este DSL no admite ciclos. Revisa la ruta: ${labels.join(' → ')}.`
-      );
+      alert(`El diagrama contiene un ciclo y este DSL no admite ciclos. Revisa la ruta: ${labels.join(' → ')}.`);
       return;
     }
 
@@ -93,7 +121,10 @@ export class BinomialComponent extends GenericComponent {
       );
 
       const theoreticalMap = calculateTheoreticalNodeProbabilities(
-        this.myModel, this.probabilityKey, this.branchValueKey, this.maxProbability
+        this.myModel,
+        this.probabilityKey,
+        this.branchValueKey,
+        this.maxProbability
       );
       const endNodeIds = buildEndNodeIdSet(nodes);
       let theoreticalProbability: number | undefined = 0;
@@ -106,7 +137,9 @@ export class BinomialComponent extends GenericComponent {
       }
 
       if (endNodeIds.size === 0) {
-        alert('El diagrama no contiene ningún nodo End. La probabilidad teórica no se puede calcular hasta que añadas un nodo End como terminal del flujo.');
+        alert(
+          'El diagrama no contiene ningún nodo End. La probabilidad teórica no se puede calcular hasta que añadas un nodo End como terminal del flujo.'
+        );
         theoreticalProbability = undefined;
       } else if (reachableEndCount === 0) {
         alert(

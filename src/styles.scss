@@ -26,6 +26,15 @@ button {
   font-family: 'Poppins', sans-serif;
 }
 
+header {
+  box-sizing: border-box;
+  height: 6rem;
+}
+main {
+  box-sizing: border-box;
+  height: calc(100% - 6rem);
+}
+
 risk-root {
   display: block;
   width: 100%;
@@ -142,5 +151,5 @@ risk-simple {
 }
 
 .selectedResult {
-  background: #EAF3DE !important;
+  background: #eaf3de !important;
 }

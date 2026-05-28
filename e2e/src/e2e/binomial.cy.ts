@@ -10,7 +10,7 @@ describe('e2e', () => {
   });
 
   it('daga model should be visible', () => {
-    cy.get('app-risk-simple').should('be.visible');
+    cy.get('risk-simple').should('be.visible');
   });
 
   it('daga diagram should be visible', () => {
@@ -45,7 +45,7 @@ describe('e2e', () => {
       .clear()
       .type('50')
       .trigger('change');
-    
+
     cy.get('daga-diagram').click();
     // Open calculation dialog, set 1000 iterations, run
     cy.get('.topbar-actions').contains('button', 'Calculate Probability').click();

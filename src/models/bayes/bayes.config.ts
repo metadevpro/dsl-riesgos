@@ -10,12 +10,8 @@ import {
   VerticalAlign,
   layouts
 } from '@metadev/daga-angular';
-import { BayesCausalLayout } from '../utils/bayes/causalLayout';
-import {
-  bottomRoundedRectangleShape,
-  roundedRectangleShape,
-  topRoundedRectangleShape
-} from './look/shape';
+import { bottomRoundedRectangleShape, roundedRectangleShape, topRoundedRectangleShape } from '../shape';
+import { BayesCausalLayout } from './util/causalLayout';
 
 layouts['bayes-causal'] = new BayesCausalLayout();
 
@@ -106,10 +102,7 @@ const twoBandSectionGrid = (tint: string): SectionGridConfig => ({
   minWidths: [250],
   minHeights: [32, 118],
   margin: 0,
-  sections: [
-    [{ look: topBandLook(tint) }],
-    [{ look: bottomBandLook() }]
-  ]
+  sections: [[{ look: topBandLook(tint) }], [{ look: bottomBandLook() }]]
 });
 
 const nodeShellLook = (): ShapedLookConfig => ({
