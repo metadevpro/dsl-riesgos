@@ -3,15 +3,14 @@ import {
   findEndNode,
   findStartNode,
   getEffectiveNodeProbability,
+  getNextNodeFromConnection,
   getNodeId,
   getNodeMap,
-  getNextNodeFromConnection,
   isNodeTypeLike,
   isStateDiagramNodeLike
-} from '../generalCalculationNodes.utils';
+} from '../../../util/generalCalculationNodes.utils';
+import { CalculationResult, ConnectionInfo, NodeId, NodeInfo } from '../../types';
 import { normalizeWeightValue } from './binomialWeight.utils';
-
-import { ConnectionInfo, NodeId, NodeInfo, CalculationResult } from '../../types';
 
 function readConnectionFieldByKey(connection: ConnectionInfo, key: string): unknown {
   if (!connection || typeof connection !== 'object') return undefined;
@@ -182,8 +181,7 @@ export function calculateBinomialProbability(
     startNodeToUse = findStartNode(nodes, connections);
   }
 
-  const startNodeName =
-    ((startNodeToUse.data?.['node name'] as string | undefined) ||
+  const startNodeName = ((startNodeToUse.data?.['node name'] as string | undefined) ||
     (startNodeToUse.data?.['name'] as string | undefined) ||
     `Node ${getNodeId(startNodeToUse)}`) as string;
 

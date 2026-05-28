@@ -2,10 +2,10 @@ import {
   buildOutgoingConnections,
   findStartNodes,
   getEffectiveNodeProbability,
+  getNextNodeFromConnection,
   getNodeId,
-  getNodeMap,
-  getNextNodeFromConnection
-} from '../generalCalculationNodes.utils';
+  getNodeMap
+} from '../../../util/generalCalculationNodes.utils';
 import { ConnectionInfo, NodeId, NodeInfo } from '../../types';
 
 function toArray<T>(value: unknown): T[] {

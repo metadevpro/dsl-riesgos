@@ -10,11 +10,7 @@ import {
   Type,
   VerticalAlign
 } from '@metadev/daga-angular';
-import {
-  bottomRoundedRectangleShape,
-  roundedRectangleShape,
-  topRoundedRectangleShape
-} from './look/shape';
+import { bottomRoundedRectangleShape, roundedRectangleShape, topRoundedRectangleShape } from '../shape';
 
 interface NodeVisual {
   solid: string;
@@ -111,10 +107,7 @@ const twoBandSectionGrid = (tint: string): SectionGridConfig => ({
   minWidths: [250],
   minHeights: [32, 118],
   margin: 0,
-  sections: [
-    [{ look: topBandLook(tint) }],
-    [{ look: bottomBandLook() }]
-  ]
+  sections: [[{ look: topBandLook(tint) }], [{ look: bottomBandLook() }]]
 });
 
 const threeBandSectionGrid = (tint: string): SectionGridConfig => ({
@@ -123,11 +116,7 @@ const threeBandSectionGrid = (tint: string): SectionGridConfig => ({
   minWidths: [250],
   minHeights: [32, 90, 28],
   margin: 0,
-  sections: [
-    [{ look: topBandLook(tint) }],
-    [{ look: middleBandLook() }],
-    [{ look: bottomBandLook() }]
-  ]
+  sections: [[{ look: topBandLook(tint) }], [{ look: middleBandLook() }], [{ look: bottomBandLook() }]]
 });
 
 const nodeShellLook = (): ShapedLookConfig => ({
@@ -147,7 +136,7 @@ export const PROB_CONFIG: DiagramConfig = {
       spacing: 50,
       snap: true,
       style: 'lines',
-      thickness: 0.02,
+      thickness: 0.02
     }
   },
   layoutFormat: 'tree',
@@ -221,7 +210,7 @@ export const PROB_CONFIG: DiagramConfig = {
     },
     propertyEditor: {
       width: '16rem'
-    },
+    }
   },
   nodeTypes: [
     {
@@ -464,6 +453,6 @@ export const PROB_CONFIG: DiagramConfig = {
       basic: true,
       editable: false,
       rootAttribute: 'updatedAt'
-    },
+    }
   ]
 };

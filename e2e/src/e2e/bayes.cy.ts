@@ -10,7 +10,7 @@ describe('e2e', () => {
   });
 
   it('daga model should be visible', () => {
-    cy.get('app-risk-bayes').should('be.visible');
+    cy.get('risk-bayes').should('be.visible');
   });
 
   it('daga diagram should be visible', () => {
@@ -31,10 +31,8 @@ describe('e2e', () => {
     cy.get('body').type('{esc}');
     cy.get('daga-property-editor .daga-property-name').dblclick({ force: true });
     cy.get('.bayes-popup-backdrop').should('be.visible');
-    cy.get('.bayes-popup-backdrop table input[type="number"]').eq(0)
-      .clear().type('70').trigger('change'); // Sí = 70
-    cy.get('.bayes-popup-backdrop table input[type="number"]').eq(1)
-      .clear().type('30').trigger('change'); // No = 30
+    cy.get('.bayes-popup-backdrop table input[type="number"]').eq(0).clear().type('70').trigger('change'); // Sí = 70
+    cy.get('.bayes-popup-backdrop table input[type="number"]').eq(1).clear().type('30').trigger('change'); // No = 30
     // Close popup by clicking the backdrop corner (outside centered dialog)
     cy.get('.bayes-popup-backdrop').click('topLeft', { force: true });
     cy.get('.bayes-popup-backdrop').should('not.exist');
@@ -46,10 +44,8 @@ describe('e2e', () => {
     cy.get('daga-property-editor .daga-property-name').dblclick({ force: true });
     cy.get('.bayes-popup-backdrop').should('be.visible');
     // First row (parent=Sí): P(Sí)=10, P(No)=90
-    cy.get('.bayes-popup-backdrop table input[type="number"]').eq(0)
-      .clear().type('10').trigger('change');
-    cy.get('.bayes-popup-backdrop table input[type="number"]').eq(1)
-      .clear().type('90').trigger('change');
+    cy.get('.bayes-popup-backdrop table input[type="number"]').eq(0).clear().type('10').trigger('change');
+    cy.get('.bayes-popup-backdrop table input[type="number"]').eq(1).clear().type('90').trigger('change');
     cy.get('.bayes-popup-backdrop').click('topLeft', { force: true });
     cy.get('.bayes-popup-backdrop').should('not.exist');
 

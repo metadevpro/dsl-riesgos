@@ -1,4 +1,4 @@
-import { NodeInfo, ConnectionInfo, ConnectionEndpoints, NodeId } from '../types';
+import { ConnectionEndpoints, ConnectionInfo, NodeId, NodeInfo } from '../models/types';
 import { normalizeProbability } from './probability.utils';
 
 const STATE_DIAGRAM_NODE_TYPE_ID = 'state-diagram-node';

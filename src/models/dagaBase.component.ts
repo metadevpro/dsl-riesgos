@@ -1,34 +1,34 @@
 import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnDestroy, Output, SimpleChanges, inject } from '@angular/core';
 import {
+  AddConnectionAction,
   Canvas,
   CanvasProviderService,
   DagaModule,
   DiagramActionMethod,
+  DiagramConnection,
   DiagramError,
   DiagramModel,
   DiagramNode,
-  DiagramConnection,
   DiagramValidator,
-  UpdateValuesAction,
-  AddConnectionAction,
-  RemoveAction
+  RemoveAction,
+  UpdateValuesAction
 } from '@metadev/daga-angular';
 import { Subscription } from 'rxjs';
-import { formatProbabilityPercent, normalizeProbability, MAX_PROBABILITY, PROBABILITY_KEY } from '../utils/probability.utils';
 import {
   AUTO_NORMALIZE_ADJACENT_KEY,
   handleConnectionStructuralChange,
   handleConnectionUpdateValues,
   isConnectionAutoNormalizeEnabled
-} from '../utils/connectionCalculate.utils';
-import { isStateDiagramNodeLike, normalizeNodeId } from '../utils/generalCalculationNodes.utils';
-import { calculateTheoreticalNodeProbabilities, normalizeWeightValue } from '../utils/binomial/binomialWeight.utils';
-import { BayesGraph } from '../types';
+} from '../util/connectionCalculate.utils';
+import { isStateDiagramNodeLike, normalizeNodeId } from '../util/generalCalculationNodes.utils';
+import { MAX_PROBABILITY, PROBABILITY_KEY, formatProbabilityPercent, normalizeProbability } from '../util/probability.utils';
+import { calculateTheoreticalNodeProbabilities, normalizeWeightValue } from './binomial/util/binomialWeight.utils';
+import { BayesGraph } from './types';
 
 @Component({
   standalone: true,
   template: `<ng-content />`,
-  selector: 'app-daga-base',
+  selector: 'daga-base',
   imports: [DagaModule]
 })
 export class DagaBaseComponent implements AfterViewInit, OnDestroy, OnChanges {
@@ -386,7 +386,7 @@ export class DagaBaseComponent implements AfterViewInit, OnDestroy, OnChanges {
 
   private raisePortsAboveDecorators(): void {
     if (typeof document === 'undefined') return;
-    document.querySelectorAll('daga-diagram g.diagram-port').forEach(el => el.parentNode?.appendChild(el));
+    document.querySelectorAll('daga-diagram g.diagram-port').forEach((el) => el.parentNode?.appendChild(el));
   }
 
   private refreshConnectionWeightLabels(canvas: Canvas): void {
@@ -586,9 +586,16 @@ export class DagaBaseComponent implements AfterViewInit, OnDestroy, OnChanges {
         </div>
       </foreignObject>
     `;
-    canvas.model.decorators.new(node, [node.coords[0], node.coords[1] + bodyOffsetY], node.width, bodyHeight, priority, bodyHtml, bodyDecoratorId);
+    canvas.model.decorators.new(
+      node,
+      [node.coords[0], node.coords[1] + bodyOffsetY],
+      node.width,
+      bodyHeight,
+      priority,
+      bodyHtml,
+      bodyDecoratorId
+    );
   }
-
 }
 
 class DagaBaseDiagramValidator implements DiagramValidator {

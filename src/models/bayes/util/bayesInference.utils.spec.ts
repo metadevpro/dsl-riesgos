@@ -1,5 +1,5 @@
-import { recalcAllMarginals } from './bayesInference.utils';
 import { BayesGraph } from '../../types';
+import { recalcAllMarginals } from './bayesInference.utils';
 
 describe('BayesInference Utility (Flujo de verify.ts)', () => {
   let graph: BayesGraph;
