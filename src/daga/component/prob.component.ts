@@ -6,11 +6,11 @@ import { downloadRiskFile, readRiskFile, RiskFile } from '../utils/importExport.
 
 @Component({
   standalone: true,
-  selector: 'risk-root',
+  selector: 'app-prob',
   templateUrl: '../dagaIndex.html',
   imports: [CommonModule, BinomialComponent, BayesComponent]
 })
-export class SimpleComponent {
+export class ProbComponent {
   selectedModel: 'binomial' | 'bayes' = 'binomial';
 
   @ViewChild(BinomialComponent) private binomial?: BinomialComponent;
@@ -21,8 +21,7 @@ export class SimpleComponent {
   }
 
   exportCurrent(): void {
-    const file =
-      this.selectedModel === 'binomial' ? this.binomial?.exportCurrent() ?? null : this.bayes?.exportCurrent() ?? null;
+    const file = this.selectedModel === 'binomial' ? (this.binomial?.exportCurrent() ?? null) : (this.bayes?.exportCurrent() ?? null);
     if (file) {
       downloadRiskFile(file);
     }

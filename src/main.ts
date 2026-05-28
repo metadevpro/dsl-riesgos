@@ -1,5 +1,5 @@
 import { bootstrapApplication } from '@angular/platform-browser';
 import { simpleAppConfig } from './daga/prob.app.config';
-import { SimpleComponent } from './daga/component/prob.component';
+import { AppComponent } from './daga/component/app/app.component';
 
-bootstrapApplication(SimpleComponent, simpleAppConfig).catch((err) => console.error(err));
+bootstrapApplication(AppComponent, simpleAppConfig).catch((err) => console.error(err));
