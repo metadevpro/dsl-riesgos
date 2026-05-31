@@ -24,7 +24,7 @@ const NODE_VISUALS: Record<string, NodeVisual> = {
   'end-diagram-node': { solid: '#B8475A', tint: '#F7DCE1' }
 };
 
-const NODE_BORDER = '#E5E7EB';
+const NODE_BORDER = '#000000';
 const NODE_BORDER_SELECTED = '#378ADD';
 const NODE_FILL_WHITE = '#FFFFFF';
 
@@ -65,7 +65,7 @@ const topBandLook = (tint: string): ShapedLookConfig => ({
     borderThickness: 2
   },
   highlighted: {
-    borderThickness: 3
+    borderThickness: 1
   }
 });
 
@@ -81,7 +81,7 @@ const middleBandLook = (): ShapedLookConfig => ({
     borderThickness: 2
   },
   highlighted: {
-    borderThickness: 3
+    borderThickness: 1
   }
 });
 
@@ -97,7 +97,7 @@ const bottomBandLook = (): ShapedLookConfig => ({
     borderThickness: 2
   },
   highlighted: {
-    borderThickness: 3
+    borderThickness: 1
   }
 });
 
@@ -126,7 +126,7 @@ const nodeShellLook = (): ShapedLookConfig => ({
   borderColor: 'transparent',
   borderThickness: 0,
   selected: { borderColor: 'transparent', fillColor: 'transparent' },
-  highlighted: { borderColor: 'transparent' }
+  highlighted: { borderColor: 'black', borderThickness: 4 }
 });
 
 export const PROB_CONFIG: DiagramConfig = {

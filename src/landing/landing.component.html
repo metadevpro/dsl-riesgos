@@ -7,17 +7,80 @@
   <h2>Example 1. In-line quality control</h2>
   <p>
     A factory produces screws on an automated production line. The quality control process consists of two stages: first, an automatic
-    visual inspection (using a camera), and then—only if the camera detects a defect—a manual inspection by an operator. Historical data
+    visual inspection (using a camera), and then, only if the camera detects a defect, a manual inspection by an operator. Historical data
     shows that:
   </p>
   <ul>
     <li>5% of the screws are defective.</li>
     <li>The camera correctly identifies 90% of the defective screws (true positive rate).</li>
-    <li>The camera incorrectly flags 10% of the non-defective screws as defective (false positive rate).</li>
+    <li>If a screw is referred for manual inspection, the operator confirms the defect 95% of the time.</li>
   </ul>
+  <p>
+    The aim of the model is to estimate the probability that a screw will be definitively rejected after passing through the entire process.
+  </p>
+  **BUTTON TO THE MODEL**
 
-  <h2>Example 2. Aaa</h2>
-  TODO
+  <h2>Example 2. Logistics Supply Chain</h2>
+  <p>
+    A logistics company has a supply chain consisting of three stages: supplier, warehouse and distribution.
+    If any link fails, the order does not reach the customer. The probabilities of failure for each stage are:
+  </p>
+  <ul>
+    <li>Supplier: 3%</li>
+    <li>Warehouse: 5%</li>
+    <li>Distribution: 2%</li>
+  </ul>
+  <p>
+    What is the probability that an order will reach the customer successfully?
+    What is the probability that an order will fail due to a supplier issue, given that it failed?
+  </p>
+  **BUTTON TO THE MODEL**
+
+  <h2>Example 3. Cybersecurity </h2>
+  <p>
+    A security team wants to model the risk of an external attacker compromising their system.
+    The attack must overcome three barriers succesfully:
+  </p>
+  <ul>
+    <li>Firewall: 10% chance of being breached.</li>
+    <li>Intrusion Detection System (IDS): if the Firewall is breached, there is a 20% chance of being bypassed.</li>
+    <li>Two-factor Authentication: if the IDS is bypassed, there is a 5% chance of being compromised.</li>
+  </ul>
+  <p>
+    Although this probability seems low, in a system receiving 10.000 attack attempts per month:
+    Expected succesful attacks = 10.000 * 0.1 * 0.2 * 0.05 = 10 successful attacks per month.
+  </p>
+  **BUTTON TO THE MODEL**
+
+  <h3>Example 3.5. Cybersecurity Extension</h3>
+  <p>
+    Furthermore, an extension of the previous example has been proposed where, upon realising
+    that the system has been compromised, two key points are taken into account:
+  </p>
+  <ul>
+    <li>Detection: There is a 70% chance that the breach will be detected within the first 24 hours.</li>
+    <li>Mitigation: If the breach is detected, there is an 80% chance that effective mitigation measures will be implemented within the first 48 hours.</li>
+  </ul>
+  <p>
+    If both key points apply, even if there has been a data breach, it will have been contained early
+    and the consequences will be minimal.
+  </p>
+  **BUTTON TO THE MODEL**
+
+  <h2>Example 4. Clinical Trial</h2>
+  <p>
+    A pharmaceutical company is conducting a clinical trial to evaluate the efficacy of a new drug. The trial consists of two phases:    
+  </p>
+  <ul>
+    <li>Phase 1 (Safety): 100 patients receive the drug, and 70 show improvement.</li>
+    <li>Phase 2 (Preliminary Efficacy): 200 patients receive the drug, and 90 show improvement.</li>
+    <li>Phase 3 (Large-scale Efficacy): 500 patients receive the drug, and 300 show improvement.</li>
+  </ul>
+  <p>
+    Furthermore, after passing Phase 3, the regulatory authorities approves the drug with a 99% confidence level, which means that there is a 1% chance that the drug is not effective despite the positive results in the trial.
+    The company wants to estimate the overall probability that the drug is effective, taking into account the results of all three phases and the regulatory approval process.
+  </p>
+  **BUTTON TO THE MODEL**
 
   <div class="footer">&copy; Juanjo Amores &amp; <a href="https://metadev.pro">Metadev</a> 2026.</div>
 </div>
