@@ -150,7 +150,7 @@ export const PROB_CONFIG: DiagramConfig = {
       enableSelection: false
     },
     palette: {
-      width: '15rem',
+      width: '14rem',
       gap: '0.5rem',
       sections: [
         {
