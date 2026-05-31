@@ -1,0 +1,849 @@
+{
+  "riskFileVersion": 1,
+  "modelType": "binomial",
+  "exportedAt": "2026-05-31T17:26:35.394Z",
+  "daga": {
+    "name": "unnamed",
+    "type": "simple-diagram",
+    "typeVersion": 1,
+    "createdAt": "2026-05-13T11:15:01.996Z",
+    "updatedAt": "2026-05-13T11:15:01.996Z",
+    "nodes": [
+      {
+        "id": "id68030a2a-28eb-442e-9b16-fc465150c3cf",
+        "type": "start-diagram-node",
+        "children": [],
+        "sections": [
+          {
+            "id": "id68030a2a-28eb-442e-9b16-fc465150c3cf_0_0",
+            "ports": [],
+            "label": "",
+            "indexXInNode": 0,
+            "indexYInNode": 0,
+            "coords": [
+              350,
+              600
+            ],
+            "width": 250,
+            "height": 32
+          },
+          {
+            "id": "id68030a2a-28eb-442e-9b16-fc465150c3cf_1_0",
+            "ports": [],
+            "label": "",
+            "indexXInNode": 0,
+            "indexYInNode": 1,
+            "coords": [
+              350,
+              632
+            ],
+            "width": 250,
+            "height": 118
+          }
+        ],
+        "ports": [
+          {
+            "id": "id68030a2a-28eb-442e-9b16-fc465150c3cf_port_0",
+            "coords": [
+              475,
+              600
+            ],
+            "connectionPoint": [
+              475,
+              600
+            ],
+            "direction": "top",
+            "label": ""
+          },
+          {
+            "id": "id68030a2a-28eb-442e-9b16-fc465150c3cf_port_1",
+            "coords": [
+              350,
+              675
+            ],
+            "connectionPoint": [
+              350,
+              675
+            ],
+            "direction": "left",
+            "label": ""
+          },
+          {
+            "id": "id68030a2a-28eb-442e-9b16-fc465150c3cf_port_2",
+            "coords": [
+              475,
+              750
+            ],
+            "connectionPoint": [
+              475,
+              750
+            ],
+            "direction": "bottom",
+            "label": ""
+          },
+          {
+            "id": "id68030a2a-28eb-442e-9b16-fc465150c3cf_port_3",
+            "coords": [
+              600,
+              675
+            ],
+            "connectionPoint": [
+              600,
+              675
+            ],
+            "direction": "right",
+            "label": ""
+          }
+        ],
+        "label": "Clinical Trial starts",
+        "coords": [
+          350,
+          600
+        ],
+        "width": 250,
+        "height": 150,
+        "data": {
+          "node name": "Clinical Trial starts",
+          "node number": 1
+        }
+      },
+      {
+        "id": "id80af05f5-ffe2-4896-9e81-f466118c07fa",
+        "type": "event-diagram-node",
+        "children": [],
+        "sections": [
+          {
+            "id": "id80af05f5-ffe2-4896-9e81-f466118c07fa_0_0",
+            "ports": [],
+            "label": "",
+            "indexXInNode": 0,
+            "indexYInNode": 0,
+            "coords": [
+              650,
+              600
+            ],
+            "width": 250,
+            "height": 32
+          },
+          {
+            "id": "id80af05f5-ffe2-4896-9e81-f466118c07fa_1_0",
+            "ports": [],
+            "label": "",
+            "indexXInNode": 0,
+            "indexYInNode": 1,
+            "coords": [
+              650,
+              632
+            ],
+            "width": 250,
+            "height": 90
+          },
+          {
+            "id": "id80af05f5-ffe2-4896-9e81-f466118c07fa_2_0",
+            "ports": [],
+            "label": "",
+            "indexXInNode": 0,
+            "indexYInNode": 2,
+            "coords": [
+              650,
+              722
+            ],
+            "width": 250,
+            "height": 28
+          }
+        ],
+        "ports": [
+          {
+            "id": "id80af05f5-ffe2-4896-9e81-f466118c07fa_port_0",
+            "coords": [
+              775,
+              600
+            ],
+            "connectionPoint": [
+              775,
+              600
+            ],
+            "direction": "top",
+            "label": ""
+          },
+          {
+            "id": "id80af05f5-ffe2-4896-9e81-f466118c07fa_port_1",
+            "coords": [
+              650,
+              675
+            ],
+            "connectionPoint": [
+              650,
+              675
+            ],
+            "direction": "left",
+            "label": ""
+          },
+          {
+            "id": "id80af05f5-ffe2-4896-9e81-f466118c07fa_port_2",
+            "coords": [
+              775,
+              750
+            ],
+            "connectionPoint": [
+              775,
+              750
+            ],
+            "direction": "bottom",
+            "label": ""
+          },
+          {
+            "id": "id80af05f5-ffe2-4896-9e81-f466118c07fa_port_3",
+            "coords": [
+              900,
+              675
+            ],
+            "connectionPoint": [
+              900,
+              675
+            ],
+            "direction": "right",
+            "label": ""
+          }
+        ],
+        "label": "Phase 1",
+        "coords": [
+          650,
+          600
+        ],
+        "width": 250,
+        "height": 150,
+        "data": {
+          "node name": "Phase 1",
+          "node number": 1,
+          "probability": 70
+        }
+      },
+      {
+        "id": "id4feee37d-cda6-436c-8126-c48742fc48ee",
+        "type": "event-diagram-node",
+        "children": [],
+        "sections": [
+          {
+            "id": "id4feee37d-cda6-436c-8126-c48742fc48ee_0_0",
+            "ports": [],
+            "label": "",
+            "indexXInNode": 0,
+            "indexYInNode": 0,
+            "coords": [
+              950,
+              600
+            ],
+            "width": 250,
+            "height": 32
+          },
+          {
+            "id": "id4feee37d-cda6-436c-8126-c48742fc48ee_1_0",
+            "ports": [],
+            "label": "",
+            "indexXInNode": 0,
+            "indexYInNode": 1,
+            "coords": [
+              950,
+              632
+            ],
+            "width": 250,
+            "height": 90
+          },
+          {
+            "id": "id4feee37d-cda6-436c-8126-c48742fc48ee_2_0",
+            "ports": [],
+            "label": "",
+            "indexXInNode": 0,
+            "indexYInNode": 2,
+            "coords": [
+              950,
+              722
+            ],
+            "width": 250,
+            "height": 28
+          }
+        ],
+        "ports": [
+          {
+            "id": "id4feee37d-cda6-436c-8126-c48742fc48ee_port_0",
+            "coords": [
+              1075,
+              600
+            ],
+            "connectionPoint": [
+              1075,
+              600
+            ],
+            "direction": "top",
+            "label": ""
+          },
+          {
+            "id": "id4feee37d-cda6-436c-8126-c48742fc48ee_port_1",
+            "coords": [
+              950,
+              675
+            ],
+            "connectionPoint": [
+              950,
+              675
+            ],
+            "direction": "left",
+            "label": ""
+          },
+          {
+            "id": "id4feee37d-cda6-436c-8126-c48742fc48ee_port_2",
+            "coords": [
+              1075,
+              750
+            ],
+            "connectionPoint": [
+              1075,
+              750
+            ],
+            "direction": "bottom",
+            "label": ""
+          },
+          {
+            "id": "id4feee37d-cda6-436c-8126-c48742fc48ee_port_3",
+            "coords": [
+              1200,
+              675
+            ],
+            "connectionPoint": [
+              1200,
+              675
+            ],
+            "direction": "right",
+            "label": ""
+          }
+        ],
+        "label": "Phase 2",
+        "coords": [
+          950,
+          600
+        ],
+        "width": 250,
+        "height": 150,
+        "data": {
+          "node name": "Phase 2",
+          "node number": 1,
+          "probability": 45
+        }
+      },
+      {
+        "id": "id07cc93fe-abe7-4046-a1f2-1f5e7f49dcbf",
+        "type": "event-diagram-node",
+        "children": [],
+        "sections": [
+          {
+            "id": "id07cc93fe-abe7-4046-a1f2-1f5e7f49dcbf_0_0",
+            "ports": [],
+            "label": "",
+            "indexXInNode": 0,
+            "indexYInNode": 0,
+            "coords": [
+              1250,
+              600
+            ],
+            "width": 250,
+            "height": 32
+          },
+          {
+            "id": "id07cc93fe-abe7-4046-a1f2-1f5e7f49dcbf_1_0",
+            "ports": [],
+            "label": "",
+            "indexXInNode": 0,
+            "indexYInNode": 1,
+            "coords": [
+              1250,
+              632
+            ],
+            "width": 250,
+            "height": 90
+          },
+          {
+            "id": "id07cc93fe-abe7-4046-a1f2-1f5e7f49dcbf_2_0",
+            "ports": [],
+            "label": "",
+            "indexXInNode": 0,
+            "indexYInNode": 2,
+            "coords": [
+              1250,
+              722
+            ],
+            "width": 250,
+            "height": 28
+          }
+        ],
+        "ports": [
+          {
+            "id": "id07cc93fe-abe7-4046-a1f2-1f5e7f49dcbf_port_0",
+            "coords": [
+              1375,
+              600
+            ],
+            "connectionPoint": [
+              1375,
+              600
+            ],
+            "direction": "top",
+            "label": ""
+          },
+          {
+            "id": "id07cc93fe-abe7-4046-a1f2-1f5e7f49dcbf_port_1",
+            "coords": [
+              1250,
+              675
+            ],
+            "connectionPoint": [
+              1250,
+              675
+            ],
+            "direction": "left",
+            "label": ""
+          },
+          {
+            "id": "id07cc93fe-abe7-4046-a1f2-1f5e7f49dcbf_port_2",
+            "coords": [
+              1375,
+              750
+            ],
+            "connectionPoint": [
+              1375,
+              750
+            ],
+            "direction": "bottom",
+            "label": ""
+          },
+          {
+            "id": "id07cc93fe-abe7-4046-a1f2-1f5e7f49dcbf_port_3",
+            "coords": [
+              1500,
+              675
+            ],
+            "connectionPoint": [
+              1500,
+              675
+            ],
+            "direction": "right",
+            "label": ""
+          }
+        ],
+        "label": "Phase 3",
+        "coords": [
+          1250,
+          600
+        ],
+        "width": 250,
+        "height": 150,
+        "data": {
+          "node name": "Phase 3",
+          "node number": 1,
+          "probability": 60
+        }
+      },
+      {
+        "id": "id4300b862-57bb-42ba-8cb5-082bc6324882",
+        "type": "event-diagram-node",
+        "children": [],
+        "sections": [
+          {
+            "id": "id4300b862-57bb-42ba-8cb5-082bc6324882_0_0",
+            "ports": [],
+            "label": "",
+            "indexXInNode": 0,
+            "indexYInNode": 0,
+            "coords": [
+              950,
+              800
+            ],
+            "width": 250,
+            "height": 32
+          },
+          {
+            "id": "id4300b862-57bb-42ba-8cb5-082bc6324882_1_0",
+            "ports": [],
+            "label": "",
+            "indexXInNode": 0,
+            "indexYInNode": 1,
+            "coords": [
+              950,
+              832
+            ],
+            "width": 250,
+            "height": 90
+          },
+          {
+            "id": "id4300b862-57bb-42ba-8cb5-082bc6324882_2_0",
+            "ports": [],
+            "label": "",
+            "indexXInNode": 0,
+            "indexYInNode": 2,
+            "coords": [
+              950,
+              922
+            ],
+            "width": 250,
+            "height": 28
+          }
+        ],
+        "ports": [
+          {
+            "id": "id4300b862-57bb-42ba-8cb5-082bc6324882_port_0",
+            "coords": [
+              1075,
+              800
+            ],
+            "connectionPoint": [
+              1075,
+              800
+            ],
+            "direction": "top",
+            "label": ""
+          },
+          {
+            "id": "id4300b862-57bb-42ba-8cb5-082bc6324882_port_1",
+            "coords": [
+              950,
+              875
+            ],
+            "connectionPoint": [
+              950,
+              875
+            ],
+            "direction": "left",
+            "label": ""
+          },
+          {
+            "id": "id4300b862-57bb-42ba-8cb5-082bc6324882_port_2",
+            "coords": [
+              1075,
+              950
+            ],
+            "connectionPoint": [
+              1075,
+              950
+            ],
+            "direction": "bottom",
+            "label": ""
+          },
+          {
+            "id": "id4300b862-57bb-42ba-8cb5-082bc6324882_port_3",
+            "coords": [
+              1200,
+              875
+            ],
+            "connectionPoint": [
+              1200,
+              875
+            ],
+            "direction": "right",
+            "label": ""
+          }
+        ],
+        "label": "Regulatory Authorities Conf.",
+        "coords": [
+          950,
+          800
+        ],
+        "width": 250,
+        "height": 150,
+        "data": {
+          "node name": "Regulatory Authorities Conf.",
+          "node number": 1,
+          "probability": 99
+        }
+      },
+      {
+        "id": "iddf9d2cc0-1919-472f-9bff-4ecb7db20976",
+        "type": "state-diagram-node",
+        "children": [],
+        "sections": [
+          {
+            "id": "iddf9d2cc0-1919-472f-9bff-4ecb7db20976_0_0",
+            "ports": [],
+            "label": "",
+            "indexXInNode": 0,
+            "indexYInNode": 0,
+            "coords": [
+              1250,
+              800
+            ],
+            "width": 250,
+            "height": 32
+          },
+          {
+            "id": "iddf9d2cc0-1919-472f-9bff-4ecb7db20976_1_0",
+            "ports": [],
+            "label": "",
+            "indexXInNode": 0,
+            "indexYInNode": 1,
+            "coords": [
+              1250,
+              832
+            ],
+            "width": 250,
+            "height": 118
+          }
+        ],
+        "ports": [
+          {
+            "id": "iddf9d2cc0-1919-472f-9bff-4ecb7db20976_port_0",
+            "coords": [
+              1375,
+              800
+            ],
+            "connectionPoint": [
+              1375,
+              800
+            ],
+            "direction": "top",
+            "label": ""
+          },
+          {
+            "id": "iddf9d2cc0-1919-472f-9bff-4ecb7db20976_port_1",
+            "coords": [
+              1250,
+              875
+            ],
+            "connectionPoint": [
+              1250,
+              875
+            ],
+            "direction": "left",
+            "label": ""
+          },
+          {
+            "id": "iddf9d2cc0-1919-472f-9bff-4ecb7db20976_port_2",
+            "coords": [
+              1375,
+              950
+            ],
+            "connectionPoint": [
+              1375,
+              950
+            ],
+            "direction": "bottom",
+            "label": ""
+          },
+          {
+            "id": "iddf9d2cc0-1919-472f-9bff-4ecb7db20976_port_3",
+            "coords": [
+              1500,
+              875
+            ],
+            "connectionPoint": [
+              1500,
+              875
+            ],
+            "direction": "right",
+            "label": ""
+          }
+        ],
+        "label": "Positive Results",
+        "coords": [
+          1250,
+          800
+        ],
+        "width": 250,
+        "height": 150,
+        "data": {
+          "node name": "Positive Results",
+          "node number": 1
+        }
+      },
+      {
+        "id": "id6277d487-4679-43c1-be75-b66a441ca5de",
+        "type": "end-diagram-node",
+        "children": [],
+        "sections": [
+          {
+            "id": "id6277d487-4679-43c1-be75-b66a441ca5de_0_0",
+            "ports": [],
+            "label": "",
+            "indexXInNode": 0,
+            "indexYInNode": 0,
+            "coords": [
+              650,
+              800
+            ],
+            "width": 250,
+            "height": 32
+          },
+          {
+            "id": "id6277d487-4679-43c1-be75-b66a441ca5de_1_0",
+            "ports": [],
+            "label": "",
+            "indexXInNode": 0,
+            "indexYInNode": 1,
+            "coords": [
+              650,
+              832
+            ],
+            "width": 250,
+            "height": 118
+          }
+        ],
+        "ports": [
+          {
+            "id": "id6277d487-4679-43c1-be75-b66a441ca5de_port_0",
+            "coords": [
+              775,
+              800
+            ],
+            "connectionPoint": [
+              775,
+              800
+            ],
+            "direction": "top",
+            "label": ""
+          },
+          {
+            "id": "id6277d487-4679-43c1-be75-b66a441ca5de_port_1",
+            "coords": [
+              650,
+              875
+            ],
+            "connectionPoint": [
+              650,
+              875
+            ],
+            "direction": "left",
+            "label": ""
+          },
+          {
+            "id": "id6277d487-4679-43c1-be75-b66a441ca5de_port_2",
+            "coords": [
+              775,
+              950
+            ],
+            "connectionPoint": [
+              775,
+              950
+            ],
+            "direction": "bottom",
+            "label": ""
+          },
+          {
+            "id": "id6277d487-4679-43c1-be75-b66a441ca5de_port_3",
+            "coords": [
+              900,
+              875
+            ],
+            "connectionPoint": [
+              900,
+              875
+            ],
+            "direction": "right",
+            "label": ""
+          }
+        ],
+        "label": "Drug is Effective",
+        "coords": [
+          650,
+          800
+        ],
+        "width": 250,
+        "height": 150,
+        "data": {
+          "node name": "Drug is Effective",
+          "node number": 1
+        }
+      }
+    ],
+    "connections": [
+      {
+        "id": "id55a4ded3-9d07-471b-8a6e-32786589a3b1",
+        "type": "start-connection",
+        "start": "id68030a2a-28eb-442e-9b16-fc465150c3cf_port_3",
+        "end": "id80af05f5-ffe2-4896-9e81-f466118c07fa_port_1",
+        "startLabel": "",
+        "middleLabel": "",
+        "endLabel": "1",
+        "points": [],
+        "data": {
+          "connection name": "miss connection",
+          "weight": 1
+        }
+      },
+      {
+        "id": "ide9639de7-7ed1-4ba1-a043-12aa5097d42b",
+        "type": "diagram-connection",
+        "start": "id80af05f5-ffe2-4896-9e81-f466118c07fa_port_3",
+        "end": "id4feee37d-cda6-436c-8126-c48742fc48ee_port_1",
+        "startLabel": "",
+        "middleLabel": "",
+        "endLabel": "1",
+        "points": [],
+        "data": {
+          "connection name": "miss connection",
+          "weight": 1
+        }
+      },
+      {
+        "id": "id1cfa95b3-82e6-4c35-9ace-60f3825dfcaf",
+        "type": "diagram-connection",
+        "start": "id4feee37d-cda6-436c-8126-c48742fc48ee_port_3",
+        "end": "id07cc93fe-abe7-4046-a1f2-1f5e7f49dcbf_port_1",
+        "startLabel": "",
+        "middleLabel": "",
+        "endLabel": "1",
+        "points": [],
+        "data": {
+          "connection name": "miss connection",
+          "weight": 1
+        }
+      },
+      {
+        "id": "idaf9e1a95-b2ba-4cd1-812d-bdcc3b68bb53",
+        "type": "diagram-connection",
+        "start": "id07cc93fe-abe7-4046-a1f2-1f5e7f49dcbf_port_3",
+        "end": "iddf9d2cc0-1919-472f-9bff-4ecb7db20976_port_3",
+        "startLabel": "",
+        "middleLabel": "",
+        "endLabel": "1",
+        "points": [],
+        "data": {
+          "connection name": "miss connection",
+          "weight": 1
+        }
+      },
+      {
+        "id": "idcb848e7a-46dc-481b-92ff-c0148f0927e1",
+        "type": "diagram-connection",
+        "start": "iddf9d2cc0-1919-472f-9bff-4ecb7db20976_port_1",
+        "end": "id4300b862-57bb-42ba-8cb5-082bc6324882_port_3",
+        "startLabel": "",
+        "middleLabel": "",
+        "endLabel": "1",
+        "points": [],
+        "data": {
+          "connection name": "miss connection",
+          "weight": 1
+        }
+      },
+      {
+        "id": "id7eeae84d-8f66-47cf-b903-38f7999ec738",
+        "type": "end-connection",
+        "start": "id4300b862-57bb-42ba-8cb5-082bc6324882_port_1",
+        "end": "id6277d487-4679-43c1-be75-b66a441ca5de_port_3",
+        "startLabel": "",
+        "middleLabel": "",
+        "endLabel": "1",
+        "points": [],
+        "data": {
+          "connection name": "end connection",
+          "weight": 1
+        }
+      }
+    ],
+    "data": {
+      "name": "unnamed",
+      "description": "",
+      "layout": "tree",
+      "created": "2026-05-13T11:15:01.996Z",
+      "last opened": "2026-05-13T11:15:01.996Z"
+    }
+  }
+}
