@@ -3,3 +3,19 @@
   height: 90%;
   overflow-y: auto;
 }
+
+.example-button {
+  display: inline-block;
+  margin: 0.5rem 0 1.5rem;
+  padding: 0.6rem 1.2rem;
+  background: #2ecc4a;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background 0.15s ease;
+
+  &:hover {
+    background: #25b03f;
+  }
+}

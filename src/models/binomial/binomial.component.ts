@@ -1,9 +1,17 @@
 import { CommonModule } from '@angular/common';
-import { Component, ViewChild } from '@angular/core';
+import { afterNextRender, Component, inject, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { DagaExporter } from '@metadev/daga';
 import { Canvas, DagaModule } from '@metadev/daga-angular';
 import { detectCycle, getNodeDisplayName, getNodeMap } from '../../util/generalCalculationNodes.utils';
-import { RiskFile, applyRiskFileToCanvas, downloadRiskFile, exportCanvasToFile, readRiskFile } from '../../util/importExport.utils';
+import {
+  RiskFile,
+  applyRiskFileToCanvas,
+  downloadRiskFile,
+  exportCanvasToFile,
+  loadRiskFileFromUrl,
+  readRiskFile
+} from '../../util/importExport.utils';
 import { DagaBaseComponent } from '../dagaBase.component';
 import { GenericComponent } from '../generic.component';
 import { ConnectionInfo, NodeInfo } from '../types';
@@ -24,6 +32,20 @@ export class BinomialComponent extends GenericComponent {
 
   private canvas: Canvas | null = null;
   private pendingImport: RiskFile | null = null;
+
+  private readonly route = inject(ActivatedRoute);
+
+  constructor() {
+    super();
+    // Browser-only: auto-import the example referenced by ?example=<file-stem>.
+    afterNextRender(() => {
+      const name = this.route.snapshot.queryParamMap.get('example');
+      if (!name || !/^[\w.-]+$/.test(name)) return;
+      loadRiskFileFromUrl(`/assets/examples/binomial/${name}.json`)
+        .then((file) => this.applyImport(file))
+        .catch((err) => console.error('No se pudo cargar el ejemplo:', err));
+    });
+  }
 
   get hasResults(): boolean {
     return this.results.length > 0;

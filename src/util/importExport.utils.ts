@@ -70,36 +70,48 @@ export function downloadRiskFile(file: RiskFile, baseName?: string): void {
   URL.revokeObjectURL(url);
 }
 
+export function parseRiskFile(text: string): RiskFile {
+  const parsed = JSON.parse(text) as Partial<RiskFile>;
+  if (!parsed || parsed.riskFileVersion !== 1) {
+    throw new Error('Formato no soportado: falta riskFileVersion=1.');
+  }
+  if (!parsed.daga || !Array.isArray(parsed.daga.nodes) || !Array.isArray(parsed.daga.connections)) {
+    throw new Error('Archivo inválido: falta sección daga.nodes / daga.connections.');
+  }
+  const modelType: RiskModelType =
+    parsed.modelType === 'binomial' || parsed.modelType === 'bayes' ? parsed.modelType : detectModelType(parsed.daga);
+  migrateLegacyValueKeys(parsed.daga);
+  return {
+    riskFileVersion: 1,
+    modelType,
+    exportedAt: typeof parsed.exportedAt === 'string' ? parsed.exportedAt : new Date().toISOString(),
+    daga: parsed.daga,
+    bayes: parsed.bayes
+  };
+}
+
 export function readRiskFile(file: File): Promise<RiskFile> {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onerror = () => reject(new Error('No se pudo leer el archivo.'));
     reader.onload = () => {
       try {
-        const text = reader.result as string;
-        const parsed = JSON.parse(text) as Partial<RiskFile>;
-        if (!parsed || parsed.riskFileVersion !== 1) {
-          throw new Error('Formato no soportado: falta riskFileVersion=1.');
-        }
-        if (!parsed.daga || !Array.isArray(parsed.daga.nodes) || !Array.isArray(parsed.daga.connections)) {
-          throw new Error('Archivo inválido: falta sección daga.nodes / daga.connections.');
-        }
-        const modelType: RiskModelType =
-          parsed.modelType === 'binomial' || parsed.modelType === 'bayes' ? parsed.modelType : detectModelType(parsed.daga);
-        migrateLegacyValueKeys(parsed.daga);
-        resolve({
-          riskFileVersion: 1,
-          modelType,
-          exportedAt: typeof parsed.exportedAt === 'string' ? parsed.exportedAt : new Date().toISOString(),
-          daga: parsed.daga,
-          bayes: parsed.bayes
-        });
+        resolve(parseRiskFile(reader.result as string));
       } catch (err) {
         reject(err instanceof Error ? err : new Error(String(err)));
       }
     };
     reader.readAsText(file);
   });
+}
+
+/** Fetches a RiskFile JSON from a served URL (e.g. an example under /assets). */
+export async function loadRiskFileFromUrl(url: string): Promise<RiskFile> {
+  const res = await fetch(url);
+  if (!res.ok) {
+    throw new Error(`No se pudo cargar el modelo (${res.status}): ${url}`);
+  }
+  return parseRiskFile(await res.text());
 }
 
 export function detectModelType(daga: DagaModel): RiskModelType {

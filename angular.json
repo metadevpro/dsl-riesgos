@@ -39,6 +39,11 @@
                 "input": "node_modules/@metadev/daga-angular/assets",
                 "glob": "**/*",
                 "output": "./assets/daga"
+              },
+              {
+                "glob": "**/*.json",
+                "input": "docs/examples",
+                "output": "assets/examples"
               }
             ],
             "styles": ["node_modules/@metadev/daga-angular/assets/styles/daga.scss", "src/styles.scss"],

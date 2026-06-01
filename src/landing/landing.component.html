@@ -1,11 +1,9 @@
 <div class="landing">
   <h1>RISK DSL</h1>
-  <h2>About me</h2>
-  <p>I'm Juan José Amores, a Computer Engineering student at UPV, specializing in Software Engineering. What drives me is building technology that goes beyond the technical: tools that help people understand complex problems and make decisions with greater clarity and confidence.</p>
-  <p>That idea is what gave rise to this project. My final degree thesis —Visual Modeling and Risk Calculation using DSL and Web Technologies— is a web application that allows users to represent, calculate, and explore risks through interactive visual models. By combining a custom DSL, probabilistic networks, and integration with Daga, the tool transforms complex calculations into dynamic, easy-to-understand diagrams that are simple to manipulate.</p>
-  <p>This project was developed in collaboration with Metadev and under the supervision of Pedro J. Molina, which allowed me to work in a real professional environment from the early design stages all the way through to the final implementation.</p>
-  <p>To build it, I worked with Angular, TypeScript, and web diagramming libraries, bringing together software engineering, probabilistic calculus, and user experience design. The goal isn't just to build a working application — it's to bring risk analysis closer to real-world contexts such as space missions, banking, insurance, and investment.</p>
-  <p>Ultimately, this project represents my way of merging curiosity, technology, and practical value. Turning hard-to-interpret mathematical models into visual tools that help teams and organizations make better decisions.</p>
+  <p>In an increasingly complex world, risks don't appear in isolation — they are interconnected, generating situations that are difficult to anticipate using traditional methods.</p>
+  <p>This project introduces an interactive web application that combines probabilistic models with visual diagrams, allowing users to represent uncertainty scenarios in a clear and intuitive way. Through a visual DSL built with Angular and TypeScript, anyone can transform abstract statistical calculations into understandable diagrams, with no advanced technical knowledge required.</p>
+  <p>The tool is designed for critical sectors such as space missions, banking and insurance, where making informed decisions can make a significant difference.</p>
+  <p>The goal is simple: to bring risk modelling closer to analysts and management teams, merging the rigour of data with the clarity of visuals, so that any organisation can understand its risks and act with greater confidence and security.</p>
 
   <h2>Binomial Examples</h2>
   <h3>Example 1. In-line quality control</h3>
@@ -22,7 +20,19 @@
   <p>
     The aim of the model is to estimate the probability that a screw will be definitively rejected after passing through the entire process.
   </p>
-  **BUTTON TO THE MODEL**
+
+  <img
+    src="assets/screenshots/binomial/binomial-example1-landing-diagram.png"
+    alt="Binomial example 1 landing diagram"
+  />
+  <a
+    class="example-button"
+    routerLink="/binomial"
+    [queryParams]="{ example: 'binomial-example1-landing' }"
+    data-cy="open-example-binomial-1"
+  >
+    Open this example in the model →
+  </a>
 
   <h3>Example 2. Logistics Supply Chain</h3>
   <p>
@@ -38,7 +48,20 @@
     What is the probability that an order will reach the customer successfully?
     What is the probability that an order will fail due to a supplier issue, given that it failed?
   </p>
-  **BUTTON TO THE MODEL**
+
+  <img
+    src="assets/screenshots/binomial/binomial-example2-landing-diagram.png"
+    alt="Binomial example 2 landing diagram"
+  />
+  <p></p>
+  <a
+    class="example-button"
+    routerLink="/binomial"
+    [queryParams]="{ example: 'binomial-example2-landing' }"
+    data-cy="open-example-binomial-2"
+  >
+    Open this example in the model →
+  </a>
 
   <h3>Example 3. Cybersecurity </h3>
   <p>
@@ -54,7 +77,14 @@
     Although this probability seems low, in a system receiving 10.000 attack attempts per month:
     Expected succesful attacks = 10.000 * 0.1 * 0.2 * 0.05 = 10 successful attacks per month.
   </p>
-  **BUTTON TO THE MODEL**
+  <a
+    class="example-button"
+    routerLink="/binomial"
+    [queryParams]="{ example: 'binomial-example3-landing' }"
+    data-cy="open-example-binomial-3"
+  >
+    Open this example in the model →
+  </a>
 
   <h3>Example 3.5. Cybersecurity Extension</h3>
   <p>
@@ -69,7 +99,14 @@
     If both key points apply, even if there has been a data breach, it will have been contained early
     and the consequences will be minimal.
   </p>
-  **BUTTON TO THE MODEL**
+  <a
+    class="example-button"
+    routerLink="/binomial"
+    [queryParams]="{ example: 'binomial-example3.5-landing' }"
+    data-cy="open-example-binomial-3-5"
+  >
+    Open this example in the model →
+  </a>
 
   <h3>Example 4. Clinical Trial</h3>
   <p>
@@ -84,7 +121,14 @@
     Furthermore, after passing Phase 3, the regulatory authorities approves the drug with a 99% confidence level, which means that there is a 1% chance that the drug is not effective despite the positive results in the trial.
     The company wants to estimate the overall probability that the drug is effective, taking into account the results of all three phases and the regulatory approval process.
   </p>
-  **BUTTON TO THE MODEL**
+  <a
+    class="example-button"
+    routerLink="/binomial"
+    [queryParams]="{ example: 'binomial-example4-landing' }"
+    data-cy="open-example-binomial-4"
+  >
+    Open this example in the model →
+  </a>
 
   <!-- Bayes Examples -->
 
@@ -147,7 +191,11 @@
     automatically imply mission failure, but it does reduce the margins of success.
     Conversely, the combination of several adverse factors can significantly degrade the probability of success.
   </p>
-  <h4>Technical Details</h4>
+
+  <img
+    src="assets/screenshots/bayes/bayes-example1-landing-diagram.png"
+    alt="Bayes example 1 landing diagram"
+  />
 
   <h4>Probabilities defined in the CPTs</h4>
   <p>
@@ -295,11 +343,18 @@
     failure or adverse weather is confirmed, the model selects the corresponding rows and propagates the change toward the mission and
     payload deployment nodes.
   </p>
-  **BUTTON TO THE MODEL*
+  <a
+    class="example-button"
+    routerLink="/bayes"
+    [queryParams]="{ example: 'bayes-example1-landing' }"
+    data-cy="open-example-bayes-1"
+  >
+    Open this example in the model →
+  </a>
 
   <!-- Example 2 Bayes -->
 
-  <h3>Example 2: Abort decision at T-0</h3>
+  <h3>Example 2: Abort Launch at T-10</h3>
   <p>
     In the final second before launch, the rocket's software automatically checks several critical systems.
     If any of the sensors detects an anomaly, the system can trigger an automatic abort at T-0, halting the launch before ignition is complete.
@@ -339,8 +394,13 @@
     <li>T-0 Alert: The software activates automatic abort.</li>
     <li>Failure is real: The alert actually corresponds to a physical failure and not a false positive.</li>
   </ul>
-  <h4>Probabilities defined in the CPTs</h4>
+  
+  <img
+    src="assets/screenshots/bayes/bayes-example2-landing-diagram.png"
+    alt="Bayes example 2 landing diagram"
+  />
 
+  <h4>Probabilities defined in the CPTs</h4>
   <h4>Node 1 · RealSystemFailure</h4>
   <p>
     This node represents the prior probability that an actual physical fault exists at T-0.
@@ -503,7 +563,14 @@
     the network does not only detect an alarm, it estimates whether that alarm should be considered a real fault
     or a false positive.
   </p>
-  **BUTTON TO THE MODEL**
+  <a
+    class="example-button"
+    routerLink="/bayes"
+    [queryParams]="{ example: 'bayes-example2-landing' }"
+    data-cy="open-example-bayes-2"
+  >
+    Open this example in the model →
+  </a>
 
   <!-- Example 3 Bayes -->
   <h3>Example 3. Crew Dragon </h3>
@@ -532,16 +599,22 @@
     cause it to capsize or delay recovery.
   </p>
   <p>
-    The model includes the folllowing nodes:
+    The model includes the following nodes:
   </p>
   <ul>
     <li>Deorbit Burn Failure: The deorbit manoeuvre is not executed correctly.</li>
-    <li>Heat Shiled Failure: The heat shield does not provide adequate protection during re-entry.</li>
+    <li>Heat Shield Failure: The heat shield does not provide adequate protection during re-entry.</li>
     <li>Parachute Deployment Failure: The parachute system does not deploy correctly.</li>
     <li>Oceanic Conditions: Sea conditions are unsuitable for splashdown</li>
     <li>Normal Splashdown: The capsule lands safely in the ocean.</li>
     <li>Crew Rescued: The crew is successfully recovered.</li>
   </ul>
+  
+  <img
+    src="assets/screenshots/bayes/bayes-example3-landing-diagram.png"
+    alt="Bayes example 3 landing diagram"
+  />
+  
   <h4>Probabilities defined in the CPTs</h4>
 
   <h4>Node 1 · DeorbitBurnFailure</h4>
@@ -734,6 +807,19 @@
     safe crew recovery.
   </p>
 
-  **BUTTON TO THE MODEL**
+  <a
+    class="example-button"
+    routerLink="/bayes"
+    [queryParams]="{ example: 'bayes-example3-landing' }"
+    data-cy="open-example-bayes-3"
+  >
+    Open this example in the model →
+  </a>
+  <h2>Credits</h2>
+  <p>I'm Juan José Amores, a Computer Engineering student at UPV, specializing in Software Engineering. What drives me is building technology that goes beyond the technical: tools that help people understand complex problems and make decisions with greater clarity and confidence.</p>
+  <p>That idea is what gave rise to this project. My final degree thesis —Visual Modeling and Risk Calculation using DSL and Web Technologies— is a web application that allows users to represent, calculate, and explore risks through interactive visual models. By combining a custom DSL, probabilistic networks, and integration with Daga, the tool transforms complex calculations into dynamic, easy-to-understand diagrams that are simple to manipulate.</p>
+  <p>This project was developed in collaboration with Metadev and under the supervision of Pedro J. Molina and Patricio Letelier, which allowed me to work in a real professional environment from the early design stages all the way through to the final implementation.</p>
+  <p>To build it, I worked with Angular, TypeScript, and web diagramming libraries, bringing together software engineering, probabilistic calculus, and user experience design. The goal isn't just to build a working application — it's to bring risk analysis closer to real-world contexts such as space missions, banking, insurance, and investment.</p>
+  <p>Ultimately, this project represents my way of merging curiosity, technology, and practical value. Turning hard-to-interpret mathematical models into visual tools that help teams and organizations make better decisions.</p>
   <div class="footer">&copy; Juanjo Amores &amp; <a href="https://metadev.pro">Metadev</a> 2026.</div>
 </div>

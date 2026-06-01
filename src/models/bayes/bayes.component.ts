@@ -1,12 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, inject, OnDestroy, ViewChild } from '@angular/core';
+import { afterNextRender, ChangeDetectorRef, Component, inject, OnDestroy, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { DagaConnection, DagaExporter, DagaModel, DagaNode } from '@metadev/daga';
 import { AddConnectionAction, AddNodeAction, Canvas, DagaModule, DiagramPort, Side } from '@metadev/daga-angular';
 import {
   applyRiskFileToCanvas,
   downloadRiskFile,
   exportCanvasToFile,
+  loadRiskFileFromUrl,
   overlayBayesSchemaOnGraph,
   readRiskFile,
   RiskFile,
@@ -73,7 +75,21 @@ export class BayesComponent extends GenericComponent implements OnDestroy {
   private canvas: Canvas | null = null;
   private pendingImport: RiskFile | null = null;
 
+  private readonly route = inject(ActivatedRoute);
+
   @ViewChild(DagaBaseComponent) private dagaBase?: DagaBaseComponent;
+
+  constructor() {
+    super();
+    // Browser-only: auto-import the example referenced by ?example=<file-stem>.
+    afterNextRender(() => {
+      const name = this.route.snapshot.queryParamMap.get('example');
+      if (!name || !/^[\w.-]+$/.test(name)) return;
+      loadRiskFileFromUrl(`/assets/examples/bayes/${name}.json`)
+        .then((file) => this.applyImport(file))
+        .catch((err) => console.error('No se pudo cargar el ejemplo:', err));
+    });
+  }
 
   get hasResults(): boolean {
     return this.results.length > 0;
