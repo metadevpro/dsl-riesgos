@@ -1,0 +1,666 @@
+{
+  "riskFileVersion": 1,
+  "modelType": "bayes",
+  "exportedAt": "2026-06-01T01:11:04.335Z",
+  "daga": {
+    "name": "bayes diagram",
+    "type": "simple-diagram",
+    "typeVersion": 1,
+    "createdAt": "2026-05-18T11:18:35.513Z",
+    "updatedAt": "2026-05-18T11:18:35.513Z",
+    "nodes": [
+      {
+        "id": "id05564686-becf-47a0-98fa-57afcfaa137f",
+        "type": "cause-diagram-node",
+        "children": [],
+        "sections": [
+          {
+            "id": "id05564686-becf-47a0-98fa-57afcfaa137f_0_0",
+            "ports": [],
+            "label": "",
+            "indexXInNode": 0,
+            "indexYInNode": 0,
+            "coords": [
+              50,
+              155
+            ],
+            "width": 250,
+            "height": 32
+          },
+          {
+            "id": "id05564686-becf-47a0-98fa-57afcfaa137f_1_0",
+            "ports": [],
+            "label": "",
+            "indexXInNode": 0,
+            "indexYInNode": 1,
+            "coords": [
+              50,
+              187
+            ],
+            "width": 250,
+            "height": 118
+          }
+        ],
+        "ports": [
+          {
+            "id": "id05564686-becf-47a0-98fa-57afcfaa137f_port_0",
+            "coords": [
+              175,
+              155
+            ],
+            "connectionPoint": [
+              175,
+              155
+            ],
+            "direction": "top",
+            "label": ""
+          },
+          {
+            "id": "id05564686-becf-47a0-98fa-57afcfaa137f_port_1",
+            "coords": [
+              50,
+              230
+            ],
+            "connectionPoint": [
+              50,
+              230
+            ],
+            "direction": "left",
+            "label": ""
+          },
+          {
+            "id": "id05564686-becf-47a0-98fa-57afcfaa137f_port_2",
+            "coords": [
+              175,
+              305
+            ],
+            "connectionPoint": [
+              175,
+              305
+            ],
+            "direction": "bottom",
+            "label": ""
+          },
+          {
+            "id": "id05564686-becf-47a0-98fa-57afcfaa137f_port_3",
+            "coords": [
+              300,
+              230
+            ],
+            "connectionPoint": [
+              300,
+              230
+            ],
+            "direction": "right",
+            "label": ""
+          }
+        ],
+        "label": "Real System Failure",
+        "coords": [
+          50,
+          155
+        ],
+        "width": 250,
+        "height": 150,
+        "data": {
+          "node name": "Real System Failure",
+          "bayes_evidence": "null",
+          "bayes_cpt": "",
+          "bayes_pSi": 50,
+          "bayes_pNo": 50
+        }
+      },
+      {
+        "id": "id5098b85d-cfce-4dbb-92af-e4a637e4342c",
+        "type": "event-diagram-node",
+        "children": [],
+        "sections": [
+          {
+            "id": "id5098b85d-cfce-4dbb-92af-e4a637e4342c_0_0",
+            "ports": [],
+            "label": "",
+            "indexXInNode": 0,
+            "indexYInNode": 0,
+            "coords": [
+              1040,
+              155
+            ],
+            "width": 250,
+            "height": 32
+          },
+          {
+            "id": "id5098b85d-cfce-4dbb-92af-e4a637e4342c_1_0",
+            "ports": [],
+            "label": "",
+            "indexXInNode": 0,
+            "indexYInNode": 1,
+            "coords": [
+              1040,
+              187
+            ],
+            "width": 250,
+            "height": 118
+          }
+        ],
+        "ports": [
+          {
+            "id": "id5098b85d-cfce-4dbb-92af-e4a637e4342c_port_0",
+            "coords": [
+              1165,
+              155
+            ],
+            "connectionPoint": [
+              1165,
+              155
+            ],
+            "direction": "top",
+            "label": ""
+          },
+          {
+            "id": "id5098b85d-cfce-4dbb-92af-e4a637e4342c_port_1",
+            "coords": [
+              1040,
+              230
+            ],
+            "connectionPoint": [
+              1040,
+              230
+            ],
+            "direction": "left",
+            "label": ""
+          },
+          {
+            "id": "id5098b85d-cfce-4dbb-92af-e4a637e4342c_port_2",
+            "coords": [
+              1165,
+              305
+            ],
+            "connectionPoint": [
+              1165,
+              305
+            ],
+            "direction": "bottom",
+            "label": ""
+          },
+          {
+            "id": "id5098b85d-cfce-4dbb-92af-e4a637e4342c_port_3",
+            "coords": [
+              1290,
+              230
+            ],
+            "connectionPoint": [
+              1290,
+              230
+            ],
+            "direction": "right",
+            "label": ""
+          }
+        ],
+        "label": "Failure is real",
+        "coords": [
+          1040,
+          155
+        ],
+        "width": 250,
+        "height": 150,
+        "data": {
+          "node name": "Failure is real",
+          "bayes_evidence": "null",
+          "bayes_cpt": "",
+          "bayes_pSi": 50,
+          "bayes_pNo": 50
+        }
+      },
+      {
+        "id": "id98807491-a403-4d6c-bab2-977022c362fb",
+        "type": "effect-diagram-node",
+        "children": [],
+        "sections": [
+          {
+            "id": "id98807491-a403-4d6c-bab2-977022c362fb_0_0",
+            "ports": [],
+            "label": "",
+            "indexXInNode": 0,
+            "indexYInNode": 0,
+            "coords": [
+              380,
+              50
+            ],
+            "width": 250,
+            "height": 32
+          },
+          {
+            "id": "id98807491-a403-4d6c-bab2-977022c362fb_1_0",
+            "ports": [],
+            "label": "",
+            "indexXInNode": 0,
+            "indexYInNode": 1,
+            "coords": [
+              380,
+              82
+            ],
+            "width": 250,
+            "height": 118
+          }
+        ],
+        "ports": [
+          {
+            "id": "id98807491-a403-4d6c-bab2-977022c362fb_port_0",
+            "coords": [
+              505,
+              50
+            ],
+            "connectionPoint": [
+              505,
+              50
+            ],
+            "direction": "top",
+            "label": ""
+          },
+          {
+            "id": "id98807491-a403-4d6c-bab2-977022c362fb_port_1",
+            "coords": [
+              380,
+              125
+            ],
+            "connectionPoint": [
+              380,
+              125
+            ],
+            "direction": "left",
+            "label": ""
+          },
+          {
+            "id": "id98807491-a403-4d6c-bab2-977022c362fb_port_2",
+            "coords": [
+              505,
+              200
+            ],
+            "connectionPoint": [
+              505,
+              200
+            ],
+            "direction": "bottom",
+            "label": ""
+          },
+          {
+            "id": "id98807491-a403-4d6c-bab2-977022c362fb_port_3",
+            "coords": [
+              630,
+              125
+            ],
+            "connectionPoint": [
+              630,
+              125
+            ],
+            "direction": "right",
+            "label": ""
+          }
+        ],
+        "label": "EC Sensor",
+        "coords": [
+          380,
+          50
+        ],
+        "width": 250,
+        "height": 150,
+        "data": {
+          "node name": "EC Sensor",
+          "bayes_evidence": "null",
+          "bayes_cpt": "",
+          "bayes_pSi": 50,
+          "bayes_pNo": 50
+        }
+      },
+      {
+        "id": "id74d0bcf5-a252-413f-af3c-63b928768f77",
+        "type": "effect-diagram-node",
+        "children": [],
+        "sections": [
+          {
+            "id": "id74d0bcf5-a252-413f-af3c-63b928768f77_0_0",
+            "ports": [],
+            "label": "",
+            "indexXInNode": 0,
+            "indexYInNode": 0,
+            "coords": [
+              380,
+              260
+            ],
+            "width": 250,
+            "height": 32
+          },
+          {
+            "id": "id74d0bcf5-a252-413f-af3c-63b928768f77_1_0",
+            "ports": [],
+            "label": "",
+            "indexXInNode": 0,
+            "indexYInNode": 1,
+            "coords": [
+              380,
+              292
+            ],
+            "width": 250,
+            "height": 118
+          }
+        ],
+        "ports": [
+          {
+            "id": "id74d0bcf5-a252-413f-af3c-63b928768f77_port_0",
+            "coords": [
+              505,
+              260
+            ],
+            "connectionPoint": [
+              505,
+              260
+            ],
+            "direction": "top",
+            "label": ""
+          },
+          {
+            "id": "id74d0bcf5-a252-413f-af3c-63b928768f77_port_1",
+            "coords": [
+              380,
+              335
+            ],
+            "connectionPoint": [
+              380,
+              335
+            ],
+            "direction": "left",
+            "label": ""
+          },
+          {
+            "id": "id74d0bcf5-a252-413f-af3c-63b928768f77_port_2",
+            "coords": [
+              505,
+              410
+            ],
+            "connectionPoint": [
+              505,
+              410
+            ],
+            "direction": "bottom",
+            "label": ""
+          },
+          {
+            "id": "id74d0bcf5-a252-413f-af3c-63b928768f77_port_3",
+            "coords": [
+              630,
+              335
+            ],
+            "connectionPoint": [
+              630,
+              335
+            ],
+            "direction": "right",
+            "label": ""
+          }
+        ],
+        "label": "Propellant Sensor",
+        "coords": [
+          380,
+          260
+        ],
+        "width": 250,
+        "height": 150,
+        "data": {
+          "node name": "Propellant Sensor",
+          "bayes_evidence": "null",
+          "bayes_cpt": "",
+          "bayes_pSi": 50,
+          "bayes_pNo": 50
+        }
+      },
+      {
+        "id": "id8ea386f4-e5e4-48d6-9b9f-e4d16be7c6d6",
+        "type": "event-diagram-node",
+        "children": [],
+        "sections": [
+          {
+            "id": "id8ea386f4-e5e4-48d6-9b9f-e4d16be7c6d6_0_0",
+            "ports": [],
+            "label": "",
+            "indexXInNode": 0,
+            "indexYInNode": 0,
+            "coords": [
+              710,
+              155
+            ],
+            "width": 250,
+            "height": 32
+          },
+          {
+            "id": "id8ea386f4-e5e4-48d6-9b9f-e4d16be7c6d6_1_0",
+            "ports": [],
+            "label": "",
+            "indexXInNode": 0,
+            "indexYInNode": 1,
+            "coords": [
+              710,
+              187
+            ],
+            "width": 250,
+            "height": 118
+          }
+        ],
+        "ports": [
+          {
+            "id": "id8ea386f4-e5e4-48d6-9b9f-e4d16be7c6d6_port_0",
+            "coords": [
+              835,
+              155
+            ],
+            "connectionPoint": [
+              835,
+              155
+            ],
+            "direction": "top",
+            "label": ""
+          },
+          {
+            "id": "id8ea386f4-e5e4-48d6-9b9f-e4d16be7c6d6_port_1",
+            "coords": [
+              710,
+              230
+            ],
+            "connectionPoint": [
+              710,
+              230
+            ],
+            "direction": "left",
+            "label": ""
+          },
+          {
+            "id": "id8ea386f4-e5e4-48d6-9b9f-e4d16be7c6d6_port_2",
+            "coords": [
+              835,
+              305
+            ],
+            "connectionPoint": [
+              835,
+              305
+            ],
+            "direction": "bottom",
+            "label": ""
+          },
+          {
+            "id": "id8ea386f4-e5e4-48d6-9b9f-e4d16be7c6d6_port_3",
+            "coords": [
+              960,
+              230
+            ],
+            "connectionPoint": [
+              960,
+              230
+            ],
+            "direction": "right",
+            "label": ""
+          }
+        ],
+        "label": "T-0 Alert",
+        "coords": [
+          710,
+          155
+        ],
+        "width": 250,
+        "height": 150,
+        "data": {
+          "node name": "T-0 Alert",
+          "bayes_evidence": "null",
+          "bayes_cpt": "",
+          "bayes_pSi": 50,
+          "bayes_pNo": 50
+        }
+      }
+    ],
+    "connections": [
+      {
+        "id": "idb40aee3b-d693-4f96-b2cd-d375e62e6069",
+        "type": "diagram-connection",
+        "start": "id05564686-becf-47a0-98fa-57afcfaa137f_port_3",
+        "end": "id98807491-a403-4d6c-bab2-977022c362fb_port_1",
+        "startLabel": "",
+        "middleLabel": "",
+        "endLabel": "",
+        "points": [],
+        "data": {
+          "connection name": ""
+        }
+      },
+      {
+        "id": "id33022147-75c5-40d6-ac61-019bef53e1dc",
+        "type": "diagram-connection",
+        "start": "id05564686-becf-47a0-98fa-57afcfaa137f_port_3",
+        "end": "id74d0bcf5-a252-413f-af3c-63b928768f77_port_1",
+        "startLabel": "",
+        "middleLabel": "",
+        "endLabel": "",
+        "points": [],
+        "data": {
+          "connection name": ""
+        }
+      },
+      {
+        "id": "id8013d6db-f4f7-4c6d-843c-9162927943c1",
+        "type": "diagram-connection",
+        "start": "id98807491-a403-4d6c-bab2-977022c362fb_port_3",
+        "end": "id8ea386f4-e5e4-48d6-9b9f-e4d16be7c6d6_port_1",
+        "startLabel": "",
+        "middleLabel": "",
+        "endLabel": "",
+        "points": [],
+        "data": {
+          "connection name": ""
+        }
+      },
+      {
+        "id": "iddabdfc42-678c-4cf0-9724-e9903c477760",
+        "type": "diagram-connection",
+        "start": "id74d0bcf5-a252-413f-af3c-63b928768f77_port_3",
+        "end": "id8ea386f4-e5e4-48d6-9b9f-e4d16be7c6d6_port_1",
+        "startLabel": "",
+        "middleLabel": "",
+        "endLabel": "",
+        "points": [],
+        "data": {
+          "connection name": ""
+        }
+      },
+      {
+        "id": "id462b0fa2-5f03-48ca-a036-bca469793200",
+        "type": "diagram-connection",
+        "start": "id8ea386f4-e5e4-48d6-9b9f-e4d16be7c6d6_port_3",
+        "end": "id5098b85d-cfce-4dbb-92af-e4a637e4342c_port_1",
+        "startLabel": "",
+        "middleLabel": "",
+        "endLabel": "",
+        "points": [],
+        "data": {
+          "connection name": ""
+        }
+      }
+    ],
+    "data": {
+      "name": "bayes diagram",
+      "description": "",
+      "layout": "adjacency",
+      "created": "2026-05-18T11:18:35.513Z",
+      "last opened": "2026-05-18T11:18:35.513Z"
+    }
+  },
+  "bayes": {
+    "nodes": {
+      "id05564686-becf-47a0-98fa-57afcfaa137f": {
+        "evidence": null,
+        "cpt": {
+          "prior": {
+            "si": 0.008,
+            "no": 0.992
+          }
+        }
+      },
+      "id5098b85d-cfce-4dbb-92af-e4a637e4342c": {
+        "evidence": null,
+        "cpt": {
+          "id8ea386f4-e5e4-48d6-9b9f-e4d16be7c6d6_si": {
+            "si": 0.15,
+            "no": 0.85
+          },
+          "id8ea386f4-e5e4-48d6-9b9f-e4d16be7c6d6_no": {
+            "si": 0.003,
+            "no": 0.997
+          }
+        }
+      },
+      "id98807491-a403-4d6c-bab2-977022c362fb": {
+        "evidence": null,
+        "cpt": {
+          "id05564686-becf-47a0-98fa-57afcfaa137f_si": {
+            "si": 0.95,
+            "no": 0.05
+          },
+          "id05564686-becf-47a0-98fa-57afcfaa137f_no": {
+            "si": 0.03,
+            "no": 0.97
+          }
+        }
+      },
+      "id74d0bcf5-a252-413f-af3c-63b928768f77": {
+        "evidence": null,
+        "cpt": {
+          "id05564686-becf-47a0-98fa-57afcfaa137f_si": {
+            "si": 0.9,
+            "no": 0.1
+          },
+          "id05564686-becf-47a0-98fa-57afcfaa137f_no": {
+            "si": 0.04,
+            "no": 0.96
+          }
+        }
+      },
+      "id8ea386f4-e5e4-48d6-9b9f-e4d16be7c6d6": {
+        "evidence": null,
+        "cpt": {
+          "id98807491-a403-4d6c-bab2-977022c362fb_si|id74d0bcf5-a252-413f-af3c-63b928768f77_si": {
+            "si": 0.99,
+            "no": 0.01
+          },
+          "id98807491-a403-4d6c-bab2-977022c362fb_si|id74d0bcf5-a252-413f-af3c-63b928768f77_no": {
+            "si": 0.95,
+            "no": 0.05
+          },
+          "id98807491-a403-4d6c-bab2-977022c362fb_no|id74d0bcf5-a252-413f-af3c-63b928768f77_si": {
+            "si": 0.93,
+            "no": 0.07
+          },
+          "id98807491-a403-4d6c-bab2-977022c362fb_no|id74d0bcf5-a252-413f-af3c-63b928768f77_no": {
+            "si": 0.01,
+            "no": 0.99
+          }
+        }
+      }
+    }
+  }
+}

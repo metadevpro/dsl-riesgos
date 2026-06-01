@@ -28,7 +28,7 @@ import { BayesGraph } from './types';
 @Component({
   standalone: true,
   template: `<ng-content />`,
-  selector: 'daga-base',
+  selector: 'app-daga-base',
   imports: [DagaModule]
 })
 export class DagaBaseComponent implements AfterViewInit, OnDestroy, OnChanges {

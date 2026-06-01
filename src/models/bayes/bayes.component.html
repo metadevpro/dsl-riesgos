@@ -508,7 +508,7 @@
 
   <!-- ═══ Daga Diagram ═══ -->
   <daga-diagram [config]="bayes_config" (modelChange)="onModelChange($event)">
-    <daga-base
+    <app-daga-base
       [bayesMode]="true"
       [bayesGraph]="bayesGraph"
       (nodeDoubleClicked)="onNodeDoubleClick($event)"
