@@ -1,0 +1,611 @@
+{
+  "riskFileVersion": 1,
+  "modelType": "binomial",
+  "exportedAt": "2026-05-31T16:46:31.999Z",
+  "daga": {
+    "name": "unnamed",
+    "type": "simple-diagram",
+    "typeVersion": 1,
+    "createdAt": "2026-05-13T11:03:22.888Z",
+    "updatedAt": "2026-05-13T11:03:22.888Z",
+    "nodes": [
+      {
+        "id": "id87c31d65-d0d9-47ce-a2af-3e15eb7a0a3f",
+        "type": "start-diagram-node",
+        "children": [],
+        "sections": [
+          {
+            "id": "id87c31d65-d0d9-47ce-a2af-3e15eb7a0a3f_0_0",
+            "ports": [],
+            "label": "",
+            "indexXInNode": 0,
+            "indexYInNode": 0,
+            "coords": [
+              0,
+              0
+            ],
+            "width": 250,
+            "height": 32
+          },
+          {
+            "id": "id87c31d65-d0d9-47ce-a2af-3e15eb7a0a3f_1_0",
+            "ports": [],
+            "label": "",
+            "indexXInNode": 0,
+            "indexYInNode": 1,
+            "coords": [
+              0,
+              32
+            ],
+            "width": 250,
+            "height": 118
+          }
+        ],
+        "ports": [
+          {
+            "id": "id87c31d65-d0d9-47ce-a2af-3e15eb7a0a3f_port_0",
+            "coords": [
+              125,
+              0
+            ],
+            "connectionPoint": [
+              125,
+              0
+            ],
+            "direction": "top",
+            "label": ""
+          },
+          {
+            "id": "id87c31d65-d0d9-47ce-a2af-3e15eb7a0a3f_port_1",
+            "coords": [
+              0,
+              75
+            ],
+            "connectionPoint": [
+              0,
+              75
+            ],
+            "direction": "left",
+            "label": ""
+          },
+          {
+            "id": "id87c31d65-d0d9-47ce-a2af-3e15eb7a0a3f_port_2",
+            "coords": [
+              125,
+              150
+            ],
+            "connectionPoint": [
+              125,
+              150
+            ],
+            "direction": "bottom",
+            "label": ""
+          },
+          {
+            "id": "id87c31d65-d0d9-47ce-a2af-3e15eb7a0a3f_port_3",
+            "coords": [
+              250,
+              75
+            ],
+            "connectionPoint": [
+              250,
+              75
+            ],
+            "direction": "right",
+            "label": ""
+          }
+        ],
+        "label": "Order arrives",
+        "coords": [
+          0,
+          0
+        ],
+        "width": 250,
+        "height": 150,
+        "data": {
+          "node name": "Order arrives",
+          "node number": 1
+        }
+      },
+      {
+        "id": "idf00fb73f-a2d5-4635-a6c2-2ddf2eba57ee",
+        "type": "event-diagram-node",
+        "children": [],
+        "sections": [
+          {
+            "id": "idf00fb73f-a2d5-4635-a6c2-2ddf2eba57ee_0_0",
+            "ports": [],
+            "label": "",
+            "indexXInNode": 0,
+            "indexYInNode": 0,
+            "coords": [
+              300,
+              0
+            ],
+            "width": 250,
+            "height": 32
+          },
+          {
+            "id": "idf00fb73f-a2d5-4635-a6c2-2ddf2eba57ee_1_0",
+            "ports": [],
+            "label": "",
+            "indexXInNode": 0,
+            "indexYInNode": 1,
+            "coords": [
+              300,
+              32
+            ],
+            "width": 250,
+            "height": 90
+          },
+          {
+            "id": "idf00fb73f-a2d5-4635-a6c2-2ddf2eba57ee_2_0",
+            "ports": [],
+            "label": "",
+            "indexXInNode": 0,
+            "indexYInNode": 2,
+            "coords": [
+              300,
+              122
+            ],
+            "width": 250,
+            "height": 28
+          }
+        ],
+        "ports": [
+          {
+            "id": "idf00fb73f-a2d5-4635-a6c2-2ddf2eba57ee_port_0",
+            "coords": [
+              425,
+              0
+            ],
+            "connectionPoint": [
+              425,
+              0
+            ],
+            "direction": "top",
+            "label": ""
+          },
+          {
+            "id": "idf00fb73f-a2d5-4635-a6c2-2ddf2eba57ee_port_1",
+            "coords": [
+              300,
+              75
+            ],
+            "connectionPoint": [
+              300,
+              75
+            ],
+            "direction": "left",
+            "label": ""
+          },
+          {
+            "id": "idf00fb73f-a2d5-4635-a6c2-2ddf2eba57ee_port_2",
+            "coords": [
+              425,
+              150
+            ],
+            "connectionPoint": [
+              425,
+              150
+            ],
+            "direction": "bottom",
+            "label": ""
+          },
+          {
+            "id": "idf00fb73f-a2d5-4635-a6c2-2ddf2eba57ee_port_3",
+            "coords": [
+              550,
+              75
+            ],
+            "connectionPoint": [
+              550,
+              75
+            ],
+            "direction": "right",
+            "label": ""
+          }
+        ],
+        "label": "Supplier not fails",
+        "coords": [
+          300,
+          0
+        ],
+        "width": 250,
+        "height": 150,
+        "data": {
+          "node name": "Supplier not fails",
+          "node number": 1,
+          "probability": 97
+        }
+      },
+      {
+        "id": "idf47b9ca3-0285-4f3f-b521-9c52cad51fb1",
+        "type": "event-diagram-node",
+        "children": [],
+        "sections": [
+          {
+            "id": "idf47b9ca3-0285-4f3f-b521-9c52cad51fb1_0_0",
+            "ports": [],
+            "label": "",
+            "indexXInNode": 0,
+            "indexYInNode": 0,
+            "coords": [
+              600,
+              0
+            ],
+            "width": 250,
+            "height": 32
+          },
+          {
+            "id": "idf47b9ca3-0285-4f3f-b521-9c52cad51fb1_1_0",
+            "ports": [],
+            "label": "",
+            "indexXInNode": 0,
+            "indexYInNode": 1,
+            "coords": [
+              600,
+              32
+            ],
+            "width": 250,
+            "height": 90
+          },
+          {
+            "id": "idf47b9ca3-0285-4f3f-b521-9c52cad51fb1_2_0",
+            "ports": [],
+            "label": "",
+            "indexXInNode": 0,
+            "indexYInNode": 2,
+            "coords": [
+              600,
+              122
+            ],
+            "width": 250,
+            "height": 28
+          }
+        ],
+        "ports": [
+          {
+            "id": "idf47b9ca3-0285-4f3f-b521-9c52cad51fb1_port_0",
+            "coords": [
+              725,
+              0
+            ],
+            "connectionPoint": [
+              725,
+              0
+            ],
+            "direction": "top",
+            "label": ""
+          },
+          {
+            "id": "idf47b9ca3-0285-4f3f-b521-9c52cad51fb1_port_1",
+            "coords": [
+              600,
+              75
+            ],
+            "connectionPoint": [
+              600,
+              75
+            ],
+            "direction": "left",
+            "label": ""
+          },
+          {
+            "id": "idf47b9ca3-0285-4f3f-b521-9c52cad51fb1_port_2",
+            "coords": [
+              725,
+              150
+            ],
+            "connectionPoint": [
+              725,
+              150
+            ],
+            "direction": "bottom",
+            "label": ""
+          },
+          {
+            "id": "idf47b9ca3-0285-4f3f-b521-9c52cad51fb1_port_3",
+            "coords": [
+              850,
+              75
+            ],
+            "connectionPoint": [
+              850,
+              75
+            ],
+            "direction": "right",
+            "label": ""
+          }
+        ],
+        "label": "Warehouse not fails",
+        "coords": [
+          600,
+          0
+        ],
+        "width": 250,
+        "height": 150,
+        "data": {
+          "node name": "Warehouse not fails",
+          "node number": 1,
+          "probability": 95
+        }
+      },
+      {
+        "id": "id62b82ee8-3714-40f2-a4a0-eb88e1967eec",
+        "type": "event-diagram-node",
+        "children": [],
+        "sections": [
+          {
+            "id": "id62b82ee8-3714-40f2-a4a0-eb88e1967eec_0_0",
+            "ports": [],
+            "label": "",
+            "indexXInNode": 0,
+            "indexYInNode": 0,
+            "coords": [
+              900,
+              0
+            ],
+            "width": 250,
+            "height": 32
+          },
+          {
+            "id": "id62b82ee8-3714-40f2-a4a0-eb88e1967eec_1_0",
+            "ports": [],
+            "label": "",
+            "indexXInNode": 0,
+            "indexYInNode": 1,
+            "coords": [
+              900,
+              32
+            ],
+            "width": 250,
+            "height": 90
+          },
+          {
+            "id": "id62b82ee8-3714-40f2-a4a0-eb88e1967eec_2_0",
+            "ports": [],
+            "label": "",
+            "indexXInNode": 0,
+            "indexYInNode": 2,
+            "coords": [
+              900,
+              122
+            ],
+            "width": 250,
+            "height": 28
+          }
+        ],
+        "ports": [
+          {
+            "id": "id62b82ee8-3714-40f2-a4a0-eb88e1967eec_port_0",
+            "coords": [
+              1025,
+              0
+            ],
+            "connectionPoint": [
+              1025,
+              0
+            ],
+            "direction": "top",
+            "label": ""
+          },
+          {
+            "id": "id62b82ee8-3714-40f2-a4a0-eb88e1967eec_port_1",
+            "coords": [
+              900,
+              75
+            ],
+            "connectionPoint": [
+              900,
+              75
+            ],
+            "direction": "left",
+            "label": ""
+          },
+          {
+            "id": "id62b82ee8-3714-40f2-a4a0-eb88e1967eec_port_2",
+            "coords": [
+              1025,
+              150
+            ],
+            "connectionPoint": [
+              1025,
+              150
+            ],
+            "direction": "bottom",
+            "label": ""
+          },
+          {
+            "id": "id62b82ee8-3714-40f2-a4a0-eb88e1967eec_port_3",
+            "coords": [
+              1150,
+              75
+            ],
+            "connectionPoint": [
+              1150,
+              75
+            ],
+            "direction": "right",
+            "label": ""
+          }
+        ],
+        "label": "Distribution not fails",
+        "coords": [
+          900,
+          0
+        ],
+        "width": 250,
+        "height": 150,
+        "data": {
+          "node name": "Distribution not fails",
+          "node number": 1,
+          "probability": 98
+        }
+      },
+      {
+        "id": "id2d1409c4-932c-430c-8f46-5f3c61642233",
+        "type": "end-diagram-node",
+        "children": [],
+        "sections": [
+          {
+            "id": "id2d1409c4-932c-430c-8f46-5f3c61642233_0_0",
+            "ports": [],
+            "label": "",
+            "indexXInNode": 0,
+            "indexYInNode": 0,
+            "coords": [
+              1200,
+              0
+            ],
+            "width": 250,
+            "height": 32
+          },
+          {
+            "id": "id2d1409c4-932c-430c-8f46-5f3c61642233_1_0",
+            "ports": [],
+            "label": "",
+            "indexXInNode": 0,
+            "indexYInNode": 1,
+            "coords": [
+              1200,
+              32
+            ],
+            "width": 250,
+            "height": 118
+          }
+        ],
+        "ports": [
+          {
+            "id": "id2d1409c4-932c-430c-8f46-5f3c61642233_port_0",
+            "coords": [
+              1325,
+              0
+            ],
+            "connectionPoint": [
+              1325,
+              0
+            ],
+            "direction": "top",
+            "label": ""
+          },
+          {
+            "id": "id2d1409c4-932c-430c-8f46-5f3c61642233_port_1",
+            "coords": [
+              1200,
+              75
+            ],
+            "connectionPoint": [
+              1200,
+              75
+            ],
+            "direction": "left",
+            "label": ""
+          },
+          {
+            "id": "id2d1409c4-932c-430c-8f46-5f3c61642233_port_2",
+            "coords": [
+              1325,
+              150
+            ],
+            "connectionPoint": [
+              1325,
+              150
+            ],
+            "direction": "bottom",
+            "label": ""
+          },
+          {
+            "id": "id2d1409c4-932c-430c-8f46-5f3c61642233_port_3",
+            "coords": [
+              1450,
+              75
+            ],
+            "connectionPoint": [
+              1450,
+              75
+            ],
+            "direction": "right",
+            "label": ""
+          }
+        ],
+        "label": "Order reaches the customer",
+        "coords": [
+          1200,
+          0
+        ],
+        "width": 250,
+        "height": 150,
+        "data": {
+          "node name": "Order reaches the customer",
+          "node number": 1
+        }
+      }
+    ],
+    "connections": [
+      {
+        "id": "idcbb9e26c-dc96-41df-aa38-74583bbdc3a5",
+        "type": "start-connection",
+        "start": "id87c31d65-d0d9-47ce-a2af-3e15eb7a0a3f_port_3",
+        "end": "idf00fb73f-a2d5-4635-a6c2-2ddf2eba57ee_port_1",
+        "startLabel": "",
+        "middleLabel": "",
+        "endLabel": "1",
+        "points": [],
+        "data": {
+          "connection name": "miss connection",
+          "weight": 1
+        }
+      },
+      {
+        "id": "id15b6b119-7094-4cd8-bb9d-13abfb7d90c8",
+        "type": "diagram-connection",
+        "start": "idf00fb73f-a2d5-4635-a6c2-2ddf2eba57ee_port_3",
+        "end": "idf47b9ca3-0285-4f3f-b521-9c52cad51fb1_port_1",
+        "startLabel": "",
+        "middleLabel": "",
+        "endLabel": "1",
+        "points": [],
+        "data": {
+          "connection name": "miss connection",
+          "weight": 1
+        }
+      },
+      {
+        "id": "id3920329c-e898-48b9-8edd-82e6ee2218ed",
+        "type": "diagram-connection",
+        "start": "idf47b9ca3-0285-4f3f-b521-9c52cad51fb1_port_3",
+        "end": "id62b82ee8-3714-40f2-a4a0-eb88e1967eec_port_1",
+        "startLabel": "",
+        "middleLabel": "",
+        "endLabel": "1",
+        "points": [],
+        "data": {
+          "connection name": "miss connection",
+          "weight": 1
+        }
+      },
+      {
+        "id": "id8e813471-0db3-44d6-ae86-816c0874ddfc",
+        "type": "end-connection",
+        "start": "id62b82ee8-3714-40f2-a4a0-eb88e1967eec_port_3",
+        "end": "id2d1409c4-932c-430c-8f46-5f3c61642233_port_1",
+        "startLabel": "",
+        "middleLabel": "",
+        "endLabel": "1",
+        "points": [],
+        "data": {
+          "connection name": "end connection",
+          "weight": 1
+        }
+      }
+    ],
+    "data": {
+      "name": "unnamed",
+      "description": "",
+      "layout": "tree",
+      "created": "2026-05-13T11:03:22.888Z",
+      "last opened": "2026-05-13T11:03:22.888Z"
+    }
+  }
+}

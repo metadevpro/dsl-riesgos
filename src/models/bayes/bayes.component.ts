@@ -36,6 +36,7 @@ import { generarDatosSinteticos } from './util/syntheticData.utils';
   standalone: true,
   selector: 'risk-bayes',
   templateUrl: 'bayes.component.html',
+  styleUrl: 'bayes.component.scss',
   imports: [DagaModule, CommonModule, FormsModule, DagaBaseComponent]
 })
 export class BayesComponent extends GenericComponent implements OnDestroy {

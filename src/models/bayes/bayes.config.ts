@@ -26,7 +26,7 @@ const BAYES_NODE_VISUALS: Record<string, BayesNodeVisual> = {
   'event-diagram-node': { solid: '#6D28D9', tint: '#EEDCFA' }
 };
 
-const NODE_BORDER = '#E5E7EB';
+const NODE_BORDER = '#000000';
 const NODE_BORDER_SELECTED = '#378ADD';
 const NODE_FILL_WHITE = '#FFFFFF';
 
@@ -76,7 +76,7 @@ const topBandLook = (tint: string): ShapedLookConfig => ({
     borderThickness: 2
   },
   highlighted: {
-    borderThickness: 3
+    borderThickness: 1
   }
 });
 
@@ -92,7 +92,7 @@ const bottomBandLook = (): ShapedLookConfig => ({
     borderThickness: 2
   },
   highlighted: {
-    borderThickness: 3
+    borderThickness: 1
   }
 });
 
@@ -110,9 +110,9 @@ const nodeShellLook = (): ShapedLookConfig => ({
   shape: roundedRectangleShape,
   fillColor: 'transparent',
   borderColor: 'transparent',
-  borderThickness: 0,
+  borderThickness: 2,
   selected: { borderColor: 'transparent', fillColor: 'transparent' },
-  highlighted: { borderColor: 'transparent' }
+  highlighted: { borderColor: 'black', borderThickness: 4 }
 });
 
 const buildBayesNodeType = (id: string, name: string) => ({

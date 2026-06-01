@@ -1,6 +1,6 @@
 <div class="topbar-actions">
   <button data-test-id="import" (click)="fileInput.click()">Import</button>
-  <button data-test-id="export" (click)="exportCurrent()">Export</button>
+  <button data-test-id="export" (click)="downloadRiskFile()">Export</button>
   <button class="primary" (click)="openCalculationDialog()">Calculate Probability</button>
   @if (hasResults) {
     <button class="primary" (click)="openResultsBar()">View Results</button>
@@ -165,7 +165,7 @@
   </div>
 
   <daga-diagram [config]="config" (modelChange)="myModel = $event">
-    <daga-base
+    <app-daga-base
       [branchValueKey]="branchValueKey"
       [showTheoreticalProbabilities]="showTheoreticalProbabilities"
       (canvasReady)="onCanvasReady($event)"

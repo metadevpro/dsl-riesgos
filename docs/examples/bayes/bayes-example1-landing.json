@@ -1,0 +1,661 @@
+{
+  "riskFileVersion": 1,
+  "modelType": "bayes",
+  "exportedAt": "2026-06-01T00:24:44.687Z",
+  "daga": {
+    "name": "bayes diagram",
+    "type": "simple-diagram",
+    "typeVersion": 1,
+    "createdAt": "2026-05-18T10:29:08.780Z",
+    "updatedAt": "2026-05-18T10:29:08.780Z",
+    "nodes": [
+      {
+        "id": "id6551f3b3-9793-40c9-bbe0-d0bd9860aa43",
+        "type": "cause-diagram-node",
+        "children": [],
+        "sections": [
+          {
+            "id": "id6551f3b3-9793-40c9-bbe0-d0bd9860aa43_0_0",
+            "ports": [],
+            "label": "",
+            "indexXInNode": 0,
+            "indexYInNode": 0,
+            "coords": [
+              50,
+              470
+            ],
+            "width": 250,
+            "height": 32
+          },
+          {
+            "id": "id6551f3b3-9793-40c9-bbe0-d0bd9860aa43_1_0",
+            "ports": [],
+            "label": "",
+            "indexXInNode": 0,
+            "indexYInNode": 1,
+            "coords": [
+              50,
+              502
+            ],
+            "width": 250,
+            "height": 118
+          }
+        ],
+        "ports": [
+          {
+            "id": "id6551f3b3-9793-40c9-bbe0-d0bd9860aa43_port_0",
+            "coords": [
+              175,
+              470
+            ],
+            "connectionPoint": [
+              175,
+              470
+            ],
+            "direction": "top",
+            "label": ""
+          },
+          {
+            "id": "id6551f3b3-9793-40c9-bbe0-d0bd9860aa43_port_1",
+            "coords": [
+              50,
+              545
+            ],
+            "connectionPoint": [
+              50,
+              545
+            ],
+            "direction": "left",
+            "label": ""
+          },
+          {
+            "id": "id6551f3b3-9793-40c9-bbe0-d0bd9860aa43_port_2",
+            "coords": [
+              175,
+              620
+            ],
+            "connectionPoint": [
+              175,
+              620
+            ],
+            "direction": "bottom",
+            "label": ""
+          },
+          {
+            "id": "id6551f3b3-9793-40c9-bbe0-d0bd9860aa43_port_3",
+            "coords": [
+              300,
+              545
+            ],
+            "connectionPoint": [
+              300,
+              545
+            ],
+            "direction": "right",
+            "label": ""
+          }
+        ],
+        "label": "Partial Engine Failure",
+        "coords": [
+          50,
+          470
+        ],
+        "width": 250,
+        "height": 150,
+        "data": {
+          "node name": "Partial Engine Failure",
+          "bayes_evidence": "null",
+          "bayes_cpt": "",
+          "bayes_pSi": 50,
+          "bayes_pNo": 50
+        }
+      },
+      {
+        "id": "iddffa6d2b-4b54-4fdb-baa9-bf4f117bb97b",
+        "type": "cause-diagram-node",
+        "children": [],
+        "sections": [
+          {
+            "id": "iddffa6d2b-4b54-4fdb-baa9-bf4f117bb97b_0_0",
+            "ports": [],
+            "label": "",
+            "indexXInNode": 0,
+            "indexYInNode": 0,
+            "coords": [
+              50,
+              50
+            ],
+            "width": 250,
+            "height": 32
+          },
+          {
+            "id": "iddffa6d2b-4b54-4fdb-baa9-bf4f117bb97b_1_0",
+            "ports": [],
+            "label": "",
+            "indexXInNode": 0,
+            "indexYInNode": 1,
+            "coords": [
+              50,
+              82
+            ],
+            "width": 250,
+            "height": 118
+          }
+        ],
+        "ports": [
+          {
+            "id": "iddffa6d2b-4b54-4fdb-baa9-bf4f117bb97b_port_0",
+            "coords": [
+              175,
+              50
+            ],
+            "connectionPoint": [
+              175,
+              50
+            ],
+            "direction": "top",
+            "label": ""
+          },
+          {
+            "id": "iddffa6d2b-4b54-4fdb-baa9-bf4f117bb97b_port_1",
+            "coords": [
+              50,
+              125
+            ],
+            "connectionPoint": [
+              50,
+              125
+            ],
+            "direction": "left",
+            "label": ""
+          },
+          {
+            "id": "iddffa6d2b-4b54-4fdb-baa9-bf4f117bb97b_port_2",
+            "coords": [
+              175,
+              200
+            ],
+            "connectionPoint": [
+              175,
+              200
+            ],
+            "direction": "bottom",
+            "label": ""
+          },
+          {
+            "id": "iddffa6d2b-4b54-4fdb-baa9-bf4f117bb97b_port_3",
+            "coords": [
+              300,
+              125
+            ],
+            "connectionPoint": [
+              300,
+              125
+            ],
+            "direction": "right",
+            "label": ""
+          }
+        ],
+        "label": "Critical Engine Failure",
+        "coords": [
+          50,
+          50
+        ],
+        "width": 250,
+        "height": 150,
+        "data": {
+          "node name": "Critical Engine Failure",
+          "bayes_evidence": "null",
+          "bayes_cpt": "",
+          "bayes_pSi": 50,
+          "bayes_pNo": 50
+        }
+      },
+      {
+        "id": "id564c0e0e-d17a-47e8-a908-cdfb11e175d0",
+        "type": "cause-diagram-node",
+        "children": [],
+        "sections": [
+          {
+            "id": "id564c0e0e-d17a-47e8-a908-cdfb11e175d0_0_0",
+            "ports": [],
+            "label": "",
+            "indexXInNode": 0,
+            "indexYInNode": 0,
+            "coords": [
+              50,
+              260
+            ],
+            "width": 250,
+            "height": 32
+          },
+          {
+            "id": "id564c0e0e-d17a-47e8-a908-cdfb11e175d0_1_0",
+            "ports": [],
+            "label": "",
+            "indexXInNode": 0,
+            "indexYInNode": 1,
+            "coords": [
+              50,
+              292
+            ],
+            "width": 250,
+            "height": 118
+          }
+        ],
+        "ports": [
+          {
+            "id": "id564c0e0e-d17a-47e8-a908-cdfb11e175d0_port_0",
+            "coords": [
+              175,
+              260
+            ],
+            "connectionPoint": [
+              175,
+              260
+            ],
+            "direction": "top",
+            "label": ""
+          },
+          {
+            "id": "id564c0e0e-d17a-47e8-a908-cdfb11e175d0_port_1",
+            "coords": [
+              50,
+              335
+            ],
+            "connectionPoint": [
+              50,
+              335
+            ],
+            "direction": "left",
+            "label": ""
+          },
+          {
+            "id": "id564c0e0e-d17a-47e8-a908-cdfb11e175d0_port_2",
+            "coords": [
+              175,
+              410
+            ],
+            "connectionPoint": [
+              175,
+              410
+            ],
+            "direction": "bottom",
+            "label": ""
+          },
+          {
+            "id": "id564c0e0e-d17a-47e8-a908-cdfb11e175d0_port_3",
+            "coords": [
+              300,
+              335
+            ],
+            "connectionPoint": [
+              300,
+              335
+            ],
+            "direction": "right",
+            "label": ""
+          }
+        ],
+        "label": "Metereological Conditions",
+        "coords": [
+          50,
+          260
+        ],
+        "width": 250,
+        "height": 150,
+        "data": {
+          "node name": "Metereological Conditions",
+          "bayes_evidence": "null",
+          "bayes_cpt": "",
+          "bayes_pSi": 50,
+          "bayes_pNo": 50
+        }
+      },
+      {
+        "id": "id73d0414d-4611-4b62-b726-490006c6ae82",
+        "type": "effect-diagram-node",
+        "children": [],
+        "sections": [
+          {
+            "id": "id73d0414d-4611-4b62-b726-490006c6ae82_0_0",
+            "ports": [],
+            "label": "",
+            "indexXInNode": 0,
+            "indexYInNode": 0,
+            "coords": [
+              380,
+              260
+            ],
+            "width": 250,
+            "height": 32
+          },
+          {
+            "id": "id73d0414d-4611-4b62-b726-490006c6ae82_1_0",
+            "ports": [],
+            "label": "",
+            "indexXInNode": 0,
+            "indexYInNode": 1,
+            "coords": [
+              380,
+              292
+            ],
+            "width": 250,
+            "height": 118
+          }
+        ],
+        "ports": [
+          {
+            "id": "id73d0414d-4611-4b62-b726-490006c6ae82_port_0",
+            "coords": [
+              505,
+              260
+            ],
+            "connectionPoint": [
+              505,
+              260
+            ],
+            "direction": "top",
+            "label": ""
+          },
+          {
+            "id": "id73d0414d-4611-4b62-b726-490006c6ae82_port_1",
+            "coords": [
+              380,
+              335
+            ],
+            "connectionPoint": [
+              380,
+              335
+            ],
+            "direction": "left",
+            "label": ""
+          },
+          {
+            "id": "id73d0414d-4611-4b62-b726-490006c6ae82_port_2",
+            "coords": [
+              505,
+              410
+            ],
+            "connectionPoint": [
+              505,
+              410
+            ],
+            "direction": "bottom",
+            "label": ""
+          },
+          {
+            "id": "id73d0414d-4611-4b62-b726-490006c6ae82_port_3",
+            "coords": [
+              630,
+              335
+            ],
+            "connectionPoint": [
+              630,
+              335
+            ],
+            "direction": "right",
+            "label": ""
+          }
+        ],
+        "label": "Mission reaches orbit",
+        "coords": [
+          380,
+          260
+        ],
+        "width": 250,
+        "height": 150,
+        "data": {
+          "node name": "Mission reaches orbit",
+          "bayes_evidence": "null",
+          "bayes_cpt": "",
+          "bayes_pSi": 50,
+          "bayes_pNo": 50
+        }
+      },
+      {
+        "id": "id4a99f539-4f78-4dd8-a5cf-9ae58e7e5f89",
+        "type": "event-diagram-node",
+        "children": [],
+        "sections": [
+          {
+            "id": "id4a99f539-4f78-4dd8-a5cf-9ae58e7e5f89_0_0",
+            "ports": [],
+            "label": "",
+            "indexXInNode": 0,
+            "indexYInNode": 0,
+            "coords": [
+              710,
+              260
+            ],
+            "width": 250,
+            "height": 32
+          },
+          {
+            "id": "id4a99f539-4f78-4dd8-a5cf-9ae58e7e5f89_1_0",
+            "ports": [],
+            "label": "",
+            "indexXInNode": 0,
+            "indexYInNode": 1,
+            "coords": [
+              710,
+              292
+            ],
+            "width": 250,
+            "height": 118
+          }
+        ],
+        "ports": [
+          {
+            "id": "id4a99f539-4f78-4dd8-a5cf-9ae58e7e5f89_port_0",
+            "coords": [
+              835,
+              260
+            ],
+            "connectionPoint": [
+              835,
+              260
+            ],
+            "direction": "top",
+            "label": ""
+          },
+          {
+            "id": "id4a99f539-4f78-4dd8-a5cf-9ae58e7e5f89_port_1",
+            "coords": [
+              710,
+              335
+            ],
+            "connectionPoint": [
+              710,
+              335
+            ],
+            "direction": "left",
+            "label": ""
+          },
+          {
+            "id": "id4a99f539-4f78-4dd8-a5cf-9ae58e7e5f89_port_2",
+            "coords": [
+              835,
+              410
+            ],
+            "connectionPoint": [
+              835,
+              410
+            ],
+            "direction": "bottom",
+            "label": ""
+          },
+          {
+            "id": "id4a99f539-4f78-4dd8-a5cf-9ae58e7e5f89_port_3",
+            "coords": [
+              960,
+              335
+            ],
+            "connectionPoint": [
+              960,
+              335
+            ],
+            "direction": "right",
+            "label": ""
+          }
+        ],
+        "label": "Payload Release",
+        "coords": [
+          710,
+          260
+        ],
+        "width": 250,
+        "height": 150,
+        "data": {
+          "node name": "Payload Release",
+          "bayes_evidence": "null",
+          "bayes_cpt": "",
+          "bayes_pSi": 50,
+          "bayes_pNo": 50
+        }
+      }
+    ],
+    "connections": [
+      {
+        "id": "id382ede2b-44b2-4683-a922-ab855e0a4236",
+        "type": "diagram-connection",
+        "start": "id6551f3b3-9793-40c9-bbe0-d0bd9860aa43_port_3",
+        "end": "id73d0414d-4611-4b62-b726-490006c6ae82_port_1",
+        "startLabel": "",
+        "middleLabel": "",
+        "endLabel": "",
+        "points": [],
+        "data": {
+          "connection name": ""
+        }
+      },
+      {
+        "id": "id065d24df-1d74-4cde-943e-68aa72bc8684",
+        "type": "diagram-connection",
+        "start": "iddffa6d2b-4b54-4fdb-baa9-bf4f117bb97b_port_3",
+        "end": "id73d0414d-4611-4b62-b726-490006c6ae82_port_1",
+        "startLabel": "",
+        "middleLabel": "",
+        "endLabel": "",
+        "points": [],
+        "data": {
+          "connection name": ""
+        }
+      },
+      {
+        "id": "ida97cde27-2fd9-444b-bed2-ba2eab6e2ddb",
+        "type": "diagram-connection",
+        "start": "id564c0e0e-d17a-47e8-a908-cdfb11e175d0_port_3",
+        "end": "id73d0414d-4611-4b62-b726-490006c6ae82_port_1",
+        "startLabel": "",
+        "middleLabel": "",
+        "endLabel": "",
+        "points": [],
+        "data": {
+          "connection name": ""
+        }
+      },
+      {
+        "id": "id09b72ba0-14c6-4dd4-8d7a-5689dc396039",
+        "type": "diagram-connection",
+        "start": "id73d0414d-4611-4b62-b726-490006c6ae82_port_3",
+        "end": "id4a99f539-4f78-4dd8-a5cf-9ae58e7e5f89_port_1",
+        "startLabel": "",
+        "middleLabel": "",
+        "endLabel": "",
+        "points": [],
+        "data": {
+          "connection name": ""
+        }
+      }
+    ],
+    "data": {
+      "name": "bayes diagram",
+      "description": "",
+      "layout": "adjacency",
+      "created": "2026-05-18T10:29:08.780Z",
+      "last opened": "2026-05-18T10:29:08.780Z"
+    }
+  },
+  "bayes": {
+    "nodes": {
+      "id6551f3b3-9793-40c9-bbe0-d0bd9860aa43": {
+        "evidence": null,
+        "cpt": {
+          "prior": {
+            "si": 0.061,
+            "no": 0.939
+          }
+        }
+      },
+      "iddffa6d2b-4b54-4fdb-baa9-bf4f117bb97b": {
+        "evidence": null,
+        "cpt": {
+          "prior": {
+            "si": 0.00003,
+            "no": 1
+          }
+        }
+      },
+      "id564c0e0e-d17a-47e8-a908-cdfb11e175d0": {
+        "evidence": null,
+        "cpt": {
+          "prior": {
+            "si": 0.02,
+            "no": 0.98
+          }
+        }
+      },
+      "id73d0414d-4611-4b62-b726-490006c6ae82": {
+        "evidence": null,
+        "cpt": {
+          "id6551f3b3-9793-40c9-bbe0-d0bd9860aa43_si|iddffa6d2b-4b54-4fdb-baa9-bf4f117bb97b_si|id564c0e0e-d17a-47e8-a908-cdfb11e175d0_si": {
+            "si": 0.005,
+            "no": 0.995
+          },
+          "id6551f3b3-9793-40c9-bbe0-d0bd9860aa43_si|iddffa6d2b-4b54-4fdb-baa9-bf4f117bb97b_si|id564c0e0e-d17a-47e8-a908-cdfb11e175d0_no": {
+            "si": 0.02,
+            "no": 0.98
+          },
+          "id6551f3b3-9793-40c9-bbe0-d0bd9860aa43_si|iddffa6d2b-4b54-4fdb-baa9-bf4f117bb97b_no|id564c0e0e-d17a-47e8-a908-cdfb11e175d0_si": {
+            "si": 0.55,
+            "no": 0.45
+          },
+          "id6551f3b3-9793-40c9-bbe0-d0bd9860aa43_si|iddffa6d2b-4b54-4fdb-baa9-bf4f117bb97b_no|id564c0e0e-d17a-47e8-a908-cdfb11e175d0_no": {
+            "si": 0.85,
+            "no": 0.15
+          },
+          "id6551f3b3-9793-40c9-bbe0-d0bd9860aa43_no|iddffa6d2b-4b54-4fdb-baa9-bf4f117bb97b_si|id564c0e0e-d17a-47e8-a908-cdfb11e175d0_si": {
+            "si": 0.01,
+            "no": 0.99
+          },
+          "id6551f3b3-9793-40c9-bbe0-d0bd9860aa43_no|iddffa6d2b-4b54-4fdb-baa9-bf4f117bb97b_si|id564c0e0e-d17a-47e8-a908-cdfb11e175d0_no": {
+            "si": 0.05,
+            "no": 0.95
+          },
+          "id6551f3b3-9793-40c9-bbe0-d0bd9860aa43_no|iddffa6d2b-4b54-4fdb-baa9-bf4f117bb97b_no|id564c0e0e-d17a-47e8-a908-cdfb11e175d0_si": {
+            "si": 0.8,
+            "no": 0.2
+          },
+          "id6551f3b3-9793-40c9-bbe0-d0bd9860aa43_no|iddffa6d2b-4b54-4fdb-baa9-bf4f117bb97b_no|id564c0e0e-d17a-47e8-a908-cdfb11e175d0_no": {
+            "si": 0.985,
+            "no": 0.015
+          }
+        }
+      },
+      "id4a99f539-4f78-4dd8-a5cf-9ae58e7e5f89": {
+        "evidence": null,
+        "cpt": {
+          "id73d0414d-4611-4b62-b726-490006c6ae82_si": {
+            "si": 0.97,
+            "no": 0.03
+          },
+          "id73d0414d-4611-4b62-b726-490006c6ae82_no": {
+            "si": 0.03,
+            "no": 0.97
+          }
+        }
+      }
+    }
+  }
+}
