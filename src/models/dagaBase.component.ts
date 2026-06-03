@@ -11,6 +11,7 @@ import {
   DiagramNode,
   DiagramValidator,
   RemoveAction,
+  ShapedLookConfig,
   UpdateValuesAction
 } from '@metadev/daga-angular';
 import { Subscription } from 'rxjs';
@@ -23,6 +24,7 @@ import {
 import { isStateDiagramNodeLike, normalizeNodeId } from '../util/generalCalculationNodes.utils';
 import { MAX_PROBABILITY, PROBABILITY_KEY, formatProbabilityPercent, normalizeProbability } from '../util/probability.utils';
 import { calculateTheoreticalNodeProbabilities, normalizeWeightValue } from './binomial/util/binomialWeight.utils';
+import { topRoundedRectangleShape } from './shape';
 import { BayesGraph } from './types';
 
 @Component({
@@ -506,6 +508,32 @@ export class DagaBaseComponent implements AfterViewInit, OnDestroy, OnChanges {
   }
 
   /**
+   * Overrides the fill color of the node's top band section (the real daga-painted
+   * shape, so the node border paints above it). `fill === null` clears the override,
+   * restoring the node type's default tint (used for neutral '?' evidence).
+   */
+  private applyBayesHeaderFill(node: DiagramNode, fill: string | null): void {
+    const topSection = node.sections?.find((s) => s.indexYInNode === 0 && s.indexXInNode === 0);
+    if (!topSection) return;
+
+    if (fill === null) {
+      topSection.lookConfig = undefined;
+    } else {
+      // Mirror the config's topBandLook shape/border so only the fill changes.
+      topSection.lookConfig = {
+        lookType: 'shaped-look',
+        shape: topRoundedRectangleShape,
+        fillColor: fill,
+        borderColor: '#000000',
+        borderThickness: 1,
+        selected: { fillColor: fill, borderColor: '#378ADD', borderThickness: 2 },
+        highlighted: { borderThickness: 1 }
+      } as ShapedLookConfig;
+    }
+    topSection.updateInView();
+  }
+
+  /**
    * Draws the Bayesian decorators INSIDE the node:
    *   • Top band: type icon (left) + Yes% (right), tinted by node type.
    *   • Body: centered node name + Yes/No bars + evidence pill.
@@ -532,17 +560,29 @@ export class DagaBaseComponent implements AfterViewInit, OnDestroy, OnChanges {
     let badgeBg = '#F3F4F6';
     let badgeIcon = '?';
     let badgeText = 'no evidence';
+    // Header colors: neutral '?' keeps the node type's default tint (null = no override);
+    // evidence Sí/No invert (solid colored band fill + light decorator text).
+    let bandFill: string | null = null;
+    let headerTextColor = style.solid;
     if (evidence === 'si') {
       badgeColor = '#27500A';
       badgeBg = '#EAF3DE';
       badgeIcon = '✓';
       badgeText = 'evidence: Yes';
+      bandFill = '#27500A';
+      headerTextColor = '#EAF3DE';
     } else if (evidence === 'no') {
       badgeColor = '#791F1F';
       badgeBg = '#FCEBEB';
       badgeIcon = '✕';
       badgeText = 'evidence: No';
+      bandFill = '#791F1F';
+      headerTextColor = '#FCEBEB';
     }
+
+    // Recolor the real top band section (daga-painted shape) so the node border
+    // renders ABOVE the fill. null restores the type's default tint.
+    this.applyBayesHeaderFill(node, bandFill);
 
     const priority = typeof node.getPriority === 'function' ? node.getPriority() : 0;
 
@@ -553,7 +593,7 @@ export class DagaBaseComponent implements AfterViewInit, OnDestroy, OnChanges {
       <foreignObject x="0" y="0" width="${node.width}" height="${topBandHeight}">
         <div xmlns="http://www.w3.org/1999/xhtml" style="height:${topBandHeight}px;display:flex;align-items:center;justify-content:space-between;padding:0 10px;box-sizing:border-box;background:transparent;pointer-events:none;font-family:'WonderUnitSans', sans-serif;">
           <img src="${style.icon}" width="22" height="22" style="display:block;" alt="" />
-          <span style="color:${style.solid};font-weight:700;font-size:13px;">${pSiPct}%</span>
+          <span style="color:${headerTextColor};font-weight:700;font-size:13px;">${pSiPct}%</span>
         </div>
       </foreignObject>
     `;
