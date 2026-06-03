@@ -1,7 +1,7 @@
 {
   "riskFileVersion": 1,
   "modelType": "binomial",
-  "exportedAt": "2026-05-31T17:26:35.394Z",
+  "exportedAt": "2026-06-03T11:03:28.985Z",
   "daga": {
     "name": "unnamed",
     "type": "simple-diagram",
@@ -21,8 +21,8 @@
             "indexXInNode": 0,
             "indexYInNode": 0,
             "coords": [
-              350,
-              600
+              0,
+              0
             ],
             "width": 250,
             "height": 32
@@ -34,8 +34,8 @@
             "indexXInNode": 0,
             "indexYInNode": 1,
             "coords": [
-              350,
-              632
+              0,
+              32
             ],
             "width": 250,
             "height": 118
@@ -45,12 +45,12 @@
           {
             "id": "id68030a2a-28eb-442e-9b16-fc465150c3cf_port_0",
             "coords": [
-              475,
-              600
+              125,
+              0
             ],
             "connectionPoint": [
-              475,
-              600
+              125,
+              0
             ],
             "direction": "top",
             "label": ""
@@ -58,12 +58,12 @@
           {
             "id": "id68030a2a-28eb-442e-9b16-fc465150c3cf_port_1",
             "coords": [
-              350,
-              675
+              0,
+              75
             ],
             "connectionPoint": [
-              350,
-              675
+              0,
+              75
             ],
             "direction": "left",
             "label": ""
@@ -71,12 +71,12 @@
           {
             "id": "id68030a2a-28eb-442e-9b16-fc465150c3cf_port_2",
             "coords": [
-              475,
-              750
+              125,
+              150
             ],
             "connectionPoint": [
-              475,
-              750
+              125,
+              150
             ],
             "direction": "bottom",
             "label": ""
@@ -84,12 +84,12 @@
           {
             "id": "id68030a2a-28eb-442e-9b16-fc465150c3cf_port_3",
             "coords": [
-              600,
-              675
+              250,
+              75
             ],
             "connectionPoint": [
-              600,
-              675
+              250,
+              75
             ],
             "direction": "right",
             "label": ""
@@ -97,8 +97,8 @@
         ],
         "label": "Clinical Trial starts",
         "coords": [
-          350,
-          600
+          0,
+          0
         ],
         "width": 250,
         "height": 150,
@@ -119,8 +119,8 @@
             "indexXInNode": 0,
             "indexYInNode": 0,
             "coords": [
-              650,
-              600
+              350,
+              0
             ],
             "width": 250,
             "height": 32
@@ -132,8 +132,8 @@
             "indexXInNode": 0,
             "indexYInNode": 1,
             "coords": [
-              650,
-              632
+              350,
+              32
             ],
             "width": 250,
             "height": 90
@@ -145,8 +145,8 @@
             "indexXInNode": 0,
             "indexYInNode": 2,
             "coords": [
-              650,
-              722
+              350,
+              122
             ],
             "width": 250,
             "height": 28
@@ -156,12 +156,12 @@
           {
             "id": "id80af05f5-ffe2-4896-9e81-f466118c07fa_port_0",
             "coords": [
-              775,
-              600
+              475,
+              0
             ],
             "connectionPoint": [
-              775,
-              600
+              475,
+              0
             ],
             "direction": "top",
             "label": ""
@@ -169,12 +169,12 @@
           {
             "id": "id80af05f5-ffe2-4896-9e81-f466118c07fa_port_1",
             "coords": [
-              650,
-              675
+              350,
+              75
             ],
             "connectionPoint": [
-              650,
-              675
+              350,
+              75
             ],
             "direction": "left",
             "label": ""
@@ -182,12 +182,12 @@
           {
             "id": "id80af05f5-ffe2-4896-9e81-f466118c07fa_port_2",
             "coords": [
-              775,
-              750
+              475,
+              150
             ],
             "connectionPoint": [
-              775,
-              750
+              475,
+              150
             ],
             "direction": "bottom",
             "label": ""
@@ -195,12 +195,12 @@
           {
             "id": "id80af05f5-ffe2-4896-9e81-f466118c07fa_port_3",
             "coords": [
-              900,
-              675
+              600,
+              75
             ],
             "connectionPoint": [
-              900,
-              675
+              600,
+              75
             ],
             "direction": "right",
             "label": ""
@@ -208,15 +208,15 @@
         ],
         "label": "Phase 1",
         "coords": [
-          650,
-          600
+          350,
+          0
         ],
         "width": 250,
         "height": 150,
         "data": {
           "node name": "Phase 1",
           "node number": 1,
-          "probability": 70
+          "probability": 52
         }
       },
       {
@@ -231,8 +231,8 @@
             "indexXInNode": 0,
             "indexYInNode": 0,
             "coords": [
-              950,
-              600
+              700,
+              0
             ],
             "width": 250,
             "height": 32
@@ -244,8 +244,8 @@
             "indexXInNode": 0,
             "indexYInNode": 1,
             "coords": [
-              950,
-              632
+              700,
+              32
             ],
             "width": 250,
             "height": 90
@@ -257,8 +257,8 @@
             "indexXInNode": 0,
             "indexYInNode": 2,
             "coords": [
-              950,
-              722
+              700,
+              122
             ],
             "width": 250,
             "height": 28
@@ -268,12 +268,12 @@
           {
             "id": "id4feee37d-cda6-436c-8126-c48742fc48ee_port_0",
             "coords": [
-              1075,
-              600
+              825,
+              0
             ],
             "connectionPoint": [
-              1075,
-              600
+              825,
+              0
             ],
             "direction": "top",
             "label": ""
@@ -281,12 +281,12 @@
           {
             "id": "id4feee37d-cda6-436c-8126-c48742fc48ee_port_1",
             "coords": [
-              950,
-              675
+              700,
+              75
             ],
             "connectionPoint": [
-              950,
-              675
+              700,
+              75
             ],
             "direction": "left",
             "label": ""
@@ -294,12 +294,12 @@
           {
             "id": "id4feee37d-cda6-436c-8126-c48742fc48ee_port_2",
             "coords": [
-              1075,
-              750
+              825,
+              150
             ],
             "connectionPoint": [
-              1075,
-              750
+              825,
+              150
             ],
             "direction": "bottom",
             "label": ""
@@ -307,12 +307,12 @@
           {
             "id": "id4feee37d-cda6-436c-8126-c48742fc48ee_port_3",
             "coords": [
-              1200,
-              675
+              950,
+              75
             ],
             "connectionPoint": [
-              1200,
-              675
+              950,
+              75
             ],
             "direction": "right",
             "label": ""
@@ -320,15 +320,15 @@
         ],
         "label": "Phase 2",
         "coords": [
-          950,
-          600
+          700,
+          0
         ],
         "width": 250,
         "height": 150,
         "data": {
           "node name": "Phase 2",
           "node number": 1,
-          "probability": 45
+          "probability": 28.9
         }
       },
       {
@@ -343,8 +343,8 @@
             "indexXInNode": 0,
             "indexYInNode": 0,
             "coords": [
-              1250,
-              600
+              1050,
+              0
             ],
             "width": 250,
             "height": 32
@@ -356,8 +356,8 @@
             "indexXInNode": 0,
             "indexYInNode": 1,
             "coords": [
-              1250,
-              632
+              1050,
+              32
             ],
             "width": 250,
             "height": 90
@@ -369,8 +369,8 @@
             "indexXInNode": 0,
             "indexYInNode": 2,
             "coords": [
-              1250,
-              722
+              1050,
+              122
             ],
             "width": 250,
             "height": 28
@@ -380,12 +380,12 @@
           {
             "id": "id07cc93fe-abe7-4046-a1f2-1f5e7f49dcbf_port_0",
             "coords": [
-              1375,
-              600
+              1175,
+              0
             ],
             "connectionPoint": [
-              1375,
-              600
+              1175,
+              0
             ],
             "direction": "top",
             "label": ""
@@ -393,12 +393,12 @@
           {
             "id": "id07cc93fe-abe7-4046-a1f2-1f5e7f49dcbf_port_1",
             "coords": [
-              1250,
-              675
+              1050,
+              75
             ],
             "connectionPoint": [
-              1250,
-              675
+              1050,
+              75
             ],
             "direction": "left",
             "label": ""
@@ -406,12 +406,12 @@
           {
             "id": "id07cc93fe-abe7-4046-a1f2-1f5e7f49dcbf_port_2",
             "coords": [
-              1375,
-              750
+              1175,
+              150
             ],
             "connectionPoint": [
-              1375,
-              750
+              1175,
+              150
             ],
             "direction": "bottom",
             "label": ""
@@ -419,12 +419,12 @@
           {
             "id": "id07cc93fe-abe7-4046-a1f2-1f5e7f49dcbf_port_3",
             "coords": [
-              1500,
-              675
+              1300,
+              75
             ],
             "connectionPoint": [
-              1500,
-              675
+              1300,
+              75
             ],
             "direction": "right",
             "label": ""
@@ -432,15 +432,15 @@
         ],
         "label": "Phase 3",
         "coords": [
-          1250,
-          600
+          1050,
+          0
         ],
         "width": 250,
         "height": 150,
         "data": {
           "node name": "Phase 3",
           "node number": 1,
-          "probability": 60
+          "probability": 57.8
         }
       },
       {
@@ -455,8 +455,8 @@
             "indexXInNode": 0,
             "indexYInNode": 0,
             "coords": [
-              950,
-              800
+              1750,
+              0
             ],
             "width": 250,
             "height": 32
@@ -468,8 +468,8 @@
             "indexXInNode": 0,
             "indexYInNode": 1,
             "coords": [
-              950,
-              832
+              1750,
+              32
             ],
             "width": 250,
             "height": 90
@@ -481,8 +481,8 @@
             "indexXInNode": 0,
             "indexYInNode": 2,
             "coords": [
-              950,
-              922
+              1750,
+              122
             ],
             "width": 250,
             "height": 28
@@ -492,12 +492,12 @@
           {
             "id": "id4300b862-57bb-42ba-8cb5-082bc6324882_port_0",
             "coords": [
-              1075,
-              800
+              1875,
+              0
             ],
             "connectionPoint": [
-              1075,
-              800
+              1875,
+              0
             ],
             "direction": "top",
             "label": ""
@@ -505,12 +505,12 @@
           {
             "id": "id4300b862-57bb-42ba-8cb5-082bc6324882_port_1",
             "coords": [
-              950,
-              875
+              1750,
+              75
             ],
             "connectionPoint": [
-              950,
-              875
+              1750,
+              75
             ],
             "direction": "left",
             "label": ""
@@ -518,12 +518,12 @@
           {
             "id": "id4300b862-57bb-42ba-8cb5-082bc6324882_port_2",
             "coords": [
-              1075,
-              950
+              1875,
+              150
             ],
             "connectionPoint": [
-              1075,
-              950
+              1875,
+              150
             ],
             "direction": "bottom",
             "label": ""
@@ -531,12 +531,12 @@
           {
             "id": "id4300b862-57bb-42ba-8cb5-082bc6324882_port_3",
             "coords": [
-              1200,
-              875
+              2000,
+              75
             ],
             "connectionPoint": [
-              1200,
-              875
+              2000,
+              75
             ],
             "direction": "right",
             "label": ""
@@ -544,15 +544,15 @@
         ],
         "label": "Regulatory Authorities Conf.",
         "coords": [
-          950,
-          800
+          1750,
+          0
         ],
         "width": 250,
         "height": 150,
         "data": {
           "node name": "Regulatory Authorities Conf.",
           "node number": 1,
-          "probability": 99
+          "probability": 90.6
         }
       },
       {
@@ -567,8 +567,8 @@
             "indexXInNode": 0,
             "indexYInNode": 0,
             "coords": [
-              1250,
-              800
+              1400,
+              0
             ],
             "width": 250,
             "height": 32
@@ -580,8 +580,8 @@
             "indexXInNode": 0,
             "indexYInNode": 1,
             "coords": [
-              1250,
-              832
+              1400,
+              32
             ],
             "width": 250,
             "height": 118
@@ -591,12 +591,12 @@
           {
             "id": "iddf9d2cc0-1919-472f-9bff-4ecb7db20976_port_0",
             "coords": [
-              1375,
-              800
+              1525,
+              0
             ],
             "connectionPoint": [
-              1375,
-              800
+              1525,
+              0
             ],
             "direction": "top",
             "label": ""
@@ -604,12 +604,12 @@
           {
             "id": "iddf9d2cc0-1919-472f-9bff-4ecb7db20976_port_1",
             "coords": [
-              1250,
-              875
+              1400,
+              75
             ],
             "connectionPoint": [
-              1250,
-              875
+              1400,
+              75
             ],
             "direction": "left",
             "label": ""
@@ -617,12 +617,12 @@
           {
             "id": "iddf9d2cc0-1919-472f-9bff-4ecb7db20976_port_2",
             "coords": [
-              1375,
-              950
+              1525,
+              150
             ],
             "connectionPoint": [
-              1375,
-              950
+              1525,
+              150
             ],
             "direction": "bottom",
             "label": ""
@@ -630,12 +630,12 @@
           {
             "id": "iddf9d2cc0-1919-472f-9bff-4ecb7db20976_port_3",
             "coords": [
-              1500,
-              875
+              1650,
+              75
             ],
             "connectionPoint": [
-              1500,
-              875
+              1650,
+              75
             ],
             "direction": "right",
             "label": ""
@@ -643,8 +643,8 @@
         ],
         "label": "Positive Results",
         "coords": [
-          1250,
-          800
+          1400,
+          0
         ],
         "width": 250,
         "height": 150,
@@ -665,8 +665,8 @@
             "indexXInNode": 0,
             "indexYInNode": 0,
             "coords": [
-              650,
-              800
+              2100,
+              0
             ],
             "width": 250,
             "height": 32
@@ -678,8 +678,8 @@
             "indexXInNode": 0,
             "indexYInNode": 1,
             "coords": [
-              650,
-              832
+              2100,
+              32
             ],
             "width": 250,
             "height": 118
@@ -689,12 +689,12 @@
           {
             "id": "id6277d487-4679-43c1-be75-b66a441ca5de_port_0",
             "coords": [
-              775,
-              800
+              2225,
+              0
             ],
             "connectionPoint": [
-              775,
-              800
+              2225,
+              0
             ],
             "direction": "top",
             "label": ""
@@ -702,12 +702,12 @@
           {
             "id": "id6277d487-4679-43c1-be75-b66a441ca5de_port_1",
             "coords": [
-              650,
-              875
+              2100,
+              75
             ],
             "connectionPoint": [
-              650,
-              875
+              2100,
+              75
             ],
             "direction": "left",
             "label": ""
@@ -715,12 +715,12 @@
           {
             "id": "id6277d487-4679-43c1-be75-b66a441ca5de_port_2",
             "coords": [
-              775,
-              950
+              2225,
+              150
             ],
             "connectionPoint": [
-              775,
-              950
+              2225,
+              150
             ],
             "direction": "bottom",
             "label": ""
@@ -728,12 +728,12 @@
           {
             "id": "id6277d487-4679-43c1-be75-b66a441ca5de_port_3",
             "coords": [
-              900,
-              875
+              2350,
+              75
             ],
             "connectionPoint": [
-              900,
-              875
+              2350,
+              75
             ],
             "direction": "right",
             "label": ""
@@ -741,8 +741,8 @@
         ],
         "label": "Drug is Effective",
         "coords": [
-          650,
-          800
+          2100,
+          0
         ],
         "width": 250,
         "height": 150,
@@ -799,7 +799,7 @@
         "id": "idaf9e1a95-b2ba-4cd1-812d-bdcc3b68bb53",
         "type": "diagram-connection",
         "start": "id07cc93fe-abe7-4046-a1f2-1f5e7f49dcbf_port_3",
-        "end": "iddf9d2cc0-1919-472f-9bff-4ecb7db20976_port_3",
+        "end": "iddf9d2cc0-1919-472f-9bff-4ecb7db20976_port_1",
         "startLabel": "",
         "middleLabel": "",
         "endLabel": "1",
@@ -812,8 +812,8 @@
       {
         "id": "idcb848e7a-46dc-481b-92ff-c0148f0927e1",
         "type": "diagram-connection",
-        "start": "iddf9d2cc0-1919-472f-9bff-4ecb7db20976_port_1",
-        "end": "id4300b862-57bb-42ba-8cb5-082bc6324882_port_3",
+        "start": "iddf9d2cc0-1919-472f-9bff-4ecb7db20976_port_3",
+        "end": "id4300b862-57bb-42ba-8cb5-082bc6324882_port_1",
         "startLabel": "",
         "middleLabel": "",
         "endLabel": "1",
@@ -826,8 +826,8 @@
       {
         "id": "id7eeae84d-8f66-47cf-b903-38f7999ec738",
         "type": "end-connection",
-        "start": "id4300b862-57bb-42ba-8cb5-082bc6324882_port_1",
-        "end": "id6277d487-4679-43c1-be75-b66a441ca5de_port_3",
+        "start": "id4300b862-57bb-42ba-8cb5-082bc6324882_port_3",
+        "end": "id6277d487-4679-43c1-be75-b66a441ca5de_port_1",
         "startLabel": "",
         "middleLabel": "",
         "endLabel": "1",

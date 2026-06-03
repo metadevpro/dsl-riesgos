@@ -1,7 +1,7 @@
 {
   "riskFileVersion": 1,
   "modelType": "binomial",
-  "exportedAt": "2026-05-31T17:16:08.881Z",
+  "exportedAt": "2026-06-03T10:14:13.220Z",
   "daga": {
     "name": "unnamed",
     "type": "simple-diagram",
@@ -119,7 +119,7 @@
             "indexXInNode": 0,
             "indexYInNode": 0,
             "coords": [
-              400,
+              450,
               600
             ],
             "width": 250,
@@ -132,7 +132,7 @@
             "indexXInNode": 0,
             "indexYInNode": 1,
             "coords": [
-              400,
+              450,
               632
             ],
             "width": 250,
@@ -145,7 +145,7 @@
             "indexXInNode": 0,
             "indexYInNode": 2,
             "coords": [
-              400,
+              450,
               722
             ],
             "width": 250,
@@ -156,11 +156,11 @@
           {
             "id": "id44b168f2-0f2e-4d15-8a2c-e18c735df842_port_0",
             "coords": [
-              525,
+              575,
               600
             ],
             "connectionPoint": [
-              525,
+              575,
               600
             ],
             "direction": "top",
@@ -169,11 +169,11 @@
           {
             "id": "id44b168f2-0f2e-4d15-8a2c-e18c735df842_port_1",
             "coords": [
-              400,
+              450,
               675
             ],
             "connectionPoint": [
-              400,
+              450,
               675
             ],
             "direction": "left",
@@ -182,11 +182,11 @@
           {
             "id": "id44b168f2-0f2e-4d15-8a2c-e18c735df842_port_2",
             "coords": [
-              525,
+              575,
               750
             ],
             "connectionPoint": [
-              525,
+              575,
               750
             ],
             "direction": "bottom",
@@ -195,28 +195,28 @@
           {
             "id": "id44b168f2-0f2e-4d15-8a2c-e18c735df842_port_3",
             "coords": [
-              650,
+              700,
               675
             ],
             "connectionPoint": [
-              650,
+              700,
               675
             ],
             "direction": "right",
             "label": ""
           }
         ],
-        "label": "Firewall bypassed",
+        "label": "Initial access",
         "coords": [
-          400,
+          450,
           600
         ],
         "width": 250,
         "height": 150,
         "data": {
-          "node name": "Firewall bypassed",
+          "node name": "Initial access",
           "node number": 1,
-          "probability": 10
+          "probability": 0.3
         }
       },
       {
@@ -231,7 +231,7 @@
             "indexXInNode": 0,
             "indexYInNode": 0,
             "coords": [
-              700,
+              1050,
               600
             ],
             "width": 250,
@@ -244,7 +244,7 @@
             "indexXInNode": 0,
             "indexYInNode": 1,
             "coords": [
-              700,
+              1050,
               632
             ],
             "width": 250,
@@ -257,7 +257,7 @@
             "indexXInNode": 0,
             "indexYInNode": 2,
             "coords": [
-              700,
+              1050,
               722
             ],
             "width": 250,
@@ -268,11 +268,11 @@
           {
             "id": "id13a3f2db-a501-470f-be0a-b2aec73b6d97_port_0",
             "coords": [
-              825,
+              1175,
               600
             ],
             "connectionPoint": [
-              825,
+              1175,
               600
             ],
             "direction": "top",
@@ -281,11 +281,11 @@
           {
             "id": "id13a3f2db-a501-470f-be0a-b2aec73b6d97_port_1",
             "coords": [
-              700,
+              1050,
               675
             ],
             "connectionPoint": [
-              700,
+              1050,
               675
             ],
             "direction": "left",
@@ -294,11 +294,11 @@
           {
             "id": "id13a3f2db-a501-470f-be0a-b2aec73b6d97_port_2",
             "coords": [
-              825,
+              1175,
               750
             ],
             "connectionPoint": [
-              825,
+              1175,
               750
             ],
             "direction": "bottom",
@@ -307,28 +307,28 @@
           {
             "id": "id13a3f2db-a501-470f-be0a-b2aec73b6d97_port_3",
             "coords": [
-              950,
+              1300,
               675
             ],
             "connectionPoint": [
-              950,
+              1300,
               675
             ],
             "direction": "right",
             "label": ""
           }
         ],
-        "label": "IDS bypassed",
+        "label": "Privilege escalation",
         "coords": [
-          700,
+          1050,
           600
         ],
         "width": 250,
         "height": 150,
         "data": {
-          "node name": "IDS bypassed",
+          "node name": "Privilege escalation",
           "node number": 1,
-          "probability": 20
+          "probability": 25
         }
       },
       {
@@ -343,7 +343,7 @@
             "indexXInNode": 0,
             "indexYInNode": 0,
             "coords": [
-              1000,
+              1350,
               600
             ],
             "width": 250,
@@ -356,7 +356,7 @@
             "indexXInNode": 0,
             "indexYInNode": 1,
             "coords": [
-              1000,
+              1350,
               632
             ],
             "width": 250,
@@ -369,7 +369,7 @@
             "indexXInNode": 0,
             "indexYInNode": 2,
             "coords": [
-              1000,
+              1350,
               722
             ],
             "width": 250,
@@ -380,11 +380,11 @@
           {
             "id": "id96ea11dd-7a00-4e3f-8bec-0d25f135f73f_port_0",
             "coords": [
-              1125,
+              1475,
               600
             ],
             "connectionPoint": [
-              1125,
+              1475,
               600
             ],
             "direction": "top",
@@ -393,11 +393,11 @@
           {
             "id": "id96ea11dd-7a00-4e3f-8bec-0d25f135f73f_port_1",
             "coords": [
-              1000,
+              1350,
               675
             ],
             "connectionPoint": [
-              1000,
+              1350,
               675
             ],
             "direction": "left",
@@ -406,11 +406,11 @@
           {
             "id": "id96ea11dd-7a00-4e3f-8bec-0d25f135f73f_port_2",
             "coords": [
-              1125,
+              1475,
               750
             ],
             "connectionPoint": [
-              1125,
+              1475,
               750
             ],
             "direction": "bottom",
@@ -419,57 +419,169 @@
           {
             "id": "id96ea11dd-7a00-4e3f-8bec-0d25f135f73f_port_3",
             "coords": [
-              1250,
+              1600,
               675
             ],
             "connectionPoint": [
-              1250,
+              1600,
               675
             ],
             "direction": "right",
             "label": ""
           }
         ],
-        "label": "2FA bypassed",
+        "label": "High-impact outcome",
         "coords": [
-          1000,
+          1350,
           600
         ],
         "width": 250,
         "height": 150,
         "data": {
-          "node name": "2FA bypassed",
+          "node name": "High-impact outcome",
           "node number": 1,
-          "probability": 5
+          "probability": 48
         }
       },
       {
-        "id": "id41ab1311-8abe-45f4-9bba-a2764e934b59",
-        "type": "state-diagram-node",
+        "id": "id87045ff9-9ff9-43fa-830c-8aaf53fae4e2",
+        "type": "event-diagram-node",
         "children": [],
         "sections": [
           {
-            "id": "id41ab1311-8abe-45f4-9bba-a2764e934b59_0_0",
+            "id": "id87045ff9-9ff9-43fa-830c-8aaf53fae4e2_0_0",
             "ports": [],
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 0,
             "coords": [
-              1000,
-              800
+              750,
+              600
             ],
             "width": 250,
             "height": 32
           },
           {
-            "id": "id41ab1311-8abe-45f4-9bba-a2764e934b59_1_0",
+            "id": "id87045ff9-9ff9-43fa-830c-8aaf53fae4e2_1_0",
             "ports": [],
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 1,
             "coords": [
+              750,
+              632
+            ],
+            "width": 250,
+            "height": 90
+          },
+          {
+            "id": "id87045ff9-9ff9-43fa-830c-8aaf53fae4e2_2_0",
+            "ports": [],
+            "label": "",
+            "indexXInNode": 0,
+            "indexYInNode": 2,
+            "coords": [
+              750,
+              722
+            ],
+            "width": 250,
+            "height": 28
+          }
+        ],
+        "ports": [
+          {
+            "id": "id87045ff9-9ff9-43fa-830c-8aaf53fae4e2_port_0",
+            "coords": [
+              875,
+              600
+            ],
+            "connectionPoint": [
+              875,
+              600
+            ],
+            "direction": "top",
+            "label": ""
+          },
+          {
+            "id": "id87045ff9-9ff9-43fa-830c-8aaf53fae4e2_port_1",
+            "coords": [
+              750,
+              675
+            ],
+            "connectionPoint": [
+              750,
+              675
+            ],
+            "direction": "left",
+            "label": ""
+          },
+          {
+            "id": "id87045ff9-9ff9-43fa-830c-8aaf53fae4e2_port_2",
+            "coords": [
+              875,
+              750
+            ],
+            "connectionPoint": [
+              875,
+              750
+            ],
+            "direction": "bottom",
+            "label": ""
+          },
+          {
+            "id": "id87045ff9-9ff9-43fa-830c-8aaf53fae4e2_port_3",
+            "coords": [
               1000,
-              832
+              675
+            ],
+            "connectionPoint": [
+              1000,
+              675
+            ],
+            "direction": "right",
+            "label": ""
+          }
+        ],
+        "label": "Event",
+        "coords": [
+          750,
+          600
+        ],
+        "width": 250,
+        "height": 150,
+        "data": {
+          "node name": "Event",
+          "node number": 1,
+          "probability": 1.44
+        }
+      },
+      {
+        "id": "id732871f3-a49d-4f55-834c-8a2777ff2d1e",
+        "type": "state-diagram-node",
+        "children": [],
+        "sections": [
+          {
+            "id": "id732871f3-a49d-4f55-834c-8a2777ff2d1e_0_0",
+            "ports": [],
+            "label": "",
+            "indexXInNode": 0,
+            "indexYInNode": 0,
+            "coords": [
+              1650,
+              600
+            ],
+            "width": 250,
+            "height": 32
+          },
+          {
+            "id": "id732871f3-a49d-4f55-834c-8a2777ff2d1e_1_0",
+            "ports": [],
+            "label": "",
+            "indexXInNode": 0,
+            "indexYInNode": 1,
+            "coords": [
+              1650,
+              632
             ],
             "width": 250,
             "height": 118
@@ -477,53 +589,53 @@
         ],
         "ports": [
           {
-            "id": "id41ab1311-8abe-45f4-9bba-a2764e934b59_port_0",
+            "id": "id732871f3-a49d-4f55-834c-8a2777ff2d1e_port_0",
             "coords": [
-              1125,
-              800
+              1775,
+              600
             ],
             "connectionPoint": [
-              1125,
-              800
+              1775,
+              600
             ],
             "direction": "top",
             "label": ""
           },
           {
-            "id": "id41ab1311-8abe-45f4-9bba-a2764e934b59_port_1",
+            "id": "id732871f3-a49d-4f55-834c-8a2777ff2d1e_port_1",
             "coords": [
-              1000,
-              875
+              1650,
+              675
             ],
             "connectionPoint": [
-              1000,
-              875
+              1650,
+              675
             ],
             "direction": "left",
             "label": ""
           },
           {
-            "id": "id41ab1311-8abe-45f4-9bba-a2764e934b59_port_2",
+            "id": "id732871f3-a49d-4f55-834c-8a2777ff2d1e_port_2",
             "coords": [
-              1125,
-              950
+              1775,
+              750
             ],
             "connectionPoint": [
-              1125,
-              950
+              1775,
+              750
             ],
             "direction": "bottom",
             "label": ""
           },
           {
-            "id": "id41ab1311-8abe-45f4-9bba-a2764e934b59_port_3",
+            "id": "id732871f3-a49d-4f55-834c-8a2777ff2d1e_port_3",
             "coords": [
-              1250,
-              875
+              1900,
+              675
             ],
             "connectionPoint": [
-              1250,
-              875
+              1900,
+              675
             ],
             "direction": "right",
             "label": ""
@@ -531,8 +643,8 @@
         ],
         "label": "System compromised",
         "coords": [
-          1000,
-          800
+          1650,
+          600
         ],
         "width": 250,
         "height": 150,
@@ -542,45 +654,45 @@
         }
       },
       {
-        "id": "id062e9541-a60c-4352-a180-b469c3e69c47",
+        "id": "idecdd4852-a844-4daa-9a3b-c798e03c5857",
         "type": "event-diagram-node",
         "children": [],
         "sections": [
           {
-            "id": "id062e9541-a60c-4352-a180-b469c3e69c47_0_0",
+            "id": "idecdd4852-a844-4daa-9a3b-c798e03c5857_0_0",
             "ports": [],
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 0,
             "coords": [
-              700,
-              800
+              1950,
+              600
             ],
             "width": 250,
             "height": 32
           },
           {
-            "id": "id062e9541-a60c-4352-a180-b469c3e69c47_1_0",
+            "id": "idecdd4852-a844-4daa-9a3b-c798e03c5857_1_0",
             "ports": [],
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 1,
             "coords": [
-              700,
-              832
+              1950,
+              632
             ],
             "width": 250,
             "height": 90
           },
           {
-            "id": "id062e9541-a60c-4352-a180-b469c3e69c47_2_0",
+            "id": "idecdd4852-a844-4daa-9a3b-c798e03c5857_2_0",
             "ports": [],
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 2,
             "coords": [
-              700,
-              922
+              1950,
+              722
             ],
             "width": 250,
             "height": 28
@@ -588,111 +700,111 @@
         ],
         "ports": [
           {
-            "id": "id062e9541-a60c-4352-a180-b469c3e69c47_port_0",
+            "id": "idecdd4852-a844-4daa-9a3b-c798e03c5857_port_0",
             "coords": [
-              825,
-              800
+              2075,
+              600
             ],
             "connectionPoint": [
-              825,
-              800
+              2075,
+              600
             ],
             "direction": "top",
             "label": ""
           },
           {
-            "id": "id062e9541-a60c-4352-a180-b469c3e69c47_port_1",
+            "id": "idecdd4852-a844-4daa-9a3b-c798e03c5857_port_1",
             "coords": [
-              700,
-              875
+              1950,
+              675
             ],
             "connectionPoint": [
-              700,
-              875
+              1950,
+              675
             ],
             "direction": "left",
             "label": ""
           },
           {
-            "id": "id062e9541-a60c-4352-a180-b469c3e69c47_port_2",
+            "id": "idecdd4852-a844-4daa-9a3b-c798e03c5857_port_2",
             "coords": [
-              825,
-              950
+              2075,
+              750
             ],
             "connectionPoint": [
-              825,
-              950
+              2075,
+              750
             ],
             "direction": "bottom",
             "label": ""
           },
           {
-            "id": "id062e9541-a60c-4352-a180-b469c3e69c47_port_3",
+            "id": "idecdd4852-a844-4daa-9a3b-c798e03c5857_port_3",
             "coords": [
-              950,
-              875
+              2200,
+              675
             ],
             "connectionPoint": [
-              950,
-              875
+              2200,
+              675
             ],
             "direction": "right",
             "label": ""
           }
         ],
-        "label": "Breach detected",
+        "label": "Internal detection",
         "coords": [
-          700,
-          800
+          1950,
+          600
         ],
         "width": 250,
         "height": 150,
         "data": {
-          "node name": "Breach detected",
+          "node name": "Internal detection",
           "node number": 1,
-          "probability": 70
+          "probability": 52
         }
       },
       {
-        "id": "idaacc5f5a-df70-4520-b20e-4f13a5c5deaf",
+        "id": "idb93a1a5b-450e-4379-a991-d07240ae91b6",
         "type": "event-diagram-node",
         "children": [],
         "sections": [
           {
-            "id": "idaacc5f5a-df70-4520-b20e-4f13a5c5deaf_0_0",
+            "id": "idb93a1a5b-450e-4379-a991-d07240ae91b6_0_0",
             "ports": [],
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 0,
             "coords": [
-              400,
-              800
+              2250,
+              600
             ],
             "width": 250,
             "height": 32
           },
           {
-            "id": "idaacc5f5a-df70-4520-b20e-4f13a5c5deaf_1_0",
+            "id": "idb93a1a5b-450e-4379-a991-d07240ae91b6_1_0",
             "ports": [],
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 1,
             "coords": [
-              400,
-              832
+              2250,
+              632
             ],
             "width": 250,
             "height": 90
           },
           {
-            "id": "idaacc5f5a-df70-4520-b20e-4f13a5c5deaf_2_0",
+            "id": "idb93a1a5b-450e-4379-a991-d07240ae91b6_2_0",
             "ports": [],
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 2,
             "coords": [
-              400,
-              922
+              2250,
+              722
             ],
             "width": 250,
             "height": 28
@@ -700,98 +812,98 @@
         ],
         "ports": [
           {
-            "id": "idaacc5f5a-df70-4520-b20e-4f13a5c5deaf_port_0",
+            "id": "idb93a1a5b-450e-4379-a991-d07240ae91b6_port_0",
             "coords": [
-              525,
-              800
+              2375,
+              600
             ],
             "connectionPoint": [
-              525,
-              800
+              2375,
+              600
             ],
             "direction": "top",
             "label": ""
           },
           {
-            "id": "idaacc5f5a-df70-4520-b20e-4f13a5c5deaf_port_1",
+            "id": "idb93a1a5b-450e-4379-a991-d07240ae91b6_port_1",
             "coords": [
-              400,
-              875
+              2250,
+              675
             ],
             "connectionPoint": [
-              400,
-              875
+              2250,
+              675
             ],
             "direction": "left",
             "label": ""
           },
           {
-            "id": "idaacc5f5a-df70-4520-b20e-4f13a5c5deaf_port_2",
+            "id": "idb93a1a5b-450e-4379-a991-d07240ae91b6_port_2",
             "coords": [
-              525,
-              950
+              2375,
+              750
             ],
             "connectionPoint": [
-              525,
-              950
+              2375,
+              750
             ],
             "direction": "bottom",
             "label": ""
           },
           {
-            "id": "idaacc5f5a-df70-4520-b20e-4f13a5c5deaf_port_3",
+            "id": "idb93a1a5b-450e-4379-a991-d07240ae91b6_port_3",
             "coords": [
-              650,
-              875
+              2500,
+              675
             ],
             "connectionPoint": [
-              650,
-              875
+              2500,
+              675
             ],
             "direction": "right",
             "label": ""
           }
         ],
-        "label": "Breach mitigated",
+        "label": "Early containment",
         "coords": [
-          400,
-          800
+          2250,
+          600
         ],
         "width": 250,
         "height": 150,
         "data": {
-          "node name": "Breach mitigated",
+          "node name": "Early containment",
           "node number": 1,
-          "probability": 80
+          "probability": 60
         }
       },
       {
-        "id": "id51757fc8-480f-4330-a4ba-6cac6a14ed50",
+        "id": "idbebb2603-2a9d-4e91-b9f8-761f2248c2db",
         "type": "end-diagram-node",
         "children": [],
         "sections": [
           {
-            "id": "id51757fc8-480f-4330-a4ba-6cac6a14ed50_0_0",
+            "id": "idbebb2603-2a9d-4e91-b9f8-761f2248c2db_0_0",
             "ports": [],
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 0,
             "coords": [
-              100,
-              800
+              2550,
+              600
             ],
             "width": 250,
             "height": 32
           },
           {
-            "id": "id51757fc8-480f-4330-a4ba-6cac6a14ed50_1_0",
+            "id": "idbebb2603-2a9d-4e91-b9f8-761f2248c2db_1_0",
             "ports": [],
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 1,
             "coords": [
-              100,
-              832
+              2550,
+              632
             ],
             "width": 250,
             "height": 118
@@ -799,67 +911,67 @@
         ],
         "ports": [
           {
-            "id": "id51757fc8-480f-4330-a4ba-6cac6a14ed50_port_0",
+            "id": "idbebb2603-2a9d-4e91-b9f8-761f2248c2db_port_0",
             "coords": [
-              225,
-              800
+              2675,
+              600
             ],
             "connectionPoint": [
-              225,
-              800
+              2675,
+              600
             ],
             "direction": "top",
             "label": ""
           },
           {
-            "id": "id51757fc8-480f-4330-a4ba-6cac6a14ed50_port_1",
+            "id": "idbebb2603-2a9d-4e91-b9f8-761f2248c2db_port_1",
             "coords": [
-              100,
-              875
+              2550,
+              675
             ],
             "connectionPoint": [
-              100,
-              875
+              2550,
+              675
             ],
             "direction": "left",
             "label": ""
           },
           {
-            "id": "id51757fc8-480f-4330-a4ba-6cac6a14ed50_port_2",
+            "id": "idbebb2603-2a9d-4e91-b9f8-761f2248c2db_port_2",
             "coords": [
-              225,
-              950
+              2675,
+              750
             ],
             "connectionPoint": [
-              225,
-              950
+              2675,
+              750
             ],
             "direction": "bottom",
             "label": ""
           },
           {
-            "id": "id51757fc8-480f-4330-a4ba-6cac6a14ed50_port_3",
+            "id": "idbebb2603-2a9d-4e91-b9f8-761f2248c2db_port_3",
             "coords": [
-              350,
-              875
+              2800,
+              675
             ],
             "connectionPoint": [
-              350,
-              875
+              2800,
+              675
             ],
             "direction": "right",
             "label": ""
           }
         ],
-        "label": "Breach minimal consequences",
+        "label": "Breach solved",
         "coords": [
-          100,
-          800
+          2550,
+          600
         ],
         "width": 250,
         "height": 150,
         "data": {
-          "node name": "Breach minimal consequences",
+          "node name": "Breach solved",
           "node number": 1
         }
       }
@@ -870,20 +982,6 @@
         "type": "start-connection",
         "start": "id9efe097f-1d18-4e30-ab7f-e9a38a274f8c_port_3",
         "end": "id44b168f2-0f2e-4d15-8a2c-e18c735df842_port_1",
-        "startLabel": "",
-        "middleLabel": "",
-        "endLabel": "1",
-        "points": [],
-        "data": {
-          "connection name": "miss connection",
-          "weight": 1
-        }
-      },
-      {
-        "id": "id7a5cb46a-1870-4c3a-8274-20fee0a0e3ce",
-        "type": "diagram-connection",
-        "start": "id44b168f2-0f2e-4d15-8a2c-e18c735df842_port_3",
-        "end": "id13a3f2db-a501-470f-be0a-b2aec73b6d97_port_1",
         "startLabel": "",
         "middleLabel": "",
         "endLabel": "1",
@@ -908,58 +1006,86 @@
         }
       },
       {
-        "id": "idb63c5181-9da5-4453-99c2-3a6db82e76ea",
+        "id": "idcc0d7781-fb23-4b82-a0fb-5dae2fb2e382",
+        "type": "diagram-connection",
+        "start": "id44b168f2-0f2e-4d15-8a2c-e18c735df842_port_3",
+        "end": "id87045ff9-9ff9-43fa-830c-8aaf53fae4e2_port_1",
+        "startLabel": "",
+        "middleLabel": "",
+        "endLabel": "1",
+        "points": [],
+        "data": {
+          "connection name": "miss connection",
+          "weight": 1
+        }
+      },
+      {
+        "id": "id54a3ee71-20e1-4af6-923f-c3268430e9ba",
+        "type": "diagram-connection",
+        "start": "id87045ff9-9ff9-43fa-830c-8aaf53fae4e2_port_3",
+        "end": "id13a3f2db-a501-470f-be0a-b2aec73b6d97_port_1",
+        "startLabel": "",
+        "middleLabel": "",
+        "endLabel": "1",
+        "points": [],
+        "data": {
+          "connection name": "miss connection",
+          "weight": 1
+        }
+      },
+      {
+        "id": "iddadc11d3-d076-4bee-8fab-c0f4c868bf1d",
+        "type": "diagram-connection",
+        "start": "id96ea11dd-7a00-4e3f-8bec-0d25f135f73f_port_3",
+        "end": "id732871f3-a49d-4f55-834c-8a2777ff2d1e_port_1",
+        "startLabel": "",
+        "middleLabel": "",
+        "endLabel": "1",
+        "points": [],
+        "data": {
+          "connection name": "miss connection",
+          "weight": 1
+        }
+      },
+      {
+        "id": "idf7c61b5b-497b-4f04-ae51-ec8931ac2933",
+        "type": "diagram-connection",
+        "start": "id732871f3-a49d-4f55-834c-8a2777ff2d1e_port_3",
+        "end": "idecdd4852-a844-4daa-9a3b-c798e03c5857_port_1",
+        "startLabel": "",
+        "middleLabel": "",
+        "endLabel": "1",
+        "points": [],
+        "data": {
+          "connection name": "miss connection",
+          "weight": 1
+        }
+      },
+      {
+        "id": "idb435275d-9c7e-429c-9902-a03e15099d7b",
+        "type": "diagram-connection",
+        "start": "idecdd4852-a844-4daa-9a3b-c798e03c5857_port_3",
+        "end": "idb93a1a5b-450e-4379-a991-d07240ae91b6_port_1",
+        "startLabel": "",
+        "middleLabel": "",
+        "endLabel": "1",
+        "points": [],
+        "data": {
+          "connection name": "miss connection",
+          "weight": 1
+        }
+      },
+      {
+        "id": "idfa2ab609-9095-49c1-b731-ee59e60866b4",
         "type": "end-connection",
-        "start": "idaacc5f5a-df70-4520-b20e-4f13a5c5deaf_port_1",
-        "end": "id51757fc8-480f-4330-a4ba-6cac6a14ed50_port_3",
+        "start": "idb93a1a5b-450e-4379-a991-d07240ae91b6_port_3",
+        "end": "idbebb2603-2a9d-4e91-b9f8-761f2248c2db_port_1",
         "startLabel": "",
         "middleLabel": "",
         "endLabel": "1",
         "points": [],
         "data": {
           "connection name": "end connection",
-          "weight": 1
-        }
-      },
-      {
-        "id": "id13c53f86-2cc0-4153-acfb-0f1ba5d9748e",
-        "type": "diagram-connection",
-        "start": "id062e9541-a60c-4352-a180-b469c3e69c47_port_1",
-        "end": "idaacc5f5a-df70-4520-b20e-4f13a5c5deaf_port_3",
-        "startLabel": "",
-        "middleLabel": "",
-        "endLabel": "1",
-        "points": [],
-        "data": {
-          "connection name": "miss connection",
-          "weight": 1
-        }
-      },
-      {
-        "id": "id42418a59-7a13-45a0-b3de-7a332af3dc72",
-        "type": "diagram-connection",
-        "start": "id41ab1311-8abe-45f4-9bba-a2764e934b59_port_1",
-        "end": "id062e9541-a60c-4352-a180-b469c3e69c47_port_3",
-        "startLabel": "",
-        "middleLabel": "",
-        "endLabel": "1",
-        "points": [],
-        "data": {
-          "connection name": "miss connection",
-          "weight": 1
-        }
-      },
-      {
-        "id": "id675d32c5-966c-478c-bc12-b94e2c434e83",
-        "type": "diagram-connection",
-        "start": "id96ea11dd-7a00-4e3f-8bec-0d25f135f73f_port_3",
-        "end": "id41ab1311-8abe-45f4-9bba-a2764e934b59_port_3",
-        "startLabel": "",
-        "middleLabel": "",
-        "endLabel": "1",
-        "points": [],
-        "data": {
-          "connection name": "miss connection",
           "weight": 1
         }
       }
