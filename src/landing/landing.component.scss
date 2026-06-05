@@ -26,3 +26,12 @@ li {
     background: #25b03f;
   }
 }
+
+.logos {
+  margin: 2rem 4rem;
+  display: flex;
+  gap: 4rem;
+  img {
+    width: 20rem;
+  }
+}
