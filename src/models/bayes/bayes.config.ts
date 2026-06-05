@@ -229,9 +229,15 @@ export const bayes_CONFIG: DiagramConfig = {
         refY: 4
       },
       label: {
-        color: '#000000',
-        selectedColor: '#000000',
-        fontSize: 12,
+        look: {
+          lookType: 'field-look',
+          fontColor: '#000000',
+          fontSize: 12,
+          fontWeight: 400,
+          highlighted: {
+            fontWeight: 600
+          }
+        },
         padding: 6,
         margin: 20
       },
