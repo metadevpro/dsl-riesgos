@@ -1,7 +1,14 @@
 .landing {
   padding: 0 2rem;
-  height: 90%;
+  height: 98%;
   overflow-y: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+p,
+li {
+  min-width: 30rem;
+  max-width: 62rem;
 }
 
 .example-button {

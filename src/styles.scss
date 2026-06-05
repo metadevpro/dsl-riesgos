@@ -19,6 +19,30 @@ body {
   font-family: inherit;
 }
 
+h1 {
+  color: #17164a;
+  font-weight: bold;
+}
+h2 {
+  color: #36358b;
+  font-weight: bold;
+}
+h3 {
+  color: #4c4aa3;
+  font-weight: bold;
+}
+h4 {
+  color: #6563ba;
+  font-weight: bold;
+}
+
+hr {
+  height: 2px;
+  background-color: #4c4aa3;
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+}
+
 input,
 select,
 textarea,
@@ -152,4 +176,9 @@ risk-simple {
 
 .selectedResult {
   background: #eaf3de !important;
+}
+
+.footer {
+  margin-top: 2rem;
+  margin-bottom: 3rem;
 }

@@ -3,3 +3,8 @@
   height: 90%;
   overflow-y: auto;
 }
+p,
+li {
+  min-width: 30rem;
+  max-width: 62rem;
+}
