@@ -22,6 +22,7 @@ import { calculateTheoreticalNodeProbabilities } from './util/binomialWeight.uti
   standalone: true,
   selector: 'risk-simple',
   templateUrl: 'binomial.component.html',
+  styleUrls: ['../models-shared.scss'],
   imports: [DagaModule, CommonModule, DagaBaseComponent]
 })
 export class BinomialComponent extends GenericComponent {
