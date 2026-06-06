@@ -1,0 +1,24 @@
+<h3>Example 1. In-line Quality Control</h3>
+<p>
+  A factory produces screws on an automated production line. The quality control process consists of two stages: first, an automatic
+  visual inspection (using a camera), and then, only if the camera detects a defect, a manual inspection by an operator. Historical data
+  shows that:
+</p>
+<ul>
+  <li>5% of the screws are defective.</li>
+  <li>The camera correctly identifies 90% of the defective screws (true positive rate).</li>
+  <li>If a screw is referred for manual inspection, the operator confirms the defect 95% of the time.</li>
+</ul>
+<p>
+  The aim of the model is to estimate the probability that a screw will be definitively rejected after passing through the entire process.
+</p>
+
+<img src="assets/screenshots/binomial/binomial-example1-landing-diagram.png" alt="Binomial example 1 landing diagram" />
+<a
+  class="example-button"
+  routerLink="/binomial"
+  [queryParams]="{ example: 'binomial-example1-landing' }"
+  data-cy="open-example-binomial-1"
+>
+  Open this example in the model →
+</a>

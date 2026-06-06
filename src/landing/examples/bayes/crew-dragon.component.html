@@ -1,0 +1,202 @@
+<h3>Example 3. Crew Dragon</h3>
+<p>
+  This example models a critical phase of a crewed mission: the re-entry and recovery of the Crew Dragon capsule. Unlike a launch, where
+  the main objective is to reach orbit, here the risk lies in the capsule successfully performing the de-orbiting manoeuvre, passing
+  through the atmosphere, deploying its parachutes and landing safely.
+</p>
+<p>The question the model answers is</p>
+<p>Given the re-entry sequence, what is the probability that the crew will be recovered safe and sound?</p>
+<p>The Crew Dragon re-entry can be divided into three main phases:</p>
+<ul>
+  <li>De-orbit burn: The capsule fires its thrusters to slow down and begin its descent.</li>
+  <li>Atmospheric re-entry: The capsule passes through the atmosphere, facing extreme heat and forces.</li>
+  <li>
+    Descent and splashdown: The parachute system slows the capsule down before it hits the ocean, where it must be recovered by rescue
+    teams.
+  </li>
+</ul>
+<p>
+  In addition to the technical systems, ocean conditions also play a role. Even if the capsule functions correctly, rough seas can make
+  splashdown difficult, cause it to capsize or delay recovery.
+</p>
+<p>The model includes the following nodes:</p>
+<ul>
+  <li>Deorbit Burn Failure: The deorbit manoeuvre is not executed correctly.</li>
+  <li>Heat Shield Failure: The heat shield does not provide adequate protection during re-entry.</li>
+  <li>Parachute Deployment Failure: The parachute system does not deploy correctly.</li>
+  <li>Oceanic Conditions: Sea conditions are unsuitable for splashdown</li>
+  <li>Normal Splashdown: The capsule lands safely in the ocean.</li>
+  <li>Crew Rescued: The crew is successfully recovered.</li>
+</ul>
+
+<img src="assets/screenshots/bayes/bayes-example3-landing-diagram.png" alt="Bayes example 3 landing diagram" />
+
+<h4>Probabilities defined in the CPTs</h4>
+
+<h4>Node 1 · DeorbitBurnFailure</h4>
+<p>This node represents the initial probability that the deorbit manoeuvre fails.</p>
+<table>
+  <thead>
+    <tr>
+      <th>State</th>
+      <th>Probability</th>
+      <th>Interpretation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>yes</td>
+      <td>0.5%</td>
+      <td>The deorbit burn manoeuvre fails.</td>
+    </tr>
+    <tr>
+      <td>no</td>
+      <td>99.5%</td>
+      <td>The manoeuvre is executed correctly.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4>Node 2 · HeatShieldFailure</h4>
+<p>The heat shield failure depends on whether the deorbit manoeuvre was correct.</p>
+<table>
+  <thead>
+    <tr>
+      <th>DeorbitBurnFailure</th>
+      <th>P(HeatShieldFailure = yes)</th>
+      <th>Interpretation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>yes</td>
+      <td>80%</td>
+      <td>An incorrect trajectory can expose the shield to off-design conditions.</td>
+    </tr>
+    <tr>
+      <td>no</td>
+      <td>0.1%</td>
+      <td>On a nominal trajectory, heat shield failure is highly unlikely.</td>
+    </tr>
+  </tbody>
+</table>
+<p>This table represents a strong causal relationship: a failure in the re-entry trajectory drastically increases thermal risk.</p>
+
+<h4>Node 3 · ParachuteFailure</h4>
+<p>The parachute system depends on the prior state of the capsule after re-entry.</p>
+<table>
+  <thead>
+    <tr>
+      <th>HeatShieldFailure</th>
+      <th>P(ParachuteFailure = yes)</th>
+      <th>Interpretation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>yes</td>
+      <td>85%</td>
+      <td>If the shield fails, the capsule can become unstable and hinder deployment.</td>
+    </tr>
+    <tr>
+      <td>no</td>
+      <td>0.2%</td>
+      <td>With a nominal re-entry, parachute system failure is very unlikely.</td>
+    </tr>
+  </tbody>
+</table>
+<p>This CPT lets us model how a thermal problem can turn into a descent problem.</p>
+
+<h4>Node 4 · OceanicConditions</h4>
+<p>This node represents an external factor: the sea state in the recovery zone.</p>
+<table>
+  <thead>
+    <tr>
+      <th>State</th>
+      <th>Probability</th>
+      <th>Interpretation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>yes</td>
+      <td>5%</td>
+      <td>Oceanic conditions are adverse.</td>
+    </tr>
+    <tr>
+      <td>no</td>
+      <td>95%</td>
+      <td>Conditions are favourable for recovery.</td>
+    </tr>
+  </tbody>
+</table>
+<p>Unlike the technical nodes, this node does not depend on the capsule. It represents an environmental source of risk.</p>
+
+<h4>Node 5 · NormalSplashdown</h4>
+<p>Splashdown depends on the state of the parachute system and the oceanic conditions.</p>
+<table>
+  <thead>
+    <tr>
+      <th>ParachuteFailure</th>
+      <th>OceanicConditions</th>
+      <th>P(NormalSplashdown = yes)</th>
+      <th>Interpretation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>no</td>
+      <td>no</td>
+      <td>99.8%</td>
+      <td>Everything works correctly and the sea is favourable.</td>
+    </tr>
+    <tr>
+      <td>no</td>
+      <td>yes</td>
+      <td>75%</td>
+      <td>The parachutes work, but the adverse sea reduces safety.</td>
+    </tr>
+    <tr>
+      <td>yes</td>
+      <td>no</td>
+      <td>3%</td>
+      <td>The parachutes fail, even though the ocean is in good condition.</td>
+    </tr>
+    <tr>
+      <td>yes</td>
+      <td>yes</td>
+      <td>0.5%</td>
+      <td>The parachutes fail and the sea is also adverse.</td>
+    </tr>
+  </tbody>
+</table>
+<p>This table is key because it combines technical risk and environmental risk in a single operational outcome.</p>
+
+<h4>Node 6 · CrewRescued</h4>
+<p>The final state depends on whether splashdown occurred within safe parameters.</p>
+<table>
+  <thead>
+    <tr>
+      <th>NormalSplashdown</th>
+      <th>P(CrewRescued = yes)</th>
+      <th>Interpretation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>yes</td>
+      <td>99.8%</td>
+      <td>If splashdown is nominal, safe recovery is almost certain.</td>
+    </tr>
+    <tr>
+      <td>no</td>
+      <td>20%</td>
+      <td>Even with a non-nominal splashdown, there can be a survival margin.</td>
+    </tr>
+  </tbody>
+</table>
+<p>This node summarises the final outcome of interest to the controller: the probability of safe crew recovery.</p>
+
+<a class="example-button" routerLink="/bayes" [queryParams]="{ example: 'bayes-example3-landing' }" data-cy="open-example-bayes-3">
+  Open this example in the model →
+</a>
