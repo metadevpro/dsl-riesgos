@@ -54,13 +54,13 @@
   </thead>
   <tbody>
     <tr>
-      <td>yes</td>
-      <td>0.8%</td>
+      <td><span class="state state--yes">Yes</span></td>
+      <td class="num">0.8%</td>
       <td>Initial probability of a real fault in one of the critical systems.</td>
     </tr>
     <tr>
-      <td>no</td>
-      <td>99.2%</td>
+      <td><span class="state state--no">No</span></td>
+      <td class="num">99.2%</td>
       <td>Complementary: no real physical fault exists.</td>
     </tr>
   </tbody>
@@ -78,13 +78,13 @@
   </thead>
   <tbody>
     <tr>
-      <td>yes</td>
-      <td>90%</td>
+      <td><span class="state state--yes">Yes</span></td>
+      <td class="num">90%</td>
       <td>If there is a real fault, the sensor detects it in 90% of cases.</td>
     </tr>
     <tr>
-      <td>no</td>
-      <td>4%</td>
+      <td><span class="state state--no">No</span></td>
+      <td class="num">4%</td>
       <td>If there is no real fault, the sensor can produce a false positive in 4% of cases.</td>
     </tr>
   </tbody>
@@ -107,13 +107,13 @@
   </thead>
   <tbody>
     <tr>
-      <td>yes</td>
-      <td>95%</td>
+      <td><span class="state state--yes">Yes</span></td>
+      <td class="num">95%</td>
       <td>If there is a real fault, the ECS sensor detects it with high probability.</td>
     </tr>
     <tr>
-      <td>no</td>
-      <td>3%</td>
+      <td><span class="state state--no">No</span></td>
+      <td class="num">3%</td>
       <td>If there is no real fault, a false alarm can occur in 3% of cases.</td>
     </tr>
   </tbody>
@@ -136,27 +136,27 @@
   </thead>
   <tbody>
     <tr>
-      <td>yes</td>
-      <td>yes</td>
-      <td>99%</td>
+      <td><span class="state state--yes">Yes</span></td>
+      <td><span class="state state--yes">Yes</span></td>
+      <td class="num">99%</td>
       <td>Both sensors alarm; the abort is triggered almost with certainty.</td>
     </tr>
     <tr>
-      <td>yes</td>
-      <td>no</td>
-      <td>95%</td>
+      <td><span class="state state--yes">Yes</span></td>
+      <td><span class="state state--no">No</span></td>
+      <td class="num">95%</td>
       <td>Only the propellant system alarms.</td>
     </tr>
     <tr>
-      <td>no</td>
-      <td>yes</td>
-      <td>93%</td>
+      <td><span class="state state--no">No</span></td>
+      <td><span class="state state--yes">Yes</span></td>
+      <td class="num">93%</td>
       <td>Only the ECS system alarms.</td>
     </tr>
     <tr>
-      <td>no</td>
-      <td>no</td>
-      <td>1%</td>
+      <td><span class="state state--no">No</span></td>
+      <td><span class="state state--no">No</span></td>
+      <td class="num">1%</td>
       <td>An abort may occur for other reasons: electrical noise, a bug or an external signal.</td>
     </tr>
   </tbody>
@@ -178,13 +178,13 @@
   </thead>
   <tbody>
     <tr>
-      <td>yes</td>
-      <td>15%</td>
+      <td><span class="state state--yes">Yes</span></td>
+      <td class="num">15%</td>
       <td>With an active alert, there is a 15% probability that the fault is real.</td>
     </tr>
     <tr>
-      <td>no</td>
-      <td>0.3%</td>
+      <td><span class="state state--no">No</span></td>
+      <td class="num">0.3%</td>
       <td>Without an alert, it is very unlikely that an undetected physical fault exists.</td>
     </tr>
   </tbody>

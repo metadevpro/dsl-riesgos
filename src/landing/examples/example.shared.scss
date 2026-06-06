@@ -29,13 +29,39 @@ table {
     text-align: left;
   }
 
+  td.num {
+    text-align: right;
+  }
+
   thead th {
-    background: #f0f0f5;
+    background: #e9f5ed;
     font-weight: 600;
   }
 
   tbody tr:nth-child(even) {
     background: #fafafc;
+  }
+
+  .state {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .state::before {
+    content: '';
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    flex: none;
+  }
+
+  .state--yes::before {
+    background: #2ecc4a;
+  }
+
+  .state--no::before {
+    background: #e74c3c;
   }
 }
 
