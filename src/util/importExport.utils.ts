@@ -174,7 +174,37 @@ export function applyRiskFileToCanvas(canvas: Canvas, file: RiskFile): void {
   canvas.model.clear();
   new DagaImporter().import(canvas.model, file.daga);
   canvas.updateModelInView();
-  canvas.center(undefined, 1, 300);
+  if (typeof requestAnimationFrame === 'function') {
+    requestAnimationFrame(() => fitCanvasToContent(canvas));
+  } else {
+    fitCanvasToContent(canvas);
+  }
+}
+
+/**
+ * Encuadra el diagrama (fit-to-content) midiendo el viewport real.
+ * Sustituye a canvas.center(), cuyo cálculo de tamaño de ventana es erróneo
+ * cuando el grid está activo (mide el <rect> del patrón en <defs>, ~50px).
+ */
+export function fitCanvasToContent(canvas: Canvas, maxZoom = 1, padding = 0.9): void {
+  const nodes = canvas.model.nodes.all();
+  if (nodes.length === 0) return;
+
+  const svg = canvas.selectSVGElement().node();
+  const view = svg?.getBoundingClientRect();
+  const windowW = view?.width ?? 0;
+  const windowH = view?.height ?? 0;
+  if (windowW < 1 || windowH < 1) return; // viewport aún sin layout
+
+  const minX = Math.min(...nodes.map((n) => n.coords[0]));
+  const maxX = Math.max(...nodes.map((n) => n.coords[0] + n.width));
+  const minY = Math.min(...nodes.map((n) => n.coords[1]));
+  const maxY = Math.max(...nodes.map((n) => n.coords[1] + n.height));
+  const rangeX = Math.max(maxX - minX, 1);
+  const rangeY = Math.max(maxY - minY, 1);
+
+  const zoom = Math.min(windowW / rangeX, windowH / rangeY, maxZoom) * padding;
+  canvas.zoomAndPanTo((minX + maxX) / 2, (minY + maxY) / 2, zoom, 0);
 }
 
 function remapLegacyBayesNodeTypes(daga: DagaModel): void {

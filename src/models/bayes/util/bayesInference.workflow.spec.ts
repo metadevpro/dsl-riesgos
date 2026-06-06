@@ -24,7 +24,8 @@ describe('Bayes Workflow — CPT building blocks', () => {
     const cpt = generateDefaultCPT(['P1', 'P2', 'P3']);
     expect(Object.keys(cpt)).toHaveLength(8);
     for (const row of Object.values(cpt)) {
-      expect((row as any).si + (row as any).no).toBeCloseTo(1, 5);
+      const r = row as { si: number; no: number };
+      expect(r.si + r.no).toBeCloseTo(1, 5);
     }
   });
 
