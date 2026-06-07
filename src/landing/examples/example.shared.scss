@@ -1,0 +1,82 @@
+p,
+li {
+  min-width: 30rem;
+  max-width: 62rem;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+pre {
+  max-width: 62rem;
+  padding: 0.75rem 1rem;
+  background: #f5f5f7;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+table {
+  border-collapse: collapse;
+  margin: 1rem 0;
+  max-width: 62rem;
+
+  th,
+  td {
+    border: 1px solid #d1d5db;
+    padding: 0.4rem 0.75rem;
+    text-align: left;
+  }
+
+  td.num {
+    text-align: right;
+  }
+
+  thead th {
+    background: #e9f5ed;
+    font-weight: 600;
+  }
+
+  tbody tr:nth-child(even) {
+    background: #fafafc;
+  }
+
+  .state {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .state::before {
+    content: '';
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    flex: none;
+  }
+
+  .state--yes::before {
+    background: #2ecc4a;
+  }
+
+  .state--no::before {
+    background: #e74c3c;
+  }
+}
+
+.example-button {
+  display: inline-block;
+  margin: 0.5rem 0 1.5rem;
+  padding: 0.6rem 1.2rem;
+  background: #2ecc4a;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background 0.15s ease;
+
+  &:hover {
+    background: #25b03f;
+  }
+}

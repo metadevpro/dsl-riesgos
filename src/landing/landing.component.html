@@ -18,897 +18,114 @@
     visuals, so that any organisation can understand its risks and act with greater confidence and security.
   </p>
 
-  <h2>Binomial Examples</h2>
-  <h3>What it is used for</h3>
-  <p>
-    It models sequential processes in which events occur in a chain, each with an independent probability of success or failure. It answers
-    questions such as 'What is the probability that an order will reach the customer if each link in the chain can fail?' or 'What is the
-    probability that a drug will pass all phases of clinical trials?'
-  </p>
-  <h3>How it is built</h3>
-  <p>
-    The diagram is a graph of nodes (start, state, event, end) linked by connections with weights. Each weight represents the probability of
-    taking that branch. The theoretical probability of reaching a result is calculated by multiplying the probabilities along the path. In
-    addition, a simulation engine traverses the graph many times (the iterations) and measures how often success is achieved, allowing the
-    theoretical value to be compared with an empirical one.
-  </p>
-  <h3>Why it has been used</h3>
-  <p>
-    The binomial approach fits naturally with risks that break down into successive success/failure steps. It is intuitive — the diagram is
-    read from left to right —, easy to parameterise using historical data (failure rates per stage) and sufficient for a huge variety of
-    real-world cases: quality control, supply chains, attack chains in cybersecurity or the phased funnel of a clinical trial. The
-    simulation also provides empirical validation of the calculations.
-  </p>
-  <h3>Example 1. In-line Quality Control</h3>
-  <p>
-    A factory produces screws on an automated production line. The quality control process consists of two stages: first, an automatic
-    visual inspection (using a camera), and then, only if the camera detects a defect, a manual inspection by an operator. Historical data
-    shows that:
-  </p>
-  <ul>
-    <li>5% of the screws are defective.</li>
-    <li>The camera correctly identifies 90% of the defective screws (true positive rate).</li>
-    <li>If a screw is referred for manual inspection, the operator confirms the defect 95% of the time.</li>
-  </ul>
-  <p>
-    The aim of the model is to estimate the probability that a screw will be definitively rejected after passing through the entire process.
-  </p>
+  <section class="example-panel">
+    <h2>Binomial Examples</h2>
+    <h3>What it is used for</h3>
+    <p>
+      It models sequential processes in which events occur in a chain, each with an independent probability of success or failure. It
+      answers questions such as 'What is the probability that an order will reach the customer if each link in the chain can fail?' or 'What
+      is the probability that a drug will pass all phases of clinical trials?'
+    </p>
+    <h3>How it is built</h3>
+    <p>
+      The diagram is a graph of nodes (start, state, event, end) linked by connections with weights. Each weight represents the probability
+      of taking that branch. The theoretical probability of reaching a result is calculated by multiplying the probabilities along the path.
+      In addition, a simulation engine traverses the graph many times (the iterations) and measures how often success is achieved, allowing
+      the theoretical value to be compared with an empirical one.
+    </p>
+    <h3>Why it has been used</h3>
+    <p>
+      The binomial approach fits naturally with risks that break down into successive success/failure steps. It is intuitive — the diagram
+      is read from left to right —, easy to parameterise using historical data (failure rates per stage) and sufficient for a huge variety
+      of real-world cases: quality control, supply chains, attack chains in cybersecurity or the phased funnel of a clinical trial. The
+      simulation also provides empirical validation of the calculations.
+    </p>
+    <h3>Examples</h3>
 
-  <img src="assets/screenshots/binomial/binomial-example1-landing-diagram.png" alt="Binomial example 1 landing diagram" />
-  <a
-    class="example-button"
-    routerLink="/binomial"
-    [queryParams]="{ example: 'binomial-example1-landing' }"
-    data-cy="open-example-binomial-1"
-  >
-    Open this example in the model →
-  </a>
+    <div class="tab-strip">
+      @for (tab of binomialTabs; track tab.id) {
+        <button
+          class="tab"
+          [class.active]="binomialTab() === tab.id"
+          (click)="binomialTab.set(tab.id)"
+          [attr.data-cy]="'tab-binomial-' + tab.id"
+        >
+          {{ tab.label }}
+        </button>
+      }
+    </div>
 
-  <h3>Example 2. Logistics Supply Chain</h3>
-  <p>
-    A logistics company has a supply chain consisting of three stages: supplier, warehouse and distribution. If any link fails, the order
-    does not reach the customer. The probabilities of failure for each stage are:
-  </p>
-  <ul>
-    <li>Supplier: 3%</li>
-    <li>Warehouse: 5%</li>
-    <li>Distribution: 2%</li>
-  </ul>
-  <p>
-    What is the probability that an order will reach the customer successfully? What is the probability that an order will fail due to a
-    supplier issue, given that it failed?
-  </p>
+    <div class="example-content">
+      @switch (binomialTab()) {
+        @case ('quality-control') {
+          <risk-example-quality-control />
+        }
+        @case ('supply-chain') {
+          <risk-example-supply-chain />
+        }
+        @case ('cybersecurity') {
+          <risk-example-cybersecurity />
+        }
+        @case ('cybersecurity-extension') {
+          <risk-example-cybersecurity-extension />
+        }
+        @case ('clinical-trial') {
+          <risk-example-clinical-trial />
+        }
+      }
+    </div>
+  </section>
 
-  <img src="assets/screenshots/binomial/binomial-example2-landing-diagram.png" alt="Binomial example 2 landing diagram" />
-  <p></p>
-  <a
-    class="example-button"
-    routerLink="/binomial"
-    [queryParams]="{ example: 'binomial-example2-landing' }"
-    data-cy="open-example-binomial-2"
-  >
-    Open this example in the model →
-  </a>
+  <section class="example-panel">
+    <h2>Bayes Examples</h2>
+    <h3>What it is used for</h3>
+    <p>
+      It models causal networks in which various variables influence one another, and allows for reasoning based on partial evidence: by
+      observing the state of some nodes, the network updates the probabilities of the rest. It answers questions such as 'if an engine
+      failure is detected during flight, what is the probability of reaching orbit?' or 'if the abort alarm went off, what is the
+      probability that the failure is real?'.
+    </p>
+    <h3>How it is built</h3>
+    <p>
+      It is a Bayesian network: a directed acyclic graph where each node has a Conditional Probability Table (CPT) that describes its
+      probability as a function of its parents' states. The inference engine calculates the marginal distributions for each node. Exact
+      inference enumerates the actual combinations and is limited to 20 nodes due to its exponential cost. Above that size, Monte Carlo
+      (likelihood weighting) is used for an approximate estimate with its margin of error. CPTs can be defined manually or learned from
+      CSV's data.
+    </p>
+    <h3>Why it has been used</h3>
+    <p>
+      Many real-world risks are not simply linear chains: causes interact, there are external factors (e.g. weather or sea conditions) and,
+      above all, we have partial observations on which to base our reasoning. Bayesian networks are the standard formalism for this: they
+      clearly separate a sensor's sensitivity from its false positive rate, propagate evidence throughout the network, and allow for both
+      forward (effect) and backward (cause) reasoning. This makes them ideal for scenarios such as the reliability of space missions or
+      alarm diagnosis, where what matters is not just detecting an event but estimating its true significance.
+    </p>
+    <h3>Examples</h3>
 
-  <h3>Example 3. Cybersecurity</h3>
-  <p>
-    A security team wants to model the risk of an external attacker compromising a company's cloud environment. In modern systems, many
-    attacks do not begin by “breaking” a firewall directly, but by abusing stolen credentials, exposed remote-access services, vulnerable
-    software or weak identity controls. This is consistent with recent industry reports:
-    <a href="https://www.microsoft.com/en-us/security/security-insider/threat-landscape/microsoft-digital-defense-report-2024?form=MG0AV3"
-      >Microsoft</a
-    >
-    reported blocking more than 7,000 password attacks per second, while the Verizon DBIR 2026 states that 31% of breaches now start with
-    software vulnerabilities and that 48% of breaches involve ransomware.
-  </p>
-  <p>
-    For this example, the company's identity provider, WAF and SIEM logs show around 50,000 malicious access attempts per month. The attack
-    chain is modelled as follows:
-  </p>
-  <ul>
-    <li>
-      Initial access: 0.3% of malicious access attempts involve either a valid leaked credential, a reused password, an exposed
-      remote-access service or an exploitable public-facing vulnerability.
-    </li>
-    <li>
-      MFA / Conditional Access failure: if the attacker obtains a valid access path, there is a 1.44% chance that MFA and conditional access
-      do not prevent compromise. This value is derived from
-      <a href="https://www.microsoft.com/en-us/research/publication/how-effective-is-multifactor-authentication-at-deterring-cyberattacks"
-        >Microsoft Research</a
-      >, which found that MFA reduces the risk of compromise by 98.56% in cases involving leaked credentials.
-    </li>
-    <li>
-      Privilege escalation or lateral movement: if the attacker gains access, there is a 25% chance that the compromised account, session
-      token or vulnerable system allows the attacker to move laterally, escalate privileges or access sensitive resources. This is a
-      modelling assumption and should be calibrated with internal audit, red-team or incident-response data.
-    </li>
-    <li>
-      High-impact outcome: if lateral movement succeeds, there is a 48% chance that the incident becomes a high-impact brech, such as
-      ransomware deployment, data exfiltration or major operational disruption. This value is used as a modelling proxy based on the Verizon
-      DBIR 2026, finding that ransomware is present in 48% of breaches.
-    </li>
-  </ul>
-  <p>
-    Therefore, the expected high-impact incidents per month can be calculated as: 50,000 x 0.003 x 0.0144 x 0.25 x 0.48 = 0.2592 high-impact
-    incidents per month. This is equivalent to approximately one high-impact incident every four months.
-  </p>
-  <p>
-    This result should not be interpreted as a universal prediction. It is a modelling result based on a combination of public cybersecurity
-    reports and scenario-specific assumptions. In a real organization, these probabilities should be adjusted using internal data from the
-    identity provider, WAF, EDR, SIEM, vulnerability scanners, penetration tests and previous security incidents.
-  </p>
-  <a
-    class="example-button"
-    routerLink="/binomial"
-    [queryParams]="{ example: 'binomial-example3-landing' }"
-    data-cy="open-example-binomial-3"
-  >
-    Open this example in the model →
-  </a>
+    <div class="tab-strip">
+      @for (tab of bayesTabs; track tab.id) {
+        <button class="tab" [class.active]="bayesTab() === tab.id" (click)="bayesTab.set(tab.id)" [attr.data-cy]="'tab-bayes-' + tab.id">
+          {{ tab.label }}
+        </button>
+      }
+    </div>
 
-  <h3>Example 3.1. Cybersecurity Extension</h3>
-  <p>
-    The previous example estimates the probability of a high-impact compromise. However, the final business impact also depends on whether
-    the organization detects and contains the intrusion early.
-  </p>
-  <p>Two additional factors are added to the model:</p>
-  <ul>
-    <li>
-      Internal Detection: there is a 52% chance that the organization detects the malicious activity internally before being notified by an
-      external party. This value is based on Mandiant’s
-      <a href="https://www.securityweek.com/m-trends-2026-initial-access-handoff-shrinks-from-hours-to-22-seconds/">M-Trends 2026</a> data,
-      which reported that breaches were detected internally in 52% of cases.
-    </li>
-    <li>
-      Early containment: if the intrusion is detected internally, there is a 60% chance that the security team contains the incident before
-      it causes severe operational or data-loss consequences. Containment actions may include disabling the compromised account, revoking
-      active sessions, rotating credentials, isolating affected systems, blocking command-and-control traffic and preserving forensic
-      evidence. This value is a modelling assumption and should be calibrated using incident-response exercises or historical SOC metrics.
-    </li>
-  </ul>
-  <p>
-    With these additions, the expected high-impact incidents per month can be recalculated as: 0.2592 x (1 - 0.312) = 0.1783 incidents per
-    month. This is equivalent to approximately one high-impact incident every five to six months.
-  </p>
-  <p>
-    This extension makes the model more realistic because the impact of a cybersecurity incident does not only depend on whether the
-    attacker gains access. It also depends on the organization’s ability to detect, investigate and contain the intrusion quickly.
-    Mandiant’s M-Trends 2026 report also reported a global median dwell time of 14 days, showing that attackers may remain inside an
-    environment for days before being detected.
-  </p>
-  <p>
-    As in the previous example, these values should not be treated as fixed probabilities for every organization. They are parameters of the
-    model. In a real deployment, they should be replaced or refined using internal detection metrics, mean time to detect, mean time to
-    respond, incident-response simulations and historical incident data.
-  </p>
-  <a
-    class="example-button"
-    routerLink="/binomial"
-    [queryParams]="{ example: 'binomial-example3.5-landing' }"
-    data-cy="open-example-binomial-3-5"
-  >
-    Open this example in the model →
-  </a>
+    <div class="example-content">
+      @switch (bayesTab()) {
+        @case ('falcon9') {
+          <risk-example-falcon9 />
+        }
+        @case ('rocket-abort') {
+          <risk-example-rocket-abort />
+        }
+        @case ('crew-dragon') {
+          <risk-example-crew-dragon />
+        }
+      }
+    </div>
+  </section>
 
-  <h3>Example 4. Clinical Trial</h3>
-  <p>
-    A pharmaceutical company wants to model the risk and expected cost of investing in a new drug candidate. The candidate has shown
-    promising results in preclinical studies, but this does not guarantee that it will be safe, effective or approved in humans.
-  </p>
-  <p>
-    In real drug development, clinical trials are usually divided into sequential phases. Phase 1 mainly evaluates safety and tolerability,
-    Phase 2 studies preliminary efficacy and dose selection, and Phase 3 confirms safety and efficacy in a larger patient population. If any
-    phase fails, the development programme is halted and the following phases are not funded.
-  </p>
-  <p>For this example, the company models the process as follows:</p>
-  <ul>
-    <li>
-      Phase 1 (Safety and tolerability): 60 participants receive the candidate drug. The main objective is to evaluate safety, tolerability,
-      dose range and possible adverse effects. This phase has an estimated cost of 5 million euros. The probability of successfully
-      advancing to Phase 2 is 52.0%.
-    </li>
-    <li>
-      Phase 2 (Proof of concept and dose selection): 200 patients with the target condition receive the drug or a comparator. The objective
-      is to obtain preliminary evidence of efficacy, continue evaluating safety and select the most appropriate dose for larger studies.
-      This phase has an estimated cost of 15 million euros. The probability of successfully advancing to Phase 3 is 28.9%.
-    </li>
-    <li>
-      Phase 3 (Pivotal efficacy and safety): 1,500 patients are enrolled to confirm the drug's efficacy, safety profile and benefit-risk
-      balance at scale. This phase has an estimated cost of 45 million euros. The probability of successfully reaching regulatory filing is
-      57.8%.
-    </li>
-    <li>
-      Regulatory review: If the clinical dossier is submitted, the regulatory authority reviews the evidence on quality, safety and
-      efficacy. The review process has an estimated cost of 5 million euros. The probability of approval after submission is 90.6%.
-    </li>
-  </ul>
-  <p>Therefore, the probability of successfully reaching regulatory approval can be calculated as:</p>
-  <pre>
-    Probability of regulatory approval = 0.520 x 0.289 x 0.578 x 0.906 = 0.0787
-  </pre>
-  <p>Under these assumptions, the model estimates a 7.87% probability of regulatory approval from the beginning of Phase 1.</p>
-  <p>The expected total cost including regulatory review is:</p>
-  <pre>
-    Expected clinical cost = 5 + (0.520 x 15) + (0.520 x 0.289 x 45) = 19.56 million euros
-  </pre>
-  <p>The expected total cost including regulatory review is:</p>
-  <pre>
-    Expected total cost = 19.56 + (0.0787 x 5) = 20 million euros
-  </pre>
-  <p>From a portfolio perspective, the risk-adjusted expected cost per approved drug is:</p>
-  <pre>
-    Risk-adjusted expected cost per approved drug = 20.00 / 0.0787 = 254.1 million euros
-  </pre>
-  <p>
-    This does not mean that a single approved drug will always cost 254.1 million euros. It means that, if many similar candidates were
-    developed under the same assumptions, the average cost per successful approval would be approximately 254.1 million euros.
-  </p>
-  <p>Some questions that the model can answer are:</p>
-  <ul>
-    <li>What is the probability that the drug will reach regulatory approval?</li>
-    <li>What is the expected clinical cost before regulatory filing?</li>
-    <li>What is the expected total cost including regulatory review?</li>
-    <li>What is the risk-adjusted expected cost per approved drug?</li>
-    <li>Which phase contributes most to the overall probability of failure?</li>
-  </ul>
-  <p>
-    As in the cybersecurity example, these values should not be interpreted as universal predictions. They are parameters of the model. In a
-    real pharmaceutical company, they should be adjusted using indication-specific clinical data, historical trial outcomes, trial design,
-    recruitment difficulty, regulatory pathway, safety profile and internal cost estimates.
-  </p>
-  <p>
-    <em>
-      Reference note: The phase-transition probabilities are based on
-      <a href="https://www.bio.org/clinical-development-success-rates-and-contributing-factors-2011-2020" target="_blank"
-        >BIO, Informa Pharma Intelligence and QLS Advisors' Clinical Development Success Rates 2011-2020</a
-      >
-      report. The description of the clinical phases follows the FDA's public description of the drug-review process. The cost values are
-      simplified scenario parameters chosen within published phase-level clinical-trial cost ranges and do not include discovery,
-      manufacturing scale-up, opportunity cost, post-market studies or the full cost of failed research programmes.
-    </em>
-  </p>
-  <a
-    class="example-button"
-    routerLink="/binomial"
-    [queryParams]="{ example: 'binomial-example4-landing' }"
-    data-cy="open-example-binomial-4"
-  >
-    Open this example in the model →
-  </a>
-
-  <!-- Bayes Examples -->
-
-  <h2>Bayes Examples</h2>
-  <h3>What it is used for</h3>
-  <p>
-    It models causal networks in which various variables influence one another, and allows for reasoning based on partial evidence: by
-    observing the state of some nodes, the network updates the probabilities of the rest. It answers questions such as 'if an engine failure
-    is detected during flight, what is the probability of reaching orbit?' or 'if the abort alarm went off, what is the probability that the
-    failure is real?'.
-  </p>
-  <h3>How it is built</h3>
-  <p>
-    It is a Bayesian network: a directed acyclic graph where each node has a Conditional Probability Table (CPT) that describes its
-    probability as a function of its parents' states. The inference engine calculates the marginal distributions for each node. Exact
-    inference enumerates the actual combinations and is limited to 20 nodes due to its exponential cost. Above that size, Monte Carlo
-    (likelihood weighting) is used for an approximate estimate with its margin of error. CPTs can be defined manually or learned from CSV's
-    data.
-  </p>
-  <h3>Why it has been used</h3>
-  <p>
-    Many real-world risks are not simply linear chains: causes interact, there are external factors (e.g. weather or sea conditions) and,
-    above all, we have partial observations on which to base our reasoning. Bayesian networks are the standard formalism for this: they
-    clearly separate a sensor's sensitivity from its false positive rate, propagate evidence throughout the network, and allow for both
-    forward (effect) and backward (cause) reasoning. This makes them ideal for scenarios such as the reliability of space missions or alarm
-    diagnosis, where what matters is not just detecting an event but estimating its true significance.
-  </p>
-  <!-- Example 1 Bayes -->
-
-  <h3>Example 1. Falcon 9 Mission</h3>
-  <p>
-    This example demonstrates how a Bayesian network can help estimate the risk of an aerospace mission based on partial evidence. The case
-    is inspired by the Falcon 9, whose first stage is equipped with nine Merlin engines and is designed with engine-out capability: it can
-    continue the mission even if one or two engines fail during ascent. The question the model answers is:
-  </p>
-  <p>If an engine failure is detected during flight, what is the probability that the mission will succesfully reach orbit?</p>
-  <p>
-    To avoid an overly large network, the model does not represent the 9 engines separately. If each engine were modelled individually, 2^9
-    = 512 possible combinations would have to be considered, which would make the probability tables difficult to manage in an interactive
-    example.
-  </p>
-  <p>
-    To avoid having to manually enter the 9 engines into the network, the probability of 0, 1, 2 or more engines failing is calculated in
-    advance using a binomial distribution.
-  </p>
-  <p>In this case, two parameters are used:</p>
-  <ul>
-    <li>Number of engines: 9</li>
-    <li>Probability of failure per engine: 0.7 %</li>
-  </ul>
-  <p>
-    Using these values, the model calculates the probability that no engines will fail, the probability that 1 or 2 engines will faily, and
-    the probability that 3 or more engines will fail.
-  </p>
-  <p>The model consists of five main nodes:</p>
-  <ul>
-    <li>Partial Engine Failure: 1 or 2 engines fail. The mission can still succeed.</li>
-    <li>Critical Engine Failure: 3 or more engines fail. The mission is likely to fail.</li>
-    <li>Meteorological Conditions: Adverse weather can affect the mission's success.</li>
-    <li>Mission reaches orbit: The mission successfully reaches its intended orbit.</li>
-    <li>Payload release: The payload is successfully released once the mission reaches its target orbit.</li>
-  </ul>
-  <p>
-    Simplifying the engines allows the probabilistic logic of the real system to be retained without overcomplicating the model. Rather than
-    manually entering hundreds of combinations, the binomial calculation summarises the probability of a partial or critical failure, and
-    the Bayesian network is responsible for propagating that risk through the rest of the model to estimate the overall mission risk based
-    on the evidence of an engine failure.
-  </p>
-  <p>
-    The model's structure reflects a simple decision chain: engine failures and weather conditions influence the probability of reaching
-    orbit, and, in turn, reaching orbit determines the probability of succesfully deploying the payload.
-  </p>
-  <p>
-    This case illustrates the value of the Bayesian approach within the DSL: the user can see how the risk changes when new evidence is
-    introduced. A partial failure does not automatically imply mission failure, but it does reduce the margins of success. Conversely, the
-    combination of several adverse factors can significantly degrade the probability of success.
-  </p>
-
-  <img src="assets/screenshots/bayes/bayes-example1-landing-diagram.png" alt="Bayes example 1 landing diagram" />
-
-  <h4>Probabilities defined in the CPTs</h4>
-  <p>
-    Each node in the network has an associated probability table. In root nodes, the table defines their initial probability. In dependent
-    nodes, the CPT indicates how the probability changes according to the state of their parent nodes.
-  </p>
-
-  <h4>Root nodes</h4>
-  <table>
-    <thead>
-      <tr>
-        <th>Node</th>
-        <th>State</th>
-        <th>Probability</th>
-        <th>Meaning</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>PartialEngineFailure</td>
-        <td>yes</td>
-        <td>6.1%</td>
-        <td>1 or 2 engines fail.</td>
-      </tr>
-      <tr>
-        <td>PartialEngineFailure</td>
-        <td>no</td>
-        <td>93.9%</td>
-        <td>No partial failure occurs.</td>
-      </tr>
-      <tr>
-        <td>CriticalEngineFailure</td>
-        <td>yes</td>
-        <td>0.0030%</td>
-        <td>3 or more engines fail.</td>
-      </tr>
-      <tr>
-        <td>CriticalEngineFailure</td>
-        <td>no</td>
-        <td>99.9970%</td>
-        <td>No critical failure occurs.</td>
-      </tr>
-      <tr>
-        <td>WeatherConditions</td>
-        <td>yes</td>
-        <td>2.0%</td>
-        <td>Adverse weather during the flight.</td>
-      </tr>
-      <tr>
-        <td>WeatherConditions</td>
-        <td>no</td>
-        <td>98.0%</td>
-        <td>Weather conditions are favorable.</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h4>Intermediate node: MissionReachesOrbit</h4>
-  <table>
-    <thead>
-      <tr>
-        <th>PartialEngineFailure</th>
-        <th>CriticalEngineFailure</th>
-        <th>WeatherConditions</th>
-        <th>P(Mission = yes)</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>no</td>
-        <td>no</td>
-        <td>no</td>
-        <td>98.5%</td>
-      </tr>
-      <tr>
-        <td>no</td>
-        <td>no</td>
-        <td>yes</td>
-        <td>80.0%</td>
-      </tr>
-      <tr>
-        <td>no</td>
-        <td>yes</td>
-        <td>no</td>
-        <td>5.0%</td>
-      </tr>
-      <tr>
-        <td>no</td>
-        <td>yes</td>
-        <td>yes</td>
-        <td>1.0%</td>
-      </tr>
-      <tr>
-        <td>yes</td>
-        <td>no</td>
-        <td>no</td>
-        <td>85.0%</td>
-      </tr>
-      <tr>
-        <td>yes</td>
-        <td>no</td>
-        <td>yes</td>
-        <td>55.0%</td>
-      </tr>
-      <tr>
-        <td>yes</td>
-        <td>yes</td>
-        <td>no</td>
-        <td>2.0%</td>
-      </tr>
-      <tr>
-        <td>yes</td>
-        <td>yes</td>
-        <td>yes</td>
-        <td>0.5%</td>
-      </tr>
-    </tbody>
-  </table>
-  <p>
-    The last two rows combine a partial failure and a critical failure at the same time. In reality these are almost incompatible
-    situations, but they are included to complete the binary table required by the model.
-  </p>
-
-  <h4>Leaf node: PayloadDeployed</h4>
-  <table>
-    <thead>
-      <tr>
-        <th>MissionReachesOrbit</th>
-        <th>P(Payload = yes)</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>yes</td>
-        <td>97.0%</td>
-      </tr>
-      <tr>
-        <td>no</td>
-        <td>3.0%</td>
-      </tr>
-    </tbody>
-  </table>
-  <p>
-    These CPTs are what the network uses to update the probabilities when the user introduces evidence. For example, if a partial engine
-    failure or adverse weather is confirmed, the model selects the corresponding rows and propagates the change toward the mission and
-    payload deployment nodes.
-  </p>
-  <a class="example-button" routerLink="/bayes" [queryParams]="{ example: 'bayes-example1-landing' }" data-cy="open-example-bayes-1">
-    Open this example in the model →
-  </a>
-
-  <!-- Example 2 Bayes -->
-
-  <h3>Example 2: Rocket Abort Launch at T-10</h3>
-  <p>
-    In the final second before launch, the rocket's software automatically checks several critical systems. If any of the sensors detects an
-    anomaly, the system can trigger an automatic abort at T-0, halting the launch before ignition is complete.
-  </p>
-  <p>
-    The problem is that an alarm does not always indicate an actual physical fault. Sensors can generate false positives due to electrical
-    noise, anomalous readings, temporary deviations or software errors. Therefore, when an alert is triggered, the flight controller needs
-    to answer a key question:
-  </p>
-  <p>If the abort system has been activated, what is the probability that there is actually a physical fault?</p>
-  <p>
-    This example shows how a Bayesian network allows a binary alert — “abort” or “no abort” — to be transformed into a probabilistic
-    estimate useful for decision-making
-  </p>
-
-  <h4>Context of the case</h4>
-  <p>
-    The model depicts a scenario inspired by real-world launches, where an anomalous reading at T-0 can temporarily halt the mission. In
-    such scenarios, the objective is not merely to detect the alarm, but to assess whether that alarm corresponds to:
-  </p>
-  <ul>
-    <li>A genuine physical fault in the vehicle.</li>
-    <li>A false positive generated by the sensor system.</li>
-    <li>A combination of several weak signals.</li>
-    <li>Strong evidence, enough to warrant a full inspection.</li>
-  </ul>
-  <p>
-    In a risk analysis application, this example demonstrates the value of the DSL developed in the final year project: the user can
-    visually construct the network, define the conditional probability tables and observe how the probability of a real failure changes when
-    new evidence is introduced.
-  </p>
-  <p>The network contains five main nodes:</p>
-  <ul>
-    <li>Real System Failure: There is a real physical failure in one of the critical systems at T-0.</li>
-    <li>Propellant Sensor: The propellant sensor system reports an anomaly.</li>
-    <li>EC Sensor: The engine control system sensor reports an anomaly.</li>
-    <li>T-0 Alert: The software activates automatic abort.</li>
-    <li>Failure is real: The alert actually corresponds to a physical failure and not a false positive.</li>
-  </ul>
-
-  <img src="assets/screenshots/bayes/bayes-example2-landing-diagram.png" alt="Bayes example 2 landing diagram" />
-
-  <h4>Probabilities defined in the CPTs</h4>
-  <h4>Node 1 · RealSystemFailure</h4>
-  <p>This node represents the prior probability that an actual physical fault exists at T-0.</p>
-  <table>
-    <thead>
-      <tr>
-        <th>State</th>
-        <th>Probability</th>
-        <th>Meaning</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>yes</td>
-        <td>0.8%</td>
-        <td>Initial probability of a real fault in one of the critical systems.</td>
-      </tr>
-      <tr>
-        <td>no</td>
-        <td>99.2%</td>
-        <td>Complementary: no real physical fault exists.</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h4>Node 2 · PropellantSensor</h4>
-  <p>This node models the response of the propellant sensor depending on whether a real fault exists.</p>
-  <table>
-    <thead>
-      <tr>
-        <th>RealSystemFailure</th>
-        <th>P(PropellantSensor = yes)</th>
-        <th>Interpretation</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>yes</td>
-        <td>90%</td>
-        <td>If there is a real fault, the sensor detects it in 90% of cases.</td>
-      </tr>
-      <tr>
-        <td>no</td>
-        <td>4%</td>
-        <td>If there is no real fault, the sensor can produce a false positive in 4% of cases.</td>
-      </tr>
-    </tbody>
-  </table>
-  <p>This table separates two important concepts:</p>
-  <ul>
-    <li>Sensitivity: ability to detect a fault when one exists.</li>
-    <li>False positive: probability of triggering an alarm even when there is no real fault.</li>
-  </ul>
-
-  <h4>Node 3 · ECSensor</h4>
-  <p>The engine control system sensor also depends on the existence of a real fault.</p>
-  <table>
-    <thead>
-      <tr>
-        <th>RealSystemFailure</th>
-        <th>P(ECSensor = yes)</th>
-        <th>Interpretation</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>yes</td>
-        <td>95%</td>
-        <td>If there is a real fault, the ECS sensor detects it with high probability.</td>
-      </tr>
-      <tr>
-        <td>no</td>
-        <td>3%</td>
-        <td>If there is no real fault, a false alarm can occur in 3% of cases.</td>
-      </tr>
-    </tbody>
-  </table>
-  <p>The ECS sensor is modelled as more sensitive and with a lower false positive rate than the propellant sensor.</p>
-
-  <h4>Node 4 · T0Alert</h4>
-  <p>
-    This node represents the automatic decision made by the software. The alert is triggered with high probability if at least one of the
-    sensors reports an anomaly.
-  </p>
-  <table>
-    <thead>
-      <tr>
-        <th>PropellantSensor</th>
-        <th>ECSensor</th>
-        <th>P(T0Alert = yes)</th>
-        <th>Interpretation</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>yes</td>
-        <td>yes</td>
-        <td>99%</td>
-        <td>Both sensors alarm; the abort is triggered almost with certainty.</td>
-      </tr>
-      <tr>
-        <td>yes</td>
-        <td>no</td>
-        <td>95%</td>
-        <td>Only the propellant system alarms.</td>
-      </tr>
-      <tr>
-        <td>no</td>
-        <td>yes</td>
-        <td>93%</td>
-        <td>Only the ECS system alarms.</td>
-      </tr>
-      <tr>
-        <td>no</td>
-        <td>no</td>
-        <td>1%</td>
-        <td>An abort may occur for other reasons: electrical noise, a bug or an external signal.</td>
-      </tr>
-    </tbody>
-  </table>
-  <p>
-    This CPT represents logic similar to an OR gate, but with uncertainty. No deterministic rule is enforced; instead, it allows the
-    imperfections of the software and the environment to be modelled.
-  </p>
-
-  <h4>Node 5 · FailureIsReal</h4>
-  <p>This node summarises whether the observed alert actually corresponds to a physical fault.</p>
-  <table>
-    <thead>
-      <tr>
-        <th>T0Alert</th>
-        <th>P(FailureIsReal = yes)</th>
-        <th>Interpretation</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>yes</td>
-        <td>15%</td>
-        <td>With an active alert, there is a 15% probability that the fault is real.</td>
-      </tr>
-      <tr>
-        <td>no</td>
-        <td>0.3%</td>
-        <td>Without an alert, it is very unlikely that an undetected physical fault exists.</td>
-      </tr>
-    </tbody>
-  </table>
-  <p>
-    This node is especially useful because it summarises the practical value of the model: the network does not only detect an alarm, it
-    estimates whether that alarm should be considered a real fault or a false positive.
-  </p>
-  <a class="example-button" routerLink="/bayes" [queryParams]="{ example: 'bayes-example2-landing' }" data-cy="open-example-bayes-2">
-    Open this example in the model →
-  </a>
-
-  <!-- Example 3 Bayes -->
-  <h3>Example 3. Crew Dragon</h3>
-  <p>
-    This example models a critical phase of a crewed mission: the re-entry and recovery of the Crew Dragon capsule. Unlike a launch, where
-    the main objective is to reach orbit, here the risk lies in the capsule successfully performing the de-orbiting manoeuvre, passing
-    through the atmosphere, deploying its parachutes and landing safely.
-  </p>
-  <p>The question the model answers is</p>
-  <p>Given the re-entry sequence, what is the probability that the crew will be recovered safe and sound?</p>
-  <p>The Crew Dragon re-entry can be divided into three main phases:</p>
-  <ul>
-    <li>De-orbit burn: The capsule fires its thrusters to slow down and begin its descent.</li>
-    <li>Atmospheric re-entry: The capsule passes through the atmosphere, facing extreme heat and forces.</li>
-    <li>
-      Descent and splashdown: The parachute system slows the capsule down before it hits the ocean, where it must be recovered by rescue
-      teams.
-    </li>
-  </ul>
-  <p>
-    In addition to the technical systems, ocean conditions also play a role. Even if the capsule functions correctly, rough seas can make
-    splashdown difficult, cause it to capsize or delay recovery.
-  </p>
-  <p>The model includes the following nodes:</p>
-  <ul>
-    <li>Deorbit Burn Failure: The deorbit manoeuvre is not executed correctly.</li>
-    <li>Heat Shield Failure: The heat shield does not provide adequate protection during re-entry.</li>
-    <li>Parachute Deployment Failure: The parachute system does not deploy correctly.</li>
-    <li>Oceanic Conditions: Sea conditions are unsuitable for splashdown</li>
-    <li>Normal Splashdown: The capsule lands safely in the ocean.</li>
-    <li>Crew Rescued: The crew is successfully recovered.</li>
-  </ul>
-
-  <img src="assets/screenshots/bayes/bayes-example3-landing-diagram.png" alt="Bayes example 3 landing diagram" />
-
-  <h4>Probabilities defined in the CPTs</h4>
-
-  <h4>Node 1 · DeorbitBurnFailure</h4>
-  <p>This node represents the initial probability that the deorbit manoeuvre fails.</p>
-  <table>
-    <thead>
-      <tr>
-        <th>State</th>
-        <th>Probability</th>
-        <th>Interpretation</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>yes</td>
-        <td>0.5%</td>
-        <td>The deorbit burn manoeuvre fails.</td>
-      </tr>
-      <tr>
-        <td>no</td>
-        <td>99.5%</td>
-        <td>The manoeuvre is executed correctly.</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h4>Node 2 · HeatShieldFailure</h4>
-  <p>The heat shield failure depends on whether the deorbit manoeuvre was correct.</p>
-  <table>
-    <thead>
-      <tr>
-        <th>DeorbitBurnFailure</th>
-        <th>P(HeatShieldFailure = yes)</th>
-        <th>Interpretation</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>yes</td>
-        <td>80%</td>
-        <td>An incorrect trajectory can expose the shield to off-design conditions.</td>
-      </tr>
-      <tr>
-        <td>no</td>
-        <td>0.1%</td>
-        <td>On a nominal trajectory, heat shield failure is highly unlikely.</td>
-      </tr>
-    </tbody>
-  </table>
-  <p>This table represents a strong causal relationship: a failure in the re-entry trajectory drastically increases thermal risk.</p>
-
-  <h4>Node 3 · ParachuteFailure</h4>
-  <p>The parachute system depends on the prior state of the capsule after re-entry.</p>
-  <table>
-    <thead>
-      <tr>
-        <th>HeatShieldFailure</th>
-        <th>P(ParachuteFailure = yes)</th>
-        <th>Interpretation</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>yes</td>
-        <td>85%</td>
-        <td>If the shield fails, the capsule can become unstable and hinder deployment.</td>
-      </tr>
-      <tr>
-        <td>no</td>
-        <td>0.2%</td>
-        <td>With a nominal re-entry, parachute system failure is very unlikely.</td>
-      </tr>
-    </tbody>
-  </table>
-  <p>This CPT lets us model how a thermal problem can turn into a descent problem.</p>
-
-  <h4>Node 4 · OceanicConditions</h4>
-  <p>This node represents an external factor: the sea state in the recovery zone.</p>
-  <table>
-    <thead>
-      <tr>
-        <th>State</th>
-        <th>Probability</th>
-        <th>Interpretation</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>yes</td>
-        <td>5%</td>
-        <td>Oceanic conditions are adverse.</td>
-      </tr>
-      <tr>
-        <td>no</td>
-        <td>95%</td>
-        <td>Conditions are favourable for recovery.</td>
-      </tr>
-    </tbody>
-  </table>
-  <p>Unlike the technical nodes, this node does not depend on the capsule. It represents an environmental source of risk.</p>
-
-  <h4>Node 5 · NormalSplashdown</h4>
-  <p>Splashdown depends on the state of the parachute system and the oceanic conditions.</p>
-  <table>
-    <thead>
-      <tr>
-        <th>ParachuteFailure</th>
-        <th>OceanicConditions</th>
-        <th>P(NormalSplashdown = yes)</th>
-        <th>Interpretation</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>no</td>
-        <td>no</td>
-        <td>99.8%</td>
-        <td>Everything works correctly and the sea is favourable.</td>
-      </tr>
-      <tr>
-        <td>no</td>
-        <td>yes</td>
-        <td>75%</td>
-        <td>The parachutes work, but the adverse sea reduces safety.</td>
-      </tr>
-      <tr>
-        <td>yes</td>
-        <td>no</td>
-        <td>3%</td>
-        <td>The parachutes fail, even though the ocean is in good condition.</td>
-      </tr>
-      <tr>
-        <td>yes</td>
-        <td>yes</td>
-        <td>0.5%</td>
-        <td>The parachutes fail and the sea is also adverse.</td>
-      </tr>
-    </tbody>
-  </table>
-  <p>This table is key because it combines technical risk and environmental risk in a single operational outcome.</p>
-
-  <h4>Node 6 · CrewRescued</h4>
-  <p>The final state depends on whether splashdown occurred within safe parameters.</p>
-  <table>
-    <thead>
-      <tr>
-        <th>NormalSplashdown</th>
-        <th>P(CrewRescued = yes)</th>
-        <th>Interpretation</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>yes</td>
-        <td>99.8%</td>
-        <td>If splashdown is nominal, safe recovery is almost certain.</td>
-      </tr>
-      <tr>
-        <td>no</td>
-        <td>20%</td>
-        <td>Even with a non-nominal splashdown, there can be a survival margin.</td>
-      </tr>
-    </tbody>
-  </table>
-  <p>This node summarises the final outcome of interest to the controller: the probability of safe crew recovery.</p>
-
-  <a class="example-button" routerLink="/bayes" [queryParams]="{ example: 'bayes-example3-landing' }" data-cy="open-example-bayes-3">
-    Open this example in the model →
-  </a>
   <h2>Credits</h2>
   <div class="logos">
     <img src="/img/upv.svg" alt="Logo of Technical University of Valencia" />

@@ -1,7 +1,14 @@
 describe('e2e', () => {
   beforeEach(() => {
     cy.visit('/'); // Se visita la raíz de la aplicación antes de cada prueba
-    cy.getByTestId('binomial').click(); // Se hace click en el botón del modelo binomial para asegurarse de que se muestre el panel correspondiente
+    cy.get('header nav a').should('have.length', 4); // El header con las 4 secciones debe estar visible
+    cy.getByTestId('nav-binomial').click(); // Se navega a la sección binomial mediante el enlace del header
+  });
+
+  it('toolbar should show import, export and calculate-probability', () => {
+    cy.getByTestId('import').should('be.visible');
+    cy.getByTestId('export').should('be.visible');
+    cy.getByTestId('calculate-probability').should('be.visible');
   });
 
   it('daga panel should be visible and should have 4 items', () => {
@@ -48,8 +55,8 @@ describe('e2e', () => {
 
     cy.get('daga-diagram').click();
     // Open calculation dialog, set 1000 iterations, run
-    cy.get('.topbar-actions').contains('button', 'Calculate Probability').click();
-    cy.get('#iterations').type('1000');
+    cy.getByTestId('calculate-probability').click();
+    cy.get('#iterations').type('0');
     // The "Calculate" button that only has "Calculate" text (not "Calculate Probability") is the one inside the dialog
     cy.contains('button', /^\s*Calculate\s*$/).click();
 

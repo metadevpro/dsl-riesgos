@@ -1,0 +1,55 @@
+<h3>Example 3. Cybersecurity</h3>
+<p>
+  A security team wants to model the risk of an external attacker compromising a company's cloud environment. In modern systems, many
+  attacks do not begin by “breaking” a firewall directly, but by abusing stolen credentials, exposed remote-access services, vulnerable
+  software or weak identity controls. This is consistent with recent industry reports:
+  <a href="https://www.microsoft.com/en-us/security/security-insider/threat-landscape/microsoft-digital-defense-report-2024?form=MG0AV3"
+    >Microsoft</a
+  >
+  reported blocking more than 7,000 password attacks per second, while the Verizon DBIR 2026 states that 31% of breaches now start with
+  software vulnerabilities and that 48% of breaches involve ransomware.
+</p>
+<p>
+  For this example, the company's identity provider, WAF and SIEM logs show around 50,000 malicious access attempts per month. The attack
+  chain is modelled as follows:
+</p>
+<ul>
+  <li>
+    Initial access: 0.3% of malicious access attempts involve either a valid leaked credential, a reused password, an exposed
+    remote-access service or an exploitable public-facing vulnerability.
+  </li>
+  <li>
+    MFA / Conditional Access failure: if the attacker obtains a valid access path, there is a 1.44% chance that MFA and conditional access
+    do not prevent compromise. This value is derived from
+    <a href="https://www.microsoft.com/en-us/research/publication/how-effective-is-multifactor-authentication-at-deterring-cyberattacks"
+      >Microsoft Research</a
+    >, which found that MFA reduces the risk of compromise by 98.56% in cases involving leaked credentials.
+  </li>
+  <li>
+    Privilege escalation or lateral movement: if the attacker gains access, there is a 25% chance that the compromised account, session
+    token or vulnerable system allows the attacker to move laterally, escalate privileges or access sensitive resources. This is a
+    modelling assumption and should be calibrated with internal audit, red-team or incident-response data.
+  </li>
+  <li>
+    High-impact outcome: if lateral movement succeeds, there is a 48% chance that the incident becomes a high-impact brech, such as
+    ransomware deployment, data exfiltration or major operational disruption. This value is used as a modelling proxy based on the Verizon
+    DBIR 2026, finding that ransomware is present in 48% of breaches.
+  </li>
+</ul>
+<p>
+  Therefore, the expected high-impact incidents per month can be calculated as: 50,000 x 0.003 x 0.0144 x 0.25 x 0.48 = 0.2592 high-impact
+  incidents per month. This is equivalent to approximately one high-impact incident every four months.
+</p>
+<p>
+  This result should not be interpreted as a universal prediction. It is a modelling result based on a combination of public cybersecurity
+  reports and scenario-specific assumptions. In a real organization, these probabilities should be adjusted using internal data from the
+  identity provider, WAF, EDR, SIEM, vulnerability scanners, penetration tests and previous security incidents.
+</p>
+<a
+  class="example-button"
+  routerLink="/binomial"
+  [queryParams]="{ example: 'binomial-example3-landing' }"
+  data-cy="open-example-binomial-3"
+>
+  Open this example in the model →
+</a>

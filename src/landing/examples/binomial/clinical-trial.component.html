@@ -1,0 +1,85 @@
+<h3>Example 4. Clinical Trial</h3>
+<p>
+  A pharmaceutical company wants to model the risk and expected cost of investing in a new drug candidate. The candidate has shown
+  promising results in preclinical studies, but this does not guarantee that it will be safe, effective or approved in humans.
+</p>
+<p>
+  In real drug development, clinical trials are usually divided into sequential phases. Phase 1 mainly evaluates safety and tolerability,
+  Phase 2 studies preliminary efficacy and dose selection, and Phase 3 confirms safety and efficacy in a larger patient population. If any
+  phase fails, the development programme is halted and the following phases are not funded.
+</p>
+<p>For this example, the company models the process as follows:</p>
+<ul>
+  <li>
+    Phase 1 (Safety and tolerability): 60 participants receive the candidate drug. The main objective is to evaluate safety, tolerability,
+    dose range and possible adverse effects. This phase has an estimated cost of 5 million euros. The probability of successfully
+    advancing to Phase 2 is 52.0%.
+  </li>
+  <li>
+    Phase 2 (Proof of concept and dose selection): 200 patients with the target condition receive the drug or a comparator. The objective
+    is to obtain preliminary evidence of efficacy, continue evaluating safety and select the most appropriate dose for larger studies.
+    This phase has an estimated cost of 15 million euros. The probability of successfully advancing to Phase 3 is 28.9%.
+  </li>
+  <li>
+    Phase 3 (Pivotal efficacy and safety): 1,500 patients are enrolled to confirm the drug's efficacy, safety profile and benefit-risk
+    balance at scale. This phase has an estimated cost of 45 million euros. The probability of successfully reaching regulatory filing is
+    57.8%.
+  </li>
+  <li>
+    Regulatory review: If the clinical dossier is submitted, the regulatory authority reviews the evidence on quality, safety and
+    efficacy. The review process has an estimated cost of 5 million euros. The probability of approval after submission is 90.6%.
+  </li>
+</ul>
+<p>Therefore, the probability of successfully reaching regulatory approval can be calculated as:</p>
+<pre>
+    Probability of regulatory approval = 0.520 x 0.289 x 0.578 x 0.906 = 0.0787
+  </pre>
+<p>Under these assumptions, the model estimates a 7.87% probability of regulatory approval from the beginning of Phase 1.</p>
+<p>The expected total cost including regulatory review is:</p>
+<pre>
+    Expected clinical cost = 5 + (0.520 x 15) + (0.520 x 0.289 x 45) = 19.56 million euros
+  </pre>
+<p>The expected total cost including regulatory review is:</p>
+<pre>
+    Expected total cost = 19.56 + (0.0787 x 5) = 20 million euros
+  </pre>
+<p>From a portfolio perspective, the risk-adjusted expected cost per approved drug is:</p>
+<pre>
+    Risk-adjusted expected cost per approved drug = 20.00 / 0.0787 = 254.1 million euros
+  </pre>
+<p>
+  This does not mean that a single approved drug will always cost 254.1 million euros. It means that, if many similar candidates were
+  developed under the same assumptions, the average cost per successful approval would be approximately 254.1 million euros.
+</p>
+<p>Some questions that the model can answer are:</p>
+<ul>
+  <li>What is the probability that the drug will reach regulatory approval?</li>
+  <li>What is the expected clinical cost before regulatory filing?</li>
+  <li>What is the expected total cost including regulatory review?</li>
+  <li>What is the risk-adjusted expected cost per approved drug?</li>
+  <li>Which phase contributes most to the overall probability of failure?</li>
+</ul>
+<p>
+  As in the cybersecurity example, these values should not be interpreted as universal predictions. They are parameters of the model. In a
+  real pharmaceutical company, they should be adjusted using indication-specific clinical data, historical trial outcomes, trial design,
+  recruitment difficulty, regulatory pathway, safety profile and internal cost estimates.
+</p>
+<p>
+  <em>
+    Reference note: The phase-transition probabilities are based on
+    <a href="https://www.bio.org/clinical-development-success-rates-and-contributing-factors-2011-2020" target="_blank"
+      >BIO, Informa Pharma Intelligence and QLS Advisors' Clinical Development Success Rates 2011-2020</a
+    >
+    report. The description of the clinical phases follows the FDA's public description of the drug-review process. The cost values are
+    simplified scenario parameters chosen within published phase-level clinical-trial cost ranges and do not include discovery,
+    manufacturing scale-up, opportunity cost, post-market studies or the full cost of failed research programmes.
+  </em>
+</p>
+<a
+  class="example-button"
+  routerLink="/binomial"
+  [queryParams]="{ example: 'binomial-example4-landing' }"
+  data-cy="open-example-binomial-4"
+>
+  Open this example in the model →
+</a>
