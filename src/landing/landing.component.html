@@ -22,24 +22,25 @@
     <h2>Binomial Examples</h2>
     <h3>What it is used for</h3>
     <p>
-      It models sequential processes in which events occur in a chain, each with an independent probability of success or failure. It answers
-      questions such as 'What is the probability that an order will reach the customer if each link in the chain can fail?' or 'What is the
-      probability that a drug will pass all phases of clinical trials?'
+      It models sequential processes in which events occur in a chain, each with an independent probability of success or failure. It
+      answers questions such as 'What is the probability that an order will reach the customer if each link in the chain can fail?' or 'What
+      is the probability that a drug will pass all phases of clinical trials?'
     </p>
     <h3>How it is built</h3>
     <p>
-      The diagram is a graph of nodes (start, state, event, end) linked by connections with weights. Each weight represents the probability of
-      taking that branch. The theoretical probability of reaching a result is calculated by multiplying the probabilities along the path. In
-      addition, a simulation engine traverses the graph many times (the iterations) and measures how often success is achieved, allowing the
-      theoretical value to be compared with an empirical one.
+      The diagram is a graph of nodes (start, state, event, end) linked by connections with weights. Each weight represents the probability
+      of taking that branch. The theoretical probability of reaching a result is calculated by multiplying the probabilities along the path.
+      In addition, a simulation engine traverses the graph many times (the iterations) and measures how often success is achieved, allowing
+      the theoretical value to be compared with an empirical one.
     </p>
     <h3>Why it has been used</h3>
     <p>
-      The binomial approach fits naturally with risks that break down into successive success/failure steps. It is intuitive — the diagram is
-      read from left to right —, easy to parameterise using historical data (failure rates per stage) and sufficient for a huge variety of
-      real-world cases: quality control, supply chains, attack chains in cybersecurity or the phased funnel of a clinical trial. The
+      The binomial approach fits naturally with risks that break down into successive success/failure steps. It is intuitive — the diagram
+      is read from left to right —, easy to parameterise using historical data (failure rates per stage) and sufficient for a huge variety
+      of real-world cases: quality control, supply chains, attack chains in cybersecurity or the phased funnel of a clinical trial. The
       simulation also provides empirical validation of the calculations.
     </p>
+    <h3>Examples</h3>
 
     <div class="tab-strip">
       @for (tab of binomialTabs; track tab.id) {
@@ -80,35 +81,31 @@
     <h3>What it is used for</h3>
     <p>
       It models causal networks in which various variables influence one another, and allows for reasoning based on partial evidence: by
-      observing the state of some nodes, the network updates the probabilities of the rest. It answers questions such as 'if an engine failure
-      is detected during flight, what is the probability of reaching orbit?' or 'if the abort alarm went off, what is the probability that the
-      failure is real?'.
+      observing the state of some nodes, the network updates the probabilities of the rest. It answers questions such as 'if an engine
+      failure is detected during flight, what is the probability of reaching orbit?' or 'if the abort alarm went off, what is the
+      probability that the failure is real?'.
     </p>
     <h3>How it is built</h3>
     <p>
       It is a Bayesian network: a directed acyclic graph where each node has a Conditional Probability Table (CPT) that describes its
       probability as a function of its parents' states. The inference engine calculates the marginal distributions for each node. Exact
       inference enumerates the actual combinations and is limited to 20 nodes due to its exponential cost. Above that size, Monte Carlo
-      (likelihood weighting) is used for an approximate estimate with its margin of error. CPTs can be defined manually or learned from CSV's
-      data.
+      (likelihood weighting) is used for an approximate estimate with its margin of error. CPTs can be defined manually or learned from
+      CSV's data.
     </p>
     <h3>Why it has been used</h3>
     <p>
       Many real-world risks are not simply linear chains: causes interact, there are external factors (e.g. weather or sea conditions) and,
       above all, we have partial observations on which to base our reasoning. Bayesian networks are the standard formalism for this: they
       clearly separate a sensor's sensitivity from its false positive rate, propagate evidence throughout the network, and allow for both
-      forward (effect) and backward (cause) reasoning. This makes them ideal for scenarios such as the reliability of space missions or alarm
-      diagnosis, where what matters is not just detecting an event but estimating its true significance.
+      forward (effect) and backward (cause) reasoning. This makes them ideal for scenarios such as the reliability of space missions or
+      alarm diagnosis, where what matters is not just detecting an event but estimating its true significance.
     </p>
+    <h3>Examples</h3>
 
     <div class="tab-strip">
       @for (tab of bayesTabs; track tab.id) {
-        <button
-          class="tab"
-          [class.active]="bayesTab() === tab.id"
-          (click)="bayesTab.set(tab.id)"
-          [attr.data-cy]="'tab-bayes-' + tab.id"
-        >
+        <button class="tab" [class.active]="bayesTab() === tab.id" (click)="bayesTab.set(tab.id)" [attr.data-cy]="'tab-bayes-' + tab.id">
           {{ tab.label }}
         </button>
       }
