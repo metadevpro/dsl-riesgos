@@ -1,7 +1,16 @@
 describe('e2e', () => {
   beforeEach(() => {
     cy.visit('/'); // Se visita la raíz de la aplicación antes de cada prueba
-    cy.getByTestId('bayes').click(); // Se hace click en el botón del modelo binomial para asegurarse de que se muestre el panel correspondiente
+    cy.get('header nav a').should('have.length', 4); // El header con las 4 secciones debe estar visible
+    cy.getByTestId('nav-bayes').click(); // Se navega a la sección bayes mediante el enlace del header
+  });
+
+  it('toolbar should show import, export, import-csv, generate-csv and monte-carlo', () => {
+    cy.getByTestId('import').should('be.visible');
+    cy.getByTestId('export').should('be.visible');
+    cy.getByTestId('import-csv').should('be.visible');
+    cy.getByTestId('generate-csv').should('be.visible');
+    cy.getByTestId('monte-carlo').should('be.visible');
   });
 
   it('daga panel should be visible and should have 3 items', () => {
@@ -50,7 +59,7 @@ describe('e2e', () => {
     cy.get('.bayes-popup-backdrop').should('not.exist');
 
     // Open Monte Carlo panel and execute
-    cy.contains('button', 'Monte Carlo').click();
+    cy.getByTestId('monte-carlo').click();
     cy.get('#mcIteracionesInput').should('be.visible');
     cy.contains('button', 'Run').click();
 
