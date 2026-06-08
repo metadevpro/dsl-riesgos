@@ -30,21 +30,6 @@ const NODE_BORDER = '#000000';
 const NODE_BORDER_SELECTED = '#378ADD';
 const NODE_FILL_WHITE = '#FFFFFF';
 
-const NODE_LABEL_CONFIG = {
-  fontSize: 14,
-  margin: [42, 0, 0, 0],
-  fit: false,
-  horizontalAlign: HorizontalAlign.Center,
-  verticalAlign: VerticalAlign.Top
-};
-
-const NODE_PORTS = [
-  { coords: [125, 0] as [number, number], direction: Side.Top },
-  { coords: [0, 75] as [number, number], direction: Side.Left },
-  { coords: [125, 150] as [number, number], direction: Side.Bottom },
-  { coords: [250, 75] as [number, number], direction: Side.Right }
-];
-
 const BAYES_NODE_PROPERTIES = [
   { name: 'node name', type: Type.Text, basic: true, editable: true, rootAttribute: 'name' },
   {
@@ -113,18 +98,6 @@ const nodeShellLook = (): ShapedLookConfig => ({
   borderThickness: 2,
   selected: { borderColor: 'transparent', fillColor: 'transparent' },
   highlighted: { borderColor: 'black', borderThickness: 4 }
-});
-
-const buildBayesNodeType = (id: string, name: string) => ({
-  id,
-  name,
-  defaultWidth: 250,
-  defaultHeight: 150,
-  label: NODE_LABEL_CONFIG,
-  ports: NODE_PORTS,
-  look: nodeShellLook(),
-  sectionGrid: twoBandSectionGrid(BAYES_NODE_VISUALS[id].tint),
-  properties: BAYES_NODE_PROPERTIES
 });
 
 export const bayes_CONFIG: DiagramConfig = {
@@ -198,10 +171,49 @@ export const bayes_CONFIG: DiagramConfig = {
       width: '16rem'
     }
   },
+  nodeTypeDefaults: {
+    defaultWidth: 250,
+    defaultHeight: 150,
+    label: {
+      look: {
+        lookType: 'field-look',
+        fontColor: '#000000',
+        fontSize: 14,
+        fontWeight: 400,
+        highlighted: {
+          fontWeight: 600
+        }
+      },
+      margin: [42, 0, 0, 0],
+      fit: false,
+      horizontalAlign: HorizontalAlign.Center,
+      verticalAlign: VerticalAlign.Top
+    },
+    ports: [
+      { coords: [125, 0] as [number, number], direction: Side.Top },
+      { coords: [0, 75] as [number, number], direction: Side.Left },
+      { coords: [125, 150] as [number, number], direction: Side.Bottom },
+      { coords: [250, 75] as [number, number], direction: Side.Right }
+    ],
+    look: nodeShellLook(),
+    properties: BAYES_NODE_PROPERTIES
+  },
   nodeTypes: [
-    buildBayesNodeType('cause-diagram-node', 'Cause'),
-    buildBayesNodeType('effect-diagram-node', 'Effect'),
-    buildBayesNodeType('event-diagram-node', 'Event')
+    {
+      id: 'cause-diagram-node',
+      name: 'Cause',
+      sectionGrid: twoBandSectionGrid(BAYES_NODE_VISUALS['cause-diagram-node'].tint)
+    },
+    {
+      id: 'effect-diagram-node',
+      name: 'Effect',
+      sectionGrid: twoBandSectionGrid(BAYES_NODE_VISUALS['effect-diagram-node'].tint)
+    },
+    {
+      id: 'event-diagram-node',
+      name: 'Event',
+      sectionGrid: twoBandSectionGrid(BAYES_NODE_VISUALS['event-diagram-node'].tint)
+    }
   ],
   connectionTypes: [
     {
