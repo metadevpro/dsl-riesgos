@@ -1,8 +1,14 @@
 .landing {
   padding: 0 2rem;
-  height: 98%;
+  height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
+}
+
+.content {
+  max-width: 64rem;
+  margin: 0 auto;
+  width: 100%;
 }
 
 p,
@@ -20,29 +26,34 @@ li {
   top: 0;
   z-index: 5;
   display: flex;
+  align-items: flex-end;
   gap: 0.25rem;
   flex-wrap: wrap;
-  padding: 0.5rem 0;
+  padding: 0.5rem 0 0;
   background: #ffffff;
   border-bottom: 2px solid #e5e7eb;
 
   .tab {
-    border: none;
+    border: 2px solid transparent;
+    border-bottom: none;
     background: transparent;
     padding: 0.6rem 1.1rem;
     font-weight: 500;
-    color: #4c4aa3;
+    color: gray;
     cursor: pointer;
-    border-bottom: 3px solid transparent;
 
     &:hover {
-      color: #36358b;
+      color: #1d1d1d;
     }
 
     &.active {
-      color: #17164a;
+      color: #000000;
       font-weight: 700;
-      border-bottom-color: #2ecc4a;
+      background: #ffffff;
+      border-color: #e5e7eb;
+      border-top-left-radius: 0.5rem;
+      border-top-right-radius: 0.5rem;
+      margin-bottom: -2px;
     }
   }
 }

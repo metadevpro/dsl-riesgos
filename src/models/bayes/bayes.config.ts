@@ -121,7 +121,7 @@ export const bayes_CONFIG: DiagramConfig = {
       enableSelection: false
     },
     palette: {
-      width: '15rem',
+      width: '12rem',
       gap: '0.5rem',
       sections: [
         {
@@ -131,7 +131,7 @@ export const bayes_CONFIG: DiagramConfig = {
               templateType: 'node',
               type: 'cause-diagram-node',
               label: 'Cause',
-              width: 212,
+              width: 108,
               height: 40,
               labelLook: null,
               look: {
@@ -143,7 +143,7 @@ export const bayes_CONFIG: DiagramConfig = {
               templateType: 'node',
               type: 'effect-diagram-node',
               label: 'Effect',
-              width: 212,
+              width: 108,
               height: 40,
               labelLook: null,
               look: {
@@ -155,7 +155,7 @@ export const bayes_CONFIG: DiagramConfig = {
               templateType: 'node',
               type: 'event-diagram-node',
               label: 'Event',
-              width: 212,
+              width: 108,
               height: 40,
               labelLook: null,
               look: {
@@ -168,7 +168,7 @@ export const bayes_CONFIG: DiagramConfig = {
       ]
     },
     propertyEditor: {
-      width: '16rem'
+      width: '12rem'
     }
   },
   nodeTypeDefaults: {

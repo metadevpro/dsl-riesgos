@@ -130,7 +130,7 @@ export const PROB_CONFIG: DiagramConfig = {
       enableSelection: false
     },
     palette: {
-      width: '14rem',
+      width: '12rem',
       gap: '0.5rem',
       sections: [
         {
@@ -140,7 +140,7 @@ export const PROB_CONFIG: DiagramConfig = {
               templateType: 'node',
               type: 'start-diagram-node',
               label: 'Start',
-              width: 212,
+              width: 108,
               height: 40,
               labelLook: null,
               look: {
@@ -152,7 +152,7 @@ export const PROB_CONFIG: DiagramConfig = {
               templateType: 'node',
               type: 'state-diagram-node',
               label: 'State',
-              width: 212,
+              width: 108,
               height: 40,
               labelLook: null,
               look: {
@@ -164,7 +164,7 @@ export const PROB_CONFIG: DiagramConfig = {
               templateType: 'node',
               type: 'event-diagram-node',
               label: 'Event',
-              width: 212,
+              width: 108,
               height: 40,
               labelLook: null,
               look: {
@@ -176,7 +176,7 @@ export const PROB_CONFIG: DiagramConfig = {
               templateType: 'node',
               type: 'end-diagram-node',
               label: 'End',
-              width: 212,
+              width: 108,
               height: 40,
               labelLook: null,
               look: {
@@ -189,7 +189,7 @@ export const PROB_CONFIG: DiagramConfig = {
       ]
     },
     propertyEditor: {
-      width: '16rem'
+      width: '12rem'
     }
   },
   nodeTypeDefaults: {

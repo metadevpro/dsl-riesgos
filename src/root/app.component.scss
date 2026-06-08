@@ -1,3 +1,15 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+main {
+  flex: 1;
+  min-height: 0;
+  height: auto; // override global main { height: calc(100% - 6rem) }
+}
+
 header {
   display: flex;
   align-items: center;

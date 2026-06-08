@@ -15,8 +15,8 @@
 </p>
 <ul>
   <li>
-    Initial access: 0.3% of malicious access attempts involve either a valid leaked credential, a reused password, an exposed
-    remote-access service or an exploitable public-facing vulnerability.
+    Initial access: 0.3% of malicious access attempts involve either a valid leaked credential, a reused password, an exposed remote-access
+    service or an exploitable public-facing vulnerability.
   </li>
   <li>
     MFA / Conditional Access failure: if the attacker obtains a valid access path, there is a 1.44% chance that MFA and conditional access
@@ -27,8 +27,8 @@
   </li>
   <li>
     Privilege escalation or lateral movement: if the attacker gains access, there is a 25% chance that the compromised account, session
-    token or vulnerable system allows the attacker to move laterally, escalate privileges or access sensitive resources. This is a
-    modelling assumption and should be calibrated with internal audit, red-team or incident-response data.
+    token or vulnerable system allows the attacker to move laterally, escalate privileges or access sensitive resources. This is a modelling
+    assumption and should be calibrated with internal audit, red-team or incident-response data.
   </li>
   <li>
     High-impact outcome: if lateral movement succeeds, there is a 48% chance that the incident becomes a high-impact brech, such as
@@ -45,11 +45,8 @@
   reports and scenario-specific assumptions. In a real organization, these probabilities should be adjusted using internal data from the
   identity provider, WAF, EDR, SIEM, vulnerability scanners, penetration tests and previous security incidents.
 </p>
-<a
-  class="example-button"
-  routerLink="/binomial"
-  [queryParams]="{ example: 'binomial-example3-landing' }"
-  data-cy="open-example-binomial-3"
->
+<img src="assets/screenshots/binomial/binomial-example3-landing-diagram.png" alt="Binomial example 2 landing diagram" />
+<p></p>
+<a class="example-button" routerLink="/binomial" [queryParams]="{ example: 'binomial-example3-landing' }" data-cy="open-example-binomial-3">
   Open this example in the model →
 </a>
