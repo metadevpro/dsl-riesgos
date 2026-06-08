@@ -64,19 +64,19 @@ export class DagaBaseComponent implements AfterViewInit, OnDestroy, OnChanges {
   private readonly maxProbability = MAX_PROBABILITY;
 
   private readonly nodeStyleByType: Record<string, { icon: string; solid: string }> = {
-    'start-diagram-node': { icon: '/assets/icons/start-icon.svg', solid: '#15A34A' },
-    'event-diagram-node': { icon: '/assets/icons/state-icon.svg', solid: '#BA51C5' },
-    'state-diagram-node': { icon: '/assets/icons/transition-icon.svg', solid: '#047E9C' },
-    'end-diagram-node': { icon: '/assets/icons/end-icon.svg', solid: '#B8475A' }
+    'start-diagram-node': { icon: '/assets/icons/node-icons/start-icon.svg', solid: '#15A34A' },
+    'event-diagram-node': { icon: '/assets/icons/node-icons/state-icon.svg', solid: '#BA51C5' },
+    'state-diagram-node': { icon: '/assets/icons/node-icons/transition-icon.svg', solid: '#047E9C' },
+    'end-diagram-node': { icon: '/assets/icons/node-icons/end-icon.svg', solid: '#B8475A' }
   };
 
   private readonly bayesNodeStyleByType: Record<string, { icon: string; solid: string }> = {
-    'cause-diagram-node': { icon: '/assets/icons/cause-icon.svg', solid: '#C2410C' },
-    'effect-diagram-node': { icon: '/assets/icons/effect-icon.svg', solid: '#047857' },
-    'event-diagram-node': { icon: '/assets/icons/event-icon.svg', solid: '#6D28D9' }
+    'cause-diagram-node': { icon: '/assets/icons/node-icons/cause-icon.svg', solid: '#C2410C' },
+    'effect-diagram-node': { icon: '/assets/icons/node-icons/effect-icon.svg', solid: '#047857' },
+    'event-diagram-node': { icon: '/assets/icons/node-icons/event-icon.svg', solid: '#6D28D9' }
   };
 
-  private readonly bayesFallbackStyle = { icon: '/assets/icons/event-icon.svg', solid: '#6D28D9' };
+  private readonly bayesFallbackStyle = { icon: '/assets/icons/node-icons/event-icon.svg', solid: '#6D28D9' };
 
   /* Implementacion de ngAfterViewInit, ocurre cuando el componente ha sido inicializado */
   ngAfterViewInit(): void {
