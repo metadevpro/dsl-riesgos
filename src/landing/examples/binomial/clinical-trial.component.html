@@ -1,7 +1,7 @@
 <h3>Example 4. Clinical Trial</h3>
 <p>
-  A pharmaceutical company wants to model the risk and expected cost of investing in a new drug candidate. The candidate has shown
-  promising results in preclinical studies, but this does not guarantee that it will be safe, effective or approved in humans.
+  A pharmaceutical company wants to model the risk and expected cost of investing in a new drug candidate. The candidate has shown promising
+  results in preclinical studies, but this does not guarantee that it will be safe, effective or approved in humans.
 </p>
 <p>
   In real drug development, clinical trials are usually divided into sequential phases. Phase 1 mainly evaluates safety and tolerability,
@@ -12,13 +12,13 @@
 <ul>
   <li>
     Phase 1 (Safety and tolerability): 60 participants receive the candidate drug. The main objective is to evaluate safety, tolerability,
-    dose range and possible adverse effects. This phase has an estimated cost of 5 million euros. The probability of successfully
-    advancing to Phase 2 is 52.0%.
+    dose range and possible adverse effects. This phase has an estimated cost of 5 million euros. The probability of successfully advancing
+    to Phase 2 is 52.0%.
   </li>
   <li>
-    Phase 2 (Proof of concept and dose selection): 200 patients with the target condition receive the drug or a comparator. The objective
-    is to obtain preliminary evidence of efficacy, continue evaluating safety and select the most appropriate dose for larger studies.
-    This phase has an estimated cost of 15 million euros. The probability of successfully advancing to Phase 3 is 28.9%.
+    Phase 2 (Proof of concept and dose selection): 200 patients with the target condition receive the drug or a comparator. The objective is
+    to obtain preliminary evidence of efficacy, continue evaluating safety and select the most appropriate dose for larger studies. This
+    phase has an estimated cost of 15 million euros. The probability of successfully advancing to Phase 3 is 28.9%.
   </li>
   <li>
     Phase 3 (Pivotal efficacy and safety): 1,500 patients are enrolled to confirm the drug's efficacy, safety profile and benefit-risk
@@ -26,27 +26,31 @@
     57.8%.
   </li>
   <li>
-    Regulatory review: If the clinical dossier is submitted, the regulatory authority reviews the evidence on quality, safety and
-    efficacy. The review process has an estimated cost of 5 million euros. The probability of approval after submission is 90.6%.
+    Regulatory review: If the clinical dossier is submitted, the regulatory authority reviews the evidence on quality, safety and efficacy.
+    The review process has an estimated cost of 5 million euros. The probability of approval after submission is 90.6%.
   </li>
 </ul>
 <p>Therefore, the probability of successfully reaching regulatory approval can be calculated as:</p>
 <pre>
     Probability of regulatory approval = 0.520 x 0.289 x 0.578 x 0.906 = 0.0787
-  </pre>
+  </pre
+>
 <p>Under these assumptions, the model estimates a 7.87% probability of regulatory approval from the beginning of Phase 1.</p>
 <p>The expected total cost including regulatory review is:</p>
 <pre>
     Expected clinical cost = 5 + (0.520 x 15) + (0.520 x 0.289 x 45) = 19.56 million euros
-  </pre>
+  </pre
+>
 <p>The expected total cost including regulatory review is:</p>
 <pre>
     Expected total cost = 19.56 + (0.0787 x 5) = 20 million euros
-  </pre>
+  </pre
+>
 <p>From a portfolio perspective, the risk-adjusted expected cost per approved drug is:</p>
 <pre>
     Risk-adjusted expected cost per approved drug = 20.00 / 0.0787 = 254.1 million euros
-  </pre>
+  </pre
+>
 <p>
   This does not mean that a single approved drug will always cost 254.1 million euros. It means that, if many similar candidates were
   developed under the same assumptions, the average cost per successful approval would be approximately 254.1 million euros.
@@ -75,11 +79,8 @@
     manufacturing scale-up, opportunity cost, post-market studies or the full cost of failed research programmes.
   </em>
 </p>
-<a
-  class="example-button"
-  routerLink="/binomial"
-  [queryParams]="{ example: 'binomial-example4-landing' }"
-  data-cy="open-example-binomial-4"
->
+<img src="assets/screenshots/binomial/binomial-example4-landing-diagram.png" alt="Binomial example 4 landing diagram" />
+<p></p>
+<a class="example-button" routerLink="/binomial" [queryParams]="{ example: 'binomial-example4-landing' }" data-cy="open-example-binomial-4">
   Open this example in the model →
 </a>

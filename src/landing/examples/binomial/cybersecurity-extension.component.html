@@ -1,21 +1,21 @@
 <h3>Example 3.1. Cybersecurity Extension</h3>
 <p>
-  The previous example estimates the probability of a high-impact compromise. However, the final business impact also depends on whether
-  the organization detects and contains the intrusion early.
+  The previous example estimates the probability of a high-impact compromise. However, the final business impact also depends on whether the
+  organization detects and contains the intrusion early.
 </p>
 <p>Two additional factors are added to the model:</p>
 <ul>
   <li>
     Internal Detection: there is a 52% chance that the organization detects the malicious activity internally before being notified by an
-    external party. This value is based on Mandiant’s
+    external party. This value is based on Mandiant's
     <a href="https://www.securityweek.com/m-trends-2026-initial-access-handoff-shrinks-from-hours-to-22-seconds/">M-Trends 2026</a> data,
     which reported that breaches were detected internally in 52% of cases.
   </li>
   <li>
-    Early containment: if the intrusion is detected internally, there is a 60% chance that the security team contains the incident before
-    it causes severe operational or data-loss consequences. Containment actions may include disabling the compromised account, revoking
-    active sessions, rotating credentials, isolating affected systems, blocking command-and-control traffic and preserving forensic
-    evidence. This value is a modelling assumption and should be calibrated using incident-response exercises or historical SOC metrics.
+    Early containment: if the intrusion is detected internally, there is a 60% chance that the security team contains the incident before it
+    causes severe operational or data-loss consequences. Containment actions may include disabling the compromised account, revoking active
+    sessions, rotating credentials, isolating affected systems, blocking command-and-control traffic and preserving forensic evidence. This
+    value is a modelling assumption and should be calibrated using incident-response exercises or historical SOC metrics.
   </li>
 </ul>
 <p>
@@ -23,21 +23,23 @@
   month. This is equivalent to approximately one high-impact incident every five to six months.
 </p>
 <p>
-  This extension makes the model more realistic because the impact of a cybersecurity incident does not only depend on whether the
-  attacker gains access. It also depends on the organization’s ability to detect, investigate and contain the intrusion quickly.
-  Mandiant’s M-Trends 2026 report also reported a global median dwell time of 14 days, showing that attackers may remain inside an
-  environment for days before being detected.
+  This extension makes the model more realistic because the impact of a cybersecurity incident does not only depend on whether the attacker
+  gains access. It also depends on the organization’s ability to detect, investigate and contain the intrusion quickly. Mandiant's M-Trends
+  2026 report also reported a global median dwell time of 14 days, showing that attackers may remain inside an environment for days before
+  being detected.
 </p>
 <p>
   As in the previous example, these values should not be treated as fixed probabilities for every organization. They are parameters of the
   model. In a real deployment, they should be replaced or refined using internal detection metrics, mean time to detect, mean time to
   respond, incident-response simulations and historical incident data.
 </p>
+<img src="assets/screenshots/binomial/binomial-example3.1-landing-diagram.png" alt="Binomial example 3.1 landing diagram" />
+<p></p>
 <a
   class="example-button"
   routerLink="/binomial"
-  [queryParams]="{ example: 'binomial-example3.5-landing' }"
-  data-cy="open-example-binomial-3-5"
+  [queryParams]="{ example: 'binomial-example3.1-landing' }"
+  data-cy="open-example-binomial-3-1"
 >
   Open this example in the model →
 </a>

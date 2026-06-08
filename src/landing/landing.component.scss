@@ -1,8 +1,14 @@
 .landing {
   padding: 0 2rem;
-  height: 98%;
+  height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
+}
+
+.content {
+  max-width: 64rem;
+  margin: 0 auto;
+  width: 100%;
 }
 
 p,

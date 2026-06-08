@@ -1,164 +1,167 @@
 <div class="landing">
-  <h1>DSL to describe Risks</h1>
-  <p>
-    In an increasingly complex world, risks don't appear in isolation — they are interconnected, generating situations that are difficult to
-    anticipate using traditional methods.
-  </p>
-  <p>
-    This project introduces an interactive web application that combines probabilistic models with visual diagrams, allowing users to
-    represent uncertainty scenarios in a clear and intuitive way. Through a visual DSL built with Angular and TypeScript, anyone can
-    transform abstract statistical calculations into understandable diagrams, with no advanced technical knowledge required.
-  </p>
-  <p>
-    The tool is designed for critical sectors such as space missions, banking and insurance, where making informed decisions can make a
-    significant difference. Explainability and simulation (what-if scenarios) are a great gain to explore better and worst scenarios.
-  </p>
-  <p>
-    The goal is simple: to bring risk modelling closer to analysts and management teams, merging the rigour of data with the clarity of
-    visuals, so that any organisation can understand its risks and act with greater confidence and security.
-  </p>
+  <div class="content">
+    <h1>DSL to describe Risks</h1>
+    <p>
+      In an increasingly complex world, risks don't appear in isolation — they are interconnected, generating situations that are difficult
+      to anticipate using traditional methods.
+    </p>
+    <p>
+      This project introduces an interactive web application that combines probabilistic models with visual diagrams, allowing users to
+      represent uncertainty scenarios in a clear and intuitive way. Through a visual DSL built with Angular and TypeScript, anyone can
+      transform abstract statistical calculations into understandable diagrams, with no advanced technical knowledge required.
+    </p>
+    <p>
+      The tool is designed for critical sectors such as space missions, banking and insurance, where making informed decisions can make a
+      significant difference. Explainability and simulation (what-if scenarios) are a great gain to explore better and worst scenarios.
+    </p>
+    <p>
+      The goal is simple: to bring risk modelling closer to analysts and management teams, merging the rigour of data with the clarity of
+      visuals, so that any organisation can understand its risks and act with greater confidence and security.
+    </p>
 
-  <section class="example-panel">
-    <h2>Binomial Examples</h2>
-    <h3>What it is used for</h3>
-    <p>
-      It models sequential processes in which events occur in a chain, each with an independent probability of success or failure. It
-      answers questions such as 'What is the probability that an order will reach the customer if each link in the chain can fail?' or 'What
-      is the probability that a drug will pass all phases of clinical trials?'
-    </p>
-    <h3>How it is built</h3>
-    <p>
-      The diagram is a graph of nodes (start, state, event, end) linked by connections with weights. Each weight represents the probability
-      of taking that branch. The theoretical probability of reaching a result is calculated by multiplying the probabilities along the path.
-      In addition, a simulation engine traverses the graph many times (the iterations) and measures how often success is achieved, allowing
-      the theoretical value to be compared with an empirical one.
-    </p>
-    <h3>Why it has been used</h3>
-    <p>
-      The binomial approach fits naturally with risks that break down into successive success/failure steps. It is intuitive — the diagram
-      is read from left to right —, easy to parameterise using historical data (failure rates per stage) and sufficient for a huge variety
-      of real-world cases: quality control, supply chains, attack chains in cybersecurity or the phased funnel of a clinical trial. The
-      simulation also provides empirical validation of the calculations.
-    </p>
-    <h3>Examples</h3>
+    <section class="example-panel">
+      <h2>Binomial Examples</h2>
+      <h3>What it is used for</h3>
+      <p>
+        It models sequential processes in which events occur in a chain, each with an independent probability of success or failure. It
+        answers questions such as 'What is the probability that an order will reach the customer if each link in the chain can fail?' or
+        'What is the probability that a drug will pass all phases of clinical trials?'
+      </p>
+      <h3>How it is built</h3>
+      <p>
+        The diagram is a graph of nodes (start, state, event, end) linked by connections with weights. Each weight represents the
+        probability of taking that branch. The theoretical probability of reaching a result is calculated by multiplying the probabilities
+        along the path. In addition, a simulation engine traverses the graph many times (the iterations) and measures how often success is
+        achieved, allowing the theoretical value to be compared with an empirical one.
+      </p>
+      <h3>Why it has been used</h3>
+      <p>
+        The binomial approach fits naturally with risks that break down into successive success/failure steps. It is intuitive — the diagram
+        is read from left to right —, easy to parameterise using historical data (failure rates per stage) and sufficient for a huge variety
+        of real-world cases: quality control, supply chains, attack chains in cybersecurity or the phased funnel of a clinical trial. The
+        simulation also provides empirical validation of the calculations.
+      </p>
+      <h3>Examples</h3>
 
-    <div class="tab-strip">
-      @for (tab of binomialTabs; track tab.id) {
-        <button
-          class="tab"
-          [class.active]="binomialTab() === tab.id"
-          (click)="binomialTab.set(tab.id)"
-          [attr.data-cy]="'tab-binomial-' + tab.id"
-        >
-          {{ tab.label }}
-        </button>
-      }
+      <div class="tab-strip">
+        @for (tab of binomialTabs; track tab.id) {
+          <button
+            class="tab"
+            [class.active]="binomialTab() === tab.id"
+            (click)="binomialTab.set(tab.id)"
+            [attr.data-cy]="'tab-binomial-' + tab.id"
+          >
+            {{ tab.label }}
+          </button>
+        }
+      </div>
+
+      <div class="example-content">
+        @switch (binomialTab()) {
+          @case ('quality-control') {
+            <risk-example-quality-control />
+          }
+          @case ('supply-chain') {
+            <risk-example-supply-chain />
+          }
+          @case ('cybersecurity') {
+            <risk-example-cybersecurity />
+          }
+          @case ('cybersecurity-extension') {
+            <risk-example-cybersecurity-extension />
+          }
+          @case ('clinical-trial') {
+            <risk-example-clinical-trial />
+          }
+        }
+      </div>
+    </section>
+
+    <section class="example-panel">
+      <h2>Bayes Examples</h2>
+      <h3>What it is used for</h3>
+      <p>
+        It models causal networks in which various variables influence one another, and allows for reasoning based on partial evidence: by
+        observing the state of some nodes, the network updates the probabilities of the rest. It answers questions such as 'if an engine
+        failure is detected during flight, what is the probability of reaching orbit?' or 'if the abort alarm went off, what is the
+        probability that the failure is real?'.
+      </p>
+      <h3>How it is built</h3>
+      <p>
+        It is a Bayesian network: a directed acyclic graph where each node has a Conditional Probability Table (CPT) that describes its
+        probability as a function of its parents' states. The inference engine calculates the marginal distributions for each node. Exact
+        inference enumerates the actual combinations and is limited to 20 nodes due to its exponential cost. Above that size, Monte Carlo
+        (likelihood weighting) is used for an approximate estimate with its margin of error. CPTs can be defined manually or learned from
+        CSV's data.
+      </p>
+      <h3>Why it has been used</h3>
+      <p>
+        Many real-world risks are not simply linear chains: causes interact, there are external factors (e.g. weather or sea conditions)
+        and, above all, we have partial observations on which to base our reasoning. Bayesian networks are the standard formalism for this:
+        they clearly separate a sensor's sensitivity from its false positive rate, propagate evidence throughout the network, and allow for
+        both forward (effect) and backward (cause) reasoning. This makes them ideal for scenarios such as the reliability of space missions
+        or alarm diagnosis, where what matters is not just detecting an event but estimating its true significance.
+      </p>
+      <h3>Examples</h3>
+
+      <div class="tab-strip">
+        @for (tab of bayesTabs; track tab.id) {
+          <button class="tab" [class.active]="bayesTab() === tab.id" (click)="bayesTab.set(tab.id)" [attr.data-cy]="'tab-bayes-' + tab.id">
+            {{ tab.label }}
+          </button>
+        }
+      </div>
+
+      <div class="example-content">
+        @switch (bayesTab()) {
+          @case ('falcon9') {
+            <risk-example-falcon9 />
+          }
+          @case ('rocket-abort') {
+            <risk-example-rocket-abort />
+          }
+          @case ('crew-dragon') {
+            <risk-example-crew-dragon />
+          }
+        }
+      </div>
+    </section>
+
+    <h2>Credits</h2>
+    <div class="logos">
+      <img src="/img/upv.svg" alt="Logo of Technical University of Valencia" />
+      <img src="/img/metadev.svg" alt="Logo of Metadev" />
     </div>
 
-    <div class="example-content">
-      @switch (binomialTab()) {
-        @case ('quality-control') {
-          <risk-example-quality-control />
-        }
-        @case ('supply-chain') {
-          <risk-example-supply-chain />
-        }
-        @case ('cybersecurity') {
-          <risk-example-cybersecurity />
-        }
-        @case ('cybersecurity-extension') {
-          <risk-example-cybersecurity-extension />
-        }
-        @case ('clinical-trial') {
-          <risk-example-clinical-trial />
-        }
-      }
-    </div>
-  </section>
-
-  <section class="example-panel">
-    <h2>Bayes Examples</h2>
-    <h3>What it is used for</h3>
     <p>
-      It models causal networks in which various variables influence one another, and allows for reasoning based on partial evidence: by
-      observing the state of some nodes, the network updates the probabilities of the rest. It answers questions such as 'if an engine
-      failure is detected during flight, what is the probability of reaching orbit?' or 'if the abort alarm went off, what is the
-      probability that the failure is real?'.
+      My name is <a href="https://www.linkedin.com/in/juanjo-amores/">Juan José Amores</a>, a Computer Engineering student at
+      <a href="https://upv.es">UPV</a> <em>(Technical University of Valencia)</em>, specializing in Software Engineering. What drives me is
+      building technology that goes beyond the technical: tools that help people understand complex problems and make decisions with greater
+      clarity and confidence.
     </p>
-    <h3>How it is built</h3>
     <p>
-      It is a Bayesian network: a directed acyclic graph where each node has a Conditional Probability Table (CPT) that describes its
-      probability as a function of its parents' states. The inference engine calculates the marginal distributions for each node. Exact
-      inference enumerates the actual combinations and is limited to 20 nodes due to its exponential cost. Above that size, Monte Carlo
-      (likelihood weighting) is used for an approximate estimate with its margin of error. CPTs can be defined manually or learned from
-      CSV's data.
+      That idea is what gave rise to this project. My final degree thesis
+      <strong>—Visual Modeling and Risk Calculation using DSL and Web Technologies—</strong> is a web application that allows users to
+      represent, calculate, and explore risks through interactive visual models. By combining a custom DSL, probabilistic networks, and
+      integration with Daga, the tool transforms complex calculations into dynamic, easy-to-understand diagrams that are simple to
+      manipulate.
     </p>
-    <h3>Why it has been used</h3>
     <p>
-      Many real-world risks are not simply linear chains: causes interact, there are external factors (e.g. weather or sea conditions) and,
-      above all, we have partial observations on which to base our reasoning. Bayesian networks are the standard formalism for this: they
-      clearly separate a sensor's sensitivity from its false positive rate, propagate evidence throughout the network, and allow for both
-      forward (effect) and backward (cause) reasoning. This makes them ideal for scenarios such as the reliability of space missions or
-      alarm diagnosis, where what matters is not just detecting an event but estimating its true significance.
+      This project was developed in collaboration with <a href="https://metadev.pro">Metadev</a> and under the supervision of
+      <a href="http://pjmolina.com">Pedro J. Molina, PhD.</a> and
+      <a href="https://www.linkedin.com/in/letelier/">Patricio Letelier, PhD.</a>, which allowed me to work in a real professional
+      environment from the early design stages all the way through to the final implementation.
     </p>
-    <h3>Examples</h3>
-
-    <div class="tab-strip">
-      @for (tab of bayesTabs; track tab.id) {
-        <button class="tab" [class.active]="bayesTab() === tab.id" (click)="bayesTab.set(tab.id)" [attr.data-cy]="'tab-bayes-' + tab.id">
-          {{ tab.label }}
-        </button>
-      }
-    </div>
-
-    <div class="example-content">
-      @switch (bayesTab()) {
-        @case ('falcon9') {
-          <risk-example-falcon9 />
-        }
-        @case ('rocket-abort') {
-          <risk-example-rocket-abort />
-        }
-        @case ('crew-dragon') {
-          <risk-example-crew-dragon />
-        }
-      }
-    </div>
-  </section>
-
-  <h2>Credits</h2>
-  <div class="logos">
-    <img src="/img/upv.svg" alt="Logo of Technical University of Valencia" />
-    <img src="/img/metadev.svg" alt="Logo of Metadev" />
+    <p>
+      To build it, I worked with Angular, TypeScript, and web diagramming libraries, bringing together software engineering, probabilistic
+      calculus, and user experience design. The goal isn't just to build a working application — it's to bring risk analysis closer to
+      real-world contexts such as space missions, banking, insurance, and investment.
+    </p>
+    <p>
+      Ultimately, this project represents my way of merging curiosity, technology, and practical value. Turning hard-to-interpret
+      mathematical models into visual tools that help teams and organizations make better decisions.
+    </p>
+    <hr />
+    <div class="footer">&copy; Juanjo Amores &amp; <a href="https://metadev.pro">Metadev</a> 2026.</div>
   </div>
-
-  <p>
-    My name is <a href="https://www.linkedin.com/in/juanjo-amores/">Juan José Amores</a>, a Computer Engineering student at
-    <a href="https://upv.es">UPV</a> <em>(Technical University of Valencia)</em>, specializing in Software Engineering. What drives me is
-    building technology that goes beyond the technical: tools that help people understand complex problems and make decisions with greater
-    clarity and confidence.
-  </p>
-  <p>
-    That idea is what gave rise to this project. My final degree thesis
-    <strong>—Visual Modeling and Risk Calculation using DSL and Web Technologies—</strong> is a web application that allows users to
-    represent, calculate, and explore risks through interactive visual models. By combining a custom DSL, probabilistic networks, and
-    integration with Daga, the tool transforms complex calculations into dynamic, easy-to-understand diagrams that are simple to manipulate.
-  </p>
-  <p>
-    This project was developed in collaboration with <a href="https://metadev.pro">Metadev</a> and under the supervision of
-    <a href="http://pjmolina.com">Pedro J. Molina, PhD.</a> and <a href="https://www.linkedin.com/in/letelier/">Patricio Letelier, PhD.</a>,
-    which allowed me to work in a real professional environment from the early design stages all the way through to the final
-    implementation.
-  </p>
-  <p>
-    To build it, I worked with Angular, TypeScript, and web diagramming libraries, bringing together software engineering, probabilistic
-    calculus, and user experience design. The goal isn't just to build a working application — it's to bring risk analysis closer to
-    real-world contexts such as space missions, banking, insurance, and investment.
-  </p>
-  <p>
-    Ultimately, this project represents my way of merging curiosity, technology, and practical value. Turning hard-to-interpret mathematical
-    models into visual tools that help teams and organizations make better decisions.
-  </p>
-  <hr />
-  <div class="footer">&copy; Juanjo Amores &amp; <a href="https://metadev.pro">Metadev</a> 2026.</div>
 </div>

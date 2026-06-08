@@ -1,133 +1,135 @@
 <div class="doc">
-  <h2>What is Risk</h2>
-  <p>
-    <strong>Risk</strong> is a web application designed for visual modelling and probabilistic risk calculation, built to support
-    decision-making in high-stakes environments such as space missions, banking and insurance. The application is built on a domain model
-    that serves as the foundation for a visual DSL (Domain-Specific Language), seamlessly integrated with a powerful web diagramming
-    library. It is created using the <a href="https://daga.metadev.pro">Daga</a> library as a graphical editor foundation, combined with a
-    frontend-oriented architecture that leverages modern technologies such as Angular and TypeScript to handle interaction, visual
-    modelling, import/export and probabilistic calculations directly in the browser. Its core objective is to make complex risk models
-    accessible to any user, regardless of their technical background. By bridging the gap between raw statistical data and intuitive visual
-    diagrams, Risk empowers analysts and decision-makers to understand intricate probabilistic relationships, explore uncertainty scenarios
-    and make faster, safer and more informed decisions.
-  </p>
-  <h2>Use Cases</h2>
-  <ul>
-    <li>Visual risk modelling in event chains.</li>
-    <li>Calculating probabilities in sequential processes (quality control, supply chains, cybersecurity, clinical trials, etc.).</li>
-    <li>Analysing causal networks with partial evidence using Bayesian networks.</li>
-    <li>Risk estimation in systems with uncertainty (space missions, launch abort, capsule recovery, etc.).</li>
-    <li>Probability learning from real data (CSV).</li>
-  </ul>
-  <h2>How to use it</h2>
-  <ol>
-    <li>
-      Learn by changing the examples: The home page includes ready-to-open examples for each mode. This is the quickest way to understand
-      the notation.
-    </li>
-    <li>Choose a mode from the sidebar: Binomial or Bayesian.</li>
-    <li>Build your diagram by dragging nodes onto the canvas and connecting them. The calculation updates in real time.</li>
-    <li>Edit the values (weights or probability tables) directly on each element.</li>
-    <li>Import / Export your model as a '.json' file ('RiskFile') to save or share it.</li>
-    <li>Calculate the results and review them in the results sidebar.</li>
-  </ol>
-  <h2>Risk Syntax</h2>
-  <h3>Binomial Distribution</h3>
-  <p>
-    Every node in the Binomial mode has a specific type (start, state, event or end) that determines its role in the process and how it can
-    be connected to other nodes. The probability of each event node is calculated as the product of the probabilities of all the connected
-    event nodes, multiplied by the relative weights of the connections. The syntax is quite strict, as there are specific rules for how to
-    connect the nodes, but it is designed to be intuitive and easy to use for modelling sequential processes with probabilistic events. The
-    general guideline is to use the start node to begin the process, event nodes to represent probabilistic decisions, state nodes to
-    represent non-random steps or conditions, and end nodes to represent the outcomes or end points of the process.
-  </p>
-  <p>Each node has minimum two parameters that can be edited: the name and the number.</p>
-  <h4>Node Start</h4>
-  <p>
-    The start node represents the entry point of the process. Use it to start the flow. It does not represent a probabilistic event, only
-    the origin of the process.
-  </p>
-  <p>
-    Only outputs are allowed from this node, and it can only be connected to state nodes. It does not have any parameters apart of the name
-    or the number to edit.
-  </p>
-  <img src="assets/doc-section/node/binomial/Node-Binomial-Start.png" alt="Node Start (Binomial)" />
-  <h4>Node State</h4>
-  <p>
-    The state node represents a state in the process. It can be connected to any other node type, but it is recommended to connect it only
-    to event nodes. It has an implicit 100% probability of success, so it just shows a state change in the process, but it does not
-    represent a probabilistic event by itself.
-  </p>
-  <p>Inputs and outputs are allowed from this node. It does not have any parameters apart of the name or the number to edit.</p>
-  <img src="assets/doc-section/node/binomial/Node-Binomial-State.png" alt="Node State (Binomial)" />
-  <h4>Node Event</h4>
-  <p>
-    The event node represents a probabilistic event in the process. It can be connected to any other node type, but it is recommended to
-    connect it only to state or event nodes. It has a probability parameter, apart from the name and the number, that can be edited directly
-    on the node, and it represents the probability of success of the event.
-  </p>
-  <p>
-    Inputs and outputs are allowed from this node. The global probability of the event is calculated as the product of the probabilities of
-    all the connected events, so it is not possible to have a probability higher than 100% in any case.
-  </p>
-  <img src="assets/doc-section/node/binomial/Node-Binomial-Event.png" alt="Node Event (Binomial)" />
-  <h4>Node End</h4>
-  <p>
-    The end node represents the end point of the process. Use it to finish the flow. It does not represent a probabilistic event, only the
-    end of the process.
-  </p>
-  <p>
-    Only inputs are allowed to this node, and it can only be connected from event and state nodes. It does not have any parameters apart of
-    the name or the number to edit.
-  </p>
-  <img src="assets/doc-section/node/binomial/Node-Binomial-End.png" alt="Node End (Binomial)" />
-  <h4>Connections</h4>
-  <p>
-    Each connection has a weight (default is 1) that determines the relative probability of taking that branch compared to its siblings. The
-    probability of each branch is calculated as the weight of the connection divided by the total weight of all outgoing connections from
-    the same node.
-  </p>
-  <img src="assets/doc-section/connection/connection-explanation.png" alt="Connection (Binomial)" />
-  <p>
-    Rule of thumb: use <strong>Start</strong> to begin, <strong>Event</strong> for each success/failure decision with its probability,
-    <strong>State</strong> for non-random steps, and <strong>End</strong> to close each outcome.
-  </p>
-  <h3>Bayes Distribution</h3>
-  <p>
-    Every node in the Bayesian mode represents a probabilistic event, and the connections between them represent causal relationships. The
-    probability of each node is calculated based on the probabilities of its parent nodes and the conditional probability table defined for
-    that node. The syntax is more flexible than in the Binomial mode, as there are no restrictions on how to connect the nodes, but it is
-    recommended to follow the general guidelines of connecting causes to effects and effects to events.
-  </p>
-  <p>
-    Each node has a probability table that can be edited directly on the node by double-clicking it, where you can define the probability of
-    the node being true for each combination of its parent nodes. If a node has no parents, it is considered a root node and its probability
-    table will have only one entry representing its prior probability. On this interface, you can change the evidence by just clicking on
-    one of the three options: true, false or unknown. This will set the node as evidence and update the probabilities of all the nodes in
-    the network accordingly.
-  </p>
-  <p>To change the node name, simply click on the node and type the new name.</p>
-  <h4>Node Cause</h4>
-  <p>
-    The cause node represents a cause in the causal network. Usually, it is the root node of the model, a variable that does not depedend on
-    others (it has no parents). It can be connected to any other node type, but it is recommended to connect it only to effect or other
-    cause nodes.
-  </p>
-  <img src="assets/doc-section/node/bayes/Node-Bayes-Cause.png" alt="Node Cause (Bayes)" />
-  <h4>Node Effect</h4>
-  <p>
-    The effect node represents an effect in the causal network. Usually, it is an effect or outcome that depends on the state of its
-    parents. This may be an intermediate node or a final node you are interested in consulting. It can be connected to any other node type,
-    but it is recommended to connect it only to event or other effect nodes.
-  </p>
-  <img src="assets/doc-section/node/bayes/Node-Bayes-Effect.png" alt="Node Effect (Bayes)" />
-  <h4>Node Event</h4>
-  <p>
-    The event node represents a probabilistic event in the causal network. Usually, it is a final node you are interested in consulting. It
-    can be connected to any other node type, but it is recommended to connect it only to event nodes.
-  </p>
-  <img src="assets/doc-section/node/bayes/Node-Bayes-Event.png" alt="Node Event (Bayes)" />
+  <div class="content">
+    <h2>What is Risk</h2>
+    <p>
+      <strong>Risk</strong> is a web application designed for visual modelling and probabilistic risk calculation, built to support
+      decision-making in high-stakes environments such as space missions, banking and insurance. The application is built on a domain model
+      that serves as the foundation for a visual DSL (Domain-Specific Language), seamlessly integrated with a powerful web diagramming
+      library. It is created using the <a href="https://daga.metadev.pro">Daga</a> library as a graphical editor foundation, combined with a
+      frontend-oriented architecture that leverages modern technologies such as Angular and TypeScript to handle interaction, visual
+      modelling, import/export and probabilistic calculations directly in the browser. Its core objective is to make complex risk models
+      accessible to any user, regardless of their technical background. By bridging the gap between raw statistical data and intuitive
+      visual diagrams, Risk empowers analysts and decision-makers to understand intricate probabilistic relationships, explore uncertainty
+      scenarios and make faster, safer and more informed decisions.
+    </p>
+    <h2>Use Cases</h2>
+    <ul>
+      <li>Visual risk modelling in event chains.</li>
+      <li>Calculating probabilities in sequential processes (quality control, supply chains, cybersecurity, clinical trials, etc.).</li>
+      <li>Analysing causal networks with partial evidence using Bayesian networks.</li>
+      <li>Risk estimation in systems with uncertainty (space missions, launch abort, capsule recovery, etc.).</li>
+      <li>Probability learning from real data (CSV).</li>
+    </ul>
+    <h2>How to use it</h2>
+    <ol>
+      <li>
+        Learn by changing the examples: The home page includes ready-to-open examples for each mode. This is the quickest way to understand
+        the notation.
+      </li>
+      <li>Choose a mode from the sidebar: Binomial or Bayesian.</li>
+      <li>Build your diagram by dragging nodes onto the canvas and connecting them. The calculation updates in real time.</li>
+      <li>Edit the values (weights or probability tables) directly on each element.</li>
+      <li>Import / Export your model as a '.json' file ('RiskFile') to save or share it.</li>
+      <li>Calculate the results and review them in the results sidebar.</li>
+    </ol>
+    <h2>Risk Syntax</h2>
+    <h3>Binomial Distribution</h3>
+    <p>
+      Every node in the Binomial mode has a specific type (start, state, event or end) that determines its role in the process and how it
+      can be connected to other nodes. The probability of each event node is calculated as the product of the probabilities of all the
+      connected event nodes, multiplied by the relative weights of the connections. The syntax is quite strict, as there are specific rules
+      for how to connect the nodes, but it is designed to be intuitive and easy to use for modelling sequential processes with probabilistic
+      events. The general guideline is to use the start node to begin the process, event nodes to represent probabilistic decisions, state
+      nodes to represent non-random steps or conditions, and end nodes to represent the outcomes or end points of the process.
+    </p>
+    <p>Each node has minimum two parameters that can be edited: the name and the number.</p>
+    <h4>Node Start</h4>
+    <p>
+      The start node represents the entry point of the process. Use it to start the flow. It does not represent a probabilistic event, only
+      the origin of the process.
+    </p>
+    <p>
+      Only outputs are allowed from this node, and it can only be connected to state nodes. It does not have any parameters apart of the
+      name or the number to edit.
+    </p>
+    <img src="assets/doc-section/node/binomial/Node-Binomial-Start.png" alt="Node Start (Binomial)" />
+    <h4>Node State</h4>
+    <p>
+      The state node represents a state in the process. It can be connected to any other node type, but it is recommended to connect it only
+      to event nodes. It has an implicit 100% probability of success, so it just shows a state change in the process, but it does not
+      represent a probabilistic event by itself.
+    </p>
+    <p>Inputs and outputs are allowed from this node. It does not have any parameters apart of the name or the number to edit.</p>
+    <img src="assets/doc-section/node/binomial/Node-Binomial-State.png" alt="Node State (Binomial)" />
+    <h4>Node Event</h4>
+    <p>
+      The event node represents a probabilistic event in the process. It can be connected to any other node type, but it is recommended to
+      connect it only to state or event nodes. It has a probability parameter, apart from the name and the number, that can be edited
+      directly on the node, and it represents the probability of success of the event.
+    </p>
+    <p>
+      Inputs and outputs are allowed from this node. The global probability of the event is calculated as the product of the probabilities
+      of all the connected events, so it is not possible to have a probability higher than 100% in any case.
+    </p>
+    <img src="assets/doc-section/node/binomial/Node-Binomial-Event.png" alt="Node Event (Binomial)" />
+    <h4>Node End</h4>
+    <p>
+      The end node represents the end point of the process. Use it to finish the flow. It does not represent a probabilistic event, only the
+      end of the process.
+    </p>
+    <p>
+      Only inputs are allowed to this node, and it can only be connected from event and state nodes. It does not have any parameters apart
+      of the name or the number to edit.
+    </p>
+    <img src="assets/doc-section/node/binomial/Node-Binomial-End.png" alt="Node End (Binomial)" />
+    <h4>Connections</h4>
+    <p>
+      Each connection has a weight (default is 1) that determines the relative probability of taking that branch compared to its siblings.
+      The probability of each branch is calculated as the weight of the connection divided by the total weight of all outgoing connections
+      from the same node.
+    </p>
+    <img src="assets/doc-section/connection/connection-explanation.png" alt="Connection (Binomial)" />
+    <p>
+      Rule of thumb: use <strong>Start</strong> to begin, <strong>Event</strong> for each success/failure decision with its probability,
+      <strong>State</strong> for non-random steps, and <strong>End</strong> to close each outcome.
+    </p>
+    <h3>Bayes Distribution</h3>
+    <p>
+      Every node in the Bayesian mode represents a probabilistic event, and the connections between them represent causal relationships. The
+      probability of each node is calculated based on the probabilities of its parent nodes and the conditional probability table defined
+      for that node. The syntax is more flexible than in the Binomial mode, as there are no restrictions on how to connect the nodes, but it
+      is recommended to follow the general guidelines of connecting causes to effects and effects to events.
+    </p>
+    <p>
+      Each node has a probability table that can be edited directly on the node by double-clicking it, where you can define the probability
+      of the node being true for each combination of its parent nodes. If a node has no parents, it is considered a root node and its
+      probability table will have only one entry representing its prior probability. On this interface, you can change the evidence by just
+      clicking on one of the three options: true, false or unknown. This will set the node as evidence and update the probabilities of all
+      the nodes in the network accordingly.
+    </p>
+    <p>To change the node name, simply click on the node and type the new name.</p>
+    <h4>Node Cause</h4>
+    <p>
+      The cause node represents a cause in the causal network. Usually, it is the root node of the model, a variable that does not depedend
+      on others (it has no parents). It can be connected to any other node type, but it is recommended to connect it only to effect or other
+      cause nodes.
+    </p>
+    <img src="assets/doc-section/node/bayes/Node-Bayes-Cause.png" alt="Node Cause (Bayes)" />
+    <h4>Node Effect</h4>
+    <p>
+      The effect node represents an effect in the causal network. Usually, it is an effect or outcome that depends on the state of its
+      parents. This may be an intermediate node or a final node you are interested in consulting. It can be connected to any other node
+      type, but it is recommended to connect it only to event or other effect nodes.
+    </p>
+    <img src="assets/doc-section/node/bayes/Node-Bayes-Effect.png" alt="Node Effect (Bayes)" />
+    <h4>Node Event</h4>
+    <p>
+      The event node represents a probabilistic event in the causal network. Usually, it is a final node you are interested in consulting.
+      It can be connected to any other node type, but it is recommended to connect it only to event nodes.
+    </p>
+    <img src="assets/doc-section/node/bayes/Node-Bayes-Event.png" alt="Node Event (Bayes)" />
 
-  <hr />
-  <div class="footer">&copy; Juanjo Amores &amp; <a href="https://metadev.pro">Metadev</a> 2026.</div>
+    <hr />
+    <div class="footer">&copy; Juanjo Amores &amp; <a href="https://metadev.pro">Metadev</a> 2026.</div>
+  </div>
 </div>
