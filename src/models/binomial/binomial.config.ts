@@ -28,29 +28,9 @@ const NODE_BORDER = '#000000';
 const NODE_BORDER_SELECTED = '#378ADD';
 const NODE_FILL_WHITE = '#FFFFFF';
 
-const NODE_LABEL_CONFIG = {
-  fontSize: 18,
-  margin: [0, 0, -15, 0],
-  fit: false,
-  horizontalAlign: HorizontalAlign.Center,
-  verticalAlign: VerticalAlign.Center
-};
-
-const NODE_PORTS = [
-  { coords: [125, 0] as [number, number], direction: Side.Top },
-  { coords: [0, 75] as [number, number], direction: Side.Left },
-  { coords: [125, 150] as [number, number], direction: Side.Bottom },
-  { coords: [250, 75] as [number, number], direction: Side.Right }
-];
-
 const NODE_PROPERTIES = [
   { name: 'node name', type: Type.Text, basic: true, editable: true, rootAttribute: 'name' },
   { name: 'node number', type: Type.Number, defaultValue: 1, basic: true, editable: true }
-];
-
-const NODE_PROPERTIES_WITH_PROB = [
-  ...NODE_PROPERTIES,
-  { name: 'probability', type: Type.Number, defaultValue: 0, basic: true, editable: true }
 ];
 
 const topBandLook = (tint: string): ShapedLookConfig => ({
@@ -212,90 +192,96 @@ export const PROB_CONFIG: DiagramConfig = {
       width: '16rem'
     }
   },
+  nodeTypeDefaults: {
+    defaultWidth: 250,
+    defaultHeight: 150,
+    label: {
+      look: {
+        lookType: 'field-look',
+        fontColor: '#000000',
+        fontSize: 18,
+        fontWeight: 400,
+        highlighted: {
+          fontWeight: 600
+        }
+      },
+      margin: [0, 0, -15, 0],
+      fit: false,
+      horizontalAlign: HorizontalAlign.Center,
+      verticalAlign: VerticalAlign.Center
+    },
+    ports: [
+      { coords: [125, 0] as [number, number], direction: Side.Top },
+      { coords: [0, 75] as [number, number], direction: Side.Left },
+      { coords: [125, 150] as [number, number], direction: Side.Bottom },
+      { coords: [250, 75] as [number, number], direction: Side.Right }
+    ],
+    look: nodeShellLook(),
+    properties: NODE_PROPERTIES
+  },
   nodeTypes: [
     {
       id: 'event-diagram-node',
       name: 'Node',
-      defaultWidth: 250,
-      defaultHeight: 150,
-      label: NODE_LABEL_CONFIG,
-      ports: NODE_PORTS,
-      look: nodeShellLook(),
       sectionGrid: threeBandSectionGrid(NODE_VISUALS['event-diagram-node'].tint),
-      properties: NODE_PROPERTIES_WITH_PROB
+      properties: [...NODE_PROPERTIES, { name: 'probability', type: Type.Number, defaultValue: 0, basic: true, editable: true }]
     },
     {
       id: 'state-diagram-node',
       name: 'State',
-      defaultWidth: 250,
-      defaultHeight: 150,
-      label: NODE_LABEL_CONFIG,
-      ports: NODE_PORTS,
-      look: nodeShellLook(),
-      sectionGrid: twoBandSectionGrid(NODE_VISUALS['state-diagram-node'].tint),
-      properties: NODE_PROPERTIES
+      sectionGrid: twoBandSectionGrid(NODE_VISUALS['state-diagram-node'].tint)
     },
     {
       id: 'start-diagram-node',
       name: 'Start',
-      defaultWidth: 250,
-      defaultHeight: 150,
-      label: NODE_LABEL_CONFIG,
-      ports: NODE_PORTS,
-      look: nodeShellLook(),
-      sectionGrid: twoBandSectionGrid(NODE_VISUALS['start-diagram-node'].tint),
-      properties: NODE_PROPERTIES
+      sectionGrid: twoBandSectionGrid(NODE_VISUALS['start-diagram-node'].tint)
     },
     {
       id: 'end-diagram-node',
-      name: 'Node',
-      defaultWidth: 250,
-      defaultHeight: 150,
-      label: NODE_LABEL_CONFIG,
-      ports: NODE_PORTS,
-      look: nodeShellLook(),
-      sectionGrid: twoBandSectionGrid(NODE_VISUALS['end-diagram-node'].tint),
-      properties: NODE_PROPERTIES
+      name: 'End',
+      sectionGrid: twoBandSectionGrid(NODE_VISUALS['end-diagram-node'].tint)
     }
   ],
+  connectionTypeDefaults: {
+    look: {
+      lookType: 'connection-look',
+      color: '#000000',
+      thickness: 3,
+      style: LineStyle.Solid,
+      shape: LineShape.Bezier,
+      selected: {
+        color: '#AA00AA'
+      },
+      highlighted: {
+        thickness: 5
+      }
+    },
+    endMarkerLook: {
+      lookType: 'marker-image-look',
+      image: '/assets/marker/arrowDaga.svg',
+      width: 4,
+      height: 8,
+      refX: 4,
+      refY: 4
+    },
+    label: {
+      look: {
+        lookType: 'field-look',
+        fontColor: '#000000',
+        fontSize: 12,
+        fontWeight: 400,
+        highlighted: {
+          fontWeight: 600
+        }
+      },
+      padding: 6,
+      margin: 20
+    }
+  },
   connectionTypes: [
     {
       id: 'diagram-connection',
       name: 'Connection',
-      look: {
-        lookType: 'connection-look',
-        color: '#000000',
-        thickness: 3,
-        style: LineStyle.Solid,
-        shape: LineShape.Bezier,
-        selected: {
-          color: '#AA00AA'
-        },
-        highlighted: {
-          thickness: 5
-        }
-      },
-      endMarkerLook: {
-        lookType: 'marker-image-look',
-        image: '/assets/marker/arrowDaga.svg',
-        width: 4,
-        height: 8,
-        refX: 4,
-        refY: 4
-      },
-      label: {
-        look: {
-          lookType: 'field-look',
-          fontColor: '#000000',
-          fontSize: 12,
-          fontWeight: 400,
-          highlighted: {
-            fontWeight: 600
-          }
-        },
-        padding: 6,
-        margin: 20
-      },
       startTypes: ['event-diagram-node', 'state-diagram-node'],
       endTypes: ['event-diagram-node', 'state-diagram-node'],
       properties: [
@@ -318,40 +304,6 @@ export const PROB_CONFIG: DiagramConfig = {
     {
       id: 'start-connection',
       name: 'Start-Connection',
-      look: {
-        lookType: 'connection-look',
-        color: '#000000',
-        thickness: 3,
-        style: LineStyle.Solid,
-        shape: LineShape.Bezier,
-        selected: {
-          color: '#AA00AA'
-        },
-        highlighted: {
-          thickness: 5
-        }
-      },
-      endMarkerLook: {
-        lookType: 'marker-image-look',
-        image: '/assets/marker/arrowDaga.svg',
-        width: 4,
-        height: 8,
-        refX: 4,
-        refY: 4
-      },
-      label: {
-        look: {
-          lookType: 'field-look',
-          fontColor: '#000000',
-          fontSize: 12,
-          fontWeight: 400,
-          highlighted: {
-            fontWeight: 600
-          }
-        },
-        padding: 6,
-        margin: 20
-      },
       startTypes: ['start-diagram-node'],
       endTypes: ['event-diagram-node', 'state-diagram-node'],
       properties: [
@@ -374,40 +326,6 @@ export const PROB_CONFIG: DiagramConfig = {
     {
       id: 'end-connection',
       name: 'End-Connection',
-      look: {
-        lookType: 'connection-look',
-        color: '#000000',
-        thickness: 3,
-        style: LineStyle.Solid,
-        shape: LineShape.Bezier,
-        selected: {
-          color: '#AA00AA'
-        },
-        highlighted: {
-          thickness: 5
-        }
-      },
-      endMarkerLook: {
-        lookType: 'marker-image-look',
-        image: '/assets/marker/arrowDaga.svg',
-        width: 4,
-        height: 8,
-        refX: 4,
-        refY: 4
-      },
-      label: {
-        look: {
-          lookType: 'field-look',
-          fontColor: '#000000',
-          fontSize: 12,
-          fontWeight: 400,
-          highlighted: {
-            fontWeight: 600
-          }
-        },
-        padding: 6,
-        margin: 20
-      },
       startTypes: ['event-diagram-node', 'state-diagram-node'],
       endTypes: ['end-diagram-node'],
       properties: [
