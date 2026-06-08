@@ -2,7 +2,7 @@ import { DiagramConfig, DagaModel } from '@metadev/daga-angular';
 
 import { NodeInfo, ConnectionInfo, SimulationResult } from './types';
 import { findStartNodes, getNodeId, extractConnectionEndpoints } from '../util/generalCalculationNodes.utils';
-import { PROBABILITY_KEY, MAX_PROBABILITY, normalizeProbability } from '../util/probability.utils';
+import { PROBABILITY_KEY, MAX_PROBABILITY, normalizeProbability, formatSignificantPercent } from '../util/probability.utils';
 import { PROB_CONFIG } from './binomial/binomial.config';
 
 export abstract class GenericComponent {
@@ -77,9 +77,17 @@ export abstract class GenericComponent {
 
   formatPercentage(successIterations: number, iterations: number): string {
     if (!iterations || iterations <= 0) return '0%';
+    return `${formatSignificantPercent(successIterations / iterations)}%`;
+  }
 
-    const percent = (successIterations / iterations) * 100;
-    return Number.isInteger(percent) ? `${percent}%` : `${percent.toFixed(2)}%`;
+  /** Display a 0..1 fraction as a percent (e.g. marginals). Display-only rounding. */
+  formatPctFraction(fraction: number): string {
+    return `${formatSignificantPercent(fraction)}%`;
+  }
+
+  /** Display a value already on the 0..100 percent scale (e.g. theoretical probability). */
+  formatPctValue(percent: number): string {
+    return `${formatSignificantPercent(percent / 100)}%`;
   }
 
   protected hasValidModel(): boolean {

@@ -14,7 +14,7 @@ import {
   RiskFile,
   serializeBayesGraph
 } from '../../util/importExport.utils';
-import { normalizeProbability } from '../../util/probability.utils';
+import { normalizeProbability, formatSignificantPercent, MAX_DISPLAY_DECIMALS } from '../../util/probability.utils';
 import { DagaBaseComponent } from '../dagaBase.component';
 import { GenericComponent } from '../generic.component';
 import { BayesCPTEntry, BayesEvidence, BayesGraph, CPTTableRow, LearningResult, MCResult } from '../types';
@@ -327,7 +327,7 @@ export class BayesComponent extends GenericComponent implements OnDestroy {
     const node = this.bayesGraph.get(this.selectedNodeId);
     if (!node) return;
 
-    const normalized = normalizeProbability(value);
+    const normalized = normalizeProbability(value, 1, null); // 0..1 fraction, exact precision
     if (normalized === null) return;
 
     if (node.cpt[rowKey]) {
@@ -335,7 +335,7 @@ export class BayesComponent extends GenericComponent implements OnDestroy {
 
       if (this.autoNormalizeCPT) {
         const complementaryField = field === 'si' ? 'no' : 'si';
-        node.cpt[rowKey][complementaryField] = Number(Math.max(0, 1.0 - normalized).toFixed(4));
+        node.cpt[rowKey][complementaryField] = Math.max(0, 1 - normalized);
       }
     }
 
@@ -400,7 +400,9 @@ export class BayesComponent extends GenericComponent implements OnDestroy {
   }
 
   cptPct(p: number): number {
-    return Math.round(p * 100000) / 1000;
+    // Full precision: show exactly what the user entered, float noise cleaned.
+    // Storage stays exact via updateCPTCell.
+    return Number(formatSignificantPercent(p, MAX_DISPLAY_DECIMALS));
   }
 
   // ── Private helpers ──

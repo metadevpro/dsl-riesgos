@@ -80,11 +80,11 @@
           <div class="section-label">PROBABILITIES</div>
           <div class="prob-row">
             <span class="prob-label">P({{ selectedNodeName }}=Yes)</span>
-            <span class="prob-value">{{ (selectedNodeMarginals.si * 100).toFixed(3) }}%</span>
+            <span class="prob-value">{{ formatPctFraction(selectedNodeMarginals.si) }}</span>
           </div>
           <div class="prob-row">
             <span class="prob-label">P({{ selectedNodeName }}=No)</span>
-            <span class="prob-value">{{ (selectedNodeMarginals.no * 100).toFixed(3) }}%</span>
+            <span class="prob-value">{{ formatPctFraction(selectedNodeMarginals.no) }}</span>
           </div>
         </div>
 
@@ -117,7 +117,7 @@
                     <input
                       class="cpt-input"
                       type="number"
-                      step="1"
+                      step="any"
                       min="0"
                       max="100"
                       [value]="cptPct(selectedNodeCPTRows[0].pSi)"
@@ -133,7 +133,7 @@
                     <input
                       class="cpt-input"
                       type="number"
-                      step="1"
+                      step="any"
                       min="0"
                       max="100"
                       [value]="cptPct(selectedNodeCPTRows[0].pNo)"
@@ -167,7 +167,7 @@
                       <input
                         class="cpt-input"
                         type="number"
-                        step="0.01"
+                        step="any"
                         min="0"
                         max="100"
                         [value]="cptPct(row.pSi)"
@@ -180,7 +180,7 @@
                       <input
                         class="cpt-input"
                         type="number"
-                        step="0.01"
+                        step="any"
                         min="0"
                         max="100"
                         [value]="cptPct(row.pNo)"
@@ -235,10 +235,10 @@
               @for (nodeId of getMCNodeIds(); track nodeId) {
                 <tr>
                   <td style="color: #1a1a1a">{{ getNodeName(nodeId) }}</td>
-                  <td style="text-align: right; color: #1a1a1a">{{ (mcResult!.probabilidades[nodeId]['si'] * 100).toFixed(2) }}%</td>
-                  <td style="text-align: right; color: #1967d2">{{ ((bayesGraph.get(nodeId)?.marginals?.si ?? 0) * 100).toFixed(2) }}%</td>
+                  <td style="text-align: right; color: #1a1a1a">{{ formatPctFraction(mcResult!.probabilidades[nodeId]['si']) }}</td>
+                  <td style="text-align: right; color: #1967d2">{{ formatPctFraction(bayesGraph.get(nodeId)?.marginals?.si ?? 0) }}</td>
                   <td style="text-align: right" [style.color]="(mcError?.[nodeId]?.['si'] ?? 0) > 0.05 ? '#A32D2D' : '#27500A'">
-                    ±{{ ((mcError?.[nodeId]?.['si'] ?? 0) * 100).toFixed(2) }}%
+                    ±{{ formatPctFraction(mcError?.[nodeId]?.['si'] ?? 0) }}
                   </td>
                 </tr>
               }
@@ -295,10 +295,10 @@
                   <tr>
                     <td style="color: #1a1a1a">{{ getNodeName(nodeId.key) }}</td>
                     <td style="text-align: right; color: #2ecc4a; font-weight: bold">
-                      {{ (entry.result.probabilidades[nodeId.key]['si'] * 100).toFixed(2) }}%
+                      {{ formatPctFraction(entry.result.probabilidades[nodeId.key]['si']) }}
                     </td>
                     <td style="text-align: right" [style.color]="entry.error[nodeId.key]['si'] > 0.05 ? '#A32D2D' : '#27500A'">
-                      ±{{ (entry.error[nodeId.key]['si'] * 100).toFixed(2) }}%
+                      ±{{ formatPctFraction(entry.error[nodeId.key]['si']) }}
                     </td>
                   </tr>
                 }
@@ -463,9 +463,9 @@
                     <tr>
                       <td style="color: #1a1a1a">{{ bayesGraph.get(nodeId)?.name ?? nodeId }}</td>
                       <td style="text-align: right; color: #888">
-                        {{ ((graphBeforeLearning?.get(nodeId)?.marginals?.si ?? 0) * 100).toFixed(2) }}%
+                        {{ formatPctFraction(graphBeforeLearning?.get(nodeId)?.marginals?.si ?? 0) }}
                       </td>
-                      <td style="text-align: right; color: #1967d2">{{ (getCPTSi(learningResult!.graph, nodeId) * 100).toFixed(2) }}%</td>
+                      <td style="text-align: right; color: #1967d2">{{ formatPctFraction(getCPTSi(learningResult!.graph, nodeId)) }}</td>
                     </tr>
                   }
                 </tbody>

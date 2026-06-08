@@ -22,7 +22,13 @@ import {
   isConnectionAutoNormalizeEnabled
 } from '../util/connectionCalculate.utils';
 import { isStateDiagramNodeLike, normalizeNodeId } from '../util/generalCalculationNodes.utils';
-import { MAX_PROBABILITY, PROBABILITY_KEY, formatProbabilityPercent, normalizeProbability } from '../util/probability.utils';
+import {
+  MAX_PROBABILITY,
+  PROBABILITY_KEY,
+  formatProbabilityPercent,
+  formatSignificantPercent,
+  normalizeProbability
+} from '../util/probability.utils';
 import { calculateTheoreticalNodeProbabilities, normalizeWeightValue } from './binomial/util/binomialWeight.utils';
 import { topRoundedRectangleShape } from './shape';
 import { BayesGraph } from './types';
@@ -533,6 +539,7 @@ export class DagaBaseComponent implements AfterViewInit, OnDestroy, OnChanges {
     topSection.updateInView();
   }
 
+
   /**
    * Draws the Bayesian decorators INSIDE the node:
    *   • Top band: type icon (left) + Yes% (right), tinted by node type.
@@ -551,8 +558,8 @@ export class DagaBaseComponent implements AfterViewInit, OnDestroy, OnChanges {
     const pNo = bayesNode?.marginals?.no ?? 0.5;
     const evidence = bayesNode?.evidence ?? null;
 
-    const pSiPct = (pSi * 100).toFixed(3);
-    const pNoPct = (pNo * 100).toFixed(3);
+    const pSiPct = formatSignificantPercent(pSi);
+    const pNoPct = formatSignificantPercent(pNo);
     const barWidthSi = Math.max(pSi * 100, 0.5);
     const barWidthNo = Math.max(pNo * 100, 0.5);
 
