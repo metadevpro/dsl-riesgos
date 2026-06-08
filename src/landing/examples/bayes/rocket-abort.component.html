@@ -1,23 +1,23 @@
-<h3>Example 2: Rocket Abort Launch at T-10</h3>
+<h3>Example 2. Rocket Abort Launch at T-10</h3>
 <p>
   In the final second before launch, the rocket's software automatically checks several critical systems. If any of the sensors detects an
-  anomaly, the system can trigger an automatic abort at T-0, halting the launch before ignition is complete.
+  anomaly, the system can trigger an automatic abort at T-10, halting the launch before ignition is complete.
 </p>
 <p>
   The problem is that an alarm does not always indicate an actual physical fault. Sensors can generate false positives due to electrical
-  noise, anomalous readings, temporary deviations or software errors. Therefore, when an alert is triggered, the flight controller needs
-  to answer a key question:
+  noise, anomalous readings, temporary deviations or software errors. Therefore, when an alert is triggered, the flight controller needs to
+  answer a key question:
 </p>
 <p>If the abort system has been activated, what is the probability that there is actually a physical fault?</p>
 <p>
-  This example shows how a Bayesian network allows a binary alert — “abort” or “no abort” — to be transformed into a probabilistic
-  estimate useful for decision-making
+  This example shows how a Bayesian network allows a binary alert — “abort” or “no abort” — to be transformed into a probabilistic estimate
+  useful for decision-making
 </p>
 
 <h4>Context of the case</h4>
 <p>
-  The model depicts a scenario inspired by real-world launches, where an anomalous reading at T-0 can temporarily halt the mission. In
-  such scenarios, the objective is not merely to detect the alarm, but to assess whether that alarm corresponds to:
+  The model depicts a scenario inspired by real-world launches, where an anomalous reading at T-10 can temporarily halt the mission. In such
+  scenarios, the objective is not merely to detect the alarm, but to assess whether that alarm corresponds to:
 </p>
 <ul>
   <li>A genuine physical fault in the vehicle.</li>
@@ -26,13 +26,13 @@
   <li>Strong evidence, enough to warrant a full inspection.</li>
 </ul>
 <p>
-  In a risk analysis application, this example demonstrates the value of the DSL developed in the final year project: the user can
-  visually construct the network, define the conditional probability tables and observe how the probability of a real failure changes when
-  new evidence is introduced.
+  In a risk analysis application, this example demonstrates the value of the DSL developed in the final year project: the user can visually
+  construct the network, define the conditional probability tables and observe how the probability of a real failure changes when new
+  evidence is introduced.
 </p>
 <p>The network contains five main nodes:</p>
 <ul>
-  <li>Real System Failure: There is a real physical failure in one of the critical systems at T-0.</li>
+  <li>Real System Failure: There is a real physical failure in one of the critical systems at T-10.</li>
   <li>Propellant Sensor: The propellant sensor system reports an anomaly.</li>
   <li>EC Sensor: The engine control system sensor reports an anomaly.</li>
   <li>T-0 Alert: The software activates automatic abort.</li>
@@ -43,7 +43,7 @@
 
 <h4>Probabilities defined in the CPTs</h4>
 <h4>Node 1 · RealSystemFailure</h4>
-<p>This node represents the prior probability that an actual physical fault exists at T-0.</p>
+<p>This node represents the prior probability that an actual physical fault exists at T-10.</p>
 <table>
   <thead>
     <tr>
