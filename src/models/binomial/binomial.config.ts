@@ -189,7 +189,7 @@ export const PROB_CONFIG: DiagramConfig = {
       ]
     },
     propertyEditor: {
-      width: '12rem'
+      width: '13rem'
     }
   },
   nodeTypeDefaults: {

@@ -10,8 +10,28 @@
     <a data-test-id="nav-bayes" routerLink="/bayes" routerLinkActive="active">Bayes</a>
     <a data-test-id="nav-doc" routerLink="/doc" routerLinkActive="active">Docs</a>
   </nav>
+
+  @if (activeModel) {
+    <div class="toolbar-actions">
+      @for (btn of activeModel.toolbarButtons; track btn.label) {
+        @if (btn.visible !== false) {
+          <button
+            [class.primary]="btn.variant === 'primary'"
+            [class.secondary]="btn.variant === 'secondary'"
+            [attr.data-test-id]="btn.testId"
+            (click)="btn.action()"
+          >
+            @if (btn.icon) {
+              <img [src]="btn.icon" class="btn-icon" alt="" />
+            }
+            {{ btn.label }}
+          </button>
+        }
+      }
+    </div>
+  }
 </header>
 
 <main>
-  <router-outlet></router-outlet>
+  <router-outlet (activate)="onActivate($event)" (deactivate)="onDeactivate()"></router-outlet>
 </main>
