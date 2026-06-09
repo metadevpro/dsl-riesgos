@@ -20,6 +20,37 @@ header {
   border-bottom: 1px solid #e5e7eb;
 }
 
+.metadev-bar {
+  height: 46px;
+  justify-content: space-between;
+  gap: 0;
+
+  a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+  }
+
+  &__home img {
+    height: 18px;
+    display: block;
+  }
+
+  &__labs {
+    gap: 1rem;
+  }
+
+  &__labs-text {
+    height: 11px;
+    display: block;
+  }
+
+  &__labs-logo {
+    height: 24px;
+    display: block;
+  }
+}
+
 .brand {
   display: flex;
   align-items: center;
