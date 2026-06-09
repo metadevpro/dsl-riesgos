@@ -20,6 +20,14 @@ header {
   border-bottom: 1px solid #e5e7eb;
 }
 
+header:not(.metadev-bar) {
+  flex-wrap: wrap;
+  height: auto; // override base header { height: 64px } so it can grow
+  min-height: 64px; // keep one-row height when content fits
+  gap: 0.75rem 2.5rem; // row-gap / column-gap: small vertical gap on wrap
+  padding: 0.5rem 2rem; // let wrapped rows breathe top/bottom
+}
+
 .metadev-bar {
   height: 46px;
   justify-content: space-between;
@@ -74,6 +82,7 @@ header {
 nav {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 0.5rem;
 
   a {
@@ -102,6 +111,7 @@ nav {
   margin-left: auto;
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 0.5rem;
 
   button {
