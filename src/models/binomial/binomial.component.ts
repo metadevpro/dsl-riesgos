@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { afterNextRender, Component, inject, ViewChild } from '@angular/core';
+import { afterNextRender, Component, ElementRef, inject, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DagaExporter } from '@metadev/daga';
 import { Canvas, DagaModule } from '@metadev/daga-angular';
@@ -14,6 +14,7 @@ import {
 } from '../../util/importExport.utils';
 import { DagaBaseComponent } from '../dagaBase.component';
 import { GenericComponent } from '../generic.component';
+import { ModelToolbarHost, ToolbarButton } from '../model-toolbar';
 import { ConnectionInfo, NodeInfo } from '../types';
 import { buildEndNodeIdSet, calculateBinomialProbability } from './util/binomialCalculationNodes.utils';
 import { calculateTheoreticalNodeProbabilities } from './util/binomialWeight.utils';
@@ -25,16 +26,52 @@ import { calculateTheoreticalNodeProbabilities } from './util/binomialWeight.uti
   styleUrls: ['../models-shared.scss'],
   imports: [DagaModule, CommonModule, DagaBaseComponent]
 })
-export class BinomialComponent extends GenericComponent {
+export class BinomialComponent extends GenericComponent implements ModelToolbarHost {
   branchValueKey = 'weight';
   showTheoreticalProbabilities = true;
 
   @ViewChild(DagaBaseComponent) private dagaBase?: DagaBaseComponent;
+  @ViewChild('fileInput') private fileInput?: ElementRef<HTMLInputElement>;
 
   private canvas: Canvas | null = null;
   private pendingImport: RiskFile | null = null;
 
   private readonly route = inject(ActivatedRoute);
+
+  get toolbarButtons(): ToolbarButton[] {
+    return [
+      {
+        label: 'Import',
+        testId: 'import',
+        variant: 'secondary',
+        icon: 'assets/icons/feature-icons/import-icon.svg',
+        action: () => this.triggerImport()
+      },
+      {
+        label: 'Export',
+        testId: 'export',
+        variant: 'secondary',
+        icon: 'assets/icons/feature-icons/export-icon.svg',
+        action: () => this.downloadRiskFile()
+      },
+      {
+        label: 'Calculate Probability',
+        testId: 'calculate-probability',
+        variant: 'primary',
+        action: () => this.openCalculationDialog()
+      },
+      {
+        label: 'View Results',
+        variant: 'primary',
+        visible: this.hasResults,
+        action: () => this.openResultsBar()
+      }
+    ];
+  }
+
+  triggerImport(): void {
+    this.fileInput?.nativeElement.click();
+  }
 
   constructor() {
     super();

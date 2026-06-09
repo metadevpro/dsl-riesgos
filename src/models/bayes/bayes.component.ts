@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { afterNextRender, ChangeDetectorRef, Component, inject, OnDestroy, ViewChild } from '@angular/core';
+import { afterNextRender, ChangeDetectorRef, Component, ElementRef, inject, OnDestroy, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { DagaConnection, DagaExporter, DagaModel, DagaNode } from '@metadev/daga';
@@ -17,6 +17,7 @@ import {
 import { normalizeProbability, formatSignificantPercent, MAX_DISPLAY_DECIMALS } from '../../util/probability.utils';
 import { DagaBaseComponent } from '../dagaBase.component';
 import { GenericComponent } from '../generic.component';
+import { ModelToolbarHost, ToolbarButton } from '../model-toolbar';
 import { BayesCPTEntry, BayesEvidence, BayesGraph, CPTTableRow, LearningResult, MCResult } from '../types';
 import { bayes_CONFIG } from './bayes.config';
 import {
@@ -41,7 +42,7 @@ import { generarDatosSinteticos } from './util/syntheticData.utils';
   styleUrls: ['bayes.component.scss', '../models-shared.scss'],
   imports: [DagaModule, CommonModule, FormsModule, DagaBaseComponent]
 })
-export class BayesComponent extends GenericComponent implements OnDestroy {
+export class BayesComponent extends GenericComponent implements OnDestroy, ModelToolbarHost {
   private cdr = inject(ChangeDetectorRef);
 
   bayes_config = bayes_CONFIG;
@@ -78,6 +79,54 @@ export class BayesComponent extends GenericComponent implements OnDestroy {
   private readonly route = inject(ActivatedRoute);
 
   @ViewChild(DagaBaseComponent) private dagaBase?: DagaBaseComponent;
+  @ViewChild('fileInput') private fileInput?: ElementRef<HTMLInputElement>;
+
+  get toolbarButtons(): ToolbarButton[] {
+    return [
+      {
+        label: 'Import',
+        testId: 'import',
+        variant: 'secondary',
+        icon: 'assets/icons/feature-icons/import-icon.svg',
+        action: () => this.triggerImport()
+      },
+      {
+        label: 'Export',
+        testId: 'export',
+        variant: 'secondary',
+        icon: 'assets/icons/feature-icons/export-icon.svg',
+        action: () => this.downloadRiskFile()
+      },
+      {
+        label: 'Import CSV',
+        testId: 'import-csv',
+        variant: 'primary',
+        action: () => this.toggleLearningPanel()
+      },
+      {
+        label: 'Generate CSV',
+        testId: 'generate-csv',
+        variant: 'primary',
+        action: () => this.abrirDialogoCSV()
+      },
+      {
+        label: 'Monte Carlo',
+        testId: 'monte-carlo',
+        variant: 'primary',
+        action: () => this.toggleMCPanel()
+      },
+      {
+        label: 'View Results',
+        variant: 'primary',
+        visible: this.hasHistory,
+        action: () => this.openMCHistory()
+      }
+    ];
+  }
+
+  triggerImport(): void {
+    this.fileInput?.nativeElement.click();
+  }
 
   constructor() {
     super();

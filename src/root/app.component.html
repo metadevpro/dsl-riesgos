@@ -1,6 +1,17 @@
+<header class="metadev-bar">
+  <a class="metadev-bar__home" href="https://metadev.pro" target="_blank" rel="noopener noreferrer" data-test-id="metadev-home">
+    <img src="assets/icons/logos/metadev-logo.svg" alt="Metadev" />
+  </a>
+
+  <a class="metadev-bar__labs" href="https://metadev.pro/labs" target="_blank" rel="noopener noreferrer" data-test-id="metadev-labs">
+    <img class="metadev-bar__labs-text" src="assets/icons/logos/metadev-lab-text.svg" alt="A project by Metadev Labs" />
+    <img class="metadev-bar__labs-logo" src="assets/icons/logos/metadev-lab-logo.svg" alt="Metadev Labs" />
+  </a>
+</header>
+
 <header>
   <a class="brand" routerLink="/">
-    <img src="assets/icons/favicon-risk.svg" alt="Risk DSL" width="32" height="32" />
+    <img src="assets/icons/favicon/favicon-risk.svg" alt="Risk DSL" width="32" height="32" />
     <span class="brand-name">RISK DSL</span>
   </a>
 
@@ -10,8 +21,28 @@
     <a data-test-id="nav-bayes" routerLink="/bayes" routerLinkActive="active">Bayes</a>
     <a data-test-id="nav-doc" routerLink="/doc" routerLinkActive="active">Docs</a>
   </nav>
+
+  @if (activeModel) {
+    <div class="toolbar-actions">
+      @for (btn of activeModel.toolbarButtons; track btn.label) {
+        @if (btn.visible !== false) {
+          <button
+            [class.primary]="btn.variant === 'primary'"
+            [class.secondary]="btn.variant === 'secondary'"
+            [attr.data-test-id]="btn.testId"
+            (click)="btn.action()"
+          >
+            @if (btn.icon) {
+              <img [src]="btn.icon" class="btn-icon" alt="" />
+            }
+            {{ btn.label }}
+          </button>
+        }
+      }
+    </div>
+  }
 </header>
 
 <main>
-  <router-outlet></router-outlet>
+  <router-outlet (activate)="onActivate($event)" (deactivate)="onDeactivate()"></router-outlet>
 </main>

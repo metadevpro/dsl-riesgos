@@ -9,47 +9,6 @@
   overflow: hidden;
 }
 
-// Dark-green action bar (replaces the old global .app-topbar wrapper).
-.topbar-actions {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 10px;
-  height: 64px;
-  padding: 0 24px;
-  box-sizing: border-box;
-  flex-shrink: 0;
-  background: #1f3a22;
-  z-index: 1200;
-
-  button {
-    background: transparent;
-    color: #fff;
-    border: 1px solid #4a6a4f;
-    padding: 8px 16px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    white-space: nowrap;
-  }
-
-  button:hover:not(.primary) {
-    background: rgba(255, 255, 255, 0.06);
-  }
-
-  button.primary {
-    background: #2ecc4a;
-    border-color: #2ecc4a;
-  }
-
-  button.primary:hover {
-    background: #25b03f;
-  }
-}
-
 .resultsbarVisible {
   transform: translateX(0) !important;
 }
