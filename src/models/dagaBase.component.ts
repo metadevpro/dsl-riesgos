@@ -539,7 +539,6 @@ export class DagaBaseComponent implements AfterViewInit, OnDestroy, OnChanges {
     topSection.updateInView();
   }
 
-
   /**
    * Draws the Bayesian decorators INSIDE the node:
    *   • Top band: type icon (left) + Yes% (right), tinted by node type.

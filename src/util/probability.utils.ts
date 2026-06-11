@@ -27,11 +27,7 @@ export function getSignificantDigitCount(n: number): number {
  * (capped at `maxDecimals`) when rounding would collapse a non-zero value to 0.
  * Trailing zeros are stripped.
  */
-export function formatSignificantPercent(
-  fraction: number,
-  preferredDecimals = 2,
-  maxDecimals = MAX_DISPLAY_DECIMALS
-): string {
+export function formatSignificantPercent(fraction: number, preferredDecimals = 2, maxDecimals = MAX_DISPLAY_DECIMALS): string {
   if (!Number.isFinite(fraction)) return '0';
   const percent = fraction * 100;
   // Upper bound: never invent decimals the value doesn't carry. getSignificantDigitCount

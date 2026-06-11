@@ -24,11 +24,7 @@ interface WeightedSample {
  * weight from evidence nodes as the product of P(evidence | parents_sampled).
  * Returns the sample together with its weight.
  */
-function muestrearLikelihoodWeighting(
-  graph: BayesGraph,
-  orden: string[],
-  evidencias: Record<string, BayesEvidence>
-): WeightedSample {
+function muestrearLikelihoodWeighting(graph: BayesGraph, orden: string[], evidencias: Record<string, BayesEvidence>): WeightedSample {
   const muestra: Record<string, string> = {};
   let peso = 1;
 

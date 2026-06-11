@@ -21,10 +21,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 0,
-            "coords": [
-              100,
-              600
-            ],
+            "coords": [100, 600],
             "width": 250,
             "height": 32
           },
@@ -35,10 +32,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 1,
-            "coords": [
-              100,
-              632
-            ],
+            "coords": [100, 632],
             "width": 250,
             "height": 118
           }
@@ -46,53 +40,29 @@
         "ports": [
           {
             "id": "id9efe097f-1d18-4e30-ab7f-e9a38a274f8c_port_0",
-            "coords": [
-              225,
-              600
-            ],
-            "connectionPoint": [
-              225,
-              600
-            ],
+            "coords": [225, 600],
+            "connectionPoint": [225, 600],
             "direction": "top",
             "label": ""
           },
           {
             "id": "id9efe097f-1d18-4e30-ab7f-e9a38a274f8c_port_1",
-            "coords": [
-              100,
-              675
-            ],
-            "connectionPoint": [
-              100,
-              675
-            ],
+            "coords": [100, 675],
+            "connectionPoint": [100, 675],
             "direction": "left",
             "label": ""
           },
           {
             "id": "id9efe097f-1d18-4e30-ab7f-e9a38a274f8c_port_2",
-            "coords": [
-              225,
-              750
-            ],
-            "connectionPoint": [
-              225,
-              750
-            ],
+            "coords": [225, 750],
+            "connectionPoint": [225, 750],
             "direction": "bottom",
             "label": ""
           },
           {
             "id": "id9efe097f-1d18-4e30-ab7f-e9a38a274f8c_port_3",
-            "coords": [
-              350,
-              675
-            ],
-            "connectionPoint": [
-              350,
-              675
-            ],
+            "coords": [350, 675],
+            "connectionPoint": [350, 675],
             "direction": "right",
             "label": ""
           }
@@ -100,25 +70,16 @@
         "decorators": [
           {
             "id": "id9efe097f-1d18-4e30-ab7f-e9a38a274f8c-probability-decorator",
-            "coords": [
-              100,
-              600
-            ],
+            "coords": [100, 600],
             "width": 250,
             "height": 32,
             "priority": 0,
             "svg": "\n      <foreignObject x=\"0\" y=\"0\" width=\"250\" height=\"32\">\n        <div xmlns=\"http://www.w3.org/1999/xhtml\" style=\"height:32px;display:flex;align-items:center;justify-content:space-between;padding:0 10px;box-sizing:border-box;background:transparent;pointer-events:none;font-family:'WonderUnitSans', sans-serif;\">\n          <img src=\"/assets/icons/start-icon.svg\" width=\"22\" height=\"22\" style=\"display:block;\" />\n          <span style=\"color:#15A34A;font-weight:700;font-size:13px;\">100%</span>\n        </div>\n      </foreignObject>\n    ",
-            "anchorPoints": [
-              "floating",
-              "floating"
-            ]
+            "anchorPoints": ["floating", "floating"]
           }
         ],
         "label": "System",
-        "coords": [
-          100,
-          600
-        ],
+        "coords": [100, 600],
         "width": 250,
         "height": 150,
         "data": {
@@ -138,10 +99,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 0,
-            "coords": [
-              450,
-              600
-            ],
+            "coords": [450, 600],
             "width": 250,
             "height": 32
           },
@@ -152,10 +110,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 1,
-            "coords": [
-              450,
-              632
-            ],
+            "coords": [450, 632],
             "width": 250,
             "height": 90
           },
@@ -166,10 +121,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 2,
-            "coords": [
-              450,
-              722
-            ],
+            "coords": [450, 722],
             "width": 250,
             "height": 28
           }
@@ -177,53 +129,29 @@
         "ports": [
           {
             "id": "id44b168f2-0f2e-4d15-8a2c-e18c735df842_port_0",
-            "coords": [
-              575,
-              600
-            ],
-            "connectionPoint": [
-              575,
-              600
-            ],
+            "coords": [575, 600],
+            "connectionPoint": [575, 600],
             "direction": "top",
             "label": ""
           },
           {
             "id": "id44b168f2-0f2e-4d15-8a2c-e18c735df842_port_1",
-            "coords": [
-              450,
-              675
-            ],
-            "connectionPoint": [
-              450,
-              675
-            ],
+            "coords": [450, 675],
+            "connectionPoint": [450, 675],
             "direction": "left",
             "label": ""
           },
           {
             "id": "id44b168f2-0f2e-4d15-8a2c-e18c735df842_port_2",
-            "coords": [
-              575,
-              750
-            ],
-            "connectionPoint": [
-              575,
-              750
-            ],
+            "coords": [575, 750],
+            "connectionPoint": [575, 750],
             "direction": "bottom",
             "label": ""
           },
           {
             "id": "id44b168f2-0f2e-4d15-8a2c-e18c735df842_port_3",
-            "coords": [
-              700,
-              675
-            ],
-            "connectionPoint": [
-              700,
-              675
-            ],
+            "coords": [700, 675],
+            "connectionPoint": [700, 675],
             "direction": "right",
             "label": ""
           }
@@ -231,40 +159,25 @@
         "decorators": [
           {
             "id": "id44b168f2-0f2e-4d15-8a2c-e18c735df842-probability-decorator",
-            "coords": [
-              450,
-              600
-            ],
+            "coords": [450, 600],
             "width": 250,
             "height": 32,
             "priority": 0,
             "svg": "\n      <foreignObject x=\"0\" y=\"0\" width=\"250\" height=\"32\">\n        <div xmlns=\"http://www.w3.org/1999/xhtml\" style=\"height:32px;display:flex;align-items:center;justify-content:space-between;padding:0 10px;box-sizing:border-box;background:transparent;pointer-events:none;font-family:'WonderUnitSans', sans-serif;\">\n          <img src=\"/assets/icons/state-icon.svg\" width=\"22\" height=\"22\" style=\"display:block;\" />\n          <span style=\"color:#BA51C5;font-weight:700;font-size:13px;\">0.30%</span>\n        </div>\n      </foreignObject>\n    ",
-            "anchorPoints": [
-              "floating",
-              "floating"
-            ]
+            "anchorPoints": ["floating", "floating"]
           },
           {
             "id": "id44b168f2-0f2e-4d15-8a2c-e18c735df842-local-probability-decorator",
-            "coords": [
-              450,
-              722
-            ],
+            "coords": [450, 722],
             "width": 250,
             "height": 28,
             "priority": 0,
             "svg": "\n      <foreignObject x=\"0\" y=\"0\" width=\"250\" height=\"28\">\n        <div xmlns=\"http://www.w3.org/1999/xhtml\" style=\"height:28px;display:flex;align-items:center;justify-content:center;background:transparent;pointer-events:none;font-family:'WonderUnitSans', sans-serif;\">\n          <span style=\"background:#EEEEEE;color:#333;font-size:12px;border-radius:999px;padding:2px 12px;font-weight:500;\">0.30%</span>\n        </div>\n      </foreignObject>\n    ",
-            "anchorPoints": [
-              "floating",
-              "floating"
-            ]
+            "anchorPoints": ["floating", "floating"]
           }
         ],
         "label": "Initial access",
-        "coords": [
-          450,
-          600
-        ],
+        "coords": [450, 600],
         "width": 250,
         "height": 150,
         "data": {
@@ -285,10 +198,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 0,
-            "coords": [
-              1150,
-              600
-            ],
+            "coords": [1150, 600],
             "width": 250,
             "height": 32
           },
@@ -299,10 +209,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 1,
-            "coords": [
-              1150,
-              632
-            ],
+            "coords": [1150, 632],
             "width": 250,
             "height": 90
           },
@@ -313,10 +220,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 2,
-            "coords": [
-              1150,
-              722
-            ],
+            "coords": [1150, 722],
             "width": 250,
             "height": 28
           }
@@ -324,53 +228,29 @@
         "ports": [
           {
             "id": "id13a3f2db-a501-470f-be0a-b2aec73b6d97_port_0",
-            "coords": [
-              1275,
-              600
-            ],
-            "connectionPoint": [
-              1275,
-              600
-            ],
+            "coords": [1275, 600],
+            "connectionPoint": [1275, 600],
             "direction": "top",
             "label": ""
           },
           {
             "id": "id13a3f2db-a501-470f-be0a-b2aec73b6d97_port_1",
-            "coords": [
-              1150,
-              675
-            ],
-            "connectionPoint": [
-              1150,
-              675
-            ],
+            "coords": [1150, 675],
+            "connectionPoint": [1150, 675],
             "direction": "left",
             "label": ""
           },
           {
             "id": "id13a3f2db-a501-470f-be0a-b2aec73b6d97_port_2",
-            "coords": [
-              1275,
-              750
-            ],
-            "connectionPoint": [
-              1275,
-              750
-            ],
+            "coords": [1275, 750],
+            "connectionPoint": [1275, 750],
             "direction": "bottom",
             "label": ""
           },
           {
             "id": "id13a3f2db-a501-470f-be0a-b2aec73b6d97_port_3",
-            "coords": [
-              1400,
-              675
-            ],
-            "connectionPoint": [
-              1400,
-              675
-            ],
+            "coords": [1400, 675],
+            "connectionPoint": [1400, 675],
             "direction": "right",
             "label": ""
           }
@@ -378,40 +258,25 @@
         "decorators": [
           {
             "id": "id13a3f2db-a501-470f-be0a-b2aec73b6d97-probability-decorator",
-            "coords": [
-              1150,
-              600
-            ],
+            "coords": [1150, 600],
             "width": 250,
             "height": 32,
             "priority": 0,
             "svg": "\n      <foreignObject x=\"0\" y=\"0\" width=\"250\" height=\"32\">\n        <div xmlns=\"http://www.w3.org/1999/xhtml\" style=\"height:32px;display:flex;align-items:center;justify-content:space-between;padding:0 10px;box-sizing:border-box;background:transparent;pointer-events:none;font-family:'WonderUnitSans', sans-serif;\">\n          <img src=\"/assets/icons/state-icon.svg\" width=\"22\" height=\"22\" style=\"display:block;\" />\n          <span style=\"color:#BA51C5;font-weight:700;font-size:13px;\">0.00%</span>\n        </div>\n      </foreignObject>\n    ",
-            "anchorPoints": [
-              "floating",
-              "floating"
-            ]
+            "anchorPoints": ["floating", "floating"]
           },
           {
             "id": "id13a3f2db-a501-470f-be0a-b2aec73b6d97-local-probability-decorator",
-            "coords": [
-              1150,
-              722
-            ],
+            "coords": [1150, 722],
             "width": 250,
             "height": 28,
             "priority": 0,
             "svg": "\n      <foreignObject x=\"0\" y=\"0\" width=\"250\" height=\"28\">\n        <div xmlns=\"http://www.w3.org/1999/xhtml\" style=\"height:28px;display:flex;align-items:center;justify-content:center;background:transparent;pointer-events:none;font-family:'WonderUnitSans', sans-serif;\">\n          <span style=\"background:#EEEEEE;color:#333;font-size:12px;border-radius:999px;padding:2px 12px;font-weight:500;\">25%</span>\n        </div>\n      </foreignObject>\n    ",
-            "anchorPoints": [
-              "floating",
-              "floating"
-            ]
+            "anchorPoints": ["floating", "floating"]
           }
         ],
         "label": "Privilege escalation",
-        "coords": [
-          1150,
-          600
-        ],
+        "coords": [1150, 600],
         "width": 250,
         "height": 150,
         "data": {
@@ -432,10 +297,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 0,
-            "coords": [
-              1500,
-              600
-            ],
+            "coords": [1500, 600],
             "width": 250,
             "height": 32
           },
@@ -446,10 +308,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 1,
-            "coords": [
-              1500,
-              632
-            ],
+            "coords": [1500, 632],
             "width": 250,
             "height": 90
           },
@@ -460,10 +319,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 2,
-            "coords": [
-              1500,
-              722
-            ],
+            "coords": [1500, 722],
             "width": 250,
             "height": 28
           }
@@ -471,53 +327,29 @@
         "ports": [
           {
             "id": "id96ea11dd-7a00-4e3f-8bec-0d25f135f73f_port_0",
-            "coords": [
-              1625,
-              600
-            ],
-            "connectionPoint": [
-              1625,
-              600
-            ],
+            "coords": [1625, 600],
+            "connectionPoint": [1625, 600],
             "direction": "top",
             "label": ""
           },
           {
             "id": "id96ea11dd-7a00-4e3f-8bec-0d25f135f73f_port_1",
-            "coords": [
-              1500,
-              675
-            ],
-            "connectionPoint": [
-              1500,
-              675
-            ],
+            "coords": [1500, 675],
+            "connectionPoint": [1500, 675],
             "direction": "left",
             "label": ""
           },
           {
             "id": "id96ea11dd-7a00-4e3f-8bec-0d25f135f73f_port_2",
-            "coords": [
-              1625,
-              750
-            ],
-            "connectionPoint": [
-              1625,
-              750
-            ],
+            "coords": [1625, 750],
+            "connectionPoint": [1625, 750],
             "direction": "bottom",
             "label": ""
           },
           {
             "id": "id96ea11dd-7a00-4e3f-8bec-0d25f135f73f_port_3",
-            "coords": [
-              1750,
-              675
-            ],
-            "connectionPoint": [
-              1750,
-              675
-            ],
+            "coords": [1750, 675],
+            "connectionPoint": [1750, 675],
             "direction": "right",
             "label": ""
           }
@@ -525,40 +357,25 @@
         "decorators": [
           {
             "id": "id96ea11dd-7a00-4e3f-8bec-0d25f135f73f-probability-decorator",
-            "coords": [
-              1500,
-              600
-            ],
+            "coords": [1500, 600],
             "width": 250,
             "height": 32,
             "priority": 0,
             "svg": "\n      <foreignObject x=\"0\" y=\"0\" width=\"250\" height=\"32\">\n        <div xmlns=\"http://www.w3.org/1999/xhtml\" style=\"height:32px;display:flex;align-items:center;justify-content:space-between;padding:0 10px;box-sizing:border-box;background:transparent;pointer-events:none;font-family:'WonderUnitSans', sans-serif;\">\n          <img src=\"/assets/icons/state-icon.svg\" width=\"22\" height=\"22\" style=\"display:block;\" />\n          <span style=\"color:#BA51C5;font-weight:700;font-size:13px;\">0.00%</span>\n        </div>\n      </foreignObject>\n    ",
-            "anchorPoints": [
-              "floating",
-              "floating"
-            ]
+            "anchorPoints": ["floating", "floating"]
           },
           {
             "id": "id96ea11dd-7a00-4e3f-8bec-0d25f135f73f-local-probability-decorator",
-            "coords": [
-              1500,
-              722
-            ],
+            "coords": [1500, 722],
             "width": 250,
             "height": 28,
             "priority": 0,
             "svg": "\n      <foreignObject x=\"0\" y=\"0\" width=\"250\" height=\"28\">\n        <div xmlns=\"http://www.w3.org/1999/xhtml\" style=\"height:28px;display:flex;align-items:center;justify-content:center;background:transparent;pointer-events:none;font-family:'WonderUnitSans', sans-serif;\">\n          <span style=\"background:#EEEEEE;color:#333;font-size:12px;border-radius:999px;padding:2px 12px;font-weight:500;\">48%</span>\n        </div>\n      </foreignObject>\n    ",
-            "anchorPoints": [
-              "floating",
-              "floating"
-            ]
+            "anchorPoints": ["floating", "floating"]
           }
         ],
         "label": "High-impact outcome",
-        "coords": [
-          1500,
-          600
-        ],
+        "coords": [1500, 600],
         "width": 250,
         "height": 150,
         "data": {
@@ -579,10 +396,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 0,
-            "coords": [
-              800,
-              600
-            ],
+            "coords": [800, 600],
             "width": 250,
             "height": 32
           },
@@ -593,10 +407,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 1,
-            "coords": [
-              800,
-              632
-            ],
+            "coords": [800, 632],
             "width": 250,
             "height": 90
           },
@@ -607,10 +418,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 2,
-            "coords": [
-              800,
-              722
-            ],
+            "coords": [800, 722],
             "width": 250,
             "height": 28
           }
@@ -618,53 +426,29 @@
         "ports": [
           {
             "id": "id87045ff9-9ff9-43fa-830c-8aaf53fae4e2_port_0",
-            "coords": [
-              925,
-              600
-            ],
-            "connectionPoint": [
-              925,
-              600
-            ],
+            "coords": [925, 600],
+            "connectionPoint": [925, 600],
             "direction": "top",
             "label": ""
           },
           {
             "id": "id87045ff9-9ff9-43fa-830c-8aaf53fae4e2_port_1",
-            "coords": [
-              800,
-              675
-            ],
-            "connectionPoint": [
-              800,
-              675
-            ],
+            "coords": [800, 675],
+            "connectionPoint": [800, 675],
             "direction": "left",
             "label": ""
           },
           {
             "id": "id87045ff9-9ff9-43fa-830c-8aaf53fae4e2_port_2",
-            "coords": [
-              925,
-              750
-            ],
-            "connectionPoint": [
-              925,
-              750
-            ],
+            "coords": [925, 750],
+            "connectionPoint": [925, 750],
             "direction": "bottom",
             "label": ""
           },
           {
             "id": "id87045ff9-9ff9-43fa-830c-8aaf53fae4e2_port_3",
-            "coords": [
-              1050,
-              675
-            ],
-            "connectionPoint": [
-              1050,
-              675
-            ],
+            "coords": [1050, 675],
+            "connectionPoint": [1050, 675],
             "direction": "right",
             "label": ""
           }
@@ -672,40 +456,25 @@
         "decorators": [
           {
             "id": "id87045ff9-9ff9-43fa-830c-8aaf53fae4e2-probability-decorator",
-            "coords": [
-              800,
-              600
-            ],
+            "coords": [800, 600],
             "width": 250,
             "height": 32,
             "priority": 0,
             "svg": "\n      <foreignObject x=\"0\" y=\"0\" width=\"250\" height=\"32\">\n        <div xmlns=\"http://www.w3.org/1999/xhtml\" style=\"height:32px;display:flex;align-items:center;justify-content:space-between;padding:0 10px;box-sizing:border-box;background:transparent;pointer-events:none;font-family:'WonderUnitSans', sans-serif;\">\n          <img src=\"/assets/icons/state-icon.svg\" width=\"22\" height=\"22\" style=\"display:block;\" />\n          <span style=\"color:#BA51C5;font-weight:700;font-size:13px;\">0.00%</span>\n        </div>\n      </foreignObject>\n    ",
-            "anchorPoints": [
-              "floating",
-              "floating"
-            ]
+            "anchorPoints": ["floating", "floating"]
           },
           {
             "id": "id87045ff9-9ff9-43fa-830c-8aaf53fae4e2-local-probability-decorator",
-            "coords": [
-              800,
-              722
-            ],
+            "coords": [800, 722],
             "width": 250,
             "height": 28,
             "priority": 0,
             "svg": "\n      <foreignObject x=\"0\" y=\"0\" width=\"250\" height=\"28\">\n        <div xmlns=\"http://www.w3.org/1999/xhtml\" style=\"height:28px;display:flex;align-items:center;justify-content:center;background:transparent;pointer-events:none;font-family:'WonderUnitSans', sans-serif;\">\n          <span style=\"background:#EEEEEE;color:#333;font-size:12px;border-radius:999px;padding:2px 12px;font-weight:500;\">1.44%</span>\n        </div>\n      </foreignObject>\n    ",
-            "anchorPoints": [
-              "floating",
-              "floating"
-            ]
+            "anchorPoints": ["floating", "floating"]
           }
         ],
         "label": "Event",
-        "coords": [
-          800,
-          600
-        ],
+        "coords": [800, 600],
         "width": 250,
         "height": 150,
         "data": {
@@ -726,10 +495,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 0,
-            "coords": [
-              1850,
-              600
-            ],
+            "coords": [1850, 600],
             "width": 250,
             "height": 32
           },
@@ -740,10 +506,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 1,
-            "coords": [
-              1850,
-              632
-            ],
+            "coords": [1850, 632],
             "width": 250,
             "height": 118
           }
@@ -751,53 +514,29 @@
         "ports": [
           {
             "id": "id732871f3-a49d-4f55-834c-8a2777ff2d1e_port_0",
-            "coords": [
-              1975,
-              600
-            ],
-            "connectionPoint": [
-              1975,
-              600
-            ],
+            "coords": [1975, 600],
+            "connectionPoint": [1975, 600],
             "direction": "top",
             "label": ""
           },
           {
             "id": "id732871f3-a49d-4f55-834c-8a2777ff2d1e_port_1",
-            "coords": [
-              1850,
-              675
-            ],
-            "connectionPoint": [
-              1850,
-              675
-            ],
+            "coords": [1850, 675],
+            "connectionPoint": [1850, 675],
             "direction": "left",
             "label": ""
           },
           {
             "id": "id732871f3-a49d-4f55-834c-8a2777ff2d1e_port_2",
-            "coords": [
-              1975,
-              750
-            ],
-            "connectionPoint": [
-              1975,
-              750
-            ],
+            "coords": [1975, 750],
+            "connectionPoint": [1975, 750],
             "direction": "bottom",
             "label": ""
           },
           {
             "id": "id732871f3-a49d-4f55-834c-8a2777ff2d1e_port_3",
-            "coords": [
-              2100,
-              675
-            ],
-            "connectionPoint": [
-              2100,
-              675
-            ],
+            "coords": [2100, 675],
+            "connectionPoint": [2100, 675],
             "direction": "right",
             "label": ""
           }
@@ -805,25 +544,16 @@
         "decorators": [
           {
             "id": "id732871f3-a49d-4f55-834c-8a2777ff2d1e-probability-decorator",
-            "coords": [
-              1850,
-              600
-            ],
+            "coords": [1850, 600],
             "width": 250,
             "height": 32,
             "priority": 0,
             "svg": "\n      <foreignObject x=\"0\" y=\"0\" width=\"250\" height=\"32\">\n        <div xmlns=\"http://www.w3.org/1999/xhtml\" style=\"height:32px;display:flex;align-items:center;justify-content:space-between;padding:0 10px;box-sizing:border-box;background:transparent;pointer-events:none;font-family:'WonderUnitSans', sans-serif;\">\n          <img src=\"/assets/icons/transition-icon.svg\" width=\"22\" height=\"22\" style=\"display:block;\" />\n          <span style=\"color:#047E9C;font-weight:700;font-size:13px;\">0.00%</span>\n        </div>\n      </foreignObject>\n    ",
-            "anchorPoints": [
-              "floating",
-              "floating"
-            ]
+            "anchorPoints": ["floating", "floating"]
           }
         ],
         "label": "System compromised",
-        "coords": [
-          1850,
-          600
-        ],
+        "coords": [1850, 600],
         "width": 250,
         "height": 150,
         "data": {
@@ -843,10 +573,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 0,
-            "coords": [
-              2200,
-              600
-            ],
+            "coords": [2200, 600],
             "width": 250,
             "height": 32
           },
@@ -857,10 +584,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 1,
-            "coords": [
-              2200,
-              632
-            ],
+            "coords": [2200, 632],
             "width": 250,
             "height": 90
           },
@@ -871,10 +595,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 2,
-            "coords": [
-              2200,
-              722
-            ],
+            "coords": [2200, 722],
             "width": 250,
             "height": 28
           }
@@ -882,53 +603,29 @@
         "ports": [
           {
             "id": "idecdd4852-a844-4daa-9a3b-c798e03c5857_port_0",
-            "coords": [
-              2325,
-              600
-            ],
-            "connectionPoint": [
-              2325,
-              600
-            ],
+            "coords": [2325, 600],
+            "connectionPoint": [2325, 600],
             "direction": "top",
             "label": ""
           },
           {
             "id": "idecdd4852-a844-4daa-9a3b-c798e03c5857_port_1",
-            "coords": [
-              2200,
-              675
-            ],
-            "connectionPoint": [
-              2200,
-              675
-            ],
+            "coords": [2200, 675],
+            "connectionPoint": [2200, 675],
             "direction": "left",
             "label": ""
           },
           {
             "id": "idecdd4852-a844-4daa-9a3b-c798e03c5857_port_2",
-            "coords": [
-              2325,
-              750
-            ],
-            "connectionPoint": [
-              2325,
-              750
-            ],
+            "coords": [2325, 750],
+            "connectionPoint": [2325, 750],
             "direction": "bottom",
             "label": ""
           },
           {
             "id": "idecdd4852-a844-4daa-9a3b-c798e03c5857_port_3",
-            "coords": [
-              2450,
-              675
-            ],
-            "connectionPoint": [
-              2450,
-              675
-            ],
+            "coords": [2450, 675],
+            "connectionPoint": [2450, 675],
             "direction": "right",
             "label": ""
           }
@@ -936,40 +633,25 @@
         "decorators": [
           {
             "id": "idecdd4852-a844-4daa-9a3b-c798e03c5857-probability-decorator",
-            "coords": [
-              2200,
-              600
-            ],
+            "coords": [2200, 600],
             "width": 250,
             "height": 32,
             "priority": 0,
             "svg": "\n      <foreignObject x=\"0\" y=\"0\" width=\"250\" height=\"32\">\n        <div xmlns=\"http://www.w3.org/1999/xhtml\" style=\"height:32px;display:flex;align-items:center;justify-content:space-between;padding:0 10px;box-sizing:border-box;background:transparent;pointer-events:none;font-family:'WonderUnitSans', sans-serif;\">\n          <img src=\"/assets/icons/state-icon.svg\" width=\"22\" height=\"22\" style=\"display:block;\" />\n          <span style=\"color:#BA51C5;font-weight:700;font-size:13px;\">0.00%</span>\n        </div>\n      </foreignObject>\n    ",
-            "anchorPoints": [
-              "floating",
-              "floating"
-            ]
+            "anchorPoints": ["floating", "floating"]
           },
           {
             "id": "idecdd4852-a844-4daa-9a3b-c798e03c5857-local-probability-decorator",
-            "coords": [
-              2200,
-              722
-            ],
+            "coords": [2200, 722],
             "width": 250,
             "height": 28,
             "priority": 0,
             "svg": "\n      <foreignObject x=\"0\" y=\"0\" width=\"250\" height=\"28\">\n        <div xmlns=\"http://www.w3.org/1999/xhtml\" style=\"height:28px;display:flex;align-items:center;justify-content:center;background:transparent;pointer-events:none;font-family:'WonderUnitSans', sans-serif;\">\n          <span style=\"background:#EEEEEE;color:#333;font-size:12px;border-radius:999px;padding:2px 12px;font-weight:500;\">52%</span>\n        </div>\n      </foreignObject>\n    ",
-            "anchorPoints": [
-              "floating",
-              "floating"
-            ]
+            "anchorPoints": ["floating", "floating"]
           }
         ],
         "label": "Internal detection",
-        "coords": [
-          2200,
-          600
-        ],
+        "coords": [2200, 600],
         "width": 250,
         "height": 150,
         "data": {
@@ -990,10 +672,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 0,
-            "coords": [
-              2550,
-              600
-            ],
+            "coords": [2550, 600],
             "width": 250,
             "height": 32
           },
@@ -1004,10 +683,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 1,
-            "coords": [
-              2550,
-              632
-            ],
+            "coords": [2550, 632],
             "width": 250,
             "height": 90
           },
@@ -1018,10 +694,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 2,
-            "coords": [
-              2550,
-              722
-            ],
+            "coords": [2550, 722],
             "width": 250,
             "height": 28
           }
@@ -1029,53 +702,29 @@
         "ports": [
           {
             "id": "idb93a1a5b-450e-4379-a991-d07240ae91b6_port_0",
-            "coords": [
-              2675,
-              600
-            ],
-            "connectionPoint": [
-              2675,
-              600
-            ],
+            "coords": [2675, 600],
+            "connectionPoint": [2675, 600],
             "direction": "top",
             "label": ""
           },
           {
             "id": "idb93a1a5b-450e-4379-a991-d07240ae91b6_port_1",
-            "coords": [
-              2550,
-              675
-            ],
-            "connectionPoint": [
-              2550,
-              675
-            ],
+            "coords": [2550, 675],
+            "connectionPoint": [2550, 675],
             "direction": "left",
             "label": ""
           },
           {
             "id": "idb93a1a5b-450e-4379-a991-d07240ae91b6_port_2",
-            "coords": [
-              2675,
-              750
-            ],
-            "connectionPoint": [
-              2675,
-              750
-            ],
+            "coords": [2675, 750],
+            "connectionPoint": [2675, 750],
             "direction": "bottom",
             "label": ""
           },
           {
             "id": "idb93a1a5b-450e-4379-a991-d07240ae91b6_port_3",
-            "coords": [
-              2800,
-              675
-            ],
-            "connectionPoint": [
-              2800,
-              675
-            ],
+            "coords": [2800, 675],
+            "connectionPoint": [2800, 675],
             "direction": "right",
             "label": ""
           }
@@ -1083,40 +732,25 @@
         "decorators": [
           {
             "id": "idb93a1a5b-450e-4379-a991-d07240ae91b6-probability-decorator",
-            "coords": [
-              2550,
-              600
-            ],
+            "coords": [2550, 600],
             "width": 250,
             "height": 32,
             "priority": 0,
             "svg": "\n      <foreignObject x=\"0\" y=\"0\" width=\"250\" height=\"32\">\n        <div xmlns=\"http://www.w3.org/1999/xhtml\" style=\"height:32px;display:flex;align-items:center;justify-content:space-between;padding:0 10px;box-sizing:border-box;background:transparent;pointer-events:none;font-family:'WonderUnitSans', sans-serif;\">\n          <img src=\"/assets/icons/state-icon.svg\" width=\"22\" height=\"22\" style=\"display:block;\" />\n          <span style=\"color:#BA51C5;font-weight:700;font-size:13px;\">0.00%</span>\n        </div>\n      </foreignObject>\n    ",
-            "anchorPoints": [
-              "floating",
-              "floating"
-            ]
+            "anchorPoints": ["floating", "floating"]
           },
           {
             "id": "idb93a1a5b-450e-4379-a991-d07240ae91b6-local-probability-decorator",
-            "coords": [
-              2550,
-              722
-            ],
+            "coords": [2550, 722],
             "width": 250,
             "height": 28,
             "priority": 0,
             "svg": "\n      <foreignObject x=\"0\" y=\"0\" width=\"250\" height=\"28\">\n        <div xmlns=\"http://www.w3.org/1999/xhtml\" style=\"height:28px;display:flex;align-items:center;justify-content:center;background:transparent;pointer-events:none;font-family:'WonderUnitSans', sans-serif;\">\n          <span style=\"background:#EEEEEE;color:#333;font-size:12px;border-radius:999px;padding:2px 12px;font-weight:500;\">60%</span>\n        </div>\n      </foreignObject>\n    ",
-            "anchorPoints": [
-              "floating",
-              "floating"
-            ]
+            "anchorPoints": ["floating", "floating"]
           }
         ],
         "label": "Early containment",
-        "coords": [
-          2550,
-          600
-        ],
+        "coords": [2550, 600],
         "width": 250,
         "height": 150,
         "data": {
@@ -1137,10 +771,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 0,
-            "coords": [
-              2900,
-              600
-            ],
+            "coords": [2900, 600],
             "width": 250,
             "height": 32
           },
@@ -1151,10 +782,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 1,
-            "coords": [
-              2900,
-              632
-            ],
+            "coords": [2900, 632],
             "width": 250,
             "height": 118
           }
@@ -1162,53 +790,29 @@
         "ports": [
           {
             "id": "idbebb2603-2a9d-4e91-b9f8-761f2248c2db_port_0",
-            "coords": [
-              3025,
-              600
-            ],
-            "connectionPoint": [
-              3025,
-              600
-            ],
+            "coords": [3025, 600],
+            "connectionPoint": [3025, 600],
             "direction": "top",
             "label": ""
           },
           {
             "id": "idbebb2603-2a9d-4e91-b9f8-761f2248c2db_port_1",
-            "coords": [
-              2900,
-              675
-            ],
-            "connectionPoint": [
-              2900,
-              675
-            ],
+            "coords": [2900, 675],
+            "connectionPoint": [2900, 675],
             "direction": "left",
             "label": ""
           },
           {
             "id": "idbebb2603-2a9d-4e91-b9f8-761f2248c2db_port_2",
-            "coords": [
-              3025,
-              750
-            ],
-            "connectionPoint": [
-              3025,
-              750
-            ],
+            "coords": [3025, 750],
+            "connectionPoint": [3025, 750],
             "direction": "bottom",
             "label": ""
           },
           {
             "id": "idbebb2603-2a9d-4e91-b9f8-761f2248c2db_port_3",
-            "coords": [
-              3150,
-              675
-            ],
-            "connectionPoint": [
-              3150,
-              675
-            ],
+            "coords": [3150, 675],
+            "connectionPoint": [3150, 675],
             "direction": "right",
             "label": ""
           }
@@ -1216,25 +820,16 @@
         "decorators": [
           {
             "id": "idbebb2603-2a9d-4e91-b9f8-761f2248c2db-probability-decorator",
-            "coords": [
-              2900,
-              600
-            ],
+            "coords": [2900, 600],
             "width": 250,
             "height": 32,
             "priority": 0,
             "svg": "\n      <foreignObject x=\"0\" y=\"0\" width=\"250\" height=\"32\">\n        <div xmlns=\"http://www.w3.org/1999/xhtml\" style=\"height:32px;display:flex;align-items:center;justify-content:space-between;padding:0 10px;box-sizing:border-box;background:transparent;pointer-events:none;font-family:'WonderUnitSans', sans-serif;\">\n          <img src=\"/assets/icons/end-icon.svg\" width=\"22\" height=\"22\" style=\"display:block;\" />\n          <span style=\"color:#B8475A;font-weight:700;font-size:13px;\">0.00%</span>\n        </div>\n      </foreignObject>\n    ",
-            "anchorPoints": [
-              "floating",
-              "floating"
-            ]
+            "anchorPoints": ["floating", "floating"]
           }
         ],
         "label": "Breach solved",
-        "coords": [
-          2900,
-          600
-        ],
+        "coords": [2900, 600],
         "width": 250,
         "height": 150,
         "data": {

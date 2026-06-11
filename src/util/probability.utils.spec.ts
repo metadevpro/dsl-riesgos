@@ -1,9 +1,4 @@
-import {
-  formatSignificantPercent,
-  getSignificantDigitCount,
-  formatProbabilityPercent,
-  normalizeProbability,
-} from './probability.utils';
+import { formatSignificantPercent, getSignificantDigitCount, formatProbabilityPercent, normalizeProbability } from './probability.utils';
 
 describe('getSignificantDigitCount', () => {
   it('counts the digits a value genuinely carries', () => {

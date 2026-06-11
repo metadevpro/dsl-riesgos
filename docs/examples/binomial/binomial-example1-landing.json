@@ -20,10 +20,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 0,
-            "coords": [
-              350,
-              250
-            ],
+            "coords": [350, 250],
             "width": 250,
             "height": 32
           },
@@ -33,10 +30,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 1,
-            "coords": [
-              350,
-              282
-            ],
+            "coords": [350, 282],
             "width": 250,
             "height": 118
           }
@@ -44,62 +38,35 @@
         "ports": [
           {
             "id": "idf435fd40-9755-4da4-81c5-8b669bd4b418_port_0",
-            "coords": [
-              475,
-              250
-            ],
-            "connectionPoint": [
-              475,
-              250
-            ],
+            "coords": [475, 250],
+            "connectionPoint": [475, 250],
             "direction": "top",
             "label": ""
           },
           {
             "id": "idf435fd40-9755-4da4-81c5-8b669bd4b418_port_1",
-            "coords": [
-              350,
-              325
-            ],
-            "connectionPoint": [
-              350,
-              325
-            ],
+            "coords": [350, 325],
+            "connectionPoint": [350, 325],
             "direction": "left",
             "label": ""
           },
           {
             "id": "idf435fd40-9755-4da4-81c5-8b669bd4b418_port_2",
-            "coords": [
-              475,
-              400
-            ],
-            "connectionPoint": [
-              475,
-              400
-            ],
+            "coords": [475, 400],
+            "connectionPoint": [475, 400],
             "direction": "bottom",
             "label": ""
           },
           {
             "id": "idf435fd40-9755-4da4-81c5-8b669bd4b418_port_3",
-            "coords": [
-              600,
-              325
-            ],
-            "connectionPoint": [
-              600,
-              325
-            ],
+            "coords": [600, 325],
+            "connectionPoint": [600, 325],
             "direction": "right",
             "label": ""
           }
         ],
         "label": "Factory",
-        "coords": [
-          350,
-          250
-        ],
+        "coords": [350, 250],
         "width": 250,
         "height": 150,
         "data": {
@@ -118,10 +85,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 0,
-            "coords": [
-              650,
-              250
-            ],
+            "coords": [650, 250],
             "width": 250,
             "height": 32
           },
@@ -131,10 +95,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 1,
-            "coords": [
-              650,
-              282
-            ],
+            "coords": [650, 282],
             "width": 250,
             "height": 90
           },
@@ -144,10 +105,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 2,
-            "coords": [
-              650,
-              372
-            ],
+            "coords": [650, 372],
             "width": 250,
             "height": 28
           }
@@ -155,62 +113,35 @@
         "ports": [
           {
             "id": "idaed90dc7-5bf4-4e9a-b8f9-f48c0c1283b9_port_0",
-            "coords": [
-              775,
-              250
-            ],
-            "connectionPoint": [
-              775,
-              250
-            ],
+            "coords": [775, 250],
+            "connectionPoint": [775, 250],
             "direction": "top",
             "label": ""
           },
           {
             "id": "idaed90dc7-5bf4-4e9a-b8f9-f48c0c1283b9_port_1",
-            "coords": [
-              650,
-              325
-            ],
-            "connectionPoint": [
-              650,
-              325
-            ],
+            "coords": [650, 325],
+            "connectionPoint": [650, 325],
             "direction": "left",
             "label": ""
           },
           {
             "id": "idaed90dc7-5bf4-4e9a-b8f9-f48c0c1283b9_port_2",
-            "coords": [
-              775,
-              400
-            ],
-            "connectionPoint": [
-              775,
-              400
-            ],
+            "coords": [775, 400],
+            "connectionPoint": [775, 400],
             "direction": "bottom",
             "label": ""
           },
           {
             "id": "idaed90dc7-5bf4-4e9a-b8f9-f48c0c1283b9_port_3",
-            "coords": [
-              900,
-              325
-            ],
-            "connectionPoint": [
-              900,
-              325
-            ],
+            "coords": [900, 325],
+            "connectionPoint": [900, 325],
             "direction": "right",
             "label": ""
           }
         ],
         "label": "Screw is defective",
-        "coords": [
-          650,
-          250
-        ],
+        "coords": [650, 250],
         "width": 250,
         "height": 150,
         "data": {
@@ -230,10 +161,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 0,
-            "coords": [
-              950,
-              250
-            ],
+            "coords": [950, 250],
             "width": 250,
             "height": 32
           },
@@ -243,10 +171,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 1,
-            "coords": [
-              950,
-              282
-            ],
+            "coords": [950, 282],
             "width": 250,
             "height": 90
           },
@@ -256,10 +181,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 2,
-            "coords": [
-              950,
-              372
-            ],
+            "coords": [950, 372],
             "width": 250,
             "height": 28
           }
@@ -267,62 +189,35 @@
         "ports": [
           {
             "id": "id4b6c550a-3aca-472f-b20c-d2981c0ce625_port_0",
-            "coords": [
-              1075,
-              250
-            ],
-            "connectionPoint": [
-              1075,
-              250
-            ],
+            "coords": [1075, 250],
+            "connectionPoint": [1075, 250],
             "direction": "top",
             "label": ""
           },
           {
             "id": "id4b6c550a-3aca-472f-b20c-d2981c0ce625_port_1",
-            "coords": [
-              950,
-              325
-            ],
-            "connectionPoint": [
-              950,
-              325
-            ],
+            "coords": [950, 325],
+            "connectionPoint": [950, 325],
             "direction": "left",
             "label": ""
           },
           {
             "id": "id4b6c550a-3aca-472f-b20c-d2981c0ce625_port_2",
-            "coords": [
-              1075,
-              400
-            ],
-            "connectionPoint": [
-              1075,
-              400
-            ],
+            "coords": [1075, 400],
+            "connectionPoint": [1075, 400],
             "direction": "bottom",
             "label": ""
           },
           {
             "id": "id4b6c550a-3aca-472f-b20c-d2981c0ce625_port_3",
-            "coords": [
-              1200,
-              325
-            ],
-            "connectionPoint": [
-              1200,
-              325
-            ],
+            "coords": [1200, 325],
+            "connectionPoint": [1200, 325],
             "direction": "right",
             "label": ""
           }
         ],
         "label": "Camera Correctly identifies it",
-        "coords": [
-          950,
-          250
-        ],
+        "coords": [950, 250],
         "width": 250,
         "height": 150,
         "data": {
@@ -342,10 +237,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 0,
-            "coords": [
-              1250,
-              250
-            ],
+            "coords": [1250, 250],
             "width": 250,
             "height": 32
           },
@@ -355,10 +247,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 1,
-            "coords": [
-              1250,
-              282
-            ],
+            "coords": [1250, 282],
             "width": 250,
             "height": 90
           },
@@ -368,10 +257,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 2,
-            "coords": [
-              1250,
-              372
-            ],
+            "coords": [1250, 372],
             "width": 250,
             "height": 28
           }
@@ -379,62 +265,35 @@
         "ports": [
           {
             "id": "idf762b865-a3de-4fcf-aff4-07f48963755d_port_0",
-            "coords": [
-              1375,
-              250
-            ],
-            "connectionPoint": [
-              1375,
-              250
-            ],
+            "coords": [1375, 250],
+            "connectionPoint": [1375, 250],
             "direction": "top",
             "label": ""
           },
           {
             "id": "idf762b865-a3de-4fcf-aff4-07f48963755d_port_1",
-            "coords": [
-              1250,
-              325
-            ],
-            "connectionPoint": [
-              1250,
-              325
-            ],
+            "coords": [1250, 325],
+            "connectionPoint": [1250, 325],
             "direction": "left",
             "label": ""
           },
           {
             "id": "idf762b865-a3de-4fcf-aff4-07f48963755d_port_2",
-            "coords": [
-              1375,
-              400
-            ],
-            "connectionPoint": [
-              1375,
-              400
-            ],
+            "coords": [1375, 400],
+            "connectionPoint": [1375, 400],
             "direction": "bottom",
             "label": ""
           },
           {
             "id": "idf762b865-a3de-4fcf-aff4-07f48963755d_port_3",
-            "coords": [
-              1500,
-              325
-            ],
-            "connectionPoint": [
-              1500,
-              325
-            ],
+            "coords": [1500, 325],
+            "connectionPoint": [1500, 325],
             "direction": "right",
             "label": ""
           }
         ],
         "label": "Manual inspection confirms",
-        "coords": [
-          1250,
-          250
-        ],
+        "coords": [1250, 250],
         "width": 250,
         "height": 150,
         "data": {
@@ -454,10 +313,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 0,
-            "coords": [
-              1550,
-              250
-            ],
+            "coords": [1550, 250],
             "width": 250,
             "height": 32
           },
@@ -467,10 +323,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 1,
-            "coords": [
-              1550,
-              282
-            ],
+            "coords": [1550, 282],
             "width": 250,
             "height": 118
           }
@@ -478,62 +331,35 @@
         "ports": [
           {
             "id": "id237e263e-4690-4cea-b7af-7dd22f783a07_port_0",
-            "coords": [
-              1675,
-              250
-            ],
-            "connectionPoint": [
-              1675,
-              250
-            ],
+            "coords": [1675, 250],
+            "connectionPoint": [1675, 250],
             "direction": "top",
             "label": ""
           },
           {
             "id": "id237e263e-4690-4cea-b7af-7dd22f783a07_port_1",
-            "coords": [
-              1550,
-              325
-            ],
-            "connectionPoint": [
-              1550,
-              325
-            ],
+            "coords": [1550, 325],
+            "connectionPoint": [1550, 325],
             "direction": "left",
             "label": ""
           },
           {
             "id": "id237e263e-4690-4cea-b7af-7dd22f783a07_port_2",
-            "coords": [
-              1675,
-              400
-            ],
-            "connectionPoint": [
-              1675,
-              400
-            ],
+            "coords": [1675, 400],
+            "connectionPoint": [1675, 400],
             "direction": "bottom",
             "label": ""
           },
           {
             "id": "id237e263e-4690-4cea-b7af-7dd22f783a07_port_3",
-            "coords": [
-              1800,
-              325
-            ],
-            "connectionPoint": [
-              1800,
-              325
-            ],
+            "coords": [1800, 325],
+            "connectionPoint": [1800, 325],
             "direction": "right",
             "label": ""
           }
         ],
         "label": "Screw definitively rejected",
-        "coords": [
-          1550,
-          250
-        ],
+        "coords": [1550, 250],
         "width": 250,
         "height": 150,
         "data": {

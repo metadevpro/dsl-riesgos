@@ -21,10 +21,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 0,
-            "coords": [
-              50,
-              155
-            ],
+            "coords": [50, 155],
             "width": 250,
             "height": 32
           },
@@ -35,10 +32,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 1,
-            "coords": [
-              50,
-              187
-            ],
+            "coords": [50, 187],
             "width": 250,
             "height": 118
           }
@@ -46,53 +40,29 @@
         "ports": [
           {
             "id": "id05564686-becf-47a0-98fa-57afcfaa137f_port_0",
-            "coords": [
-              175,
-              155
-            ],
-            "connectionPoint": [
-              175,
-              155
-            ],
+            "coords": [175, 155],
+            "connectionPoint": [175, 155],
             "direction": "top",
             "label": ""
           },
           {
             "id": "id05564686-becf-47a0-98fa-57afcfaa137f_port_1",
-            "coords": [
-              50,
-              230
-            ],
-            "connectionPoint": [
-              50,
-              230
-            ],
+            "coords": [50, 230],
+            "connectionPoint": [50, 230],
             "direction": "left",
             "label": ""
           },
           {
             "id": "id05564686-becf-47a0-98fa-57afcfaa137f_port_2",
-            "coords": [
-              175,
-              305
-            ],
-            "connectionPoint": [
-              175,
-              305
-            ],
+            "coords": [175, 305],
+            "connectionPoint": [175, 305],
             "direction": "bottom",
             "label": ""
           },
           {
             "id": "id05564686-becf-47a0-98fa-57afcfaa137f_port_3",
-            "coords": [
-              300,
-              230
-            ],
-            "connectionPoint": [
-              300,
-              230
-            ],
+            "coords": [300, 230],
+            "connectionPoint": [300, 230],
             "direction": "right",
             "label": ""
           }
@@ -100,40 +70,25 @@
         "decorators": [
           {
             "id": "id05564686-becf-47a0-98fa-57afcfaa137f-bayes-top-decorator",
-            "coords": [
-              50,
-              155
-            ],
+            "coords": [50, 155],
             "width": 250,
             "height": 32,
             "priority": 0,
             "svg": "\n      <foreignObject x=\"0\" y=\"0\" width=\"250\" height=\"32\">\n        <div xmlns=\"http://www.w3.org/1999/xhtml\" style=\"height:32px;display:flex;align-items:center;justify-content:space-between;padding:0 10px;box-sizing:border-box;background:transparent;pointer-events:none;font-family:'WonderUnitSans', sans-serif;\">\n          <img src=\"/assets/icons/cause-icon.svg\" width=\"22\" height=\"22\" style=\"display:block;\" alt=\"\" />\n          <span style=\"color:#C2410C;font-weight:700;font-size:13px;\">0.800%</span>\n        </div>\n      </foreignObject>\n    ",
-            "anchorPoints": [
-              "floating",
-              "floating"
-            ]
+            "anchorPoints": ["floating", "floating"]
           },
           {
             "id": "id05564686-becf-47a0-98fa-57afcfaa137f-bayes-decorator",
-            "coords": [
-              50,
-              187
-            ],
+            "coords": [50, 187],
             "width": 250,
             "height": 118,
             "priority": 0,
             "svg": "\n      <foreignObject x=\"0\" y=\"0\" width=\"250\" height=\"118\">\n        <div xmlns=\"http://www.w3.org/1999/xhtml\" style=\"height:118px;display:flex;flex-direction:column;justify-content:space-between;padding:30px 14px 10px;box-sizing:border-box;background:transparent;pointer-events:none;font-family:'WonderUnitSans', sans-serif;\">\n          <div style=\"display:flex;flex-direction:column;gap:4px;\">\n            <div style=\"display:flex;align-items:center;gap:6px;\">\n              <span style=\"color:#6B7280;min-width:22px;font-size:11px;\">Yes</span>\n              <div style=\"flex:1;height:4px;background:#EEEEEE;border-radius:2px;overflow:hidden;\"><div style=\"height:100%;width:0.8000000000000002%;background:#E24B4A;border-radius:2px;transition:width .4s;\"></div></div>\n              <span style=\"color:#1F2937;font-weight:500;min-width:54px;text-align:right;font-size:11px;\">0.800%</span>\n            </div>\n            <div style=\"display:flex;align-items:center;gap:6px;\">\n              <span style=\"color:#6B7280;min-width:22px;font-size:11px;\">No</span>\n              <div style=\"flex:1;height:4px;background:#EEEEEE;border-radius:2px;overflow:hidden;\"><div style=\"height:100%;width:99.2%;background:#E24B4A;border-radius:2px;transition:width .4s;\"></div></div>\n              <span style=\"color:#1F2937;font-weight:500;min-width:54px;text-align:right;font-size:11px;\">99.200%</span>\n            </div>\n          </div>\n          <div style=\"display:flex;justify-content:center;\">\n            <div style=\"display:inline-flex;align-items:center;gap:4px;font-size:11px;padding:2px 10px;border-radius:999px;font-weight:500;background:#F3F4F6;color:#6B7280;\">\n              <span style=\"font-weight:700;\">?</span>no evidence\n            </div>\n          </div>\n        </div>\n      </foreignObject>\n    ",
-            "anchorPoints": [
-              "floating",
-              "floating"
-            ]
+            "anchorPoints": ["floating", "floating"]
           }
         ],
         "label": "Real System Failure",
-        "coords": [
-          50,
-          155
-        ],
+        "coords": [50, 155],
         "width": 250,
         "height": 150,
         "data": {
@@ -156,10 +111,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 0,
-            "coords": [
-              1040,
-              155
-            ],
+            "coords": [1040, 155],
             "width": 250,
             "height": 32
           },
@@ -170,10 +122,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 1,
-            "coords": [
-              1040,
-              187
-            ],
+            "coords": [1040, 187],
             "width": 250,
             "height": 118
           }
@@ -181,53 +130,29 @@
         "ports": [
           {
             "id": "id5098b85d-cfce-4dbb-92af-e4a637e4342c_port_0",
-            "coords": [
-              1165,
-              155
-            ],
-            "connectionPoint": [
-              1165,
-              155
-            ],
+            "coords": [1165, 155],
+            "connectionPoint": [1165, 155],
             "direction": "top",
             "label": ""
           },
           {
             "id": "id5098b85d-cfce-4dbb-92af-e4a637e4342c_port_1",
-            "coords": [
-              1040,
-              230
-            ],
-            "connectionPoint": [
-              1040,
-              230
-            ],
+            "coords": [1040, 230],
+            "connectionPoint": [1040, 230],
             "direction": "left",
             "label": ""
           },
           {
             "id": "id5098b85d-cfce-4dbb-92af-e4a637e4342c_port_2",
-            "coords": [
-              1165,
-              305
-            ],
-            "connectionPoint": [
-              1165,
-              305
-            ],
+            "coords": [1165, 305],
+            "connectionPoint": [1165, 305],
             "direction": "bottom",
             "label": ""
           },
           {
             "id": "id5098b85d-cfce-4dbb-92af-e4a637e4342c_port_3",
-            "coords": [
-              1290,
-              230
-            ],
-            "connectionPoint": [
-              1290,
-              230
-            ],
+            "coords": [1290, 230],
+            "connectionPoint": [1290, 230],
             "direction": "right",
             "label": ""
           }
@@ -235,40 +160,25 @@
         "decorators": [
           {
             "id": "id5098b85d-cfce-4dbb-92af-e4a637e4342c-bayes-top-decorator",
-            "coords": [
-              1040,
-              155
-            ],
+            "coords": [1040, 155],
             "width": 250,
             "height": 32,
             "priority": 0,
             "svg": "\n      <foreignObject x=\"0\" y=\"0\" width=\"250\" height=\"32\">\n        <div xmlns=\"http://www.w3.org/1999/xhtml\" style=\"height:32px;display:flex;align-items:center;justify-content:space-between;padding:0 10px;box-sizing:border-box;background:transparent;pointer-events:none;font-family:'WonderUnitSans', sans-serif;\">\n          <img src=\"/assets/icons/event-icon.svg\" width=\"22\" height=\"22\" style=\"display:block;\" alt=\"\" />\n          <span style=\"color:#6D28D9;font-weight:700;font-size:13px;\">1.493%</span>\n        </div>\n      </foreignObject>\n    ",
-            "anchorPoints": [
-              "floating",
-              "floating"
-            ]
+            "anchorPoints": ["floating", "floating"]
           },
           {
             "id": "id5098b85d-cfce-4dbb-92af-e4a637e4342c-bayes-decorator",
-            "coords": [
-              1040,
-              187
-            ],
+            "coords": [1040, 187],
             "width": 250,
             "height": 118,
             "priority": 0,
             "svg": "\n      <foreignObject x=\"0\" y=\"0\" width=\"250\" height=\"118\">\n        <div xmlns=\"http://www.w3.org/1999/xhtml\" style=\"height:118px;display:flex;flex-direction:column;justify-content:space-between;padding:30px 14px 10px;box-sizing:border-box;background:transparent;pointer-events:none;font-family:'WonderUnitSans', sans-serif;\">\n          <div style=\"display:flex;flex-direction:column;gap:4px;\">\n            <div style=\"display:flex;align-items:center;gap:6px;\">\n              <span style=\"color:#6B7280;min-width:22px;font-size:11px;\">Yes</span>\n              <div style=\"flex:1;height:4px;background:#EEEEEE;border-radius:2px;overflow:hidden;\"><div style=\"height:100%;width:1.4933643455999999%;background:#E24B4A;border-radius:2px;transition:width .4s;\"></div></div>\n              <span style=\"color:#1F2937;font-weight:500;min-width:54px;text-align:right;font-size:11px;\">1.493%</span>\n            </div>\n            <div style=\"display:flex;align-items:center;gap:6px;\">\n              <span style=\"color:#6B7280;min-width:22px;font-size:11px;\">No</span>\n              <div style=\"flex:1;height:4px;background:#EEEEEE;border-radius:2px;overflow:hidden;\"><div style=\"height:100%;width:98.5066356544%;background:#E24B4A;border-radius:2px;transition:width .4s;\"></div></div>\n              <span style=\"color:#1F2937;font-weight:500;min-width:54px;text-align:right;font-size:11px;\">98.507%</span>\n            </div>\n          </div>\n          <div style=\"display:flex;justify-content:center;\">\n            <div style=\"display:inline-flex;align-items:center;gap:4px;font-size:11px;padding:2px 10px;border-radius:999px;font-weight:500;background:#F3F4F6;color:#6B7280;\">\n              <span style=\"font-weight:700;\">?</span>no evidence\n            </div>\n          </div>\n        </div>\n      </foreignObject>\n    ",
-            "anchorPoints": [
-              "floating",
-              "floating"
-            ]
+            "anchorPoints": ["floating", "floating"]
           }
         ],
         "label": "Failure is real",
-        "coords": [
-          1040,
-          155
-        ],
+        "coords": [1040, 155],
         "width": 250,
         "height": 150,
         "data": {
@@ -291,10 +201,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 0,
-            "coords": [
-              380,
-              50
-            ],
+            "coords": [380, 50],
             "width": 250,
             "height": 32
           },
@@ -305,10 +212,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 1,
-            "coords": [
-              380,
-              82
-            ],
+            "coords": [380, 82],
             "width": 250,
             "height": 118
           }
@@ -316,53 +220,29 @@
         "ports": [
           {
             "id": "id98807491-a403-4d6c-bab2-977022c362fb_port_0",
-            "coords": [
-              505,
-              50
-            ],
-            "connectionPoint": [
-              505,
-              50
-            ],
+            "coords": [505, 50],
+            "connectionPoint": [505, 50],
             "direction": "top",
             "label": ""
           },
           {
             "id": "id98807491-a403-4d6c-bab2-977022c362fb_port_1",
-            "coords": [
-              380,
-              125
-            ],
-            "connectionPoint": [
-              380,
-              125
-            ],
+            "coords": [380, 125],
+            "connectionPoint": [380, 125],
             "direction": "left",
             "label": ""
           },
           {
             "id": "id98807491-a403-4d6c-bab2-977022c362fb_port_2",
-            "coords": [
-              505,
-              200
-            ],
-            "connectionPoint": [
-              505,
-              200
-            ],
+            "coords": [505, 200],
+            "connectionPoint": [505, 200],
             "direction": "bottom",
             "label": ""
           },
           {
             "id": "id98807491-a403-4d6c-bab2-977022c362fb_port_3",
-            "coords": [
-              630,
-              125
-            ],
-            "connectionPoint": [
-              630,
-              125
-            ],
+            "coords": [630, 125],
+            "connectionPoint": [630, 125],
             "direction": "right",
             "label": ""
           }
@@ -370,40 +250,25 @@
         "decorators": [
           {
             "id": "id98807491-a403-4d6c-bab2-977022c362fb-bayes-top-decorator",
-            "coords": [
-              380,
-              50
-            ],
+            "coords": [380, 50],
             "width": 250,
             "height": 32,
             "priority": 0,
             "svg": "\n      <foreignObject x=\"0\" y=\"0\" width=\"250\" height=\"32\">\n        <div xmlns=\"http://www.w3.org/1999/xhtml\" style=\"height:32px;display:flex;align-items:center;justify-content:space-between;padding:0 10px;box-sizing:border-box;background:transparent;pointer-events:none;font-family:'WonderUnitSans', sans-serif;\">\n          <img src=\"/assets/icons/effect-icon.svg\" width=\"22\" height=\"22\" style=\"display:block;\" alt=\"\" />\n          <span style=\"color:#047857;font-weight:700;font-size:13px;\">3.736%</span>\n        </div>\n      </foreignObject>\n    ",
-            "anchorPoints": [
-              "floating",
-              "floating"
-            ]
+            "anchorPoints": ["floating", "floating"]
           },
           {
             "id": "id98807491-a403-4d6c-bab2-977022c362fb-bayes-decorator",
-            "coords": [
-              380,
-              82
-            ],
+            "coords": [380, 82],
             "width": 250,
             "height": 118,
             "priority": 0,
             "svg": "\n      <foreignObject x=\"0\" y=\"0\" width=\"250\" height=\"118\">\n        <div xmlns=\"http://www.w3.org/1999/xhtml\" style=\"height:118px;display:flex;flex-direction:column;justify-content:space-between;padding:30px 14px 10px;box-sizing:border-box;background:transparent;pointer-events:none;font-family:'WonderUnitSans', sans-serif;\">\n          <div style=\"display:flex;flex-direction:column;gap:4px;\">\n            <div style=\"display:flex;align-items:center;gap:6px;\">\n              <span style=\"color:#6B7280;min-width:22px;font-size:11px;\">Yes</span>\n              <div style=\"flex:1;height:4px;background:#EEEEEE;border-radius:2px;overflow:hidden;\"><div style=\"height:100%;width:3.7360000000000007%;background:#E24B4A;border-radius:2px;transition:width .4s;\"></div></div>\n              <span style=\"color:#1F2937;font-weight:500;min-width:54px;text-align:right;font-size:11px;\">3.736%</span>\n            </div>\n            <div style=\"display:flex;align-items:center;gap:6px;\">\n              <span style=\"color:#6B7280;min-width:22px;font-size:11px;\">No</span>\n              <div style=\"flex:1;height:4px;background:#EEEEEE;border-radius:2px;overflow:hidden;\"><div style=\"height:100%;width:96.264%;background:#E24B4A;border-radius:2px;transition:width .4s;\"></div></div>\n              <span style=\"color:#1F2937;font-weight:500;min-width:54px;text-align:right;font-size:11px;\">96.264%</span>\n            </div>\n          </div>\n          <div style=\"display:flex;justify-content:center;\">\n            <div style=\"display:inline-flex;align-items:center;gap:4px;font-size:11px;padding:2px 10px;border-radius:999px;font-weight:500;background:#F3F4F6;color:#6B7280;\">\n              <span style=\"font-weight:700;\">?</span>no evidence\n            </div>\n          </div>\n        </div>\n      </foreignObject>\n    ",
-            "anchorPoints": [
-              "floating",
-              "floating"
-            ]
+            "anchorPoints": ["floating", "floating"]
           }
         ],
         "label": "EC Sensor",
-        "coords": [
-          380,
-          50
-        ],
+        "coords": [380, 50],
         "width": 250,
         "height": 150,
         "data": {
@@ -426,10 +291,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 0,
-            "coords": [
-              380,
-              260
-            ],
+            "coords": [380, 260],
             "width": 250,
             "height": 32
           },
@@ -440,10 +302,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 1,
-            "coords": [
-              380,
-              292
-            ],
+            "coords": [380, 292],
             "width": 250,
             "height": 118
           }
@@ -451,53 +310,29 @@
         "ports": [
           {
             "id": "id74d0bcf5-a252-413f-af3c-63b928768f77_port_0",
-            "coords": [
-              505,
-              260
-            ],
-            "connectionPoint": [
-              505,
-              260
-            ],
+            "coords": [505, 260],
+            "connectionPoint": [505, 260],
             "direction": "top",
             "label": ""
           },
           {
             "id": "id74d0bcf5-a252-413f-af3c-63b928768f77_port_1",
-            "coords": [
-              380,
-              335
-            ],
-            "connectionPoint": [
-              380,
-              335
-            ],
+            "coords": [380, 335],
+            "connectionPoint": [380, 335],
             "direction": "left",
             "label": ""
           },
           {
             "id": "id74d0bcf5-a252-413f-af3c-63b928768f77_port_2",
-            "coords": [
-              505,
-              410
-            ],
-            "connectionPoint": [
-              505,
-              410
-            ],
+            "coords": [505, 410],
+            "connectionPoint": [505, 410],
             "direction": "bottom",
             "label": ""
           },
           {
             "id": "id74d0bcf5-a252-413f-af3c-63b928768f77_port_3",
-            "coords": [
-              630,
-              335
-            ],
-            "connectionPoint": [
-              630,
-              335
-            ],
+            "coords": [630, 335],
+            "connectionPoint": [630, 335],
             "direction": "right",
             "label": ""
           }
@@ -505,40 +340,25 @@
         "decorators": [
           {
             "id": "id74d0bcf5-a252-413f-af3c-63b928768f77-bayes-top-decorator",
-            "coords": [
-              380,
-              260
-            ],
+            "coords": [380, 260],
             "width": 250,
             "height": 32,
             "priority": 0,
             "svg": "\n      <foreignObject x=\"0\" y=\"0\" width=\"250\" height=\"32\">\n        <div xmlns=\"http://www.w3.org/1999/xhtml\" style=\"height:32px;display:flex;align-items:center;justify-content:space-between;padding:0 10px;box-sizing:border-box;background:transparent;pointer-events:none;font-family:'WonderUnitSans', sans-serif;\">\n          <img src=\"/assets/icons/effect-icon.svg\" width=\"22\" height=\"22\" style=\"display:block;\" alt=\"\" />\n          <span style=\"color:#047857;font-weight:700;font-size:13px;\">4.688%</span>\n        </div>\n      </foreignObject>\n    ",
-            "anchorPoints": [
-              "floating",
-              "floating"
-            ]
+            "anchorPoints": ["floating", "floating"]
           },
           {
             "id": "id74d0bcf5-a252-413f-af3c-63b928768f77-bayes-decorator",
-            "coords": [
-              380,
-              292
-            ],
+            "coords": [380, 292],
             "width": 250,
             "height": 118,
             "priority": 0,
             "svg": "\n      <foreignObject x=\"0\" y=\"0\" width=\"250\" height=\"118\">\n        <div xmlns=\"http://www.w3.org/1999/xhtml\" style=\"height:118px;display:flex;flex-direction:column;justify-content:space-between;padding:30px 14px 10px;box-sizing:border-box;background:transparent;pointer-events:none;font-family:'WonderUnitSans', sans-serif;\">\n          <div style=\"display:flex;flex-direction:column;gap:4px;\">\n            <div style=\"display:flex;align-items:center;gap:6px;\">\n              <span style=\"color:#6B7280;min-width:22px;font-size:11px;\">Yes</span>\n              <div style=\"flex:1;height:4px;background:#EEEEEE;border-radius:2px;overflow:hidden;\"><div style=\"height:100%;width:4.6880000000000015%;background:#E24B4A;border-radius:2px;transition:width .4s;\"></div></div>\n              <span style=\"color:#1F2937;font-weight:500;min-width:54px;text-align:right;font-size:11px;\">4.688%</span>\n            </div>\n            <div style=\"display:flex;align-items:center;gap:6px;\">\n              <span style=\"color:#6B7280;min-width:22px;font-size:11px;\">No</span>\n              <div style=\"flex:1;height:4px;background:#EEEEEE;border-radius:2px;overflow:hidden;\"><div style=\"height:100%;width:95.312%;background:#E24B4A;border-radius:2px;transition:width .4s;\"></div></div>\n              <span style=\"color:#1F2937;font-weight:500;min-width:54px;text-align:right;font-size:11px;\">95.312%</span>\n            </div>\n          </div>\n          <div style=\"display:flex;justify-content:center;\">\n            <div style=\"display:inline-flex;align-items:center;gap:4px;font-size:11px;padding:2px 10px;border-radius:999px;font-weight:500;background:#F3F4F6;color:#6B7280;\">\n              <span style=\"font-weight:700;\">?</span>no evidence\n            </div>\n          </div>\n        </div>\n      </foreignObject>\n    ",
-            "anchorPoints": [
-              "floating",
-              "floating"
-            ]
+            "anchorPoints": ["floating", "floating"]
           }
         ],
         "label": "Propellant Sensor",
-        "coords": [
-          380,
-          260
-        ],
+        "coords": [380, 260],
         "width": 250,
         "height": 150,
         "data": {
@@ -561,10 +381,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 0,
-            "coords": [
-              710,
-              155
-            ],
+            "coords": [710, 155],
             "width": 250,
             "height": 32
           },
@@ -575,10 +392,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 1,
-            "coords": [
-              710,
-              187
-            ],
+            "coords": [710, 187],
             "width": 250,
             "height": 118
           }
@@ -586,53 +400,29 @@
         "ports": [
           {
             "id": "id8ea386f4-e5e4-48d6-9b9f-e4d16be7c6d6_port_0",
-            "coords": [
-              835,
-              155
-            ],
-            "connectionPoint": [
-              835,
-              155
-            ],
+            "coords": [835, 155],
+            "connectionPoint": [835, 155],
             "direction": "top",
             "label": ""
           },
           {
             "id": "id8ea386f4-e5e4-48d6-9b9f-e4d16be7c6d6_port_1",
-            "coords": [
-              710,
-              230
-            ],
-            "connectionPoint": [
-              710,
-              230
-            ],
+            "coords": [710, 230],
+            "connectionPoint": [710, 230],
             "direction": "left",
             "label": ""
           },
           {
             "id": "id8ea386f4-e5e4-48d6-9b9f-e4d16be7c6d6_port_2",
-            "coords": [
-              835,
-              305
-            ],
-            "connectionPoint": [
-              835,
-              305
-            ],
+            "coords": [835, 305],
+            "connectionPoint": [835, 305],
             "direction": "bottom",
             "label": ""
           },
           {
             "id": "id8ea386f4-e5e4-48d6-9b9f-e4d16be7c6d6_port_3",
-            "coords": [
-              960,
-              230
-            ],
-            "connectionPoint": [
-              960,
-              230
-            ],
+            "coords": [960, 230],
+            "connectionPoint": [960, 230],
             "direction": "right",
             "label": ""
           }
@@ -640,40 +430,25 @@
         "decorators": [
           {
             "id": "id8ea386f4-e5e4-48d6-9b9f-e4d16be7c6d6-bayes-top-decorator",
-            "coords": [
-              710,
-              155
-            ],
+            "coords": [710, 155],
             "width": 250,
             "height": 32,
             "priority": 0,
             "svg": "\n      <foreignObject x=\"0\" y=\"0\" width=\"250\" height=\"32\">\n        <div xmlns=\"http://www.w3.org/1999/xhtml\" style=\"height:32px;display:flex;align-items:center;justify-content:space-between;padding:0 10px;box-sizing:border-box;background:transparent;pointer-events:none;font-family:'WonderUnitSans', sans-serif;\">\n          <img src=\"/assets/icons/event-icon.svg\" width=\"22\" height=\"22\" style=\"display:block;\" alt=\"\" />\n          <span style=\"color:#6D28D9;font-weight:700;font-size:13px;\">8.118%</span>\n        </div>\n      </foreignObject>\n    ",
-            "anchorPoints": [
-              "floating",
-              "floating"
-            ]
+            "anchorPoints": ["floating", "floating"]
           },
           {
             "id": "id8ea386f4-e5e4-48d6-9b9f-e4d16be7c6d6-bayes-decorator",
-            "coords": [
-              710,
-              187
-            ],
+            "coords": [710, 187],
             "width": 250,
             "height": 118,
             "priority": 0,
             "svg": "\n      <foreignObject x=\"0\" y=\"0\" width=\"250\" height=\"118\">\n        <div xmlns=\"http://www.w3.org/1999/xhtml\" style=\"height:118px;display:flex;flex-direction:column;justify-content:space-between;padding:30px 14px 10px;box-sizing:border-box;background:transparent;pointer-events:none;font-family:'WonderUnitSans', sans-serif;\">\n          <div style=\"display:flex;flex-direction:column;gap:4px;\">\n            <div style=\"display:flex;align-items:center;gap:6px;\">\n              <span style=\"color:#6B7280;min-width:22px;font-size:11px;\">Yes</span>\n              <div style=\"flex:1;height:4px;background:#EEEEEE;border-radius:2px;overflow:hidden;\"><div style=\"height:100%;width:8.1181248%;background:#E24B4A;border-radius:2px;transition:width .4s;\"></div></div>\n              <span style=\"color:#1F2937;font-weight:500;min-width:54px;text-align:right;font-size:11px;\">8.118%</span>\n            </div>\n            <div style=\"display:flex;align-items:center;gap:6px;\">\n              <span style=\"color:#6B7280;min-width:22px;font-size:11px;\">No</span>\n              <div style=\"flex:1;height:4px;background:#EEEEEE;border-radius:2px;overflow:hidden;\"><div style=\"height:100%;width:91.8818752%;background:#E24B4A;border-radius:2px;transition:width .4s;\"></div></div>\n              <span style=\"color:#1F2937;font-weight:500;min-width:54px;text-align:right;font-size:11px;\">91.882%</span>\n            </div>\n          </div>\n          <div style=\"display:flex;justify-content:center;\">\n            <div style=\"display:inline-flex;align-items:center;gap:4px;font-size:11px;padding:2px 10px;border-radius:999px;font-weight:500;background:#F3F4F6;color:#6B7280;\">\n              <span style=\"font-weight:700;\">?</span>no evidence\n            </div>\n          </div>\n        </div>\n      </foreignObject>\n    ",
-            "anchorPoints": [
-              "floating",
-              "floating"
-            ]
+            "anchorPoints": ["floating", "floating"]
           }
         ],
         "label": "T-10 Alert",
-        "coords": [
-          710,
-          155
-        ],
+        "coords": [710, 155],
         "width": 250,
         "height": 150,
         "data": {

@@ -20,10 +20,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 0,
-            "coords": [
-              0,
-              0
-            ],
+            "coords": [0, 0],
             "width": 250,
             "height": 32
           },
@@ -33,10 +30,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 1,
-            "coords": [
-              0,
-              32
-            ],
+            "coords": [0, 32],
             "width": 250,
             "height": 118
           }
@@ -44,62 +38,35 @@
         "ports": [
           {
             "id": "id68030a2a-28eb-442e-9b16-fc465150c3cf_port_0",
-            "coords": [
-              125,
-              0
-            ],
-            "connectionPoint": [
-              125,
-              0
-            ],
+            "coords": [125, 0],
+            "connectionPoint": [125, 0],
             "direction": "top",
             "label": ""
           },
           {
             "id": "id68030a2a-28eb-442e-9b16-fc465150c3cf_port_1",
-            "coords": [
-              0,
-              75
-            ],
-            "connectionPoint": [
-              0,
-              75
-            ],
+            "coords": [0, 75],
+            "connectionPoint": [0, 75],
             "direction": "left",
             "label": ""
           },
           {
             "id": "id68030a2a-28eb-442e-9b16-fc465150c3cf_port_2",
-            "coords": [
-              125,
-              150
-            ],
-            "connectionPoint": [
-              125,
-              150
-            ],
+            "coords": [125, 150],
+            "connectionPoint": [125, 150],
             "direction": "bottom",
             "label": ""
           },
           {
             "id": "id68030a2a-28eb-442e-9b16-fc465150c3cf_port_3",
-            "coords": [
-              250,
-              75
-            ],
-            "connectionPoint": [
-              250,
-              75
-            ],
+            "coords": [250, 75],
+            "connectionPoint": [250, 75],
             "direction": "right",
             "label": ""
           }
         ],
         "label": "Clinical Trial starts",
-        "coords": [
-          0,
-          0
-        ],
+        "coords": [0, 0],
         "width": 250,
         "height": 150,
         "data": {
@@ -118,10 +85,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 0,
-            "coords": [
-              350,
-              0
-            ],
+            "coords": [350, 0],
             "width": 250,
             "height": 32
           },
@@ -131,10 +95,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 1,
-            "coords": [
-              350,
-              32
-            ],
+            "coords": [350, 32],
             "width": 250,
             "height": 90
           },
@@ -144,10 +105,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 2,
-            "coords": [
-              350,
-              122
-            ],
+            "coords": [350, 122],
             "width": 250,
             "height": 28
           }
@@ -155,62 +113,35 @@
         "ports": [
           {
             "id": "id80af05f5-ffe2-4896-9e81-f466118c07fa_port_0",
-            "coords": [
-              475,
-              0
-            ],
-            "connectionPoint": [
-              475,
-              0
-            ],
+            "coords": [475, 0],
+            "connectionPoint": [475, 0],
             "direction": "top",
             "label": ""
           },
           {
             "id": "id80af05f5-ffe2-4896-9e81-f466118c07fa_port_1",
-            "coords": [
-              350,
-              75
-            ],
-            "connectionPoint": [
-              350,
-              75
-            ],
+            "coords": [350, 75],
+            "connectionPoint": [350, 75],
             "direction": "left",
             "label": ""
           },
           {
             "id": "id80af05f5-ffe2-4896-9e81-f466118c07fa_port_2",
-            "coords": [
-              475,
-              150
-            ],
-            "connectionPoint": [
-              475,
-              150
-            ],
+            "coords": [475, 150],
+            "connectionPoint": [475, 150],
             "direction": "bottom",
             "label": ""
           },
           {
             "id": "id80af05f5-ffe2-4896-9e81-f466118c07fa_port_3",
-            "coords": [
-              600,
-              75
-            ],
-            "connectionPoint": [
-              600,
-              75
-            ],
+            "coords": [600, 75],
+            "connectionPoint": [600, 75],
             "direction": "right",
             "label": ""
           }
         ],
         "label": "Phase 1",
-        "coords": [
-          350,
-          0
-        ],
+        "coords": [350, 0],
         "width": 250,
         "height": 150,
         "data": {
@@ -230,10 +161,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 0,
-            "coords": [
-              700,
-              0
-            ],
+            "coords": [700, 0],
             "width": 250,
             "height": 32
           },
@@ -243,10 +171,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 1,
-            "coords": [
-              700,
-              32
-            ],
+            "coords": [700, 32],
             "width": 250,
             "height": 90
           },
@@ -256,10 +181,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 2,
-            "coords": [
-              700,
-              122
-            ],
+            "coords": [700, 122],
             "width": 250,
             "height": 28
           }
@@ -267,62 +189,35 @@
         "ports": [
           {
             "id": "id4feee37d-cda6-436c-8126-c48742fc48ee_port_0",
-            "coords": [
-              825,
-              0
-            ],
-            "connectionPoint": [
-              825,
-              0
-            ],
+            "coords": [825, 0],
+            "connectionPoint": [825, 0],
             "direction": "top",
             "label": ""
           },
           {
             "id": "id4feee37d-cda6-436c-8126-c48742fc48ee_port_1",
-            "coords": [
-              700,
-              75
-            ],
-            "connectionPoint": [
-              700,
-              75
-            ],
+            "coords": [700, 75],
+            "connectionPoint": [700, 75],
             "direction": "left",
             "label": ""
           },
           {
             "id": "id4feee37d-cda6-436c-8126-c48742fc48ee_port_2",
-            "coords": [
-              825,
-              150
-            ],
-            "connectionPoint": [
-              825,
-              150
-            ],
+            "coords": [825, 150],
+            "connectionPoint": [825, 150],
             "direction": "bottom",
             "label": ""
           },
           {
             "id": "id4feee37d-cda6-436c-8126-c48742fc48ee_port_3",
-            "coords": [
-              950,
-              75
-            ],
-            "connectionPoint": [
-              950,
-              75
-            ],
+            "coords": [950, 75],
+            "connectionPoint": [950, 75],
             "direction": "right",
             "label": ""
           }
         ],
         "label": "Phase 2",
-        "coords": [
-          700,
-          0
-        ],
+        "coords": [700, 0],
         "width": 250,
         "height": 150,
         "data": {
@@ -342,10 +237,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 0,
-            "coords": [
-              1050,
-              0
-            ],
+            "coords": [1050, 0],
             "width": 250,
             "height": 32
           },
@@ -355,10 +247,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 1,
-            "coords": [
-              1050,
-              32
-            ],
+            "coords": [1050, 32],
             "width": 250,
             "height": 90
           },
@@ -368,10 +257,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 2,
-            "coords": [
-              1050,
-              122
-            ],
+            "coords": [1050, 122],
             "width": 250,
             "height": 28
           }
@@ -379,62 +265,35 @@
         "ports": [
           {
             "id": "id07cc93fe-abe7-4046-a1f2-1f5e7f49dcbf_port_0",
-            "coords": [
-              1175,
-              0
-            ],
-            "connectionPoint": [
-              1175,
-              0
-            ],
+            "coords": [1175, 0],
+            "connectionPoint": [1175, 0],
             "direction": "top",
             "label": ""
           },
           {
             "id": "id07cc93fe-abe7-4046-a1f2-1f5e7f49dcbf_port_1",
-            "coords": [
-              1050,
-              75
-            ],
-            "connectionPoint": [
-              1050,
-              75
-            ],
+            "coords": [1050, 75],
+            "connectionPoint": [1050, 75],
             "direction": "left",
             "label": ""
           },
           {
             "id": "id07cc93fe-abe7-4046-a1f2-1f5e7f49dcbf_port_2",
-            "coords": [
-              1175,
-              150
-            ],
-            "connectionPoint": [
-              1175,
-              150
-            ],
+            "coords": [1175, 150],
+            "connectionPoint": [1175, 150],
             "direction": "bottom",
             "label": ""
           },
           {
             "id": "id07cc93fe-abe7-4046-a1f2-1f5e7f49dcbf_port_3",
-            "coords": [
-              1300,
-              75
-            ],
-            "connectionPoint": [
-              1300,
-              75
-            ],
+            "coords": [1300, 75],
+            "connectionPoint": [1300, 75],
             "direction": "right",
             "label": ""
           }
         ],
         "label": "Phase 3",
-        "coords": [
-          1050,
-          0
-        ],
+        "coords": [1050, 0],
         "width": 250,
         "height": 150,
         "data": {
@@ -454,10 +313,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 0,
-            "coords": [
-              1750,
-              0
-            ],
+            "coords": [1750, 0],
             "width": 250,
             "height": 32
           },
@@ -467,10 +323,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 1,
-            "coords": [
-              1750,
-              32
-            ],
+            "coords": [1750, 32],
             "width": 250,
             "height": 90
           },
@@ -480,10 +333,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 2,
-            "coords": [
-              1750,
-              122
-            ],
+            "coords": [1750, 122],
             "width": 250,
             "height": 28
           }
@@ -491,62 +341,35 @@
         "ports": [
           {
             "id": "id4300b862-57bb-42ba-8cb5-082bc6324882_port_0",
-            "coords": [
-              1875,
-              0
-            ],
-            "connectionPoint": [
-              1875,
-              0
-            ],
+            "coords": [1875, 0],
+            "connectionPoint": [1875, 0],
             "direction": "top",
             "label": ""
           },
           {
             "id": "id4300b862-57bb-42ba-8cb5-082bc6324882_port_1",
-            "coords": [
-              1750,
-              75
-            ],
-            "connectionPoint": [
-              1750,
-              75
-            ],
+            "coords": [1750, 75],
+            "connectionPoint": [1750, 75],
             "direction": "left",
             "label": ""
           },
           {
             "id": "id4300b862-57bb-42ba-8cb5-082bc6324882_port_2",
-            "coords": [
-              1875,
-              150
-            ],
-            "connectionPoint": [
-              1875,
-              150
-            ],
+            "coords": [1875, 150],
+            "connectionPoint": [1875, 150],
             "direction": "bottom",
             "label": ""
           },
           {
             "id": "id4300b862-57bb-42ba-8cb5-082bc6324882_port_3",
-            "coords": [
-              2000,
-              75
-            ],
-            "connectionPoint": [
-              2000,
-              75
-            ],
+            "coords": [2000, 75],
+            "connectionPoint": [2000, 75],
             "direction": "right",
             "label": ""
           }
         ],
         "label": "Regulatory Authorities Conf.",
-        "coords": [
-          1750,
-          0
-        ],
+        "coords": [1750, 0],
         "width": 250,
         "height": 150,
         "data": {
@@ -566,10 +389,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 0,
-            "coords": [
-              1400,
-              0
-            ],
+            "coords": [1400, 0],
             "width": 250,
             "height": 32
           },
@@ -579,10 +399,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 1,
-            "coords": [
-              1400,
-              32
-            ],
+            "coords": [1400, 32],
             "width": 250,
             "height": 118
           }
@@ -590,62 +407,35 @@
         "ports": [
           {
             "id": "iddf9d2cc0-1919-472f-9bff-4ecb7db20976_port_0",
-            "coords": [
-              1525,
-              0
-            ],
-            "connectionPoint": [
-              1525,
-              0
-            ],
+            "coords": [1525, 0],
+            "connectionPoint": [1525, 0],
             "direction": "top",
             "label": ""
           },
           {
             "id": "iddf9d2cc0-1919-472f-9bff-4ecb7db20976_port_1",
-            "coords": [
-              1400,
-              75
-            ],
-            "connectionPoint": [
-              1400,
-              75
-            ],
+            "coords": [1400, 75],
+            "connectionPoint": [1400, 75],
             "direction": "left",
             "label": ""
           },
           {
             "id": "iddf9d2cc0-1919-472f-9bff-4ecb7db20976_port_2",
-            "coords": [
-              1525,
-              150
-            ],
-            "connectionPoint": [
-              1525,
-              150
-            ],
+            "coords": [1525, 150],
+            "connectionPoint": [1525, 150],
             "direction": "bottom",
             "label": ""
           },
           {
             "id": "iddf9d2cc0-1919-472f-9bff-4ecb7db20976_port_3",
-            "coords": [
-              1650,
-              75
-            ],
-            "connectionPoint": [
-              1650,
-              75
-            ],
+            "coords": [1650, 75],
+            "connectionPoint": [1650, 75],
             "direction": "right",
             "label": ""
           }
         ],
         "label": "Positive Results",
-        "coords": [
-          1400,
-          0
-        ],
+        "coords": [1400, 0],
         "width": 250,
         "height": 150,
         "data": {
@@ -664,10 +454,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 0,
-            "coords": [
-              2100,
-              0
-            ],
+            "coords": [2100, 0],
             "width": 250,
             "height": 32
           },
@@ -677,10 +464,7 @@
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 1,
-            "coords": [
-              2100,
-              32
-            ],
+            "coords": [2100, 32],
             "width": 250,
             "height": 118
           }
@@ -688,62 +472,35 @@
         "ports": [
           {
             "id": "id6277d487-4679-43c1-be75-b66a441ca5de_port_0",
-            "coords": [
-              2225,
-              0
-            ],
-            "connectionPoint": [
-              2225,
-              0
-            ],
+            "coords": [2225, 0],
+            "connectionPoint": [2225, 0],
             "direction": "top",
             "label": ""
           },
           {
             "id": "id6277d487-4679-43c1-be75-b66a441ca5de_port_1",
-            "coords": [
-              2100,
-              75
-            ],
-            "connectionPoint": [
-              2100,
-              75
-            ],
+            "coords": [2100, 75],
+            "connectionPoint": [2100, 75],
             "direction": "left",
             "label": ""
           },
           {
             "id": "id6277d487-4679-43c1-be75-b66a441ca5de_port_2",
-            "coords": [
-              2225,
-              150
-            ],
-            "connectionPoint": [
-              2225,
-              150
-            ],
+            "coords": [2225, 150],
+            "connectionPoint": [2225, 150],
             "direction": "bottom",
             "label": ""
           },
           {
             "id": "id6277d487-4679-43c1-be75-b66a441ca5de_port_3",
-            "coords": [
-              2350,
-              75
-            ],
-            "connectionPoint": [
-              2350,
-              75
-            ],
+            "coords": [2350, 75],
+            "connectionPoint": [2350, 75],
             "direction": "right",
             "label": ""
           }
         ],
         "label": "Drug is Effective",
-        "coords": [
-          2100,
-          0
-        ],
+        "coords": [2100, 0],
         "width": 250,
         "height": 150,
         "data": {

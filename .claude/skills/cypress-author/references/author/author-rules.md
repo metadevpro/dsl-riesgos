@@ -7,6 +7,7 @@ Follow these rules unless requested otherwise:
 You MUST read and follow [../documentation/documentation-rules.md](../documentation/documentation-rules.md) when citing or looking up Cypress API and concepts.
 
 ## Understand
+
 - Look for a Cypress config file (`cypress.config.js`/`cypress.config.ts`).
 - Review the Cypress support file if one exists for the targeted testing type.
 - Review the project's `package.json` to understand available libraries and the version of Cypress being used.
@@ -17,7 +18,8 @@ You MUST read and follow [../documentation/documentation-rules.md](../documentat
 - When reviewing existing project content, including files suggested by agent configuration, always prefer searching for specific content inside files (`grep`) rather than reading the entire file.
 
 ## Style
-- Use clear, concise, and descriptive test titles in Cypress. 
+
+- Use clear, concise, and descriptive test titles in Cypress.
   - When creating or updating a test, summarize the user behavior and expected outcome in plain language, avoiding implementation details.
   - Prefer the format: "[action] → [expected result]".
   - If updating an existing title, remove ambiguity and ensure it reflects the current test logic.
@@ -31,12 +33,14 @@ You MUST read and follow [../documentation/documentation-rules.md](../documentat
 - Include code comments to aid a future maintainer.
 
 ## Test Structure
+
 - Tests must be independent and runnable in isolation.
 - Never depend on state from other tests.
 - Extract repeated setup logic into before() or beforeEach() blocks.
 - Prefer fewer tests with multiple assertions rather than many tiny tests.
 
 ## State Management
+
 - Programmatically prepare application state whenever possible.
 - Prefer cy.request(), cy.task(), or API setup instead of UI flows.
 - Avoid UI logins unless the login UI itself is being tested.
@@ -44,6 +48,7 @@ You MUST read and follow [../documentation/documentation-rules.md](../documentat
 - Use aliases (.as()) or closures (.then()) to access results, never assign Cypress command results to variables
 
 ## Element Identification
+
 - Review existing Cypress tests for `Cypress.ElementSelector` configuration. Always prioritize selectors by the order configured here.
 - Otherwise, prefer stable selectors in this order:
   1. `data-cy`, `data-test`, `data-testid`, `data-test-id`, `data-qa` attributes
@@ -56,6 +61,7 @@ You MUST read and follow [../documentation/documentation-rules.md](../documentat
 - When testing UI that affects accessibility, prefer selectors that reflect accessible names or roles where it doesn't conflict with stability
 
 ## Waiting
+
 - Never use arbitrary waits like `cy.wait(5000)`.
 - Use:
   - implicit retries
@@ -64,17 +70,21 @@ You MUST read and follow [../documentation/documentation-rules.md](../documentat
   - assertions that verify the next state of the application with an increased `timeout` configuration (e.g. `cy.get('[data-cy="title"]', { timeout: 10000 })`)
 
 ## Network
+
 - Stub or intercept network requests when useful.
 - Use `cy.intercept()` for controlling responses or waiting for calls.
 
 ## Configuration
+
 - Prefer extracting configuration into the `cypress.config.js|ts` file
 - Prefer configuring `baseUrl` and using `cy.visit('/path')` instead of full URLs.
 
 ## Security
+
 - Use cy.env() for credentials, passwords, or secrets.
 
 ## Guidelines
+
 - You must read and follow [./async.md](./async.md) if using Promises or `async`/`await`.
 - You must read and follow [./reusability.md](./reusability.md).
 - You must read and follow [./prompt.md](./prompt.md).

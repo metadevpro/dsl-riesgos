@@ -1,13 +1,13 @@
 <h3>Example 1. Falcon 9 Mission</h3>
 <p>
-  This example demonstrates how a Bayesian network can help estimate the risk of an aerospace mission based on partial evidence. The case
-  is inspired by the Falcon 9, whose first stage is equipped with nine Merlin engines and is designed with engine-out capability: it can
+  This example demonstrates how a Bayesian network can help estimate the risk of an aerospace mission based on partial evidence. The case is
+  inspired by the Falcon 9, whose first stage is equipped with nine Merlin engines and is designed with engine-out capability: it can
   continue the mission even if one or two engines fail during ascent. The question the model answers is:
 </p>
 <p>If an engine failure is detected during flight, what is the probability that the mission will succesfully reach orbit?</p>
 <p>
-  To avoid an overly large network, the model does not represent the 9 engines separately. If each engine were modelled individually, 2^9
-  = 512 possible combinations would have to be considered, which would make the probability tables difficult to manage in an interactive
+  To avoid an overly large network, the model does not represent the 9 engines separately. If each engine were modelled individually, 2^9 =
+  512 possible combinations would have to be considered, which would make the probability tables difficult to manage in an interactive
   example.
 </p>
 <p>
@@ -33,9 +33,9 @@
 </ul>
 <p>
   Simplifying the engines allows the probabilistic logic of the real system to be retained without overcomplicating the model. Rather than
-  manually entering hundreds of combinations, the binomial calculation summarises the probability of a partial or critical failure, and
-  the Bayesian network is responsible for propagating that risk through the rest of the model to estimate the overall mission risk based
-  on the evidence of an engine failure.
+  manually entering hundreds of combinations, the binomial calculation summarises the probability of a partial or critical failure, and the
+  Bayesian network is responsible for propagating that risk through the rest of the model to estimate the overall mission risk based on the
+  evidence of an engine failure.
 </p>
 <p>
   The model's structure reflects a simple decision chain: engine failures and weather conditions influence the probability of reaching
@@ -167,8 +167,8 @@
   </tbody>
 </table>
 <p>
-  The last two rows combine a partial failure and a critical failure at the same time. In reality these are almost incompatible
-  situations, but they are included to complete the binary table required by the model.
+  The last two rows combine a partial failure and a critical failure at the same time. In reality these are almost incompatible situations,
+  but they are included to complete the binary table required by the model.
 </p>
 
 <h4>Leaf node: PayloadDeployed</h4>
@@ -192,8 +192,8 @@
 </table>
 <p>
   These CPTs are what the network uses to update the probabilities when the user introduces evidence. For example, if a partial engine
-  failure or adverse weather is confirmed, the model selects the corresponding rows and propagates the change toward the mission and
-  payload deployment nodes.
+  failure or adverse weather is confirmed, the model selects the corresponding rows and propagates the change toward the mission and payload
+  deployment nodes.
 </p>
 <a class="example-button" routerLink="/bayes" [queryParams]="{ example: 'bayes-example1-landing' }" data-cy="open-example-bayes-1">
   Open this example in the model →

@@ -116,11 +116,7 @@ describe('Binomial Workflow — calculateTheoreticalNodeProbabilities', () => {
 
   it('propagates node probability down a linear chain', () => {
     const model = {
-      nodes: [
-        makeNode('S', { [PROB_KEY]: 100 }, 'start'),
-        makeNode('A', { [PROB_KEY]: 50 }),
-        makeNode('B', { [PROB_KEY]: 80 })
-      ],
+      nodes: [makeNode('S', { [PROB_KEY]: 100 }, 'start'), makeNode('A', { [PROB_KEY]: 50 }), makeNode('B', { [PROB_KEY]: 80 })],
       connections: [makeConn('S', 'A'), makeConn('A', 'B')]
     };
 
@@ -132,15 +128,8 @@ describe('Binomial Workflow — calculateTheoreticalNodeProbabilities', () => {
 
   it('splits flow across branches according to connection weights', () => {
     const model = {
-      nodes: [
-        makeNode('S', {}, 'start'),
-        makeNode('L', { [PROB_KEY]: 100 }),
-        makeNode('R', { [PROB_KEY]: 100 })
-      ],
-      connections: [
-        makeConn('S', 'L', { [BRANCH_KEY]: 3 }),
-        makeConn('S', 'R', { [BRANCH_KEY]: 1 })
-      ]
+      nodes: [makeNode('S', {}, 'start'), makeNode('L', { [PROB_KEY]: 100 }), makeNode('R', { [PROB_KEY]: 100 })],
+      connections: [makeConn('S', 'L', { [BRANCH_KEY]: 3 }), makeConn('S', 'R', { [BRANCH_KEY]: 1 })]
     };
 
     const results = calculateTheoreticalNodeProbabilities(model, PROB_KEY, BRANCH_KEY, MAX_PROB);
@@ -150,11 +139,7 @@ describe('Binomial Workflow — calculateTheoreticalNodeProbabilities', () => {
 
   it('multiple disjoint roots both contribute', () => {
     const model = {
-      nodes: [
-        makeNode('R1', {}, 'start'),
-        makeNode('R2', {}, 'start'),
-        makeNode('Shared', { [PROB_KEY]: 100 })
-      ],
+      nodes: [makeNode('R1', {}, 'start'), makeNode('R2', {}, 'start'), makeNode('Shared', { [PROB_KEY]: 100 })],
       connections: [makeConn('R1', 'Shared'), makeConn('R2', 'Shared')]
     };
 
