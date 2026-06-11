@@ -197,7 +197,6 @@ export const PROB_CONFIG: DiagramConfig = {
     defaultHeight: 150,
     label: {
       look: {
-        lookType: 'field-look',
         fontColor: '#000000',
         fontSize: 18,
         fontWeight: 400,
@@ -244,7 +243,6 @@ export const PROB_CONFIG: DiagramConfig = {
   ],
   connectionTypeDefaults: {
     look: {
-      lookType: 'connection-look',
       color: '#000000',
       thickness: 3,
       style: LineStyle.Solid,
@@ -257,7 +255,6 @@ export const PROB_CONFIG: DiagramConfig = {
       }
     },
     endMarkerLook: {
-      lookType: 'marker-image-look',
       image: '/assets/marker/arrowDaga.svg',
       width: 4,
       height: 8,
@@ -266,7 +263,6 @@ export const PROB_CONFIG: DiagramConfig = {
     },
     label: {
       look: {
-        lookType: 'field-look',
         fontColor: '#000000',
         fontSize: 12,
         fontWeight: 400,
