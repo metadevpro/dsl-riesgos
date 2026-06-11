@@ -176,7 +176,6 @@ export const bayes_CONFIG: DiagramConfig = {
     defaultHeight: 150,
     label: {
       look: {
-        lookType: 'field-look',
         fontColor: '#000000',
         fontSize: 14,
         fontWeight: 400,
@@ -220,7 +219,6 @@ export const bayes_CONFIG: DiagramConfig = {
       id: 'diagram-connection',
       name: 'Connection',
       look: {
-        lookType: 'connection-look',
         color: '#000000',
         thickness: 3,
         style: LineStyle.Solid,
@@ -233,7 +231,6 @@ export const bayes_CONFIG: DiagramConfig = {
         }
       },
       endMarkerLook: {
-        lookType: 'marker-image-look',
         image: '/assets/marker/arrowDaga.svg',
         width: 4,
         height: 8,
@@ -242,7 +239,6 @@ export const bayes_CONFIG: DiagramConfig = {
       },
       label: {
         look: {
-          lookType: 'field-look',
           fontColor: '#000000',
           fontSize: 12,
           fontWeight: 400,
