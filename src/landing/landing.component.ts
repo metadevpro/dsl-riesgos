@@ -9,7 +9,7 @@ import { Falcon9Component } from './examples/bayes/falcon9.component';
 import { RocketAbortComponent } from './examples/bayes/rocket-abort.component';
 import { CrewDragonComponent } from './examples/bayes/crew-dragon.component';
 
-type BinomialTab = 'quality-control' | 'supply-chain' | 'cybersecurity' | 'cybersecurity-extension' | 'clinical-trial';
+type BinomialTab = 'quality-control' | 'supply-chain' | 'clinical-trial' | 'cybersecurity' | 'cybersecurity-extension';
 type BayesTab = 'falcon9' | 'rocket-abort' | 'crew-dragon';
 
 @Component({
@@ -32,9 +32,9 @@ export class LandingComponent {
   readonly binomialTabs = [
     { id: 'quality-control', label: 'In-line Quality Control' },
     { id: 'supply-chain', label: 'Logistics Supply Chain' },
+    { id: 'clinical-trial', label: 'Clinical Trial' },
     { id: 'cybersecurity', label: 'Cybersecurity' },
-    { id: 'cybersecurity-extension', label: 'Cybersecurity Extension' },
-    { id: 'clinical-trial', label: 'Clinical Trial' }
+    { id: 'cybersecurity-extension', label: 'Cybersecurity Extension' }
   ] as const;
 
   readonly bayesTabs = [

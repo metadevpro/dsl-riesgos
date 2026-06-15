@@ -1,7 +1,7 @@
 {
   "riskFileVersion": 1,
   "modelType": "binomial",
-  "exportedAt": "2026-06-03T11:03:28.985Z",
+  "exportedAt": "2026-06-08T10:12:17.449Z",
   "daga": {
     "name": "unnamed",
     "type": "simple-diagram",
@@ -10,511 +10,564 @@
     "updatedAt": "2026-05-13T11:15:01.996Z",
     "nodes": [
       {
-        "id": "id68030a2a-28eb-442e-9b16-fc465150c3cf",
+        "id": "id9efe097f-1d18-4e30-ab7f-e9a38a274f8c",
         "type": "start-diagram-node",
         "children": [],
         "sections": [
           {
-            "id": "id68030a2a-28eb-442e-9b16-fc465150c3cf_0_0",
+            "id": "id9efe097f-1d18-4e30-ab7f-e9a38a274f8c_0_0",
             "ports": [],
+            "decorators": [],
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 0,
-            "coords": [0, 0],
+            "coords": [100, 600],
             "width": 250,
             "height": 32
           },
           {
-            "id": "id68030a2a-28eb-442e-9b16-fc465150c3cf_1_0",
+            "id": "id9efe097f-1d18-4e30-ab7f-e9a38a274f8c_1_0",
             "ports": [],
+            "decorators": [],
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 1,
-            "coords": [0, 32],
+            "coords": [100, 632],
             "width": 250,
             "height": 118
           }
         ],
         "ports": [
           {
-            "id": "id68030a2a-28eb-442e-9b16-fc465150c3cf_port_0",
-            "coords": [125, 0],
-            "connectionPoint": [125, 0],
+            "id": "id9efe097f-1d18-4e30-ab7f-e9a38a274f8c_port_0",
+            "coords": [225, 600],
+            "connectionPoint": [225, 600],
             "direction": "top",
             "label": ""
           },
           {
-            "id": "id68030a2a-28eb-442e-9b16-fc465150c3cf_port_1",
-            "coords": [0, 75],
-            "connectionPoint": [0, 75],
+            "id": "id9efe097f-1d18-4e30-ab7f-e9a38a274f8c_port_1",
+            "coords": [100, 675],
+            "connectionPoint": [100, 675],
             "direction": "left",
             "label": ""
           },
           {
-            "id": "id68030a2a-28eb-442e-9b16-fc465150c3cf_port_2",
-            "coords": [125, 150],
-            "connectionPoint": [125, 150],
+            "id": "id9efe097f-1d18-4e30-ab7f-e9a38a274f8c_port_2",
+            "coords": [225, 750],
+            "connectionPoint": [225, 750],
             "direction": "bottom",
             "label": ""
           },
           {
-            "id": "id68030a2a-28eb-442e-9b16-fc465150c3cf_port_3",
-            "coords": [250, 75],
-            "connectionPoint": [250, 75],
+            "id": "id9efe097f-1d18-4e30-ab7f-e9a38a274f8c_port_3",
+            "coords": [350, 675],
+            "connectionPoint": [350, 675],
             "direction": "right",
             "label": ""
           }
         ],
-        "label": "Clinical Trial starts",
-        "coords": [0, 0],
+        "decorators": [
+          {
+            "id": "id9efe097f-1d18-4e30-ab7f-e9a38a274f8c-probability-decorator",
+            "coords": [100, 600],
+            "width": 250,
+            "height": 32,
+            "priority": 0,
+            "svg": "\n      <foreignObject x=\"0\" y=\"0\" width=\"250\" height=\"32\">\n        <div xmlns=\"http://www.w3.org/1999/xhtml\" style=\"height:32px;display:flex;align-items:center;justify-content:space-between;padding:0 10px;box-sizing:border-box;background:transparent;pointer-events:none;font-family:'WonderUnitSans', sans-serif;\">\n          <img src=\"/assets/icons/start-icon.svg\" width=\"22\" height=\"22\" style=\"display:block;\" />\n          <span style=\"color:#15A34A;font-weight:700;font-size:13px;\">100%</span>\n        </div>\n      </foreignObject>\n    ",
+            "anchorPoints": ["floating", "floating"]
+          }
+        ],
+        "label": "System",
+        "coords": [100, 600],
         "width": 250,
         "height": 150,
         "data": {
-          "node name": "Clinical Trial starts",
+          "node name": "System",
           "node number": 1
         }
       },
       {
-        "id": "id80af05f5-ffe2-4896-9e81-f466118c07fa",
+        "id": "id44b168f2-0f2e-4d15-8a2c-e18c735df842",
         "type": "event-diagram-node",
         "children": [],
         "sections": [
           {
-            "id": "id80af05f5-ffe2-4896-9e81-f466118c07fa_0_0",
+            "id": "id44b168f2-0f2e-4d15-8a2c-e18c735df842_0_0",
             "ports": [],
+            "decorators": [],
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 0,
-            "coords": [350, 0],
+            "coords": [450, 600],
             "width": 250,
             "height": 32
           },
           {
-            "id": "id80af05f5-ffe2-4896-9e81-f466118c07fa_1_0",
+            "id": "id44b168f2-0f2e-4d15-8a2c-e18c735df842_1_0",
             "ports": [],
+            "decorators": [],
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 1,
-            "coords": [350, 32],
+            "coords": [450, 632],
             "width": 250,
             "height": 90
           },
           {
-            "id": "id80af05f5-ffe2-4896-9e81-f466118c07fa_2_0",
+            "id": "id44b168f2-0f2e-4d15-8a2c-e18c735df842_2_0",
             "ports": [],
+            "decorators": [],
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 2,
-            "coords": [350, 122],
+            "coords": [450, 722],
             "width": 250,
             "height": 28
           }
         ],
         "ports": [
           {
-            "id": "id80af05f5-ffe2-4896-9e81-f466118c07fa_port_0",
-            "coords": [475, 0],
-            "connectionPoint": [475, 0],
+            "id": "id44b168f2-0f2e-4d15-8a2c-e18c735df842_port_0",
+            "coords": [575, 600],
+            "connectionPoint": [575, 600],
             "direction": "top",
             "label": ""
           },
           {
-            "id": "id80af05f5-ffe2-4896-9e81-f466118c07fa_port_1",
-            "coords": [350, 75],
-            "connectionPoint": [350, 75],
+            "id": "id44b168f2-0f2e-4d15-8a2c-e18c735df842_port_1",
+            "coords": [450, 675],
+            "connectionPoint": [450, 675],
             "direction": "left",
             "label": ""
           },
           {
-            "id": "id80af05f5-ffe2-4896-9e81-f466118c07fa_port_2",
-            "coords": [475, 150],
-            "connectionPoint": [475, 150],
+            "id": "id44b168f2-0f2e-4d15-8a2c-e18c735df842_port_2",
+            "coords": [575, 750],
+            "connectionPoint": [575, 750],
             "direction": "bottom",
             "label": ""
           },
           {
-            "id": "id80af05f5-ffe2-4896-9e81-f466118c07fa_port_3",
-            "coords": [600, 75],
-            "connectionPoint": [600, 75],
+            "id": "id44b168f2-0f2e-4d15-8a2c-e18c735df842_port_3",
+            "coords": [700, 675],
+            "connectionPoint": [700, 675],
             "direction": "right",
             "label": ""
           }
         ],
-        "label": "Phase 1",
-        "coords": [350, 0],
+        "decorators": [
+          {
+            "id": "id44b168f2-0f2e-4d15-8a2c-e18c735df842-probability-decorator",
+            "coords": [450, 600],
+            "width": 250,
+            "height": 32,
+            "priority": 0,
+            "svg": "\n      <foreignObject x=\"0\" y=\"0\" width=\"250\" height=\"32\">\n        <div xmlns=\"http://www.w3.org/1999/xhtml\" style=\"height:32px;display:flex;align-items:center;justify-content:space-between;padding:0 10px;box-sizing:border-box;background:transparent;pointer-events:none;font-family:'WonderUnitSans', sans-serif;\">\n          <img src=\"/assets/icons/state-icon.svg\" width=\"22\" height=\"22\" style=\"display:block;\" />\n          <span style=\"color:#BA51C5;font-weight:700;font-size:13px;\">0.30%</span>\n        </div>\n      </foreignObject>\n    ",
+            "anchorPoints": ["floating", "floating"]
+          },
+          {
+            "id": "id44b168f2-0f2e-4d15-8a2c-e18c735df842-local-probability-decorator",
+            "coords": [450, 722],
+            "width": 250,
+            "height": 28,
+            "priority": 0,
+            "svg": "\n      <foreignObject x=\"0\" y=\"0\" width=\"250\" height=\"28\">\n        <div xmlns=\"http://www.w3.org/1999/xhtml\" style=\"height:28px;display:flex;align-items:center;justify-content:center;background:transparent;pointer-events:none;font-family:'WonderUnitSans', sans-serif;\">\n          <span style=\"background:#EEEEEE;color:#333;font-size:12px;border-radius:999px;padding:2px 12px;font-weight:500;\">0.30%</span>\n        </div>\n      </foreignObject>\n    ",
+            "anchorPoints": ["floating", "floating"]
+          }
+        ],
+        "label": "Initial access",
+        "coords": [450, 600],
         "width": 250,
         "height": 150,
         "data": {
-          "node name": "Phase 1",
+          "node name": "Initial access",
           "node number": 1,
-          "probability": 52
+          "probability": 0.3
         }
       },
       {
-        "id": "id4feee37d-cda6-436c-8126-c48742fc48ee",
+        "id": "id13a3f2db-a501-470f-be0a-b2aec73b6d97",
         "type": "event-diagram-node",
         "children": [],
         "sections": [
           {
-            "id": "id4feee37d-cda6-436c-8126-c48742fc48ee_0_0",
+            "id": "id13a3f2db-a501-470f-be0a-b2aec73b6d97_0_0",
             "ports": [],
+            "decorators": [],
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 0,
-            "coords": [700, 0],
+            "coords": [1150, 600],
             "width": 250,
             "height": 32
           },
           {
-            "id": "id4feee37d-cda6-436c-8126-c48742fc48ee_1_0",
+            "id": "id13a3f2db-a501-470f-be0a-b2aec73b6d97_1_0",
             "ports": [],
+            "decorators": [],
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 1,
-            "coords": [700, 32],
+            "coords": [1150, 632],
             "width": 250,
             "height": 90
           },
           {
-            "id": "id4feee37d-cda6-436c-8126-c48742fc48ee_2_0",
+            "id": "id13a3f2db-a501-470f-be0a-b2aec73b6d97_2_0",
             "ports": [],
+            "decorators": [],
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 2,
-            "coords": [700, 122],
+            "coords": [1150, 722],
             "width": 250,
             "height": 28
           }
         ],
         "ports": [
           {
-            "id": "id4feee37d-cda6-436c-8126-c48742fc48ee_port_0",
-            "coords": [825, 0],
-            "connectionPoint": [825, 0],
+            "id": "id13a3f2db-a501-470f-be0a-b2aec73b6d97_port_0",
+            "coords": [1275, 600],
+            "connectionPoint": [1275, 600],
             "direction": "top",
             "label": ""
           },
           {
-            "id": "id4feee37d-cda6-436c-8126-c48742fc48ee_port_1",
-            "coords": [700, 75],
-            "connectionPoint": [700, 75],
+            "id": "id13a3f2db-a501-470f-be0a-b2aec73b6d97_port_1",
+            "coords": [1150, 675],
+            "connectionPoint": [1150, 675],
             "direction": "left",
             "label": ""
           },
           {
-            "id": "id4feee37d-cda6-436c-8126-c48742fc48ee_port_2",
-            "coords": [825, 150],
-            "connectionPoint": [825, 150],
+            "id": "id13a3f2db-a501-470f-be0a-b2aec73b6d97_port_2",
+            "coords": [1275, 750],
+            "connectionPoint": [1275, 750],
             "direction": "bottom",
             "label": ""
           },
           {
-            "id": "id4feee37d-cda6-436c-8126-c48742fc48ee_port_3",
-            "coords": [950, 75],
-            "connectionPoint": [950, 75],
+            "id": "id13a3f2db-a501-470f-be0a-b2aec73b6d97_port_3",
+            "coords": [1400, 675],
+            "connectionPoint": [1400, 675],
             "direction": "right",
             "label": ""
           }
         ],
-        "label": "Phase 2",
-        "coords": [700, 0],
+        "decorators": [
+          {
+            "id": "id13a3f2db-a501-470f-be0a-b2aec73b6d97-probability-decorator",
+            "coords": [1150, 600],
+            "width": 250,
+            "height": 32,
+            "priority": 0,
+            "svg": "\n      <foreignObject x=\"0\" y=\"0\" width=\"250\" height=\"32\">\n        <div xmlns=\"http://www.w3.org/1999/xhtml\" style=\"height:32px;display:flex;align-items:center;justify-content:space-between;padding:0 10px;box-sizing:border-box;background:transparent;pointer-events:none;font-family:'WonderUnitSans', sans-serif;\">\n          <img src=\"/assets/icons/state-icon.svg\" width=\"22\" height=\"22\" style=\"display:block;\" />\n          <span style=\"color:#BA51C5;font-weight:700;font-size:13px;\">0.00%</span>\n        </div>\n      </foreignObject>\n    ",
+            "anchorPoints": ["floating", "floating"]
+          },
+          {
+            "id": "id13a3f2db-a501-470f-be0a-b2aec73b6d97-local-probability-decorator",
+            "coords": [1150, 722],
+            "width": 250,
+            "height": 28,
+            "priority": 0,
+            "svg": "\n      <foreignObject x=\"0\" y=\"0\" width=\"250\" height=\"28\">\n        <div xmlns=\"http://www.w3.org/1999/xhtml\" style=\"height:28px;display:flex;align-items:center;justify-content:center;background:transparent;pointer-events:none;font-family:'WonderUnitSans', sans-serif;\">\n          <span style=\"background:#EEEEEE;color:#333;font-size:12px;border-radius:999px;padding:2px 12px;font-weight:500;\">25%</span>\n        </div>\n      </foreignObject>\n    ",
+            "anchorPoints": ["floating", "floating"]
+          }
+        ],
+        "label": "Privilege escalation",
+        "coords": [1150, 600],
         "width": 250,
         "height": 150,
         "data": {
-          "node name": "Phase 2",
+          "node name": "Privilege escalation",
           "node number": 1,
-          "probability": 28.9
+          "probability": 25
         }
       },
       {
-        "id": "id07cc93fe-abe7-4046-a1f2-1f5e7f49dcbf",
+        "id": "id96ea11dd-7a00-4e3f-8bec-0d25f135f73f",
         "type": "event-diagram-node",
         "children": [],
         "sections": [
           {
-            "id": "id07cc93fe-abe7-4046-a1f2-1f5e7f49dcbf_0_0",
+            "id": "id96ea11dd-7a00-4e3f-8bec-0d25f135f73f_0_0",
             "ports": [],
+            "decorators": [],
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 0,
-            "coords": [1050, 0],
+            "coords": [1500, 600],
             "width": 250,
             "height": 32
           },
           {
-            "id": "id07cc93fe-abe7-4046-a1f2-1f5e7f49dcbf_1_0",
+            "id": "id96ea11dd-7a00-4e3f-8bec-0d25f135f73f_1_0",
             "ports": [],
+            "decorators": [],
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 1,
-            "coords": [1050, 32],
+            "coords": [1500, 632],
             "width": 250,
             "height": 90
           },
           {
-            "id": "id07cc93fe-abe7-4046-a1f2-1f5e7f49dcbf_2_0",
+            "id": "id96ea11dd-7a00-4e3f-8bec-0d25f135f73f_2_0",
             "ports": [],
+            "decorators": [],
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 2,
-            "coords": [1050, 122],
+            "coords": [1500, 722],
             "width": 250,
             "height": 28
           }
         ],
         "ports": [
           {
-            "id": "id07cc93fe-abe7-4046-a1f2-1f5e7f49dcbf_port_0",
-            "coords": [1175, 0],
-            "connectionPoint": [1175, 0],
+            "id": "id96ea11dd-7a00-4e3f-8bec-0d25f135f73f_port_0",
+            "coords": [1625, 600],
+            "connectionPoint": [1625, 600],
             "direction": "top",
             "label": ""
           },
           {
-            "id": "id07cc93fe-abe7-4046-a1f2-1f5e7f49dcbf_port_1",
-            "coords": [1050, 75],
-            "connectionPoint": [1050, 75],
+            "id": "id96ea11dd-7a00-4e3f-8bec-0d25f135f73f_port_1",
+            "coords": [1500, 675],
+            "connectionPoint": [1500, 675],
             "direction": "left",
             "label": ""
           },
           {
-            "id": "id07cc93fe-abe7-4046-a1f2-1f5e7f49dcbf_port_2",
-            "coords": [1175, 150],
-            "connectionPoint": [1175, 150],
+            "id": "id96ea11dd-7a00-4e3f-8bec-0d25f135f73f_port_2",
+            "coords": [1625, 750],
+            "connectionPoint": [1625, 750],
             "direction": "bottom",
             "label": ""
           },
           {
-            "id": "id07cc93fe-abe7-4046-a1f2-1f5e7f49dcbf_port_3",
-            "coords": [1300, 75],
-            "connectionPoint": [1300, 75],
+            "id": "id96ea11dd-7a00-4e3f-8bec-0d25f135f73f_port_3",
+            "coords": [1750, 675],
+            "connectionPoint": [1750, 675],
             "direction": "right",
             "label": ""
           }
         ],
-        "label": "Phase 3",
-        "coords": [1050, 0],
+        "decorators": [
+          {
+            "id": "id96ea11dd-7a00-4e3f-8bec-0d25f135f73f-probability-decorator",
+            "coords": [1500, 600],
+            "width": 250,
+            "height": 32,
+            "priority": 0,
+            "svg": "\n      <foreignObject x=\"0\" y=\"0\" width=\"250\" height=\"32\">\n        <div xmlns=\"http://www.w3.org/1999/xhtml\" style=\"height:32px;display:flex;align-items:center;justify-content:space-between;padding:0 10px;box-sizing:border-box;background:transparent;pointer-events:none;font-family:'WonderUnitSans', sans-serif;\">\n          <img src=\"/assets/icons/state-icon.svg\" width=\"22\" height=\"22\" style=\"display:block;\" />\n          <span style=\"color:#BA51C5;font-weight:700;font-size:13px;\">0.00%</span>\n        </div>\n      </foreignObject>\n    ",
+            "anchorPoints": ["floating", "floating"]
+          },
+          {
+            "id": "id96ea11dd-7a00-4e3f-8bec-0d25f135f73f-local-probability-decorator",
+            "coords": [1500, 722],
+            "width": 250,
+            "height": 28,
+            "priority": 0,
+            "svg": "\n      <foreignObject x=\"0\" y=\"0\" width=\"250\" height=\"28\">\n        <div xmlns=\"http://www.w3.org/1999/xhtml\" style=\"height:28px;display:flex;align-items:center;justify-content:center;background:transparent;pointer-events:none;font-family:'WonderUnitSans', sans-serif;\">\n          <span style=\"background:#EEEEEE;color:#333;font-size:12px;border-radius:999px;padding:2px 12px;font-weight:500;\">48%</span>\n        </div>\n      </foreignObject>\n    ",
+            "anchorPoints": ["floating", "floating"]
+          }
+        ],
+        "label": "High-impact outcome",
+        "coords": [1500, 600],
         "width": 250,
         "height": 150,
         "data": {
-          "node name": "Phase 3",
+          "node name": "High-impact outcome",
           "node number": 1,
-          "probability": 57.8
+          "probability": 48
         }
       },
       {
-        "id": "id4300b862-57bb-42ba-8cb5-082bc6324882",
-        "type": "event-diagram-node",
-        "children": [],
-        "sections": [
-          {
-            "id": "id4300b862-57bb-42ba-8cb5-082bc6324882_0_0",
-            "ports": [],
-            "label": "",
-            "indexXInNode": 0,
-            "indexYInNode": 0,
-            "coords": [1750, 0],
-            "width": 250,
-            "height": 32
-          },
-          {
-            "id": "id4300b862-57bb-42ba-8cb5-082bc6324882_1_0",
-            "ports": [],
-            "label": "",
-            "indexXInNode": 0,
-            "indexYInNode": 1,
-            "coords": [1750, 32],
-            "width": 250,
-            "height": 90
-          },
-          {
-            "id": "id4300b862-57bb-42ba-8cb5-082bc6324882_2_0",
-            "ports": [],
-            "label": "",
-            "indexXInNode": 0,
-            "indexYInNode": 2,
-            "coords": [1750, 122],
-            "width": 250,
-            "height": 28
-          }
-        ],
-        "ports": [
-          {
-            "id": "id4300b862-57bb-42ba-8cb5-082bc6324882_port_0",
-            "coords": [1875, 0],
-            "connectionPoint": [1875, 0],
-            "direction": "top",
-            "label": ""
-          },
-          {
-            "id": "id4300b862-57bb-42ba-8cb5-082bc6324882_port_1",
-            "coords": [1750, 75],
-            "connectionPoint": [1750, 75],
-            "direction": "left",
-            "label": ""
-          },
-          {
-            "id": "id4300b862-57bb-42ba-8cb5-082bc6324882_port_2",
-            "coords": [1875, 150],
-            "connectionPoint": [1875, 150],
-            "direction": "bottom",
-            "label": ""
-          },
-          {
-            "id": "id4300b862-57bb-42ba-8cb5-082bc6324882_port_3",
-            "coords": [2000, 75],
-            "connectionPoint": [2000, 75],
-            "direction": "right",
-            "label": ""
-          }
-        ],
-        "label": "Regulatory Authorities Conf.",
-        "coords": [1750, 0],
-        "width": 250,
-        "height": 150,
-        "data": {
-          "node name": "Regulatory Authorities Conf.",
-          "node number": 1,
-          "probability": 90.6
-        }
-      },
-      {
-        "id": "iddf9d2cc0-1919-472f-9bff-4ecb7db20976",
-        "type": "state-diagram-node",
-        "children": [],
-        "sections": [
-          {
-            "id": "iddf9d2cc0-1919-472f-9bff-4ecb7db20976_0_0",
-            "ports": [],
-            "label": "",
-            "indexXInNode": 0,
-            "indexYInNode": 0,
-            "coords": [1400, 0],
-            "width": 250,
-            "height": 32
-          },
-          {
-            "id": "iddf9d2cc0-1919-472f-9bff-4ecb7db20976_1_0",
-            "ports": [],
-            "label": "",
-            "indexXInNode": 0,
-            "indexYInNode": 1,
-            "coords": [1400, 32],
-            "width": 250,
-            "height": 118
-          }
-        ],
-        "ports": [
-          {
-            "id": "iddf9d2cc0-1919-472f-9bff-4ecb7db20976_port_0",
-            "coords": [1525, 0],
-            "connectionPoint": [1525, 0],
-            "direction": "top",
-            "label": ""
-          },
-          {
-            "id": "iddf9d2cc0-1919-472f-9bff-4ecb7db20976_port_1",
-            "coords": [1400, 75],
-            "connectionPoint": [1400, 75],
-            "direction": "left",
-            "label": ""
-          },
-          {
-            "id": "iddf9d2cc0-1919-472f-9bff-4ecb7db20976_port_2",
-            "coords": [1525, 150],
-            "connectionPoint": [1525, 150],
-            "direction": "bottom",
-            "label": ""
-          },
-          {
-            "id": "iddf9d2cc0-1919-472f-9bff-4ecb7db20976_port_3",
-            "coords": [1650, 75],
-            "connectionPoint": [1650, 75],
-            "direction": "right",
-            "label": ""
-          }
-        ],
-        "label": "Positive Results",
-        "coords": [1400, 0],
-        "width": 250,
-        "height": 150,
-        "data": {
-          "node name": "Positive Results",
-          "node number": 1
-        }
-      },
-      {
-        "id": "id6277d487-4679-43c1-be75-b66a441ca5de",
+        "id": "idd2f8d587-6d07-4ee0-919b-65972f82d91c",
         "type": "end-diagram-node",
         "children": [],
         "sections": [
           {
-            "id": "id6277d487-4679-43c1-be75-b66a441ca5de_0_0",
+            "id": "idd2f8d587-6d07-4ee0-919b-65972f82d91c_0_0",
             "ports": [],
+            "decorators": [],
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 0,
-            "coords": [2100, 0],
+            "coords": [1850, 600],
             "width": 250,
             "height": 32
           },
           {
-            "id": "id6277d487-4679-43c1-be75-b66a441ca5de_1_0",
+            "id": "idd2f8d587-6d07-4ee0-919b-65972f82d91c_1_0",
             "ports": [],
+            "decorators": [],
             "label": "",
             "indexXInNode": 0,
             "indexYInNode": 1,
-            "coords": [2100, 32],
+            "coords": [1850, 632],
             "width": 250,
             "height": 118
           }
         ],
         "ports": [
           {
-            "id": "id6277d487-4679-43c1-be75-b66a441ca5de_port_0",
-            "coords": [2225, 0],
-            "connectionPoint": [2225, 0],
+            "id": "idd2f8d587-6d07-4ee0-919b-65972f82d91c_port_0",
+            "coords": [1975, 600],
+            "connectionPoint": [1975, 600],
             "direction": "top",
             "label": ""
           },
           {
-            "id": "id6277d487-4679-43c1-be75-b66a441ca5de_port_1",
-            "coords": [2100, 75],
-            "connectionPoint": [2100, 75],
+            "id": "idd2f8d587-6d07-4ee0-919b-65972f82d91c_port_1",
+            "coords": [1850, 675],
+            "connectionPoint": [1850, 675],
             "direction": "left",
             "label": ""
           },
           {
-            "id": "id6277d487-4679-43c1-be75-b66a441ca5de_port_2",
-            "coords": [2225, 150],
-            "connectionPoint": [2225, 150],
+            "id": "idd2f8d587-6d07-4ee0-919b-65972f82d91c_port_2",
+            "coords": [1975, 750],
+            "connectionPoint": [1975, 750],
             "direction": "bottom",
             "label": ""
           },
           {
-            "id": "id6277d487-4679-43c1-be75-b66a441ca5de_port_3",
-            "coords": [2350, 75],
-            "connectionPoint": [2350, 75],
+            "id": "idd2f8d587-6d07-4ee0-919b-65972f82d91c_port_3",
+            "coords": [2100, 675],
+            "connectionPoint": [2100, 675],
             "direction": "right",
             "label": ""
           }
         ],
-        "label": "Drug is Effective",
-        "coords": [2100, 0],
+        "decorators": [
+          {
+            "id": "idd2f8d587-6d07-4ee0-919b-65972f82d91c-probability-decorator",
+            "coords": [1850, 600],
+            "width": 250,
+            "height": 32,
+            "priority": 0,
+            "svg": "\n      <foreignObject x=\"0\" y=\"0\" width=\"250\" height=\"32\">\n        <div xmlns=\"http://www.w3.org/1999/xhtml\" style=\"height:32px;display:flex;align-items:center;justify-content:space-between;padding:0 10px;box-sizing:border-box;background:transparent;pointer-events:none;font-family:'WonderUnitSans', sans-serif;\">\n          <img src=\"/assets/icons/end-icon.svg\" width=\"22\" height=\"22\" style=\"display:block;\" />\n          <span style=\"color:#B8475A;font-weight:700;font-size:13px;\">0.00%</span>\n        </div>\n      </foreignObject>\n    ",
+            "anchorPoints": ["floating", "floating"]
+          }
+        ],
+        "label": "System compromised",
+        "coords": [1850, 600],
         "width": 250,
         "height": 150,
         "data": {
-          "node name": "Drug is Effective",
+          "node name": "System compromised",
           "node number": 1
+        }
+      },
+      {
+        "id": "id87045ff9-9ff9-43fa-830c-8aaf53fae4e2",
+        "type": "event-diagram-node",
+        "children": [],
+        "sections": [
+          {
+            "id": "id87045ff9-9ff9-43fa-830c-8aaf53fae4e2_0_0",
+            "ports": [],
+            "decorators": [],
+            "label": "",
+            "indexXInNode": 0,
+            "indexYInNode": 0,
+            "coords": [800, 600],
+            "width": 250,
+            "height": 32
+          },
+          {
+            "id": "id87045ff9-9ff9-43fa-830c-8aaf53fae4e2_1_0",
+            "ports": [],
+            "decorators": [],
+            "label": "",
+            "indexXInNode": 0,
+            "indexYInNode": 1,
+            "coords": [800, 632],
+            "width": 250,
+            "height": 90
+          },
+          {
+            "id": "id87045ff9-9ff9-43fa-830c-8aaf53fae4e2_2_0",
+            "ports": [],
+            "decorators": [],
+            "label": "",
+            "indexXInNode": 0,
+            "indexYInNode": 2,
+            "coords": [800, 722],
+            "width": 250,
+            "height": 28
+          }
+        ],
+        "ports": [
+          {
+            "id": "id87045ff9-9ff9-43fa-830c-8aaf53fae4e2_port_0",
+            "coords": [925, 600],
+            "connectionPoint": [925, 600],
+            "direction": "top",
+            "label": ""
+          },
+          {
+            "id": "id87045ff9-9ff9-43fa-830c-8aaf53fae4e2_port_1",
+            "coords": [800, 675],
+            "connectionPoint": [800, 675],
+            "direction": "left",
+            "label": ""
+          },
+          {
+            "id": "id87045ff9-9ff9-43fa-830c-8aaf53fae4e2_port_2",
+            "coords": [925, 750],
+            "connectionPoint": [925, 750],
+            "direction": "bottom",
+            "label": ""
+          },
+          {
+            "id": "id87045ff9-9ff9-43fa-830c-8aaf53fae4e2_port_3",
+            "coords": [1050, 675],
+            "connectionPoint": [1050, 675],
+            "direction": "right",
+            "label": ""
+          }
+        ],
+        "decorators": [
+          {
+            "id": "id87045ff9-9ff9-43fa-830c-8aaf53fae4e2-probability-decorator",
+            "coords": [800, 600],
+            "width": 250,
+            "height": 32,
+            "priority": 0,
+            "svg": "\n      <foreignObject x=\"0\" y=\"0\" width=\"250\" height=\"32\">\n        <div xmlns=\"http://www.w3.org/1999/xhtml\" style=\"height:32px;display:flex;align-items:center;justify-content:space-between;padding:0 10px;box-sizing:border-box;background:transparent;pointer-events:none;font-family:'WonderUnitSans', sans-serif;\">\n          <img src=\"/assets/icons/state-icon.svg\" width=\"22\" height=\"22\" style=\"display:block;\" />\n          <span style=\"color:#BA51C5;font-weight:700;font-size:13px;\">0.00%</span>\n        </div>\n      </foreignObject>\n    ",
+            "anchorPoints": ["floating", "floating"]
+          },
+          {
+            "id": "id87045ff9-9ff9-43fa-830c-8aaf53fae4e2-local-probability-decorator",
+            "coords": [800, 722],
+            "width": 250,
+            "height": 28,
+            "priority": 0,
+            "svg": "\n      <foreignObject x=\"0\" y=\"0\" width=\"250\" height=\"28\">\n        <div xmlns=\"http://www.w3.org/1999/xhtml\" style=\"height:28px;display:flex;align-items:center;justify-content:center;background:transparent;pointer-events:none;font-family:'WonderUnitSans', sans-serif;\">\n          <span style=\"background:#EEEEEE;color:#333;font-size:12px;border-radius:999px;padding:2px 12px;font-weight:500;\">1.44%</span>\n        </div>\n      </foreignObject>\n    ",
+            "anchorPoints": ["floating", "floating"]
+          }
+        ],
+        "label": "Event",
+        "coords": [800, 600],
+        "width": 250,
+        "height": 150,
+        "data": {
+          "node name": "Event",
+          "node number": 1,
+          "probability": 1.44
         }
       }
     ],
     "connections": [
       {
-        "id": "id55a4ded3-9d07-471b-8a6e-32786589a3b1",
+        "id": "ida96e0a85-3f48-44a0-a812-f42b1fe6641b",
         "type": "start-connection",
-        "start": "id68030a2a-28eb-442e-9b16-fc465150c3cf_port_3",
-        "end": "id80af05f5-ffe2-4896-9e81-f466118c07fa_port_1",
+        "start": "id9efe097f-1d18-4e30-ab7f-e9a38a274f8c_port_3",
+        "end": "id44b168f2-0f2e-4d15-8a2c-e18c735df842_port_1",
         "startLabel": "",
         "middleLabel": "",
         "endLabel": "1",
@@ -525,10 +578,10 @@
         }
       },
       {
-        "id": "ide9639de7-7ed1-4ba1-a043-12aa5097d42b",
+        "id": "id31fbace7-cbec-4574-82fc-52e2376c2fa3",
         "type": "diagram-connection",
-        "start": "id80af05f5-ffe2-4896-9e81-f466118c07fa_port_3",
-        "end": "id4feee37d-cda6-436c-8126-c48742fc48ee_port_1",
+        "start": "id13a3f2db-a501-470f-be0a-b2aec73b6d97_port_3",
+        "end": "id96ea11dd-7a00-4e3f-8bec-0d25f135f73f_port_1",
         "startLabel": "",
         "middleLabel": "",
         "endLabel": "1",
@@ -539,52 +592,10 @@
         }
       },
       {
-        "id": "id1cfa95b3-82e6-4c35-9ace-60f3825dfcaf",
-        "type": "diagram-connection",
-        "start": "id4feee37d-cda6-436c-8126-c48742fc48ee_port_3",
-        "end": "id07cc93fe-abe7-4046-a1f2-1f5e7f49dcbf_port_1",
-        "startLabel": "",
-        "middleLabel": "",
-        "endLabel": "1",
-        "points": [],
-        "data": {
-          "connection name": "miss connection",
-          "weight": 1
-        }
-      },
-      {
-        "id": "idaf9e1a95-b2ba-4cd1-812d-bdcc3b68bb53",
-        "type": "diagram-connection",
-        "start": "id07cc93fe-abe7-4046-a1f2-1f5e7f49dcbf_port_3",
-        "end": "iddf9d2cc0-1919-472f-9bff-4ecb7db20976_port_1",
-        "startLabel": "",
-        "middleLabel": "",
-        "endLabel": "1",
-        "points": [],
-        "data": {
-          "connection name": "miss connection",
-          "weight": 1
-        }
-      },
-      {
-        "id": "idcb848e7a-46dc-481b-92ff-c0148f0927e1",
-        "type": "diagram-connection",
-        "start": "iddf9d2cc0-1919-472f-9bff-4ecb7db20976_port_3",
-        "end": "id4300b862-57bb-42ba-8cb5-082bc6324882_port_1",
-        "startLabel": "",
-        "middleLabel": "",
-        "endLabel": "1",
-        "points": [],
-        "data": {
-          "connection name": "miss connection",
-          "weight": 1
-        }
-      },
-      {
-        "id": "id7eeae84d-8f66-47cf-b903-38f7999ec738",
+        "id": "id9836fe24-8028-44ea-8342-b6bf1f7ec678",
         "type": "end-connection",
-        "start": "id4300b862-57bb-42ba-8cb5-082bc6324882_port_3",
-        "end": "id6277d487-4679-43c1-be75-b66a441ca5de_port_1",
+        "start": "id96ea11dd-7a00-4e3f-8bec-0d25f135f73f_port_3",
+        "end": "idd2f8d587-6d07-4ee0-919b-65972f82d91c_port_1",
         "startLabel": "",
         "middleLabel": "",
         "endLabel": "1",
@@ -593,8 +604,37 @@
           "connection name": "end connection",
           "weight": 1
         }
+      },
+      {
+        "id": "idcc0d7781-fb23-4b82-a0fb-5dae2fb2e382",
+        "type": "diagram-connection",
+        "start": "id44b168f2-0f2e-4d15-8a2c-e18c735df842_port_3",
+        "end": "id87045ff9-9ff9-43fa-830c-8aaf53fae4e2_port_1",
+        "startLabel": "",
+        "middleLabel": "",
+        "endLabel": "1",
+        "points": [],
+        "data": {
+          "connection name": "miss connection",
+          "weight": 1
+        }
+      },
+      {
+        "id": "id54a3ee71-20e1-4af6-923f-c3268430e9ba",
+        "type": "diagram-connection",
+        "start": "id87045ff9-9ff9-43fa-830c-8aaf53fae4e2_port_3",
+        "end": "id13a3f2db-a501-470f-be0a-b2aec73b6d97_port_1",
+        "startLabel": "",
+        "middleLabel": "",
+        "endLabel": "1",
+        "points": [],
+        "data": {
+          "connection name": "miss connection",
+          "weight": 1
+        }
       }
     ],
+    "objects": [],
     "data": {
       "name": "unnamed",
       "description": "",
