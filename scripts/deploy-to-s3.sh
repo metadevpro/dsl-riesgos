@@ -14,6 +14,7 @@ aws s3 sync --delete --acl public-read --exclude '*' --source-region $REGION --r
 aws s3 sync --delete --acl public-read --exclude '*' --source-region $REGION --region $REGION --include '*.ico' --content-type 'image/x-icon"' $SOURCE $TARGET
 aws s3 sync --delete --acl public-read --exclude '*' --source-region $REGION --region $REGION --include '*.svg' --content-type 'image/svg+xml' $SOURCE $TARGET
 aws s3 sync --delete --acl public-read --exclude '*' --source-region $REGION --region $REGION --include '*.png' --content-type 'image/png' $SOURCE $TARGET
+aws s3 sync --delete --acl public-read --exclude '*' --source-region $REGION --region $REGION --include '*.gif' --content-type 'image/gif' $SOURCE $TARGET
 aws s3 sync --delete --acl public-read --exclude '*' --source-region $REGION --region $REGION --include '*.jpg' --content-type 'image/jpg' $SOURCE $TARGET
 aws s3 sync --delete --acl public-read --exclude '*' --source-region $REGION --region $REGION --include '*.webp' --content-type 'image/webp' $SOURCE $TARGET
 aws s3 sync --delete --acl public-read --exclude '*' --source-region $REGION --region $REGION --include '*.html' --content-type 'text/html' $SOURCE $TARGET
