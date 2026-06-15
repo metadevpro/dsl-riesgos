@@ -22,5 +22,7 @@ aws s3 sync --delete --acl public-read --exclude '*' --source-region $REGION --r
 aws s3 sync --delete --acl public-read --exclude '*' --source-region $REGION --region $REGION --include '*.txt' --content-type 'text/plain' $SOURCE $TARGET
 aws s3 sync --delete --acl public-read --exclude '*' --source-region $REGION --region $REGION --include '*.zip' --content-type 'application/zip' $SOURCE $TARGET
 aws s3 sync --delete --acl public-read --exclude '*' --source-region $REGION --region $REGION --include '*.pdf' --content-type 'application/pdf' $SOURCE $TARGET
+aws s3 sync --delete --acl public-read --exclude '*' --source-region $REGION --region $REGION --include '*.webp' --content-type 'image/webp' $SOURCE $TARGET
+aws s3 sync --delete --acl public-read --exclude '*' --source-region $REGION --region $REGION --include '*.webm' --content-type 'video/webm' $SOURCE $TARGET
 
 echo `date --iso=s` Deploy finished.
