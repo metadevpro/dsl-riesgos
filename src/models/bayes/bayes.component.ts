@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { afterNextRender, ChangeDetectorRef, Component, ElementRef, inject, OnDestroy, ViewChild } from '@angular/core';
+import { afterNextRender, Component, ElementRef, inject, OnDestroy, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { DagaConnection, DagaExporter, DagaModel, DagaNode } from '@metadev/daga';
@@ -43,8 +43,6 @@ import { generarDatosSinteticos } from './util/syntheticData.utils';
   imports: [DagaModule, CommonModule, FormsModule, DagaBaseComponent]
 })
 export class BayesComponent extends GenericComponent implements OnDestroy, ModelToolbarHost {
-  private cdr = inject(ChangeDetectorRef);
-
   bayes_config = bayes_CONFIG;
 
   // ── Bayesian state ──

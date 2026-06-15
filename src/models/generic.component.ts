@@ -1,3 +1,4 @@
+import { ChangeDetectorRef, inject } from '@angular/core';
 import { DiagramConfig, DagaModel } from '@metadev/daga-angular';
 
 import { NodeInfo, ConnectionInfo, SimulationResult } from './types';
@@ -27,6 +28,13 @@ export abstract class GenericComponent {
 
   protected readonly probabilityKey = PROBABILITY_KEY;
   protected readonly maxProbability = MAX_PROBABILITY;
+
+  protected readonly cdr = inject(ChangeDetectorRef);
+
+  /** See `ModelToolbarHost.markForCheck`. Lets the header toolbar re-render this routed component. */
+  markForCheck(): void {
+    this.cdr.markForCheck();
+  }
 
   toggleSidebar(): void {
     this.isSidebarCollapsed = !this.isSidebarCollapsed;

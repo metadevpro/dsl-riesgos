@@ -33,7 +33,7 @@
             [class.primary]="btn.variant === 'primary'"
             [class.secondary]="btn.variant === 'secondary'"
             [attr.data-test-id]="btn.testId"
-            (click)="btn.action()"
+            (click)="runAction(btn)"
           >
             @if (btn.icon) {
               <img [src]="btn.icon" class="btn-icon" alt="" />

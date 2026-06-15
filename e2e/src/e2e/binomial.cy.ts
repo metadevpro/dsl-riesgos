@@ -54,9 +54,8 @@ describe('e2e', () => {
       .trigger('change');
 
     cy.get('daga-diagram').click();
-    // Open calculation dialog, set 1000 iterations, run
+    // Open calculation dialog, run with default 1000 iterations
     cy.getByTestId('calculate-probability').click();
-    cy.get('#iterations').type('0');
     // The "Calculate" button that only has "Calculate" text (not "Calculate Probability") is the one inside the dialog
     cy.contains('button', /^\s*Calculate\s*$/).click();
 
